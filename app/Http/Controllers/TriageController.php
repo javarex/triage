@@ -19,6 +19,14 @@ class TriageController extends Controller
     }
 
     public function index()
+    {
+        
+        $client_logs = Activity::with('client')
+                                ->paginate(1);
+        return view('triage.index', compact('client_logs'));
+    }
+
+    public function create()
     {  
         $questions = Criteria::all();
         $triage = Triage_form::all();
@@ -40,8 +48,8 @@ class TriageController extends Controller
     public function store(Request $request)
     {   
         $this->Validate($request, [
-            'activity'  => 'required|regex:/^[\pL\s\-]+$/u',
-            'venue'     => 'required|regex:/^[\pL\s\-]+$/u',
+            'activity'  => 'required|regex:/^[a-z0-9 .\-]+$/i',
+            'venue'     => 'required|regex:/^[a-z0-9 .\-]+$/i',
         ]);
         // $data = $request->input(); 
         $triage = new Triage_form;
@@ -104,3 +112,4 @@ class TriageController extends Controller
     }
 
 }
+// regex:/^[\pL\s\-]+$/u

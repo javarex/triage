@@ -7,6 +7,7 @@ use App\Client;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 
 class ClientController extends Controller
@@ -20,7 +21,11 @@ class ClientController extends Controller
     public function create()
     {
         $offices = Office::get();
-        $code = "triage".str_pad(mt_rand(1,99999), 5, '0', STR_PAD_LEFT);
+        $code = strtoupper(Str::random(4));
+        $flag = false;
+
+        $users = User::where('username',$code)->first();
+
         return view('client.create', compact('offices','code'));
     }
 
@@ -33,14 +38,23 @@ class ClientController extends Controller
             'address' => ['required', 'string', 'max:255'],
         ]);
 
-        $request['username'] = $request->code;
-        $request['password'] = bcrypt('0');
-        $request['type'] = 'client';
-        $user = User::create($request->all());
-        $request['user_id'] = $user->id;
-        $client = Client::create($request->all());
-            
+        $code_generarated = $request->code;
+        $users = User::where('username',$code_generarated)->first();
+        
+        if(is_null($users))
+        {
+            $request['username'] = $request->code;
+            $request['password'] = bcrypt('0');
+            $request['type'] = 'client';
+            $user = User::create($request->all());
+            $request['user_id'] = $user->id;
+            $client = Client::create($request->all());
+            return redirect('/triage');
+        }else{
+            return back()->with('delete','This code is already used');
+        }
+       
+        
 
-        return redirect('/triage');
     }
 }

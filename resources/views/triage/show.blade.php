@@ -67,9 +67,8 @@
             </table> 
 
             <div class="row pb-3">
-                <div class="col-md-4"></div>
-                <div class="col-md-4"><a class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">EDIT</a></div>
-                <div class="col-md-4"><button class="btn btn-primary btn-block">SAVE</button></div>
+                <div class="col-md-8"></div>
+                <div class="col-md-4"><button class="btn btn-primary btn-block">EXIT    </button></div>
             </div>
 
                 

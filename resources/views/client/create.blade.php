@@ -15,11 +15,22 @@
                             <label for="triage_code" class="col-md-4 col-form-label text-md-right">{{ __('Triage code')}}</label>
 
                             <div class="col-md-6">
-                                <div class="alert alert-info mt-1">
-                                    <div>
-                                        <h3><strong>{{ $code }}</strong></h3>
+                                <div class="alert alert-info mt-1 p-1 ">
+                                    <div class="d-flex justify-content-center">
+                                        <h3><strong>
+                                        
+                                            {{ $code }}
+                                            @if($message = Session::get('delete'))
+                                                
+                                                <span class="text-danger">
+                                                    ({{ $message }})
+                                                </span>
+                                            
+                                            @endif
+                                        
+                                        </strong></h3>
                                     </div>
-                                    <div>Note: Remember your triage login code.</div>
+                                    <div class="text-danger d-flex justify-content-center">Note: Remember your triage login code.</div>
                                 </div>
                                 <input type="hidden" class="form-control" value="{{ $code }}" name="code">
                             </div>
@@ -166,4 +177,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            
+        })
+    </script>
 @endsection
