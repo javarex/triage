@@ -27,3 +27,5 @@ Route::resource('/office','OfficeController');
 //Triage Routes
 
 Route::resource('triage', 'TriageController');
+// Route::get('/triage/load_history','TriageController@load_history');
+// Route::post('/triage/load_history', 'TriageController@load_history');

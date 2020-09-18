@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Criteria extends Model
 {
     protected $fillable = ['question'];
+    protected $dates = ['created_at', 'updated_at'];
 
     public function triage()
     {

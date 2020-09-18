@@ -16,12 +16,12 @@
 
                             <!-- generated Form number -->
                                 <div class="form-group row ">
-                                    <label for="activity" class="col-md-4 col-form-label text-md-right">{{ __('Form number') }}</label>
+                                    <!-- <label for="activity" class="col-md-4 col-form-label text-md-right">{{ __('Form number') }}</label> -->
                                 
                                     <div class="col-md-6">
                                     <input type="hidden" name="default_value">
                                         <input type="hidden" name="client_id" value="{{ auth::user()->client->id }}">
-                                        <input type="text" class="form-control" name="form_number" value="{{ $form_number }}" readonly>
+                                        <input type="hidden" class="form-control" name="form_number" value="" readonly>
                                     </div>
                                 </div>
                                 

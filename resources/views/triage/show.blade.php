@@ -2,127 +2,102 @@
 
 @section('content')
 
-<div class="col-md-6 shadow pt-2">
-        <div class="">
-            <div class="card p-3">
-                <div class="row text-left">
-                    <div class="col-md-6">
-                        <b>DATE : {{ $activity->created_at->format('m/d/Y') }}</b>
-                    </div>
-                    <div class="col-md-6">
-                        <b>FORM NUMBER : {{ sprintf('%04d',$get_form_number->form_number) }}</b>
-                    </div>
-                </div>
-                <div class="row text-left">
-                    <div class="col-md-6">
-                        <b>ACTIVITY : {{ $activity->activity }}</b>
-                    </div>
-                    <div class="col-md-6">
-                        <b>VENUE : {{ $activity->venue }}</b>
-                    </div>
-                </div>
+<div class="row">
+    <div class="col-md-5 sticky-top">
+        <div class="card shadow">
+            <div class="card-header">
+                <h3 class="text-primary text-center">
+                    <strong><i class="fa fa-history" aria-hidden="true"></i> HISTORY</strong>
+                </h3>
             </div>
-            <table class="table table-hover table-bordered ">
-                <thead>
-                    <tr>
-                    <th>CRITERIA</th>
-                    <th>ANSWER</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
+            <div class="card-body">
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('triage.create') }}" class="btn btn-primary"><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
+                </div>
+                <table class="table table-striped table-bordered mt-2">
+                    <thead>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Venue</th>
+                            <th><i class="fas fa-cog    "></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php $new_string = "" ?>
+                    @forelse($client_logs as $client)
 
-                <!-- Category A. -->
-                    
-                    
-                    @foreach( $clients as $client )
-
-                    @if( $client->criteria['id'] == 1 )
-                    <tr>
-                        <td colspan="3" class="font-weight-bold bg-primary text-light">A. SINTOMAS</td>
-                    </tr>
-
-                    @elseif( $client->criteria['id'] == 4 )
-                    <tr>
-                        <td colspan="3" class="font-weight-bold bg-primary text-light">B. TRAVEL HISTORY</td>
-                    </tr>
-                    @elseif( $client->criteria['id'] == 6 )
-                    <tr>
-                        <td colspan="3" class="font-weight-bold bg-primary text-light">C. EXPOSURE HISTORY</td>
-                    </tr>
-                    @endif
-                    <tr>
-                        <td>{{ $client->criteria['question'] }}</td>
-                        <td class="text-center font-weight-bold">
-                            @if(is_null($client->location))
-                                {{ $client->answer }}
-                            @else
-                                {{ $client->location }}
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
-                    
-                </tbody>
-            </table> 
-
-            <div class="row pb-3">
-                <div class="col-md-8"></div>
-                <div class="col-md-4"><button class="btn btn-primary btn-block">EXIT    </button></div>
+                        <tr>
+                            <td>
+                            {{ $client->activity }}
+                            </td>
+                            <td>
+                                {{ $client->venue }}
+                            </td>
+                            <td>
+                                <a href="{{ route('triage.show', $client->id ) }}" id="history_link" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    @empty
+                        <span><?php $new_string = "No Data available" ?></span>
+                    @endforelse
+                    </tbody>
+                </table>
+                {{ $new_string }}
+                {{ $client_logs->links() }}
             </div>
-
-                
-        <!-- Edit part -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="{{ route('triage.update', $activity->client_id ) }}" method="post">
-                        @csrf
-                        @method('PATCH')
-                        <table class="table table-hover table-bordered ">
-                            <thead>
-                                <tr>
+            
+        </div>
+    
+    </div>
+    <!-- right side -->
+    
+    <div class="col-md-7">
+        <div class="card shadow">
+            <div class="card-body">
+                <div id="history_details">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
                                 <th>CRITERIA</th>
-                                <th>YES</th>
-                                <th>NO</th>
-                                </tr>
-                            </thead>
+                                <th>ANSWER</th>
+                            </tr>
+
                             <tbody>
-                                @foreach( $clients as $client )
-                                <tr>
-                                    <td>{{ $client->criteria['id'].' '.$client->criteria['question'] }}</td>
-                                    <td>
-                                        <input type="hidden" value="{{$client->id }}" name="triage_id[]">
-                                        <input type="radio" name="answer{{ $client->id }}" value="yes" {{ $client->answer == 'yes' ? 'checked' : ''  }}>
-                                    </td>
-                                    <td>
-                                        <input type="radio" name="answer{{ $client->id }}" value="no" {{ $client->answer == 'no' ? 'checked' : ''  }}>
-                                    </td>
-                                </tr>
+                                @foreach($triages as $triage)
+
+                                @if( $triage->criteria['id'] == 1 )
+                                    <tr>
+                                        <td colspan="3" class="font-weight-bold bg-primary text-light">A. SINTOMAS</td>
+                                    </tr>
+
+                                @elseif( $triage->criteria['id'] == 4 )
+                                    <tr>
+                                        <td colspan="3" class="font-weight-bold bg-primary text-light">B. TRAVEL HISTORY</td>
+                                    </tr>
+                                @elseif( $triage->criteria['id'] == 6 )
+                                    <tr>
+                                        <td colspan="3" class="font-weight-bold bg-primary text-light">C. EXPOSURE HISTORY</td>
+                                    </tr>
+                                @endif
+                                    <tr>
+                                        <td>{{ $triage->criteria['question']}}</td>
+                                        <td class="text-nowrap">
+                                            {{ $triage->answer}}
+
+                                            @if(!(is_null($triage->location)))
+                                                <b>({{ $triage->location }})</b>
+                                            @endif
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
-                        </table> 
-                        <div class="modal-body">
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button class="btn btn-primary">SAVE</button>
-                        </div>
-                    </form>
-                    </div>
+                        </thead>
+                    </table>
                 </div>
             </div>
-        <!-- End edit part -->
-
         </div>
     </div>
-
 </div>
+
+
 @endsection

@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/fontawesome-free-5.14.0/css/all.min.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="background-color:#d7e2ea">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -35,9 +35,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a href="" class="nav-link">ADD NEW FORM</a>
-                        </li>
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -76,7 +74,7 @@
             </div>
         </nav>
 
-        <main class="py-4 container">
+        <main class="py-4 container-fluid ">
             <p id="display_text"></p>
             <span></span>
             @yield('content')
