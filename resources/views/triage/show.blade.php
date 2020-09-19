@@ -7,41 +7,47 @@
         <div class="card shadow">
             <div class="card-header">
                 <h3 class="text-primary text-center">
-                    <strong><i class="fa fa-history" aria-hidden="true"></i> HISTORY</strong>
+                    <strong><i class="fa fa-history" aria-hidden="true"></i> YOUR RECENT ACTIVITIES</strong>
                 </h3>
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end">
                     <a href="{{ route('triage.create') }}" class="btn btn-primary"><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
                 </div>
-                <table class="table table-striped table-bordered mt-2">
-                    <thead>
-                        <tr>
-                            <th>Activity</th>
-                            <th>Venue</th>
-                            <th><i class="fas fa-cog    "></i></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php $new_string = "" ?>
-                    @forelse($client_logs as $client)
-
-                        <tr>
-                            <td>
-                            {{ $client->activity }}
-                            </td>
-                            <td>
-                                {{ $client->venue }}
-                            </td>
-                            <td>
-                                <a href="{{ route('triage.show', $client->id ) }}" id="history_link" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                            </td>
-                        </tr>
-                    @empty
-                        <span><?php $new_string = "No Data available" ?></span>
-                    @endforelse
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered mt-2 text-center">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Venue</th>
+                                <th>Date</th>
+                                <th><i class="fas fa-cog    "></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php $new_string = "" ?>
+                        @forelse($client_logs as $client)
+                    
+                            <tr>
+                                <td>
+                                {{ $client->activity }}
+                                </td>
+                                <td>
+                                    {{ $client->venue }}
+                                </td>
+                                <td>
+                                    {{ $client->created_at->format('m/d/Y') }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('triage.show', $client->id ) }}" title="View form" id="history_link" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                        @empty
+                            <span><?php $new_string = "No Data available" ?></span>
+                        @endforelse
+                        </tbody>
+                    </table>
+                </div>
                 {{ $new_string }}
                 {{ $client_logs->links() }}
             </div>

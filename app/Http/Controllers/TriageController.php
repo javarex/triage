@@ -22,11 +22,11 @@ class TriageController extends Controller
 
     public function index()
     {
-        $user_id = User::with('client')
-                        ->first();
-        
+        $user_id = Auth::user()->id;
+        $client_id = Client::where('user_id',$user_id)
+                            ->first();
         $client_logs = Activity::with('client')
-                                ->where('client_id',$user_id->client['id'])
+                                ->where('client_id',$client_id->id)
                                 ->paginate(10);
         return view('triage.index', compact('client_logs'));
     }
@@ -91,11 +91,13 @@ class TriageController extends Controller
 
     public function show($activity_id)
     {
-        $user_id = User::with('client')
+        
+        $user_id = Auth::user()->id;
+        $client_id = Client::where('user_id',$user_id)
         ->first();
-
         $client_logs = Activity::with('client')
-                        ->where('client_id',$user_id->client['id'])
+                        ->where('client_id',$client_id->id)
+                        ->orderBy('id', 'desc')
                         ->paginate(10);
 
         //get venue and activities

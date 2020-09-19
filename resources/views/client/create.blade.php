@@ -126,7 +126,15 @@
                             </div>
 
                         </div>
+
                         <div class="form-group row">
+                            <label for="office" class="col-md-4 col-form-label text-md-right">{{ __('Office')}}</label>
+
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-group row office">
                             <label for="office" class="col-md-4 col-form-label text-md-right">{{ __('Office')}}</label>
 
                             <div class="col-md-6">

@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('styless')
 </head>
 <body style="background-color:#d7e2ea">
     <div id="app">

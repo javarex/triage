@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-md-12">
             <form action="{{ route('triage.store') }}" method="post">
-            
+                
             @csrf
-                <div class="row">
-
-                    <div class="col-md-6">
+                <div class="row pl-5">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5">
                         <div class="card shadow card-primary">
                             <div class="card-header" style="background-color:gold; color:red"><h3>TRIAGE SCREENING FORM</h3></div>
                             
@@ -51,10 +51,10 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-6 shadow">
+                    
+                    <div class="col-md-6">
                         <div class="">
-                        <table class="table table-hover table-bordered ">
+                        <table class="table table-light table-hover table-bordered ">
                             <thead>
                                 <tr>
                                 <th>CRITERIA</th>
