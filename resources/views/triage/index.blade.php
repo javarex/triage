@@ -72,7 +72,7 @@
     </div>
     <!-- right side -->
     
-    
+    <!-- <div class="col-md-12" style='background-image:url("../public/vendor/img/stop_covid.png")'></div> -->
 </div>
 
 

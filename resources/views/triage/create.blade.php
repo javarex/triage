@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ route('triage.store') }}" method="post">
+            <form action="{{ route('triage.store') }}" method="post" autocomplete="off">
                 
             @csrf
                 <div class="row pl-5">

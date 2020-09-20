@@ -38,7 +38,8 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-            $this->Validate($request, [
+        
+        $this->Validate($request, [
             'first_name'=> ['required', 'string', 'alpha', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'age'       => ['required', 'string', 'max:255'],
@@ -52,7 +53,6 @@ class ClientController extends Controller
         {
             $request['username'] = $request->code;
             $request['password'] = bcrypt('0');
-            $request['type'] = 'client';
             $user = User::create($request->all());
             $request['user_id'] = $user->id;
             $client = Client::create($request->all());

@@ -131,7 +131,7 @@
                             <label for="user_type" class="col-md-4 col-form-label text-md-right">{{ __('User type')}}</label>
 
                             <div class="col-md-6">
-                                <select name="user_type" id="user_type" class="form-control">
+                                <select name="type" id="user_type" class="form-control">
                                     <option value=""></option>
                                     <option value="guest">Guest</option>
                                     <option value="employee">Employee</option>
