@@ -59,7 +59,11 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('client.create') }}">
-                                        {{ __('Register here.') }}
+                                        {{ __('Register as client') }}
+                                    </a>
+                                    |
+                                    <a class="btn btn-link" href="{{ route('office.create') }}">
+                                        {{ __('Register as office') }}
                                     </a>
                                 @endif
                             </div>

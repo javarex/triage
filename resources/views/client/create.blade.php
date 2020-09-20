@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('client.store')}}" autocomplete="off">
+                    <form method="POST" action="{{ route('client.store')}}" autocomplete="off" class="form1">
                         @csrf
 
                         <div class="form-group row">
@@ -22,9 +22,9 @@
                                             {{ $code }}
                                             @if($message = Session::get('delete'))
                                                 
-                                                <span class="text-danger">
+                                                <div class="text-danger">
                                                     ({{ $message }})
-                                                </span>
+                                                </div>
                                             
                                             @endif
                                         
@@ -128,24 +128,27 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="office" class="col-md-4 col-form-label text-md-right">{{ __('Office')}}</label>
+                            <label for="user_type" class="col-md-4 col-form-label text-md-right">{{ __('User type')}}</label>
 
-                            
+                            <div class="col-md-6">
+                                <select name="user_type" id="user_type" class="form-control">
+                                    <option value=""></option>
+                                    <option value="guest">Guest</option>
+                                    <option value="employee">Employee</option>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="form-group row office">
-                            <label for="office" class="col-md-4 col-form-label text-md-right">{{ __('Office')}}</label>
+                        <div class="form-group row user_type_group">
+                            <label for="office" class="col-md-4 col-form-label text-md-right misc_label">Office</label>
 
-                            <div class="col-md-6">
-                                <select name="office_id" id="office" class="form-control @error('office') is-invalid @enderror" value="{{ old('office_id') }}" autocomplete="office">
+                            <div class="col-md-6" id="misc_input">
+                               <select class="form-control" name="office" id="office">
                                     <option value=""></option>
-                                    @foreach($offices as $office)
-
+                                    @foreach( $offices as $office )
                                         <option value="{{ $office->id }}">{{ $office->name }}</option>
-
                                     @endforeach
-                                </select>
+                               </select>
                             </div>
                         </div>
 
@@ -190,7 +193,21 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            
+            $('.user_type_group').hide();
+            $('#user_type').change(function()
+            {
+                if($(this).val() == 'employee')
+                {
+                    $('.user_type_group').fadeIn(600);
+                    $('#office').attr('required', true);
+
+                }else{
+                    $('.user_type_group').fadeOut(600);
+                    $('#office').removeAttr('required');
+                    $('#office').val('');
+                }
+                return false;
+            })
         })
     </script>
 @endsection
