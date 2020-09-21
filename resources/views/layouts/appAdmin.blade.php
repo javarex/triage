@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/fontawesome-free-5.14.0/css/all.min.css') }}" rel="stylesheet">
     @yield('styless')
 </head>
 <body style="background-color:#d7e2ea">
@@ -32,9 +33,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button> 
-
-                 <!-- Right Side Of Navbar -->
-                 <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -65,6 +64,7 @@
                         </li>
                         @endguest
                     </ul>
+                
             </div>
         </nav>
 

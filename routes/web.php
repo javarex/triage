@@ -15,7 +15,15 @@ Route::get('/', function () {
     return view('Auth.login');
 });
 
+Route::get('/logout', function()
+{
+    Auth::logout();
+    return redirect('/admin/login');
+});
 Auth::routes();
+
+Route::get('/admin/login','AdminController@loginForm');
+Route::get('/admin', 'AdminController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
