@@ -22,7 +22,6 @@ class AdminController extends Controller
     {
         $user_id = Auth::user()->id;
         $clients = Client::with('user','office')
-                        ->where('type', '!=' , 'admin')
                         ->paginate(2);
         $offices = Office::all();
         // dd($clients);

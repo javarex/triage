@@ -11,31 +11,7 @@
                     <form method="POST" action="{{ route('client.store')}}" autocomplete="off" class="form1">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="triage_code" class="col-md-4 col-form-label text-md-right">{{ __('Triage code')}}</label>
-
-                            <div class="col-md-6">
-                                <div class="alert alert-info mt-1 p-1 ">
-                                    <div class="d-flex justify-content-center">
-                                        <h3><strong>
-                                        
-                                            {{ $code }}
-                                            @if($message = Session::get('delete'))
-                                                
-                                                <div class="text-danger">
-                                                    ({{ $message }})
-                                                </div>
-                                            
-                                            @endif
-                                        
-                                        </strong></h3>
-                                    </div>
-                                    <div class="text-danger d-flex justify-content-center">Note: Remember your triage login code.</div>
-                                </div>
-                                <input type="hidden" class="form-control" value="{{ $code }}" name="code">
-                            </div>
-                        </div>
-
+                        
                         <div class="form-group row">
                             <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First name') }}</label>
 
@@ -138,6 +114,7 @@
                                 </select>
                             </div>
                         </div>
+                        
 
                         <div class="form-group row user_type_group">
                             <label for="office" class="col-md-4 col-form-label text-md-right misc_label">Office</label>
@@ -174,6 +151,32 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div> -->
+
+                        <div class="form-group row">
+                            <label for="triage_code" class="col-md-4 col-form-label text-md-right">{{ __('Triage code')}}</label>
+
+                            <div class="col-md-6">
+                                <div class="alert alert-info mt-1 p-1 ">
+                                    <div class="d-flex justify-content-center">
+                                        <h3><strong>
+                                        
+                                            {{ $code }}
+                                            @if($message = Session::get('delete'))
+                                                
+                                                <div class="text-danger">
+                                                    ({{ $message }})
+                                                </div>
+                                            
+                                            @endif
+                                        
+                                        </strong></h3>
+                                    </div>
+                                    <div class="text-danger d-flex justify-content-center">Note: Remember your triage login code.</div>
+                                </div>
+                                <input type="hidden" class="form-control" value="{{ $code }}" name="code">
+                            </div>
+                        </div>
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

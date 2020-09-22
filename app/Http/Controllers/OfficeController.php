@@ -70,9 +70,9 @@ class OfficeController extends Controller
 
         else
         {
-            $request['first_name'] = '';
-            $request['middle_name'] = '';
-            $request['last_name'] = '';
+            $request['first_name'] = $request->name;
+            $request['middle_name'] = $request->name;
+            $request['last_name'] = $request->name;
             $request['type'] = 'office';
             $request['password'] = bcrypt($request->password);
             $user = User::create($request->all());

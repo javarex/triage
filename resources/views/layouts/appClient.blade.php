@@ -74,7 +74,7 @@
             </div>
         </nav>
 
-        <main class="py-4 container-fluid ">
+        <main class="py-4">
             <p id="display_text"></p>
             <span></span>
             @yield('content')

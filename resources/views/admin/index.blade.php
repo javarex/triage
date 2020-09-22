@@ -22,13 +22,15 @@
             
                         <tbody>
                         @foreach($clients as $client)
-                            <tr>
-                            <td>{{ $client->user['username'] }}</td>
-                            <td>{{ $client->first_name.' '.$client->last_name }}</td>
-                            <td>{{ $client->office['name'] }}</td>
-                            <td>{{ $client['contact_number'] }}</td>
-                            <td>asdas</td>
-                            </tr>
+                            @if($client->user->type != 'admin')
+                                <tr>
+                                <td>{{ $client->user['username'] }}</td>
+                                <td>{{ $client->first_name.' '.$client->last_name }}</td>
+                                <td>{{ $client->office['name'] }}</td>
+                                <td>{{ $client['contact_number'] }}</td>
+                                <td>asdas</td>
+                                </tr>
+                            @endif
                         @endforeach
                         </tbody>
                     </table>

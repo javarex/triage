@@ -40,8 +40,8 @@ class ClientController extends Controller
     {
         
         $this->Validate($request, [
-            'first_name'=> ['required', 'string', 'alpha', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'first_name'=> 'required|regex:/^[a-z0-9 .\-]+$/i',
+            'last_name' => 'required|regex:/^[a-z0-9 .\-]+$/i',
             'age'       => ['required', 'string', 'max:255'],
             'address'   => ['required', 'string', 'max:255'],
         ]);
@@ -53,6 +53,10 @@ class ClientController extends Controller
         {
             $request['username'] = $request->code;
             $request['password'] = bcrypt('0');
+            $request['first_name'] = ucwords($request->first_name);
+            $request['middle_name'] = ucwords($request->middle_name);
+            $request['last_name'] = ucwords($request->last_name);
+            $request['address'] = ucwords($request->address);
             $user = User::create($request->all());
             $request['user_id'] = $user->id;
             $client = Client::create($request->all());
