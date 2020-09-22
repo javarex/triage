@@ -21,4 +21,8 @@ class Client extends Model
     {
         return $this->hasMany('App\Activity');
     }
+    public function office()
+    {
+        return $this->belongsTo('App\Office');
+    }
 }

@@ -22,7 +22,7 @@ Route::get('/logout', function()
 });
 Auth::routes();
 
-Route::get('/admin/login','AdminController@loginForm');
+Route::get('/admin/login','AdminController@loginForm')->name('admin.login');
 Route::get('/admin', 'AdminController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');

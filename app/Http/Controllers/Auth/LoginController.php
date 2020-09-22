@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -46,22 +47,19 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-
+        $users_query = User::where('username',$request->username)->first();
+       
         
         $userId = Auth::id();
-        if($request->type == 'admin')
+        if($users_query->type == 'admin')
         {
             return redirect('/admin');
         }
-        else
+        elseif($users_query->type == 'office')
         {
-            return 'You are not an admin';
+            return redirect('/office');
         }
-        // $credentials = $request->only('username', 'password');
-        // if(Auth::attempt($credentials))
-        // {
-            
-        // }
+       
     }
 
 }

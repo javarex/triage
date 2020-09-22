@@ -143,7 +143,7 @@
                             <label for="office" class="col-md-4 col-form-label text-md-right misc_label">Office</label>
 
                             <div class="col-md-6" id="misc_input">
-                               <select class="form-control" name="office" id="office">
+                               <select class="form-control" name="office_id" id="office">
                                     <option value=""></option>
                                     @foreach( $offices as $office )
                                         <option value="{{ $office->id }}">{{ $office->name }}</option>
