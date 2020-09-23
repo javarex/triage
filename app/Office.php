@@ -18,4 +18,9 @@ class Office extends Model
     {
         return $this->belongsTo('App\User');
     }
+    
+    public function activity()
+    {
+        return $this->hasMany('App\Activity');
+    }
 }

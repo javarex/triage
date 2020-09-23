@@ -30,7 +30,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{__('Office name')}}</label>
                                 
                                 <div class="col-md-6">
-                                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $name='') }}">
+                                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                                 </div>
                             </div>
 

@@ -13,14 +13,17 @@ class Client extends Model
     {
         return $this->belongsTo('App\User');
     }
+
     public function triage()
     {
         return $this->hasMany('App\Triage_form');
     }
+
     public function activity()
     {
         return $this->hasMany('App\Activity');
     }
+    
     public function office()
     {
         return $this->belongsTo('App\Office');

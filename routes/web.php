@@ -23,14 +23,17 @@ Route::get('/logout', function()
 Auth::routes();
 
 Route::get('/admin/login','AdminController@loginForm')->name('admin.login');
-Route::get('/admin', 'AdminController@index');
-
+Route::resource('/admin', 'AdminController');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/client/create','ClientController@create')->name('client.create');
 Route::post('/client','ClientController@store')->name('client.store');
 
 Route::resource('/office','OfficeController');
+Route::post('/office/clientLog', 'OfficeController@clientLog');
+
+Route::resource('officeLog', 'OfficeLogController');
+Route::post('/officeLog1','OfficeLogController@storeTriage');
 
 //Triage Routes
 

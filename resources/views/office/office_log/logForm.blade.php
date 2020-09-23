@@ -45,15 +45,14 @@
                 <h3 class="font-weight-bolder">WELCOME TO DAVAO DE ORO TRIAGE SCREENING</h3>
             </div>
 
-            <form action="{{ route('officeLog.create') }}" method="get" autocomplete="off">
+            <form action="/office/clientLog" method="post" autocomplete="off">
 
-                
-                
+                @csrf
                 <div class="form-group row">
                     <label for="username" class="col-md-3 col-form-label text-md-right"></label>
 
                     <div class="col-md-6">
-                        <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" placeholder="Enter your Triage Code here" autofocus>
+                        <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" placeholder="Enter your Triage Code here">
                     </div>
                     <div class="col-md-12">
                     @if($message = Session::get('username'))

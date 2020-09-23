@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Triage_form extends Model
 {
     public $timestamps = true;
-    protected $fillable = ['client_id','form_number','criteria_id','answer'];
+    protected $fillable = ['client_id','activity_id','criteria_id','answer','location'];
     protected $dates = ['created_at', 'updated_at'];
 
     public function client()

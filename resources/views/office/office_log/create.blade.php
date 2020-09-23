@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="row px-5">
-    <div class="col-md-4 m-auto">
-        <div class="card p-3">
-            <h1>{{ Auth::user()->first_name}}</h1>
+    <div class="col-md-5 m-auto">
+        <div class="card p-3 text-secondary">
+            <h1>{{ strtoupper(Auth::user()->first_name)}}</h1>
         </div>
         <div class="card shadow ">
             <div class="card-header" style="background-color:#d7e2ea">
@@ -20,6 +20,7 @@
                     <table class="table table-striped table-bordered mt-2">
                         <thead>
                             <tr>
+                                <th><i class="fas fa-users    "></i></th>
                                 <th>Activity</th>
                                 <th>Venue</th>
                                 <th>Date</th>
@@ -27,8 +28,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php $new_string = "" ?>
-                        
+
+                            @forelse($clients as $client)
+                                <tr>
+                                    <td>{{ $client->client->first_name.' '.$client->client->last_name }}</td>
+                                    <td>{{ $client->activity }}</td>
+                                    <td>{{ $client->venue }}</td>
+                                    <td>{{ $client->created_at->format('m/d/Y') }}</td>
+                                    <td>
+                                        <a href="" title="details">
+                                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+
+                            @endforelse
+
                         </tbody>
                     </table>
                 </div>
@@ -45,9 +61,9 @@
                 <h3 class="font-weight-bolder">WELCOME TO DAVAO DE ORO TRIAGE SCREENING</h3>
             </div>
 
-            <form action="{{ route('officeLog.create') }}" method="get" autocomplete="off">
+            <form action="{{ route('officeLog.store') }}" method="post" autocomplete="off">
 
-                
+                @csrf            
                 
                 <div class="form-group row">
                     <label for="username" class="col-md-3 col-form-label text-md-right"></label>
