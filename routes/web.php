@@ -32,7 +32,7 @@ Route::post('/client','ClientController@store')->name('client.store');
 Route::resource('/office','OfficeController');
 Route::post('/office/clientLog', 'OfficeController@clientLog');
 
-Route::resource('officeLog', 'OfficelogController');
+Route::resource('officelog', 'OfficelogController');
 Route::post('/officeLog1','OfficeLogController@storeTriage');
 
 //Triage Routes

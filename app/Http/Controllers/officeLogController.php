@@ -9,6 +9,7 @@ use App\Client;
 use App\Activity;
 use App\Triage_form;
 use Auth;
+
 use Illuminate\Http\Request;
 
 class officelogController extends Controller
@@ -128,5 +129,4 @@ class officelogController extends Controller
     {
         return 'hello';
     }
-
 }

@@ -22,7 +22,7 @@ class OfficeController extends Controller
             Auth::logout();
             return redirect('login');
         }
-        return redirect('/officeLog/create');
+        return redirect('/officelog/create');
     }
 
     //for admin create office
