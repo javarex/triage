@@ -11,7 +11,7 @@ use App\Triage_form;
 use Auth;
 use Illuminate\Http\Request;
 
-class officeLogController extends Controller
+class officelogController extends Controller
 {
     public function create()
     {
