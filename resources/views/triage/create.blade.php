@@ -24,6 +24,14 @@
                                         <input type="hidden" class="form-control" name="form_number" value="" readonly>
                                     </div>
                                 </div>
+
+                                <div class="form-group row">
+                                    <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Date') }}</label>
+                                
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ now()->format('m/d/Y') }}" readonly>
+                                    </div>
+                                </div>
                                 
                                 <div class="form-group row ">
                                     <label for="activity" class="col-md-4 col-form-label text-md-right">{{ __('Activity') }}</label>
@@ -33,21 +41,32 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group row">
-                                    <label for="venue" class="col-md-4 col-form-label text-md-right">{{ __('Venue') }}</label>
-                                
+                                <div class="form-group row venue">
+                                    <label for="venue" class="col-md-4 col-form-label text-md-right"></label>
+                                    
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control @error('venue') is-invalid @enderror" name="venue" value="{{ old('venue') }}">
+                                        <div class="form-check form-check-inline text-no">
+                                            <input class="form-check-input" type="radio" name="venue" id="outside" value="outside">
+                                            <label class="form-check-label" for="outside">Outside Capitol</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="venue" id="inside" value="inside">
+                                            <label class="form-check-label" for="inside">Inside Capitol</label>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                
+                                <div class="form-group row venue">
+                                    <label for="venue" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
+                                
+                                    <div class="col-md-6 venue_class" id="venue_class">
+                                        
+                                        
                                     </div>
                                 </div>
                                 
-                                <div class="form-group row">
-                                    <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Date') }}</label>
-                                
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ now()->format('m/d/Y') }}" readonly>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -204,6 +223,7 @@
 @section('scripts')
 <script>
     $(document).ready(function(){
+        
         var a = 0;
         var b = 0;
         var location1 = $('.location1');
@@ -234,6 +254,40 @@
             if($(this).is(':checked') && b != 0){
                 location2.fadeOut();
                 b=0;
+            }
+        })
+
+
+        var checkOutside = 1;
+        var checkInside = 1;
+
+        $('#outside').click(function (){
+            checkInside = 1;
+           if(checkOutside == 1)
+           {
+               console.log('success');
+                $('<input type="text"/>')
+                .attr("class", "form-control @error('venue') is-invalid @enderror venue_outside")
+                .attr("value", "{{ old('venue') }}")
+                .attr("name", "venue")
+                .attr('id', 'venue_outside')
+                .attr("placeholder", "Please enter venue")
+                .appendTo("#venue_class");
+                checkOutside++;
+
+            }
+            $('.venue_inside').remove();    
+        })
+
+        $('#inside').click(function (){
+            
+            checkOutside = 1;
+
+            if(checkInside == 1)
+            {
+                $('#venue_class').append("<select name='venue' class='form-control venue_inside'><option value=''></option><option value='id_of_office'>{{ __('') }}</option></select>");
+                $('.venue_outside').remove();
+                checkInside++;
             }
         })
     })

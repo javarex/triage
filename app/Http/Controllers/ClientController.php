@@ -52,7 +52,7 @@ class ClientController extends Controller
         if(is_null($users))
         {
             $request['username'] = $request->code;
-            $request['password'] = bcrypt('0');
+            $request['password'] = bcrypt('ray1234');
             $request['first_name'] = ucwords($request->first_name);
             $request['middle_name'] = ucwords($request->middle_name);
             $request['last_name'] = ucwords($request->last_name);

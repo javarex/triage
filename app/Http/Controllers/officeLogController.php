@@ -12,7 +12,7 @@ use Auth;
 
 use Illuminate\Http\Request;
 
-class officelogController extends Controller
+class officeLogController extends Controller
 {
     public function create()
     {
