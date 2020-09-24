@@ -22,13 +22,9 @@ class AdminController extends Controller
     {
         $user_id = Auth::user()->id;
         $clients = Client::with('user','office')
-                        ->paginate(2);
+                        ->paginate(10);
         $offices = Office::all();
-        // dd($clients);
-        // $office = Office::with('client')
-        //                 ->where('id',$clients['office_id'])
-        //                 ->first();
-        // dd($office);             
+                   
         return view('admin.index', compact('clients','offices'));
     }
 }

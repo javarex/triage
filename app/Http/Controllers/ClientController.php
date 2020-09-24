@@ -60,7 +60,14 @@ class ClientController extends Controller
             $user = User::create($request->all());
             $request['user_id'] = $user->id;
             $client = Client::create($request->all());
-            return redirect('/triage');
+            $userLogin = $user->where('id', $client->user_id)->first();
+            $authUser = Auth::user();
+            if(is_null($authUser)){
+                Auth::login($userLogin);
+                return redirect('/triage');
+            }else{
+                return redirect('/admin');
+            }
             
 
         }else{

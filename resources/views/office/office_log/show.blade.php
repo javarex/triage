@@ -27,7 +27,7 @@
                                 <label for="venue" class="col-md-3 col-form-label text-md-right">{{ __('Activity') }}</label>
                                 
                                 <div class="col-md-6">
-                                    <input type="text" name="venue" class="form-control @error('venue') is-invalid @enderror" value="{{ $activity->venue }}" readonly>
+                                    <input type="text" name="venue" class="form-control @error('venue') is-invalid @enderror" value="{{ $activity->activity }}" readonly>
                                     <input type="hidden" name="activity" id="" value="{{ $activity->id }}">
                                 </div>
                             </div>

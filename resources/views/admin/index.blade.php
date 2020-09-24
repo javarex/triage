@@ -8,7 +8,7 @@
                     <h1>Employee and Guest users</h1>
                 </div>
                 <div class="table-responsive">
-                    <a href="" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                    <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                     <table class="table table-bordered table-striped table-light">
                         <thead class="table-primary">
                             <tr>
@@ -16,7 +16,7 @@
                                 <th>Name</th>
                                 <th>Office</th>
                                 <th>Contact #</th>
-                                <th><i class="fa fa-cogs" aria-hidden="true"></i></th>
+                                <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
             
@@ -26,9 +26,31 @@
                                 <tr>
                                 <td>{{ $client->user['username'] }}</td>
                                 <td>{{ $client->first_name.' '.$client->last_name }}</td>
-                                <td>{{ $client->office['name'] }}</td>
+                                <td>
+                                    @if(is_null($client->office['name'] ))
+                                        {{ __('N/A') }}
+
+                                    @else
+
+                                        {{ $client->office['name'] }}
+                                    @endif
+
+                                </td>
                                 <td>{{ $client['contact_number'] }}</td>
-                                <td>asdas</td>
+                                <td class="text-center">
+                                
+                                    <a class="" href="">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <span class="text-info">|</span>
+                                    <a class="" href="">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </a>
+                                    <span class="text-info">|</span>
+                                    <a href="">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                </td>
                                 </tr>
                             @endif
                         @endforeach
@@ -50,16 +72,16 @@
                             <tr>
                                 <th>Office</th>
                                 <th>Division</th>
-                                <th><i class="fa fa-cogs" aria-hidden="true"></i></th>
+                                <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
             
                         <tbody>
                         @foreach($offices as $office)
                             <tr>
-                                <td>{{ $office->name }}</td>
+                                <td >{{ $office->name }}</td>
                                 <td>{{ __('Division name') }}</td>
-                                <td>
+                                <td class="text-center">
                                     <a class="" href="">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </a>
@@ -68,7 +90,7 @@
                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                     </a>
                                     <span class="text-info">|</span>
-                                    <a class="" href="">
+                                    <a href="">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                 </td>
