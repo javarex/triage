@@ -32,8 +32,8 @@ Route::post('/client','ClientController@store')->name('client.store');
 Route::resource('/office','OfficeController');
 Route::post('/office/clientLog', 'OfficeController@clientLog');
 
-Route::resource('officelog', 'officelogController');
-Route::post('/officeLog1','officelogController@storeTriage');
+Route::resource('officelog', 'officeLogController');
+Route::post('/officeLog1','officeLogController@storeTriage');
 
 //Triage Routes
 
