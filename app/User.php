@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'password', 'first_name', 'middle_name', 'last_name', 'type'
+        'username', 'password', 'first_name', 'middle_name', 'last_name', 'type', 'office_id','status'
     ];
     protected $dates = ['created_at', 'updated_at'];
     
@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function office()
     {
-        return $this->hasOne('App\Office');
+        return $this->belongsTo('App\Office');
     }
 }

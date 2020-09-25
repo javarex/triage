@@ -27,18 +27,18 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{__('Office name')}}</label>
+                                <label for="office_id" class="col-md-4 col-form-label text-md-right">{{__('Office')}}</label>
                                 
                                 <div class="col-md-6">
-                                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
-                                </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label for="division" class="col-md-4 col-form-label text-md-right">{{__('Division')}}</label>
-                                
-                                <div class="col-md-6">
-                                    <input type="text" name="division" id="division" class="form-control @error('division') is-invalid @enderror" value="{{ old('division') }}">
+                                    <select id="" class="form-control" name="office_id" id="name" class="form-control @error('name') is-invalid @enderror">
+                                   <option value=""></option>
+                                    @foreach($offices as $office)
+                                        <option value="{{ $office->id }}">
+                                            {{ $office->name }}
+                                        </option>`
+                                    @endforeach
+                                    </select>
                                 </div>
                             </div>
 

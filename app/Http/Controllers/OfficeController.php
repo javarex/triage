@@ -28,6 +28,7 @@ class OfficeController extends Controller
     //for admin create office
     public function create()
     {
+        $offices = Office::all();
         return view('office.create', compact('offices'));
     }
 
@@ -36,32 +37,24 @@ class OfficeController extends Controller
         $flag = False;
         $errorMessage = "";
         $validatedData = $request->validate([
-            'name'    => 'required',
-            'division'  => 'required',
+            'office_id'    => 'required',
             'username'  => 'required',
             'password'  =>  'required',
         ]);
         
 
-        $office = Office::where('name', $request->name)->first();
+  
         $check_username = User::where('username', $request->username)->first();
 
         //check duplication
 
-        if(is_null($office))
-        {
-            if(!(is_null($check_username)))
-            {
-                $errorMessage = "Username already exist!";
-                $flag = True;
-            }
-        }
-        else
-        {
-            $flag = True;
-            $errorMessage = "Office already exist!";
-        }
         
+        if(!(is_null($check_username)))
+        {
+            $errorMessage = "Username already exist!";
+            $flag = True;
+        }
+    
         if($flag)
         {
             return redirect()->back()
@@ -70,23 +63,25 @@ class OfficeController extends Controller
 
         else
         {
-            $request['first_name'] = $request->name;
-            $request['middle_name'] = $request->name;
-            $request['last_name'] = $request->name;
             $request['type'] = 'office';
+            $request['first_name'] = '';
+            $request['middle_name'] = '';
+            $request['last_name'] = '';
+            $request['office_id'] = $request->office_id;
             $request['password'] = bcrypt($request->password);
             $user = User::create($request->all());
             $user_id = $user->id;
-            $request['user_id'] = $user_id; 
-            $office_insert = Office::create($request->all());
-            ?>
-            <script>
-                alert('New office added successfully!')
-            </script>
-            <?php
-            return redirect('/admin');
+
+            return redirect('/admin')->with('success','New office added!');
         }
 
+    }
+
+    public function update(Request $request, $id)
+    {
+        $office = User::findOrFail($id);
+        $office->update($request->all());
+        return back();
     }
 
     

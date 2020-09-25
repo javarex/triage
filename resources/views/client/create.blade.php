@@ -104,7 +104,30 @@
 
                         </div>
 
-                        
+                        <div class="form-group row">
+                            <label for="user_type" class="col-md-4 col-form-label text-md-right">{{ __('User type')}}</label>
+
+                            <div class="col-md-6">
+                                <select name="type" id="user_type" class="form-control">
+                                    <option value=""></option>
+                                    <option value="guest">Guest</option>
+                                    <option value="employee">Employee</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row user_type_group">
+                            <label for="office" class="col-md-4 col-form-label text-md-right misc_label">Office</label>
+
+                            <div class="col-md-6" id="misc_input">
+                               <select class="form-control" name="office_id" id="office">
+                                    <option value=""></option>
+                                    @foreach( $offices as $office )
+                                        <option value="{{ $office->id }}">{{ $office->name }}</option>
+                                    @endforeach
+                               </select>
+                            </div>
+                        </div>
 
                      
 

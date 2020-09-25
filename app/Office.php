@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Office extends Model
 {
-    protected $fillable = ['name','user_id','status'];
+    protected $fillable = ['name',];
 
     protected $dates = ['created_at', 'updated_at'];
 
@@ -16,7 +16,7 @@ class Office extends Model
     }
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->hasMany('App\User');
     }
     
     public function activity()

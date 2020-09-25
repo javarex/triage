@@ -23,8 +23,9 @@ class AdminController extends Controller
         $user_id = Auth::user()->id;
         $clients = Client::with('user','office')
                         ->paginate(10);
-        $offices = Office::all();
-                   
+        $offices = User::with('office')
+                        ->where('type','office')
+                        ->get();
         return view('admin.index', compact('clients','offices'));
     }
 }
