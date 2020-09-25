@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Office extends Model
 {
-    protected $fillable = ['name','division','user_id','remarks'];
+    protected $fillable = ['name','user_id','status'];
 
     protected $dates = ['created_at', 'updated_at'];
 

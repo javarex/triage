@@ -44,7 +44,11 @@
                                 {{ $client->activity }}
                                 </td>
                                 <td>
-                                    {{ $client->venue }}
+                                    @if( is_null($client->office_id))
+                                        {{ $client->venue }}
+                                    @else
+                                        {{ $client->office['name'] }}
+                                    @endif
                                 </td>
                                 <td>
                                     {{ $client->created_at->format('m/d/Y')}}

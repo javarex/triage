@@ -60,10 +60,17 @@
                                 
                                 <div class="form-group row venue">
                                     <label for="venue" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
-                                
-                                    <div class="col-md-6 venue_class" id="venue_class">
-                                        
-                                        
+                                    
+                                    <div class="col-md-6 venue_class" id="">
+                                        <input type="text" class="form-control  @error('venue') is-invalid @enderror" id="venue_outside" name="venue" value="{{ old('venue_outside') }}" placeholder="Specify place">
+                                        <select name='venue_inside' class='form-control venue_inside' id='office_id'>
+                                            <option value=''>Select office</option>
+                                            @foreach($offices as $office)
+                                                <option value='{{ $office->id }}'>
+                                                    {{ $office->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 
@@ -229,6 +236,7 @@
         var location1 = $('.location1');
         var location2 = $('.location2');
 
+        
         location1.hide();
         location2.hide();
 
@@ -265,19 +273,19 @@
             checkInside = 1;
            if(checkOutside == 1)
            {
-               console.log('success');
-                $('<input type="text"/>')
-                .attr("class", "form-control @error('venue') is-invalid @enderror venue_outside")
-                .attr("value", "{{ old('venue') }}")
-                .attr("name", "venue")
-                .attr('id', 'venue_outside')
-                .attr("placeholder", "Please enter venue")
-                .appendTo("#venue_class");
+                $('#venue_outside').attr("required", true);
+                $('#venue_outside').fadeIn();
+
+                $('#venue_inside').attr("required", false);
+               
                 checkOutside++;
 
             }
-            $('.venue_inside').remove();    
+            $('.venue_inside').fadeOut();    
         })
+
+        $('.venue_inside').hide();
+        $('#venue_outside').hide();
 
         $('#inside').click(function (){
             
@@ -285,8 +293,10 @@
 
             if(checkInside == 1)
             {
-                $('#venue_class').append("<select name='venue' class='form-control venue_inside'><option value=''></option><option value='id_of_office'>{{ __('') }}</option></select>");
-                $('.venue_outside').remove();
+                $('#venue_inside').attr("required", true);
+                $('#venue_outside').attr("required", false);
+                $('.venue_inside').fadeIn();
+                $('#venue_outside').fadeOut();
                 checkInside++;
             }
         })

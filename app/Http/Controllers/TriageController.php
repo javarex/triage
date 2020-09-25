@@ -7,6 +7,7 @@ use App\Criteria;
 use App\Client;
 use App\User;
 use App\Triage_form;
+use App\Office;
 use App\Activity;
 use Auth;
 
@@ -25,7 +26,7 @@ class TriageController extends Controller
         $user_id = Auth::user()->id;
         $client_id = Client::where('user_id',$user_id)
                             ->first();
-        $client_logs = Activity::with('client')
+        $client_logs = Activity::with('client','office')
                                 ->where('client_id',$client_id->id)
                                 ->paginate(10);
         return view('triage.index', compact('client_logs'));
@@ -35,29 +36,26 @@ class TriageController extends Controller
     {  
         $questions = Criteria::all();
         $triage = Triage_form::all();
+        $offices = Office::where('status', NULL)->get();
 
         
-        // if($triage->isEmpty()){
-        //     $form_number = "0001";
-        // }else{
-        //     $get_form_number = Triage_form::select('form_number')->latest('form_number')->first();
-        //     $number = $get_form_number->form_number+1;
-        //     $form_number = sprintf('%04d',$number);
-        // }
-        
-
-        
-        return view('triage.create', compact('questions','triage','form_number'));
+        return view('triage.create', compact('questions','triage','offices'));
     }
 
     public function store(Request $request)
     {   
         $this->Validate($request, [
             'activity'  => 'required|regex:/^[a-z0-9 .\-]+$/i',
-            'venue'     => 'required|regex:/^[a-z0-9 .\-]+$/i',
         ]);
+        
+        if(is_null($request->venue)){
+            $request['venue'] = NULL;
+        }
+        if(!(is_null($request->venue_inside))){
+            $request['office_id'] = $request->venue_inside;
+        }
         $request['client_id'] = $request->client_id;
-        $request['activity'] = $request->activity;
+        
         $request['venue'] = $request->venue;
         $data = Activity::create($request->all());
         
