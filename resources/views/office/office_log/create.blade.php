@@ -61,7 +61,7 @@
                 <h3 class="font-weight-bolder">WELCOME TO DAVAO DE ORO TRIAGE SCREENING</h3>
             </div>
 
-            <form action="{{ route('officelog.store') }}" method="post" autocomplete="off">
+            <form action="{{ route('officeLog.store') }}" method="post" autocomplete="off">
 
                 @csrf            
                 

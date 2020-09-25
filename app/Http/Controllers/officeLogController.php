@@ -17,12 +17,13 @@ class officeLogController extends Controller
     public function create()
     {
         $user_id = Auth::user()->id;
-        $office = Office::where('user_id',$user_id)
+        $office = User:: with('office')
+                        ->where('id',$user_id)
                         ->first();
         $clients = Activity::with('Office','client')
                             ->where('office_id',$office->id)
                             ->get();
-        return view('office.office_log.create', compact('clients'));
+        return view('office.office_log.create', compact('clients','office'));
     }
 
     public function store(Request $request)

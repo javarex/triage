@@ -47,19 +47,27 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        $users_query = User::where('username',$request->username)->first();
+        $users_query = User::where('username',$request->username)
+                            ->where('status','<>',NULL)
+                            ->first();
        
-        
         $userId = Auth::id();
-        if($users_query->type == 'admin')
+
+        if(!(is_null($users_query)))
         {
-            return redirect('/admin');
+            if($users_query->type == 'admin')
+            {
+                return redirect('/admin');
+            }
+            elseif($users_query->type == 'office')
+            {
+                return redirect('/office');
+            }
+        
+        }else{
+            return redirect('/logout');
+           
         }
-        elseif($users_query->type == 'office')
-        {
-            return redirect('/office');
-        }
-       
     }
 
 }

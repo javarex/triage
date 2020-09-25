@@ -29,10 +29,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/client/create','ClientController@create')->name('client.create');
 Route::post('/client','ClientController@store')->name('client.store');
 
-Route::resource('/office','OfficeController');
+Route::resource('office','OfficeController');
 Route::post('/office/clientLog', 'OfficeController@clientLog');
 
-Route::resource('officelog', 'officeLogController');
+Route::resource('officeLog', 'officeLogController');
 Route::post('/officeLog1','officeLogController@storeTriage');
 
 //Triage Routes
