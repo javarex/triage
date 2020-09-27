@@ -21,20 +21,22 @@ class officeLogController extends Controller
                         ->where('id',$user_id)
                         ->first();
         $clients = Activity::with('Office','client')
-                            ->where('office_id',$office->id)
+                            ->where('office_id',$office->office_id)
                             ->get();
+
         return view('office.office_log.create', compact('clients','office'));
     }
 
     public function store(Request $request)
     {
-        $users_id =Auth::user()->id;
-
+        $users = Auth::user();
+        $users_id = $users->id;
+        $office_id = $users->office_id;
         $validatedData = $request->validate([
             'username' => 'required',
             'activity' => 'required',
         ]);
-        $office = Office::where('user_id', $users_id)
+        $office = Office::where('id', $users->office_id)
                         ->first();
         
         if($request->submit == "1")
@@ -48,8 +50,7 @@ class officeLogController extends Controller
                 $client = Client::where('user_id',$fetched_user->id)
                                     ->first();
                 $request['client_id'] = $client->id; 
-                $request['venue'] = $office->name;
-                $request['office_id'] = $office->id;
+                $request['office_id'] = $users->office_id;
                 $storedActivity = Activity::create($request->all());
                 
                 return redirect('/officeLog/'.$storedActivity->id);

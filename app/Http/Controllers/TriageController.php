@@ -36,7 +36,7 @@ class TriageController extends Controller
     {  
         $questions = Criteria::all();
         $triage = Triage_form::all();
-        $offices = Office::where('status', NULL)->get();
+        $offices = Office::all();
 
         
         return view('triage.create', compact('questions','triage','offices'));

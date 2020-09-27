@@ -69,6 +69,7 @@
                     <label for="username" class="col-md-3 col-form-label text-md-right"></label>
 
                     <div class="col-md-6">
+                        <input type="hidden" name="approve" value="1">
                         <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" placeholder="Enter your Triage Code here" autofocus>
                     </div>
                     <div class="col-md-12">
@@ -122,4 +123,18 @@
     <!-- <div class="col-md-12" style='background-image:url("../public/vendor/img/stop_covid.png")'></div> -->
 </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+
+        function get_new_nonApprove(){
+            $.ajax({
+                m
+            });
+        }
+        $(document).ready(function() {
+            
+        })
+    </script>
 @endsection
