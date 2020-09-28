@@ -19,26 +19,31 @@
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered mt-2">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th><i class="fas fa-users    "></i></th>
                                 <th>Activity</th>
-                                <th>Venue</th>
                                 <th>Date</th>
-                                <th><i class="fas fa-cog    "></i></th>
+                                <th><i class="fas fa-cogs    "></i></th>
                             </tr>
                         </thead>
                         <tbody>
 
                             @forelse($clients as $client)
                                 <tr>
-                                    <td>{{ $client->client->first_name.' '.$client->client->last_name }}</td>
+                                    <td width="">{{ $client->client->first_name.' '.$client->client->last_name }}</td>
                                     <td>{{ $client->activity }}</td>
-                                    <td>{{ $client->venue }}</td>
+                               
                                     <td>{{ $client->created_at->format('m/d/Y') }}</td>
-                                    <td>
-                                        <a href="" title="details">
-                                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                        </a>
+                                    <td class="text-nowrap pr-1">
+                                        @if( $client->approve == 0)
+                                            <a  href="javascript:void(0)" id="approve" class="badge badge-primary approve" data-value="1" data-id="{{ $client->id }}">Accept</a>
+                                                <span class="text-secondary">|</span>
+                                            <a href="javascript:void(0)" id="approve" class="badge badge-danger approve" data-value="2" data-id="{{ $client->id }}">Decline</a>
+                                        @elseif($client->approve == 1)
+                                            <span class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i> Approve</span>
+                                        @elseif($client->approve == 2)
+                                            <span class="badge badge-danger"><i class="fa fa-times-circle" aria-hidden="true"></i> Declined</span>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty
@@ -128,13 +133,42 @@
 @section('scripts')
     <script>
 
-        function get_new_nonApprove(){
-            $.ajax({
-                m
-            });
-        }
+        // function get_new_nonApprove(){
+        //     $.ajax({
+        //         m
+        //     });
+        // }
         $(document).ready(function() {
+            // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            function updateActivities(id, approve)
+            {
+                $.ajax({
+                    url: 'approveStatus/'+id,
+                    type: 'post',
+                    data: {
+                        _token:'{{ csrf_token() }}',
+                        id:id,
+                        approve:approve
+                        },
+                    success: function(data)
+                    {
+                            alert(data);
+                    }
+               })
+            }
+
+            $('.approve').click(function () {
+                var activity_id = $(this).data('id');
+                var _value = $(this).data('value');
+
+                updateActivities(activity_id,_value);
+            })
         })
     </script>
 @endsection
