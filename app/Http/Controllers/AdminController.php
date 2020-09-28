@@ -22,7 +22,8 @@ class AdminController extends Controller
     {
         $user_id = Auth::user()->id;
         $clients = Client::with('user','office')
-                        ->paginate(10);
+                        ->orderBy('first_name', 'asc')
+                        ->get();
         $offices = User::with('office')
                         ->where('type','office')
                         ->get();

@@ -14,21 +14,21 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-7 bg-light border">
                 <div class="header text-secondary">
                     <h1>Employee and Guest users</h1>
                 </div>
-                <div class="table-responsive">
+                <div class="">
                     <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
-                   <div class="ex1">
-                        <table class="table table-bordered table-striped table-light">
-                            <thead class="table-primary">
+                   <div class="">
+                        <table id="example" class="table table-dark table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                            <thead class="">
                                 <tr>
                                     <th>Triage Code</th>
                                     <th>Name</th>
                                     <th>Office</th>
                                     <th>Contact #</th>
-                                    <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th>
+                                    <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
                                 </tr>
                             </thead>
                        
@@ -49,7 +49,7 @@
                        
                                     </td>
                                     <td>{{ $client['contact_number'] }}</td>
-                                    <td class="text-center">
+                                    <!-- <td class="text-center">
                                     
                                         <a class="" href="">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
@@ -62,27 +62,26 @@
                                         <a href="">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </a>
-                                    </td>
+                                    </td> -->
                                     </tr>
                                 @endif
                             @endforeach
                             </tbody>
                         </table>
                    </div>
-                        {{ $clients->links() }}
                 </div>
             </div>
 
-            <div class="col-md-5">
+            <div class="col-md-5 bg-light">
                 <div class="header text-secondary">
                     <h1>Registered Offices</h1>
                 </div>
 
-                <div class="table-responsive">
+                <div class="">
                     <a href="{{ route('office.create') }}"><span class="fas fa-plus    ">ADD OFFICE</span> </a>
-                    <div class="ex1">
-                        <table class="table table-bordered table-striped table-light">
-                            <thead class="table-primary">
+                    <div class="">
+                        <table id="example1" class="table table-dark table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                            <thead class="">
                                 <tr>
                                     <th>Name</th>
                                     <th class="text-center">Username</th>
@@ -121,4 +120,16 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function()
+    {
+        $('#example').DataTable({
+            order:[[1,'asc']]
+        });
+        $('#example1').DataTable();
+    })
+</script>
 @endsection

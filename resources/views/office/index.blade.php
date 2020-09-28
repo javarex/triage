@@ -17,7 +17,7 @@
                     
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered mt-2">
+                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Activity</th>
@@ -106,4 +106,13 @@
     <!-- <div class="col-md-12" style='background-image:url("../public/vendor/img/stop_covid.png")'></div> -->
 </div>
 
+@endsection
+
+@section('scripts')
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script>
 @endsection

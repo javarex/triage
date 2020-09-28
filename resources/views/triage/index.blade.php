@@ -14,25 +14,26 @@
 
 
 
-<div class="row px-5">
-    <div class="col-md-4 m-auto">
+<div class="row ">
+    <div class="col-md-5 m-auto">
         <div class="card shadow ">
             <div class="card-header" style="background-color:#d7e2ea">
                 <h3 class="text-primary text-center">
                     <strong><i class="fa fa-history" aria-hidden="true"></i> YOUR RECENT ACTIVITIES</strong>
                 </h3>
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('triage.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
+                </div>
             </div>
             <div class="card-body">
-                <div class="d-flex justify-content-end">
-                    <a href="{{ route('triage.create') }}" class="btn btn-primary"><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
-                </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered mt-2">
+                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Activity</th>
                                 <th>Venue</th>
                                 <th>Date</th>
+                                <th>Time</th>
                                 <th><i class="fas fa-cog    "></i></th>
                             </tr>
                         </thead>
@@ -54,6 +55,9 @@
                                     {{ $client->created_at->format('m/d/Y')}}
                                 </td>
                                 <td>
+                                    {{ date('h:i a', strtotime($client->created_at))}}
+                                </td>
+                                <td>
                                     <a href="{{ route('triage.show', $client->id ) }}" id="history_link" title="View form" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
@@ -64,15 +68,15 @@
                     </table>
                 </div>
                 {{ $new_string }}
-                {{ $client_logs->links() }}
+                
             </div>
             
         </div>
     
     </div>
     
-    <div class="col-md-8 bg-light rounded-left shadow-lg">
-        <img src="{{ asset('vendor/img/stop_covid.png') }}" width="100%" heigth="auto" alt="">
+    <div class="col-md-6 bg-light rounded-left shadow-lg p-0">
+        <img src="{{ asset('vendor/img/stop_covid.png') }}" width="100%" height="100%" alt="">
     </div>
     <!-- right side -->
     
@@ -80,4 +84,12 @@
 </div>
 
 
+@endsection
+
+@section('scripts')
+        <script>
+            $(document).ready(function (){
+                $('#example').DataTable();
+            })
+        </script>
 @endsection

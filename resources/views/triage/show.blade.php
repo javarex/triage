@@ -3,17 +3,14 @@
 @section('content')
 
 <div class="row">
-    <div class="col-md-5 sticky-top">
+    <div class="col-md-5">
         <div class="card shadow">
-            <div class="card-header">
+            <div class="card-header" style="background-color:#d7e2ea">
                 <h3 class="text-primary text-center">
                     <strong><i class="fa fa-history" aria-hidden="true"></i> YOUR RECENT ACTIVITIES</strong>
                 </h3>
             </div>
             <div class="card-body">
-                <div class="d-flex justify-content-end">
-                    <a href="{{ route('triage.create') }}" class="btn btn-primary"><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
-                </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered mt-2 text-center">
                         <thead>
@@ -21,6 +18,7 @@
                                 <th>Activity</th>
                                 <th>Venue</th>
                                 <th>Date</th>
+                                <th>Time</th>
                                 <th><i class="fas fa-cog    "></i></th>
                             </tr>
                         </thead>
@@ -33,10 +31,14 @@
                                 {{ $client->activity }}
                                 </td>
                                 <td>
-                                    {{ $client->venue }}
+                                    {{ $client->office->name ?? $client->venue }}
                                 </td>
                                 <td>
                                     {{ $client->created_at->format('m/d/Y') }}
+                                </td>
+
+                                <td>
+                                    {{ date('h:i a', strtotime($client->created_at))}}
                                 </td>
                                 <td>
                                     <a href="{{ route('triage.show', $client->id ) }}" title="View form" id="history_link" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -99,6 +101,16 @@
                             </tbody>
                         </thead>
                     </table>
+                    <div class="d-flex justify-content-end">
+                        <div class="col-md-12 row d-flex justify-content-end">
+                            <div class="col-md-5 ">
+                                <button class="btn btn-danger btn-block" onclick="goBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i> BACK</button>
+                            </div>
+                            <div class="col-md-5 ">
+                                <a href="{{ route('triage.create') }}" class="btn btn-primary btn-block"><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,4 +118,12 @@
 </div>
 
 
+@endsection
+
+@section('scripts')
+<script>
+    function goBack() {
+    window.history.back();
+    }
+</script>
 @endsection

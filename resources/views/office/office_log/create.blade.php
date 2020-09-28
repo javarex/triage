@@ -1,8 +1,8 @@
 @extends('layouts.appClient')
 
 @section('content')
-<div class="row px-5">
-    <div class="col-md-5 m-auto">
+<div class="row">
+    <div class="col-md-6 m-auto">
         <div class="card p-3 text-secondary">
             <h1>{{ strtoupper(Auth::user()->first_name)}}</h1>
         </div>
@@ -17,13 +17,14 @@
                     
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered mt-2">
+                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                         <thead>
                             <tr class="text-center">
                                 <th><i class="fas fa-users    "></i></th>
                                 <th>Activity</th>
                                 <th>Date</th>
-                                <th><i class="fas fa-cogs    "></i></th>
+                                <th>Time</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +35,7 @@
                                     <td>{{ $client->activity }}</td>
                                
                                     <td>{{ $client->created_at->format('m/d/Y') }}</td>
+                                    <td>{{ date('h:i a', strtotime($client->created_at ))}}</td>
                                     <td class="text-nowrap pr-1">
                                         @if( $client->approve == 0)
                                             <a  href="javascript:void(0)" id="approve" class="badge badge-primary approve" data-value="1" data-id="{{ $client->id }}">Accept</a>
@@ -47,7 +49,7 @@
                                     </td>
                                 </tr>
                             @empty
-
+                                <span>No data available...</span>
                             @endforelse
 
                         </tbody>
@@ -60,72 +62,76 @@
     
     </div>
     
-    <div class="col-md-7 text-center rounded-left shadow-lg">
+    <div class="col-md-6 text-center rounded-left shadow-lg">
        <div class="container">
             <div class="pt-5 pb-2">
                 <h3 class="font-weight-bolder">WELCOME TO DAVAO DE ORO TRIAGE SCREENING</h3>
             </div>
 
-            <form action="{{ route('officeLog.store') }}" method="post" autocomplete="off">
-
-                @csrf            
-                
-                <div class="form-group row">
-                    <label for="username" class="col-md-3 col-form-label text-md-right"></label>
-
-                    <div class="col-md-6">
-                        <input type="hidden" name="approve" value="1">
-                        <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" placeholder="Enter your Triage Code here" autofocus>
-                    </div>
-                    <div class="col-md-12">
-                    @if($message = Session::get('username'))
-                        <span class="text-danger">
-                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{ $message }}
-                        </span>
-                    @endif
-                    @error('username')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                    </div>
-                </div>
-                
-                <div class="form-group row">
-                    <label for="activity" class="col-md-3 col-form-label text-md-right"></label>
-
-                    <div class="col-md-6">
-                        <input type="text" name="activity" class="form-control @error('activity') is-invalid @enderror" value="{{ old('activity') }}" placeholder="Activity">
-                    </div> 
-                    <div class="col-md-12">
+           <div class="card card-body shadow" style="border-bottom:solid 4px; border-bottom-color:#3490DC">
+                <form action="{{ route('officeLog.store') }}" method="post" autocomplete="off">
+               
+                    @csrf            
                     
+                    <div class="form-group row">
+                        <label for="username" class="col-md-2 col-form-label text-md-right"></label>
+               
+                        <div class="col-md-8">
+                            <input type="hidden" name="approve" value="1">
+                            <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" style="background-color:none; border:none; border-bottom:solid #0c4676 1px; border-radius:1px " value="{{ old('username') }}" placeholder="Enter your Triage Code here" autofocus>
+                        </div>
+                        <div class="col-md-12">
+                        @if($message = Session::get('username'))
+                            <span class="text-danger">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{ $message }}
+                            </span>
+                        @endif
+                        @error('username')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        </div>
+                    </div>
                     
-
-                    @error('activity')
-                        <span class="text-danger">
-                            {{ $message }}
-                        </span>
-                    @enderror
+                    <div class="form-group row">
+                        <label for="activity" class="col-md-2 col-form-label text-md-right"></label>
+               
+                        <div class="col-md-8">
+                            <input type="text" name="activity" class="form-control @error('activity') is-invalid @enderror" style="background-color:none; border:none; border-bottom:solid #0c4676 1px; border-radius:1px" value="{{ old('activity') }}" placeholder="Activity">
+                        </div> 
+                        <div class="col-md-12">
+                        
+                        
+               
+                        @error('activity')
+                            <span class="text-danger">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-3"></div>
-
-                    <div class="col-md-3 text-right">
-                        <button name="submit" class="btn btn-block btn-sm btn-primary" value="1"><i class="fas fa-pen-alt    "></i> Fill new form</button>
+               
+                    <div class="form-group row">
+               
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4 text-right">
+                        <div class="col-md-2"></div>
+                            <button name="submit" class="btn btn-block btn-sm btn-primary mt-1" value="1"><i class="fas fa-pen-alt    "></i> Fill new form</button>
+                        </div>
+              
+                        <div class="col-md-4  text-right">
+                            <button name="submit" class="btn btn-block btn-sm btn-primary mt-1" value="2"><i class="fas fa-clipboard-check    "></i> Use existing form</button>
+                        </div>
+               
                     </div>
-
-                    <div class="col-md-3 text-right">
-                        <button name="submit" class="btn btn-block btn-sm btn-primary" value="2"><i class="fas fa-clipboard-check    "></i> Use existing form</button>
-                    </div>
-
-                </div>
-
-            </form>
+               
+                </form>
+           </div>
        </div>
     </div>
     <!-- right side -->
     
     <!-- <div class="col-md-12" style='background-image:url("../public/vendor/img/stop_covid.png")'></div> -->
+    <span id="office_id" data-office="{{ Auth::user()->id}}"></span>
 </div>
 
 @endsection
@@ -139,6 +145,8 @@
         //     });
         // }
         $(document).ready(function() {
+            
+            $('#example').DataTable();
             // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             
             $.ajaxSetup({

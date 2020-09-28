@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Auth;
 use App\Activity;
 use App\Client;
+use App\User;
+use App\Office;
 
 use Illuminate\Http\Request;
 
@@ -18,4 +21,6 @@ class ActivityController extends Controller
                             ->first();
         return $client->first_name." status updated!";
     }
+
+    
 }

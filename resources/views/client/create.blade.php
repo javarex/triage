@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appClient')
 
 @section('content')
 <div class="container">
@@ -181,8 +181,16 @@
 
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <label for="triage_code" class="col-md-4 col-form-label text-md-right"></label>
+                            <div class="col-md-3 mt-2">
+                                <button type="button" onclick="goBack()" class="btn btn-danger btn-block">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                                    {{ __('Back') }}
+                                </button>
+                            </div>
+                            <div class="col-md-3 mt-2">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fa fa-check" aria-hidden="true"></i>
                                     {{ __('Register') }}
                                 </button>
                             </div>
@@ -197,6 +205,10 @@
 
 @section('scripts')
     <script>
+
+        function goBack() {
+            window.history.back();
+        }
         $(document).ready(function() {
             $('.user_type_group').hide();
             $('#user_type').change(function()

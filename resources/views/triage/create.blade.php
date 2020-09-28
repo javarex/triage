@@ -10,7 +10,11 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-5">
                         <div class="card shadow card-primary">
-                            <div class="card-header" style="background-color:gold; color:red"><h3>TRIAGE SCREENING FORM</h3></div>
+                            <div class="card-header text-primary" style="background-color:#d7e2ea">
+                                <h3>
+                                    <strong><i class="fas fa-file-alt    "></i> TRIAGE SCREENING FORM</strong>
+                                </h3>
+                            </div>
                             
                             <div class="card-body">
 
@@ -200,8 +204,13 @@
                         </table> 
                         
                         <div class="row pb-3">
-                            <div class="col-md-7"></div>
-                            <div class="col-md-5"><button class="btn btn-success btn-block">SUBMIT</button></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5 ">
+                                <button type="button" class="btn btn-danger btn-block" onclick="goBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i> BACK</button>
+                            </div>
+                            <div class="col-md-5">
+                                <button class="btn btn-primary btn-block"><i class="fa fa-check" aria-hidden="true"></i> SUBMIT</button>
+                            </div>
                         </div>
                         </div>
                     </div>
@@ -230,6 +239,11 @@
 
 @section('scripts')
 <script>
+
+    function goBack() {
+        window.history.back();
+    }
+
     $(document).ready(function(){
         
         var a = 0;

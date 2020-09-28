@@ -64,6 +64,11 @@
                                         <i class="fa fa-check" aria-hidden="true"></i> {{ __('Save') }}
                                     </button>
                                 </div>
+                                <div class="col-md-6 offset-md-4 pt-2">
+                                    <button type="button" onclick="goBack()" class="btn btn-danger btn-block">
+                                        <i class="fa fa-times" aria-hidden="true"></i> {{ __('Cancel') }}
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -71,4 +76,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        function goBack() {
+        window.history.back();
+        }
+    </script>
 @endsection

@@ -21,7 +21,8 @@ class ClientController extends Controller
 
     public function create()
     {
-        $offices = Office::get();
+        $offices = Office::orderBy('name', 'asc')
+                        ->get();
         //generate code
         $alphaList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         
@@ -52,11 +53,12 @@ class ClientController extends Controller
         if(is_null($users))
         {
             $request['username'] = $request->code;
-            $request['password'] = bcrypt('ray1234');
+            $request['password'] = bcrypt('admin');
             $request['first_name'] = ucwords($request->first_name);
             $request['middle_name'] = ucwords($request->middle_name);
             $request['last_name'] = ucwords($request->last_name);
             $request['address'] = ucwords($request->address);
+            $request['status'] = '1';
             $user = User::create($request->all());
             $request['user_id'] = $user->id;
             $client = Client::create($request->all());

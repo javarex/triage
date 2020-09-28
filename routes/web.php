@@ -40,5 +40,7 @@ Route::post('/officeLog1','officeLogController@storeTriage');
 Route::resource('triage', 'TriageController');
 
 Route::post('/officeLog/approveStatus/{id}', 'ActivityController@updateStatus');
+Route::get('/approveStatus/{id}', 'ActivityController@loadRecord');
+
 
 

@@ -19,6 +19,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/fontawesome-free-5.14.0/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
 </head>
 <body style="background-color:#d7e2ea">
     <div id="app">
@@ -36,9 +38,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto ">
                         <li class="nav-item">
-                            <a href="" class="text-secondary">
+                            <!-- <a href="" class="text-secondary">
                                 <i class="fas fa-file-alt"></i> NEW FORM
-                            </a>
+                            </a> -->
                         </li>
                     </ul>
 
@@ -78,14 +80,15 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            <p id="display_text"></p>
-            <span></span>
+        <main class="py-4 container">
             @yield('content')
         </main>
     </div>
 
-    
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
 
     @yield('scripts')
 

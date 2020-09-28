@@ -29,6 +29,7 @@ class OfficeController extends Controller
     public function create()
     {
         $offices = Office::where('used',0)
+                            ->orderBy('name', 'asc')
                             ->get();
         return view('office.create', compact('offices'));
     }
