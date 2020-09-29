@@ -23,6 +23,7 @@ class TriageController extends Controller
 
     public function index()
     {
+        
         $user_id = Auth::user()->id;
         $client_id = Client::where('user_id',$user_id)
                             ->first();
@@ -35,6 +36,7 @@ class TriageController extends Controller
 
     public function create()
     {  
+        
         $questions = Criteria::all();
         $triage = Triage_form::all();
         $offices = Office::orderBy('name', 'asc')
@@ -80,7 +82,6 @@ class TriageController extends Controller
                 'criteria_id'   => $i+1,
                 'answer'        => strtoupper($answer_name),
                 'location'      => $location,
-                'created_at'    => $current_date,
             ];
         }
 

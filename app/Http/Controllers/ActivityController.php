@@ -33,6 +33,7 @@ class ActivityController extends Controller
         $output ='';
         $activities = Activity::with('client')
                                 ->where('office_id', $id)
+                                ->orderBy('created_at', 'desc')
                                 ->get();
         $output.='<table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
         <thead>

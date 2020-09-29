@@ -15,7 +15,7 @@
 
 
 <div class="row ">
-    <div class="col-md-5 m-auto">
+    <div class="col-md-6">
         <div class="card shadow ">
             <div class="card-header" style="background-color:#d7e2ea">
                 <h3 class="text-primary text-center">
@@ -34,7 +34,7 @@
                                 <th>Venue</th>
                                 <th>Date</th>
                                 <th>Time</th>
-                                <th><i class="fas fa-cog    "></i></th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,7 +87,9 @@
 @section('scripts')
         <script>
             $(document).ready(function (){
-                $('#example').DataTable();
+                $('#example').DataTable({
+                    "bSort" : false
+                });
             })
         </script>
 @endsection

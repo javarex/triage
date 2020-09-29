@@ -120,7 +120,9 @@
                     type: 'get',
                     success: function(data){
                         $('.table_log').html(data);
-                        $('#example').DataTable();
+                        $('#example').DataTable({
+                            "bSort" : false
+                        });
                     }
                 });
             }
