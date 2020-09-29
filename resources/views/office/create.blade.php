@@ -43,6 +43,23 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="latitude" class="col-md-4 col-form-label text-md-right text-no-">{{__('Latitude')}}</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" id="latitude" value="{{ old('latitude') }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="longitude" class="col-md-4 col-form-label text-md-right text-no-">{{__('Longitude')}}</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" id="longitude" value="{{ old('longitude') }}">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
                                 <label for="username" class="col-md-4 col-form-label text-md-right text-no-">{{__('Username')}}</label>
 
                                 <div class="col-md-6">

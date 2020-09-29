@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Office extends Model
 {
-    protected $fillable = ['name','used'];
+    protected $fillable = ['name','used','longitude','latitude'];
 
     protected $dates = ['created_at', 'updated_at'];
 
