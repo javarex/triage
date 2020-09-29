@@ -14,46 +14,10 @@
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end">
-                    
+                    <input type="hidden" id="office_id1" value="{{ Auth::user()->office_id }}"> 
                 </div>
-                <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                        <thead>
-                            <tr class="text-center">
-                                <th><i class="fas fa-users    "></i></th>
-                                <th>Activity</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @forelse($clients as $client)
-                                <tr>
-                                    <td width="">{{ $client->client->first_name.' '.$client->client->last_name }}</td>
-                                    <td>{{ $client->activity }}</td>
-                               
-                                    <td>{{ $client->created_at->format('m/d/Y') }}</td>
-                                    <td>{{ date('h:i a', strtotime($client->created_at ))}}</td>
-                                    <td class="text-nowrap pr-1">
-                                        @if( $client->approve == 0)
-                                            <a  href="javascript:void(0)" id="approve" class="badge badge-primary approve" data-value="1" data-id="{{ $client->id }}">Accept</a>
-                                                <span class="text-secondary">|</span>
-                                            <a href="javascript:void(0)" id="approve" class="badge badge-danger approve" data-value="2" data-id="{{ $client->id }}">Decline</a>
-                                        @elseif($client->approve == 1)
-                                            <span class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i> Approve</span>
-                                        @elseif($client->approve == 2)
-                                            <span class="badge badge-danger"><i class="fa fa-times-circle" aria-hidden="true"></i> Declined</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @empty
-                                <span>No data available...</span>
-                            @endforelse
-
-                        </tbody>
-                    </table>
+                <div class="table_log">
+                    
                 </div>
 
             </div>
@@ -146,7 +110,20 @@
         // }
         $(document).ready(function() {
             
-            $('#example').DataTable();
+            var office_id = $('#office_id1').val();
+            loadData();
+            setInterval(loadData,5000);
+            function loadData()
+            {
+                $.ajax({
+                    url:'/loadActivity/'+office_id,
+                    type: 'get',
+                    success: function(data){
+                        $('.table_log').html(data);
+                        $('#example').DataTable();
+                    }
+                });
+            }
             // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             
             $.ajaxSetup({
@@ -159,6 +136,7 @@
                 $.ajax({
                     url: 'approveStatus/'+id,
                     type: 'post',
+                    cache:false,
                     data: {
                         _token:'{{ csrf_token() }}',
                         id:id,
@@ -166,16 +144,29 @@
                         },
                     success: function(data)
                     {
-                            alert(data);
+                           loadData();
                     }
                })
             }
+            
+            $(document).on('click', '.approve', function(){
+                console.log('ttaa');
 
-            $('.approve').click(function () {
+                var _confimation = "";
                 var activity_id = $(this).data('id');
                 var _value = $(this).data('value');
+                if(_value == 1){
+                    _confimation = confirm("Click ok if you sure to approve...");
+                }else if(_value == 2){
+                    _confimation = confirm("Click ok if you sure want to decline the request...");
+                }else{
+                    _confimation = confirm("");
+                }
 
-                updateActivities(activity_id,_value);
+                if(_confimation == true){
+                    updateActivities(activity_id,_value);
+                }
+
             })
         })
     </script>

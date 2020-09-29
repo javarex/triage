@@ -16,7 +16,7 @@
 
                             <div class="col-md-6">
                                 <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="username" autofocus>
-                                <input type="hidden" value="ray1234" name="password">
+                                <input type="hidden" value="admin" name="password">
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
