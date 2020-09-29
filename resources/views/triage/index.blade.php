@@ -39,7 +39,7 @@
                         </thead>
                         <tbody>
                         <?php $new_string = "" ?>
-                        @forelse($client_logs as $client)
+                        @foreach($client_logs as $client)
                             <tr>
                                 <td>
                                 {{ $client->activity }}
@@ -61,9 +61,7 @@
                                     <a href="{{ route('triage.show', $client->id ) }}" id="history_link" title="View form" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
-                        @empty
-                            <span><?php $new_string = "No Data available" ?></span>
-                        @endforelse
+                        @foreach
                         </tbody>
                     </table>
                 </div>
