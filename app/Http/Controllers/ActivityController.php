@@ -30,10 +30,14 @@ class ActivityController extends Controller
 
     public function loadData($id)
     {
+        $from = $request->from;
+        $to = $request->to;
+        
         $output ='';
         $activities = Activity::with('client')
                                 ->where('office_id', $id)
                                 ->orderBy('created_at', 'desc')
+                                ->whereBetween('created',[$from, $to])
                                 ->get();
         $output.='<table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
         <thead>

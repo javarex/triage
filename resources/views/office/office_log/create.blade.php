@@ -14,9 +14,11 @@
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end">
+                    <a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-hand-point-right    "></i> Sort by date range</a>
                     <input type="hidden" id="office_id1" value="{{ Auth::user()->office_id }}"> 
                 </div>
                 <div class="table_log">
+                    
                     
                 </div>
 
@@ -98,6 +100,38 @@
     <span id="office_id" data-office="{{ Auth::user()->id}}"></span>
 </div>
 
+
+    <!-- modal -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sort date</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="" class="row container">From</label>
+                        <input type="date" id="date_from" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label   label for="" class="row container">To</label>
+                        <input type="date" id="date_from" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="search_date">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -109,20 +143,29 @@
         //     });
         // }
         $(document).ready(function() {
-            
+            $(document).on('click','#search_date', function(){
+                console.log($('#date_from').val());
+                $('#myModal').modal('toggle');
+                
+            })
             var office_id = $('#office_id1').val();
             loadData();
-            setInterval(loadData,5000);
-            function loadData()
+            function loadData(from="", to="")
             {
                 $.ajax({
                     url:'/loadActivity/'+office_id,
                     type: 'get',
+                    data:{
+                        from:from,
+                        to:to
+                    },
                     success: function(data){
                         $('.table_log').html(data);
                         $('#example').DataTable({
                             "bSort" : false
                         });
+
+
                     }
                 });
             }
@@ -151,6 +194,9 @@
                })
             }
             
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#myInput').trigger('focus')
+            })
             $(document).on('click', '.approve', function(){
                 console.log('ttaa');
 
