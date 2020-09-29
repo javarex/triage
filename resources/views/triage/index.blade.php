@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php $new_string = "" ?>
+                    
                         @foreach($client_logs as $client)
                             <tr>
                                 <td>
@@ -61,11 +61,11 @@
                                     <a href="{{ route('triage.show', $client->id ) }}" id="history_link" title="View form" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
-                        @foreach
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
-                {{ $new_string }}
+              
                 
             </div>
             
