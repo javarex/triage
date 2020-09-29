@@ -28,17 +28,26 @@ class ActivityController extends Controller
         return $client->first_name.$status;
     }
 
-    public function loadData($id)
+    public function loadData(Request $request, $id)
     {
         $from = $request->from;
         $to = $request->to;
-        
+
         $output ='';
-        $activities = Activity::with('client')
-                                ->where('office_id', $id)
-                                ->orderBy('created_at', 'desc')
-                                ->whereBetween('created',[$from, $to])
-                                ->get();
+        if($from != '' && $to != ''){
+
+            $activities = Activity::with('client')
+                                    ->where('office_id', $id)
+                                    ->whereBetween('created_at',[$from, $to])
+                                    ->orderBy('created_at', 'desc')
+                                    ->get();
+        }else{
+            $activities = Activity::with('client')
+                                    ->where('office_id', $id)
+                                    ->orderBy('created_at', 'desc')
+                                    ->get();
+        }
+        
         $output.='<table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
         <thead>
             <tr class="text-center">

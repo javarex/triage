@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end">
-                    <a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-hand-point-right    "></i> Sort by date range</a>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-calendar-alt    "></i> Sort by date range</a>
                     <input type="hidden" id="office_id1" value="{{ Auth::user()->office_id }}"> 
                 </div>
                 <div class="table_log">
@@ -120,7 +120,7 @@
                     </div>
                     <div class="col-md-6">
                         <label   label for="" class="row container">To</label>
-                        <input type="date" id="date_from" class="form-control">
+                        <input type="date" id="date_to" class="form-control">
                     </div>
                 </div>
             </div>
@@ -143,14 +143,17 @@
         //     });
         // }
         $(document).ready(function() {
+            
             $(document).on('click','#search_date', function(){
-                console.log($('#date_from').val());
-                $('#myModal').modal('toggle');
+                var from = $('#date_from').val();
+                var to = $('#date_to').val();
+                loadData(from, to);
+                $('#exampleModal').modal('toggle');
                 
             })
             var office_id = $('#office_id1').val();
-            loadData();
-            function loadData(from="", to="")
+            loadData('','');
+            function loadData(from, to)
             {
                 $.ajax({
                     url:'/loadActivity/'+office_id,
