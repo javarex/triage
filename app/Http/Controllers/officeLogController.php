@@ -28,7 +28,7 @@ class officeLogController extends Controller
                             ->where('office_id',$office->office_id)
                             ->get();
 
-        return view('office.office_log.create', compact('clients','office','scannedUser'));
+        return view('office.office_log.create', compact('clients','office','username'));
     }
 
     public function store(Request $request)
