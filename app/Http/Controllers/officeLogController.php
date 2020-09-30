@@ -19,6 +19,7 @@ class officeLogController extends Controller
         
         $scannedUser = User::where('id', $request->clientid)
                             ->first();
+        $username = $scannedUser->username;
         $user_id = Auth::user()->id;
         $office = User:: with('office')
                         ->where('id',$user_id)
