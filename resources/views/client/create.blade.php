@@ -116,6 +116,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group row ">
+                            <label for="office" class="col-md-4 col-form-label text-md-right misc_label">QR Code</label>
+
+                            <div class="col-md-6" id="">
+                                 {!! QrCode::size(100)->generate('mis3ddo.dvodeoro.ph:8086/officeLog/create?clientid=4') !!}
+                            </div>
+                        </div>
+
+
                         <div class="form-group row user_type_group">
                             <label for="office" class="col-md-4 col-form-label text-md-right misc_label">Office</label>
 

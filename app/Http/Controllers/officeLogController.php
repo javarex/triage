@@ -14,8 +14,11 @@ use Illuminate\Http\Request;
 
 class officeLogController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
+        
+        $scannedUser = User::where('id', $request->clientid)
+                            ->first();
         $user_id = Auth::user()->id;
         $office = User:: with('office')
                         ->where('id',$user_id)
@@ -24,7 +27,7 @@ class officeLogController extends Controller
                             ->where('office_id',$office->office_id)
                             ->get();
 
-        return view('office.office_log.create', compact('clients','office'));
+        return view('office.office_log.create', compact('clients','office','scannedUser'));
     }
 
     public function store(Request $request)
