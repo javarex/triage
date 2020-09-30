@@ -7,6 +7,28 @@
             max-width: 100%;
             height: auto;
         }
+        
+        @media screen {
+            #printSection {
+                display: none;
+            }
+        }
+
+        @media print {
+            body * {
+                visibility:hidden;
+            }
+            #printSection, #printSection * {
+                visibility:visible;
+            }
+            #printSection {
+                position:absolute;
+                left:0;
+                top:0;
+            }
+        }
+
+
     </style>
 @endsection
 
@@ -81,15 +103,61 @@
     <!-- <div class="col-md-12" style='background-image:url("../public/vendor/img/stop_covid.png")'></div> -->
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="printProfile">
+        <div class="row container">
+            <div class="col-md-12 px-0 d-flex justify-content-center">
+                <span><i class="fa fa-user-circle fa-5x mt-2" aria-hidden="true"></i></span><span style="cursor:pointer" title="Scan me!">{!! QrCode::size('100')->generate('mis3ddo.dvodeoro.ph:8086/officeLog/create?clientid='.Auth::user()->id) !!}</span>
+                <!-- <a href="#"><span class=""><i class="fas fa-edit    "></i>Edit</span></a> -->
+            </div>
+            <div class="col-md-12 px-0 d-flex justify-content-center">
+                <h1>{{ Auth::user()->first_name.' '.Auth::user()->last_name}}</h1>
+                <!-- <a href="#"><span class=""><i class="fas fa-edit    "></i>Edit</span></a> -->
+            </div>
+            <div class="col-md-12 px-0 d-flex justify-content-center">
+                <label for=""><i class="fas fa-mobile-alt    "></i> Contact #: {{ $client_id->contact_number }}</label>
+                <!-- <a href="#"><span class=""><i class="fas fa-edit    "></i>Edit</span></a> -->
+            </div>
+            <div class="col-md-12 px-0 d-flex justify-content-center">
+                <label for=""><i class="fas fa-map-marker-alt    "></i> Address: {{ $client_id->address }}</label>
+                <!-- <a href="#"><span class=""><i class="fas fa-edit    "></i>Edit</span></a> -->
+            </div>
+           
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="print_qr" ><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 @endsection
 
 @section('scripts')
-        <script>
-            $(document).ready(function (){
-                $('#example').DataTable({
-                    "bSort" : false
-                });
-            })
-        </script>
+<script>
+    
+    $(document).ready(function (){
+        $('#example').DataTable({
+            "bSort" : false
+        });
+
+        $(document).on('click','#print', function (){
+            printElement($('#printProfile'));
+        })
+
+       
+    })
+</script>
 @endsection

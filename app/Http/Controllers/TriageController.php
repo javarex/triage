@@ -31,7 +31,7 @@ class TriageController extends Controller
                                 ->where('client_id',$client_id->id)
                                 ->orderBy('created_at', 'desc')
                                 ->get();
-        return view('triage.index', compact('client_logs'));
+        return view('triage.index', compact('client_logs','client_id'));
     }
 
     public function create()
@@ -129,12 +129,4 @@ class TriageController extends Controller
         
     }
 
-    // function load_history(Request $request, $activity_id)
-    // {
-    //     $activity = Activity::where('id',$activity_id);
-
-    //     return Response::json($activity);
-    // }
-
 }
-// regex:/^[\pL\s\-]+$/u
