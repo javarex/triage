@@ -44,7 +44,7 @@
                
                         <div class="col-md-8">
                             <input type="hidden" name="approve" value="1">
-                            <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" style="background-color:none; border:none; border-bottom:solid #0c4676 1px; border-radius:1px " value="{{ old('username') ?? $scannedUser }}" placeholder="Enter your Triage Code here" autofocus>
+                            <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" style="background-color:none; border:none; border-bottom:solid #0c4676 1px; border-radius:1px " value="{{ old('username') ?? $username }}" placeholder="Enter your Triage Code here" autofocus>
                         </div>
                         <div class="col-md-12">
                         @if($message = Session::get('username'))
