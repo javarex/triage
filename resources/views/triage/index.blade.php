@@ -136,7 +136,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="print_qr" ><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+        <button type="button" class="btn btn-primary" id="print_qr" onclick="printDiv('printProfile')"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
       </div>
     </div>
   </div>
@@ -148,6 +148,17 @@
 @section('scripts')
 <script>
     
+    function printDiv(divName){
+			var printContents = document.getElementById(divName).innerHTML;
+			var originalContents = document.body.innerHTML;
+
+			document.body.innerHTML = printContents;
+
+			window.print();
+
+			document.body.innerHTML = originalContents;
+
+		}
     $(document).ready(function (){
         $('#example').DataTable({
             "bSort" : false
