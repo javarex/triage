@@ -79,14 +79,14 @@
                     <div class="form-group row">
                
                         <div class="col-md-2"></div>
+                        <div class="col-md-4  text-right">
+                            <!-- <button name="submit" class="btn btn-block btn-sm btn-primary mt-1" value="2"><i class="fas fa-clipboard-check    "></i> Use existing form</button> -->
+                        </div>
                         <div class="col-md-4 text-right">
                         <div class="col-md-2"></div>
-                            <button name="submit" class="btn btn-block btn-sm btn-primary mt-1" value="1"><i class="fas fa-pen-alt    "></i> Fill new form</button>
+                            <button name="submit" class="btn btn-block btn-sm btn-primary mt-1" value="1"><i class="fas fa-pen-alt    "></i> Fill triage form</button>
                         </div>
               
-                        <div class="col-md-4  text-right">
-                            <button name="submit" class="btn btn-block btn-sm btn-primary mt-1" value="2"><i class="fas fa-clipboard-check    "></i> Use existing form</button>
-                        </div>
                
                     </div>
                

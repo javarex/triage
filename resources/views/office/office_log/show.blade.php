@@ -165,8 +165,13 @@
                         </table> 
                         
                         <div class="row pb-3">
-                            <div class="col-md-7"></div>
-                            <div class="col-md-5"><button class="btn btn-success btn-block">SUBMIT</button></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5 pt-1">
+                                <button class="btn btn-danger btn-block" name="triage" value="cancel">CANCEL</button>
+                            </div>
+                            <div class="col-md-5 pt-1">
+                                <button class="btn btn-primary btn-block" name="triage" value="submit">SUBMIT</button>
+                            </div>
                         </div>
                         </div>
                     </div>

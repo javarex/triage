@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Auth;
+use Carbon\Carbon;
 use App\Activity;
 use App\Client;
 use App\User;
@@ -32,18 +33,20 @@ class ActivityController extends Controller
     {
         $from = $request->from;
         $to = $request->to;
-
+        $dateNow = Carbon::now()->format('Y-m-d');
         $output ='';
         if($from != '' && $to != ''){
 
             $activities = Activity::with('client')
                                     ->where('office_id', $id)
+                                    ->where('approve','<>',0)
                                     ->whereBetween('created_at',[$from, $to])
                                     ->orderBy('created_at', 'desc')
                                     ->get();
         }else{
             $activities = Activity::with('client')
                                     ->where('office_id', $id)
+                                    ->where('created_at','like', '%'.$dateNow.'%')
                                     ->orderBy('created_at', 'desc')
                                     ->get();
         }
