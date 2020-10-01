@@ -82,6 +82,7 @@ class TriageController extends Controller
                 'criteria_id'   => $i+1,
                 'answer'        => strtoupper($answer_name),
                 'location'      => $location,
+                'created_at'    => now(),
             ];
         }
 

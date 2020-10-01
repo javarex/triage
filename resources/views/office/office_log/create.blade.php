@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6 m-auto">
+    <div class="col-md-12 m-auto">
         <div class="card p-3 text-secondary">
             <h1>{{ strtoupper(Auth::user()->first_name)}}</h1>
         </div>
@@ -17,6 +17,7 @@
                     <a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-calendar-alt    "></i> Sort by date range</a>
                     <input type="hidden" id="office_id1" value="{{ Auth::user()->office_id }}"> 
                 </div>
+                <input type="file" accept="image/*" capture="camera" />
                 <div class="table_log">
                     
                     
@@ -28,7 +29,8 @@
     
     </div>
     
-    <div class="col-md-6 text-center rounded-left shadow-lg">
+    <div class="col-md-6 text-center rounded-left shadow-lg d-none">
+   
        <div class="container">
             <div class="pt-5 pb-2">
                 <h3 class="font-weight-bolder">WELCOME TO DAVAO DE ORO TRIAGE SCREENING</h3>
