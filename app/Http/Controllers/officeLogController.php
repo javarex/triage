@@ -16,7 +16,8 @@ class officeLogController extends Controller
 {
     public function create(Request $request)
     {
-        $username = '';
+        
+        $username = $request->clientid;
         if($username != ''){
             $scannedUser = User::where('id', $request->clientid)
                             ->first();
