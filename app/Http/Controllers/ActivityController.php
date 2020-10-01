@@ -69,7 +69,7 @@ class ActivityController extends Controller
             $output.='<td>'.$activity->activity.'</td>';
             $output.='<td>'.$activity->created_at->format("m/d/Y").'</td>';
             $output.='<td>'.date("h:i a", strtotime($activity->created_at )).'</td>';
-            $output.='<td class="text-nowrap pr-1">';
+            $output.='<td class="text-nowrap pr-1" width="10%">';
             if ($activity->approve == 0) {
                 $output.='<a  href="javascript:void(0)" id="approve" class="badge badge-primary approve" data-value="1" data-id="'. $activity->id.'">Accept</a>';
                 $output.='<span class="text-secondary">|</span>';

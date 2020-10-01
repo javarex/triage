@@ -14,16 +14,9 @@ use Illuminate\Http\Request;
 
 class officeLogController extends Controller
 {
-    public function create(Request $request)
+
+    public function index()
     {
-        
-        $username = $request->clientid;
-        if($username != ''){
-            $scannedUser = User::where('id', $request->clientid)
-                            ->first();
-                            
-            $username = $scannedUser->username;
-        }
         
         $user_id = Auth::user()->id;
         $office = User:: with('office')
@@ -33,7 +26,22 @@ class officeLogController extends Controller
                             ->where('office_id',$office->office_id)
                             ->get();
 
-        return view('office.office_log.create', compact('clients','office','username'));
+        return view('office.office_log.index', compact('clients','office'));
+    }
+
+    public function create(Request $request)
+    {
+        $_user = User::with('client')
+                        ->where('username', $request->clientId)
+                        ->first();
+                        
+        if(!(is_null($client))){
+
+            return view('office.office_log.create', compact('client'));
+        }else{
+            return redirect()->back()->with('usernameErr','Incorrect Triage code!');
+        }
+       
     }
 
     public function store(Request $request)
@@ -104,6 +112,7 @@ class officeLogController extends Controller
 
     public function storeTriage(Request $request)
     {
+
         
         $request['client_id'] = $request->client_id;
         $request['activity'] = $request->activity;

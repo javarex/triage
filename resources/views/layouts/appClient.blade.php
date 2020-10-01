@@ -21,6 +21,8 @@
     <link href="{{ asset('vendor/fontawesome-free-5.14.0/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
+
+    @yield('styles')
 </head>
 <body style="background-color:#d7e2ea">
     <div id="app">
