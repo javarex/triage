@@ -17,23 +17,21 @@ class officeLogController extends Controller
     public function create(Request $request)
     {
         $username = '';
-        $dateNow = Carbon::now()->format('Y-m-d');
-        if(!(is_null($request->clientid))){
-
+        if($username != ''){
             $scannedUser = User::where('id', $request->clientid)
-                                ->first();
-                                
+                            ->first();
+                            
             $username = $scannedUser->username;
         }
-
+        
         $user_id = Auth::user()->id;
         $office = User:: with('office')
                         ->where('id',$user_id)
                         ->first();
         $clients = Activity::with('Office','client')
                             ->where('office_id',$office->office_id)
-                            ->where('created_at','like', '%'.$dateNow.'%')
                             ->get();
+
         return view('office.office_log.create', compact('clients','office','username'));
     }
 
@@ -105,43 +103,36 @@ class officeLogController extends Controller
 
     public function storeTriage(Request $request)
     {
-        if($request->triage == 'submit')
-        {
-
-            $request['client_id'] = $request->client_id;
-            $request['activity'] = $request->activity;
-            $request['venue'] = $request->venue;
-            
-             
-            $triage = new Triage_form;
-            $array_answer = array();
-            $current_date = Carbon::now();
-            for ($i=0; $i < 13; $i++) { 
-                $location = $request->default_value;
-                $answer_name = $request['answer'.strval($i+1)];
-                if($i == 3 && $answer_name == "yes"){
-                    $location = $request->input('location1');
-                }else if($i == 4 && $answer_name == "yes"){
-                    $location = $request->input('location2');
-                }
-                $output[$i] = [
-                    'client_id'     => $request->client_id,
-                    'activity_id'   => $request->activity,
-                    'criteria_id'   => $i+1,
-                    'answer'        => strtoupper($answer_name),
-                    'location'      => $location,
-                    'created_at'    => $current_date,
-                ];
+        
+        $request['client_id'] = $request->client_id;
+        $request['activity'] = $request->activity;
+        $request['venue'] = $request->venue;
+        
+         
+        $triage = new Triage_form;
+        $array_answer = array();
+        $current_date = Carbon::now();
+        for ($i=0; $i < 13; $i++) { 
+            $location = $request->default_value;
+            $answer_name = $request['answer'.strval($i+1)];
+            if($i == 3 && $answer_name == "yes"){
+                $location = $request->input('location1');
+            }else if($i == 4 && $answer_name == "yes"){
+                $location = $request->input('location2');
             }
-    
-            Triage_form::insert($output);
-    
-            return redirect('officeLog/create');
-        }else{
-            $activity = Activity::find($request->activity);
-            $activity->delete();
-            return redirect('officeLog/create');
+            $output[$i] = [
+                'client_id'     => $request->client_id,
+                'activity_id'   => $request->activity,
+                'criteria_id'   => $i+1,
+                'answer'        => strtoupper($answer_name),
+                'location'      => $location,
+                'created_at'    => $current_date,
+            ];
         }
+
+        Triage_form::insert($output);
+
+        return redirect('officeLog/create');
     }
 
     public function clientform()

@@ -35,18 +35,20 @@ class ActivityController extends Controller
         $to = $request->to;
         $dateNow = Carbon::now()->format('Y-m-d');
         $output ='';
+        $activities = new Activity;
         if($from != '' && $to != ''){
 
-            $activities = Activity::with('client')
+            $activities = $activities->with('client')
                                     ->where('office_id', $id)
                                     ->where('approve','<>',0)
                                     ->whereBetween('created_at',[$from, $to])
                                     ->orderBy('created_at', 'desc')
                                     ->get();
         }else{
-            $activities = Activity::with('client')
+            $activities = $activities->with('client')
                                     ->where('office_id', $id)
                                     ->where('created_at','like', '%'.$dateNow.'%')
+                                    ->orWhere('approve','<>',0)
                                     ->orderBy('created_at', 'desc')
                                     ->get();
         }
