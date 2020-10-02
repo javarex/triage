@@ -34,10 +34,10 @@ class officeLogController extends Controller
         $_user = User::with('client')
                         ->where('username', $request->clientId)
                         ->first();
-                        
-        if(!(is_null($client))){
+        
+        if(!(is_null($_user))){
 
-            return view('office.office_log.create', compact('client'));
+            return view('office.office_log.create', compact('_user'));
         }else{
             return redirect()->back()->with('usernameErr','Incorrect Triage code!');
         }
@@ -114,9 +114,10 @@ class officeLogController extends Controller
     {
 
         
-        $request['client_id'] = $request->client_id;
+        
         $request['activity'] = $request->activity;
         $request['venue'] = $request->venue;
+        $activity = Activity::create($request->all());
         
          
         $triage = new Triage_form;
@@ -132,7 +133,7 @@ class officeLogController extends Controller
             }
             $output[$i] = [
                 'client_id'     => $request->client_id,
-                'activity_id'   => $request->activity,
+                'activity_id'   => $activity->id,
                 'criteria_id'   => $i+1,
                 'answer'        => strtoupper($answer_name),
                 'location'      => $location,
@@ -142,7 +143,7 @@ class officeLogController extends Controller
 
         Triage_form::insert($output);
 
-        return redirect('officeLog/create');
+        return redirect('officeLog');
     }
 
     public function clientform()

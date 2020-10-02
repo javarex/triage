@@ -21,6 +21,7 @@
                                     <input type="text" name="activity" class="form-control @error('activity') is-invalid @enderror" value="{{ old('activity') }}" autofocus>
                                 <!-- office_id -->
                                     <input type="hidden" name="office_id" id="" value="{{ Auth::user()->office_id }}">
+                                    <input type="hidden" name="approve" id="" value="1">
                                 </div>
                             </div>
 
@@ -28,9 +29,9 @@
                                 <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>
                                 
                                 <div class="col-md-8">
-                                    <input type="hidden" name="client_id" value="{{ $client->client->id }}">
-                                    {{dd($client->client->id)}}
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $client->client->first_name.' '.$client->client->last_name }}" readonly>
+                                    <input type="hidden" name="client_id" value="{{ $_user->client->id }}">
+                                    
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $_user->first_name.' '.$_user->last_name }}" readonly>
                                 </div>
                             </div>
 
