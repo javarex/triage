@@ -27,7 +27,7 @@
                                     <th>Triage Code</th>
                                     <th>Name</th>
                                     <th>Office</th>
-                                    <th>Contact #</th>
+                                    <th>Action</th>
                                     <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
                                 </tr>
                             </thead>
@@ -48,7 +48,24 @@
                                         @endif
                        
                                     </td>
-                                    <td>{{ $client['contact_number'] }}</td>
+                                    <td>
+                                        <a class="" id="client_view" href="#" data-toggle="modal" data-target="#exampleModal" 
+                                        data-firstName="{{ $client->first_name }}"
+                                        data-middleName="{{ $client->middle_name }}"
+                                        data-lastName="{{ $client->last_name }}"
+                                        data-contactNumber="{{ $client->contact_number }}" title="View or edit details">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                        <span id="first_nameData" ></span>
+                                        <span class="text-info">|</span>
+                                        <a class="" href="">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </a>
+                                        <span class="text-info">|</span>
+                                        <a href="">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
                                     <!-- <td class="text-center">
                                     
                                         <a class="" href="">
@@ -65,9 +82,32 @@
                                     </td> -->
                                     </tr>
                                 @endif
+
                             @endforeach
                             </tbody>
                         </table>
+                        <!-- modal edit -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <input type="text" name="first_name" id="first_name">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <span id="firstNameModal"></span>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end modal edit  -->
                    </div>
                 </div>
             </div>
@@ -130,6 +170,18 @@
             order:[[1,'asc']]
         });
         $('#example1').DataTable();
+        
+        $(document).on('click','#client_view', function(){
+            console.log($(this).attr('data-firstName'));
+            var firstName = $(this).attr('data-firstName');
+            var middleName = $(this).attr('data-middleName');
+            var lastName = $(this).attr('data-lastName');
+            var contactNumber = $(this).attr('data-contactNumber');
+            
+            var middleName = $(this).attr('data-middleName');
+            $('#firstNameModal').html(firstName+' '+middleName+' '+lastName+' '+contactNumber);
+
+        })
     })
 </script>
 @endsection
