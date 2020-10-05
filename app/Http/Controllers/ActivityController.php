@@ -65,7 +65,12 @@ class ActivityController extends Controller
         </thead>
         <tbody>';
         foreach ($activities as $activity) {
-            $output.='<tr><td width="">'.$activity->client->first_name.' '.$activity->client->last_name.'</td>';
+            if($activity->tag_id != 0){
+                $output .= '<tr class="table-danger">';
+            }else{
+                $output .= '<tr>';
+            }
+            $output.='<td width="">'.$activity->client->first_name.' '.$activity->client->last_name.'</td>';
             $output.='<td>'.$activity->activity.'</td>';
             $output.='<td>'.$activity->created_at->format("m/d/Y").'</td>';
             $output.='<td>'.date("h:i a", strtotime($activity->created_at )).'</td>';

@@ -29,4 +29,13 @@ class AdminController extends Controller
                         ->get();
         return view('admin.index', compact('clients','offices'));
     }
+
+    public function updateClient(Request $request)
+    {
+        $client = Client::findOrFail($request->client_id);
+        $client->update($request->all());
+        $user = User::findOrFail($client->user_id);
+        $user->update($request->all());
+        return redirect('admin')->with('success_update',$client->first_name.' '.$client->last_name.' Saved changes!');
+    }
 }

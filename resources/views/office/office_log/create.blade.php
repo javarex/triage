@@ -30,6 +30,7 @@
                                 
                                 <div class="col-md-8">
                                     <input type="hidden" name="client_id" value="{{ $_user->client->id }}">
+                                    <input type="hidden" name="tag_id" value="0">
                                     
                                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $_user->first_name.' '.$_user->last_name }}" readonly>
                                 </div>

@@ -8,6 +8,9 @@
         height: 300px;
         overflow: scroll;
         }
+
+        
+        
     </style>
 @endsection
 
@@ -15,10 +18,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7 bg-light border">
+                @if($message = Session::get('success_update'))
+                <div class="col-md-12 px-0">
+                    <div class="alert alert-success"  role="alert">
+                            {{ $message }}
+                    </div>
+                </div>
+                @endif
                 <div class="header text-secondary">
                     <h1>Employee and Guest users</h1>
                 </div>
-                <div class="">
+                <div class=""> 
                     <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                    <div class="">
                         <table id="example" class="table table-dark table-striped table-bordered dt-responsive nowrap" style="width:100%">
@@ -50,20 +60,22 @@
                                     </td>
                                     <td>
                                         <a class="" id="client_view" href="#" data-toggle="modal" data-target="#exampleModal" 
+                                        data-client_id="{{ $client->id }}"
                                         data-firstName="{{ $client->first_name }}"
                                         data-middleName="{{ $client->middle_name }}"
                                         data-lastName="{{ $client->last_name }}"
+                                        data-age="{{ $client->age }}"
+                                        data-sex="{{ $client->sex }}"
+                                        data-address="{{ $client->address }}"
                                         data-contactNumber="{{ $client->contact_number }}" title="View or edit details">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
                                         </a>
                                         <span id="first_nameData" ></span>
                                         <span class="text-info">|</span>
-                                        <a class="" href="">
-                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                        </a>
-                                        <span class="text-info">|</span>
-                                        <a href="">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                      
+                          
+                                        <a href="" title="Tag this user">
+                                            <i class="fa fa-tags" aria-hidden="true" ></i>
                                         </a>
                                     </td>
                                     <!-- <td class="text-center">
@@ -90,20 +102,68 @@
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                <input type="text" name="first_name" id="first_name">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <span id="firstNameModal"></span>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
+                                    <form action="/admin/client" method="post" autocomplete="off">
+                                        
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-user-circle" aria-hidden="true"></i> CLIENT INFORMATION</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="modal-body pr-5">
+                                            <div class=" container">     
+                                                @csrf
+                                                <div class="form-group row">
+                                                    <input type="hidden" id="client_id" name="client_id">
+                                                    <label for="first_name" class="col-md-12 px-0">First name</label>
+                                                    <input type="text" name="first_name" class="form-control" id="first_name" >
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="middle_name" class="col-md-12 px-0">Middle name</label>
+                                                    <input type="text" name="middle_name" class="form-control" id="middle_name" >
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="last_name" class="col-md-12 px-0">Last name</label>
+                                                    <input type="text" name="last_name" class="form-control" id="last_name" >
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-md-12 px-0">
+                                                        <div class="row container">
+                                                            <label for="address" class="col-md-12 px-0">Address</label>
+                                                            <input type="text" name="address" class="form-control" id="address" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-md-4 px-0">
+                                                        <div class="row container">
+                                                            <label for="age" class="col-md-12 px-0">Age</label>
+                                                            <input type="text" name="age" class="form-control" id="age" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 px-0 ">
+                                                        <div class="row container">
+                                                            <label for="sex" class="col-md-12 px-0">Sex</label>
+                                                            <input type="text" name="sex" class="form-control" id="sex" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 px-0 ">
+                                                        <div class="row container pr-0">
+                                                            <label for="contact_number" class="col-md-12 px-0">Contact #</label>
+                                                            <input type="text" name="contact_number" class="form-control" id="contact_number" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -115,6 +175,12 @@
             <div class="col-md-5 bg-light">
                 <div class="header text-secondary">
                     <h1>Registered Offices</h1>
+                    @if($tagErr = Session::get('errorRequired'))
+                        <div class="alert alert-danger" role="alert">
+                            <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+                            {{ $tagErr }}
+                        </div>
+                    @endif
                 </div>
 
                 <div class="">
@@ -126,6 +192,7 @@
                                     <th>Name</th>
                                     <th class="text-center">Username</th>
                                     <th class="text-center">Status</th>
+                                    <th class="text-center"><i class="fa fa-cog" aria-hidden="true"></i></th>
                                 </tr>
                             </thead>
                         
@@ -151,10 +218,80 @@
                                             <span class="badge badge-primary">Approved</span>
                                         </td>
                                     @endif
+
+                                    <td width="10%">
+                                        <a href="#" data-toggle="modal" data-target="#modalTag" data-officeName="{{ $office->office->name }}" data-office_id="{{ $office->office->id }}" id="tags">
+                                            <i class="fa fa-tags" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
+
+                        <!-- modal tags -->
+
+                        <div class="modal fade" id="modalTag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form action="/tag" method="post" autocomplete="off">
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-tag" aria-hidden="true"></i> ADD TAG <span id="office_name"></span></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="modal-body bg-info">
+
+                                           <div class="form-group row">
+                                                <label for="date" class="col-md-4 col-form-label text-md-right"></label>
+                                                <div class="col-md-6">
+                                                    <b>Note:</b> (<span class="text-danger">*</span>) required field.
+                                                </div>
+                                           </div>
+                                           
+                                           <div class="form-group row">
+                                                <label for="date" class="col-md-4 col-form-label text-md-right"><span class="text-danger">*</span>Date</label>
+                                                <div class="col-md-6">
+                                                    <input type="hidden" name="office_id" id="office_id">
+                                                    <input type="date" class="form-control @error('date') is-invalid @enderror" name="date">
+                                                    <span class="text-danger">
+                                                        @error('date'){{ $message }}@enderror
+                                                    </span>
+                                                </div>
+                                           </div>
+                                           
+                                           <div class="form-group row">
+                                                <label for="time_from" class="col-md-4 col-form-label text-md-right"><span class="text-danger">*</span>Time from</label>
+                                                <div class="col-md-6">
+                                                    <input type="time" class="form-control @error('time_from') is-invalid @enderror" name="time_from">
+                                                    <span class="text-danger">
+                                                        @error('time_from'){{ $message }}@enderror
+                                                    </span>
+                                                </div>
+                                           </div>
+                                           <div class="form-group row">
+                                                <label for="time_to" class="col-md-4 col-form-label text-md-right"><span class="text-danger">*</span> Time to</label>
+                                                <div class="col-md-6">
+                                                    <input type="time" class="form-control @error('time_to') is-invalid @enderror" name="time_to">
+                                                    <span class="text-danger">
+                                                        @error('time_to'){{ $message }}@enderror
+                                                    </span>
+                                                </div>
+                                           </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end modal tags -->
                     </div>
                 </div>
             </div>
@@ -172,15 +309,37 @@
         $('#example1').DataTable();
         
         $(document).on('click','#client_view', function(){
-            console.log($(this).attr('data-firstName'));
+            
+
+            // var inputName = ["first_name","middle_name", "last_name"];
+            // var inputValues = ["data-firstName","data-middleName","data-lastName"];
+            
+            
+    
             var firstName = $(this).attr('data-firstName');
             var middleName = $(this).attr('data-middleName');
             var lastName = $(this).attr('data-lastName');
             var contactNumber = $(this).attr('data-contactNumber');
-            
-            var middleName = $(this).attr('data-middleName');
-            $('#firstNameModal').html(firstName+' '+middleName+' '+lastName+' '+contactNumber);
+            var age = $(this).attr('data-age');
+            var sex = $(this).attr('data-sex');
+            var address = $(this).attr('data-address');
+            var client_id = $(this).attr('data-client_id');
 
+            $('#client_id').val(client_id);
+            $('#first_name').val(firstName);
+            $('#middle_name').val(middleName);
+            $('#last_name').val(lastName);
+            $('#address').val(address);
+            $('#age').val(age);
+            $('#sex').val(sex);
+            $('#contact_number').val(contactNumber);
+            // $('#firstNameModal').html(firstName+' '+middleName+' '+lastName+' '+contactNumber);
+            
+
+        })
+        $(document).on('click','#tags', function(){
+            $('#office_name').html('<b>'+$(this).attr('data-officeName')+'</b>');
+            $('#office_id').val($(this).attr('data-office_id'));
         })
     })
 </script>

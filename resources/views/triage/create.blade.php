@@ -25,6 +25,7 @@
                                     <div class="col-md-6">
                                     <input type="hidden" name="default_value">
                                         <input type="hidden" name="client_id" value="{{ auth::user()->client->id }}">
+                                        <input type="hidden" name="tag_id" value="0">
                                         <input type="hidden" class="form-control" name="form_number" value="" readonly>
                                         <input type="hidden" name="approve" value="0">
                                     </div>

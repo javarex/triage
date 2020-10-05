@@ -223,7 +223,7 @@
             function updateActivities(id, approve)
             {
                 $.ajax({
-                    url: 'approveStatus/'+id,
+                    url: 'officeLog/approveStatus/'+id,
                     type: 'post',
                     cache:false,
                     data: {
