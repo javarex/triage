@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Tag;
 use App\Activity;
+use App\User;
+use App\Client;
 
 use Illuminate\Http\Request;
 
@@ -32,6 +34,10 @@ class TagController extends Controller
         foreach ($activityTag as $activity) {
             $activityUpdate = Activity::findOrFail($activity->id);
             $activityUpdate->update(['tag_id' => $tags->id]);
+            $client = Client::where('id', $activity->client_id)
+                            ->first();
+            $user = User::findOrFail($client->user_id);
+            $user->update(['tag' => 1]);
         }
         return redirect('admin')->with('successTag','new tag created successfully!');
     }

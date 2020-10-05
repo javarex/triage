@@ -171,7 +171,7 @@
                         <div class="row pb-3">
                             <div class="col-md-2"></div>
                             <div class="col-md-5 pt-1">
-                                <button class="btn btn-danger btn-block" name="triage" value="cancel">CANCEL</button>
+                                <button type="button" class="btn btn-danger btn-block" onclick="goBack()">CANCEL</button>
                             </div>
                             <div class="col-md-5 pt-1">
                                 <button class="btn btn-primary btn-block" name="triage" value="submit">SUBMIT</button>
@@ -204,6 +204,9 @@
 
 @section('scripts')
 <script>
+    function goBack() {
+        window.history.back();
+    }
     $(document).ready(function(){
         var a = 0;
         var b = 0;

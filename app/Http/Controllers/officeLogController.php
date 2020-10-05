@@ -14,7 +14,11 @@ use Illuminate\Http\Request;
 
 class officeLogController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         
@@ -35,9 +39,11 @@ class officeLogController extends Controller
                         ->where('username', $request->clientId)
                         ->first();
         
-        if(!(is_null($_user))){
+        if(!(is_null($_user)) && $_user->tag == 0){
 
             return view('office.office_log.create', compact('_user'));
+        }elseif(!(is_null($_user)) && $_user->tag != 0 ){
+            return redirect()->back()->with('usernameErr','This client is being tagged!');
         }else{
             return redirect()->back()->with('usernameErr','Incorrect Triage code!');
         }

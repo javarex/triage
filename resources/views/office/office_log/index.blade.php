@@ -220,6 +220,9 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            // decline || approve activity record
+
             function updateActivities(id, approve)
             {
                 $.ajax({
@@ -237,7 +240,24 @@
                     }
                })
             }
-            
+            // set time-out activity
+
+            function setTimeOut(activityId)
+            {
+                $.ajax({
+                    url: 'officeLog/setTimeOut',
+                    type: 'post',
+                    data: {
+                        _token: '{{  csrf_token() }}',
+                        id: activityId
+                    },
+                    success: function(data)
+                    {
+                        console.log(data);
+                        loadData();
+                    }
+                })
+            }
             $('#myModal').on('shown.bs.modal', function () {
                 $('#myInput').trigger('focus')
             })
@@ -259,6 +279,15 @@
                     updateActivities(activity_id,_value);
                 }
 
+            })
+
+            $(document).on('click','.time-out', function(){
+                
+                var _confirmation = confirm("Are you sure to log out this client?");
+                if(_confirmation == true)
+                {
+                    setTimeOut($(this).attr('data-activityId'));
+                }
             })
         })
     </script>

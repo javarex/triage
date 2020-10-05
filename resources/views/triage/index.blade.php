@@ -40,11 +40,37 @@
     <div class="col-md-6">
         <div class="card shadow ">
             <div class="card-header" style="background-color:#d7e2ea">
-                <h3 class="text-primary text-center">
-                    <strong><i class="fa fa-history" aria-hidden="true"></i> YOUR RECENT ACTIVITIES</strong>
-                </h3>
-                <div class="d-flex justify-content-end">
-                    <a href="{{ route('triage.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="text-primary text-center">
+                            <strong><i class="fa fa-history" aria-hidden="true"></i> YOUR RECENT ACTIVITIES</strong>
+                        </h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            @if(Auth::user()->tag)
+                            <div class="col-md-8">
+                                <div class="alert alert-danger" role="alert">
+                                    <b>Notice: You cannot fill a new form because you are being tagged by the system!</b>
+                                </div>
+                            </div>
+                            <div class="col-md-4 m-auto">
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{ route('triage.create') }}" class="btn btn-sm btn-primary disabled" ><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
+                                </div>
+                            </div>
+                            @else
+                            <div class="col-md-8">
+                                
+                            </div>
+                            <div class="col-md-4 m-auto">
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{ route('triage.create') }}" class="btn btn-sm btn-primary" ><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -62,7 +88,12 @@
                         <tbody>
                     
                         @foreach($client_logs as $client)
+                            @if($client->tag_id != 0)
+                            
+                            <tr class="table-danger">
+                            @else 
                             <tr>
+                            @endif
                                 <td>
                                 {{ $client->activity }}
                                 </td>

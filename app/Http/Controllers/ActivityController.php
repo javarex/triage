@@ -59,7 +59,8 @@ class ActivityController extends Controller
                 <th><i class="fas fa-users    "></i></th>
                 <th>Activity</th>
                 <th>Date</th>
-                <th>Time</th>
+                <th>Time-in</th>
+                <th>Time-out</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -70,10 +71,15 @@ class ActivityController extends Controller
             }else{
                 $output .= '<tr>';
             }
-            $output.='<td width="">'.$activity->client->first_name.' '.$activity->client->last_name.'</td>';
-            $output.='<td>'.$activity->activity.'</td>';
-            $output.='<td>'.$activity->created_at->format("m/d/Y").'</td>';
-            $output.='<td>'.date("h:i a", strtotime($activity->created_at )).'</td>';
+            $output.='<td width="20%">'.$activity->client->first_name.' '.$activity->client->last_name.'</td>';
+            $output.='<td width="20%">'.$activity->activity.'</td>';
+            $output.='<td width="10%">'.$activity->created_at->format("m/d/Y").'</td>';
+            $output.='<td width="10%">'.date("h:i a", strtotime($activity->created_at )).'</td>';
+            if(is_null($activity->time_out)){
+                $output.='<td width="5%"> <a href="#" class="badge badge-primary time-out" data-activityId="'.$activity->id.'"><i class="fa fa-fw fa-clock"></i> Set Time-out</a></td>';
+            }else{
+                $output.='<td width="5%">'.date("h:i a", strtotime($activity->time_out)).'</td>';
+            }
             $output.='<td class="text-nowrap pr-1" width="10%">';
             if ($activity->approve == 0) {
                 $output.='<a  href="javascript:void(0)" id="approve" class="badge badge-primary approve" data-value="1" data-id="'. $activity->id.'">Accept</a>';
@@ -92,5 +98,19 @@ class ActivityController extends Controller
         return $output;
     }
 
+    //set Time-out
+
+    public function setTimeOut(Request $request)
+    {
+        $activity_id = $request->id;
+        
+        $mytime = Carbon::now();
+        $mytime->format('H:i:s');
+
+        $activity = Activity::findOrFail($activity_id);
+        $activity->update(['time_out' => $mytime]);
+       return $activity;
+        
+    }
     
 }
