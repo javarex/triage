@@ -14,15 +14,14 @@ use Illuminate\Support\Str;
 
 class ClientController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    
     public function index()
     {
 
         return view('client.index');
     }
+    
+   
 
     public function create()
     {
@@ -43,6 +42,7 @@ class ClientController extends Controller
 
         return view('client.create', compact('offices','code'));
     }
+   
 
     public function store(Request $request)
     {
