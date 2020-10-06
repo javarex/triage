@@ -39,7 +39,7 @@
                                     <th>Triage Code</th>
                                     <th>Name</th>
                                     <th>Office</th>
-                                    <th>Action</th>
+                                    <th><i class="fa fa-cog" aria-hidden="true"></i></th>
                                     <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
                                 </tr>
                             </thead>
@@ -225,7 +225,7 @@
                                         </td>
                                     @else
                                         <td width="30">
-                                            <span class="badge badge-primary">Approved</span>
+                                            <span class="badge badge-success">Approved</span>
                                         </td>
                                     @endif
 

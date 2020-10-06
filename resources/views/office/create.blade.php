@@ -63,6 +63,7 @@
                                 <label for="username" class="col-md-4 col-form-label text-md-right text-no-">{{__('Username')}}</label>
 
                                 <div class="col-md-6">
+                                    <input type="hidden" name="status" value="1">
                                     <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" value="{{ old('username') }}">
                                 </div>
                             </div>
