@@ -50,6 +50,7 @@ class TriageController extends Controller
     {   
         $this->Validate($request, [
             'activity'  => 'required|regex:/^[a-z0-9 .\-]+$/i',
+            'answer4' => 'required_if: yes,no',
         ]);
         
         if(is_null($request->venue)){

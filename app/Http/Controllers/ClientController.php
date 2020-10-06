@@ -57,8 +57,12 @@ class ClientController extends Controller
         $code_generarated = $request->code;
         $users = User::where('username',$code_generarated)->first();
         
-        if(is_null($users))
+        $userDuplication = Client::where('first_name', $request->first_name)
+                                    ->where('last_name', $request->last_name)
+                                    ->first();
+        if(is_null($users) && is_null($userDuplication))
         {
+
             $request['username'] = $request->code;
             $request['password'] = bcrypt('admin');
             $request['first_name'] = ucwords($request->first_name);
@@ -79,7 +83,10 @@ class ClientController extends Controller
             }
             
 
-        }else{
+        }elseif (!(is_null($userDuplication))) {
+            return back()->with('delete','Information already exist!')
+                        ->withInput();
+        }elseif (!(is_null($users))) {
             return back()->with('delete','This code is already used');
         }
 

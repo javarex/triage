@@ -45,13 +45,25 @@ class ActivityController extends Controller
                                     ->orderBy('created_at', 'desc')
                                     ->get();
         }else{
-            $activities = $activities->with('client')
+            $activities_delete = $activities->with('client')
+                                    ->whereDate('created_at','<',$dateNow)
+                                    ->where('approve', 0)
                                     ->where('office_id', $id)
-                                    ->where('created_at','like', '%'.$dateNow.'%')
-                                    
                                     ->orderBy('created_at', 'desc')
                                     ->get();
+                                    
+            foreach ($activities_delete as $delete) {
+                $delete_unattended = Activity::find($delete->id);
+                $delete_unattended->delete();
+            }
+            
+            $activities = $activities->with('client')
+                                    ->where('office_id', $id)
+                                    ->orderBy('created_at', 'desc')
+                                    ->get();
+
         }
+        
         
         $output.='<table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
         <thead>
@@ -65,7 +77,10 @@ class ActivityController extends Controller
             </tr>
         </thead>
         <tbody>';
+
+        
         foreach ($activities as $activity) {
+            
             if($activity->tag_id != 0){
                 $output .= '<tr class="table-danger">';
             }else{

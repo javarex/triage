@@ -128,8 +128,20 @@
                                             <input type="text" class="form-control" id="location1" placeholder="Specify location" name="location1">
                                         </div>
                                     </td>
-                                    <td><input type="radio" name="answer4" id="yes_4" value="yes" {{ old('answer4') == 'yes' ? 'checked' : '' }}></td>
-                                    <td><input type="radio" name="answer4" id="no_4" value="no" {{ old('answer4') == 'no' ? 'checked' : '' }} checked></td>
+                                    <td>
+                                        <input type="radio" name="answer4" id="yes_4" class="@error('answer4') is-invalid @enderror" value="yes" {{ old('answer4') == 'yes' ? 'checked' : '' }}>
+                                    </td>
+                                    
+                                    <td>
+                                        <input type="radio" name="answer4" id="no_4"  class="@error('answer4') is-invalid @enderror" value="no" {{ old('answer4') == 'no' ? 'checked' : '' }} >
+                                    </td>
+                                    <tr>
+                                        <td colspan="2">
+                                            @error('answer4')
+                                                {{ $message }}
+                                            @enderror    
+                                        </td>
+                                    </tr>
                                 </tr>
 
                                 <tr>

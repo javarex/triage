@@ -11,7 +11,13 @@
                     <form method="POST" action="{{ route('client.store')}}" autocomplete="off" class="form1">
                         @csrf
 
+                        @if($message = Session::get('delete'))
+                                                
+                            <div class="text-danger text-center ">
+                                <h3>{{ $message }}</h3>
+                            </div>
                         
+                        @endif
                         <div class="form-group row">
                             <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First name') }}</label>
 
@@ -170,16 +176,7 @@
                                 <div class="alert alert-info mt-1 p-1 ">
                                     <div class="d-flex justify-content-center">
                                         <h3><strong>
-                                        
                                             {{ $code }}
-                                            @if($message = Session::get('delete'))
-                                                
-                                                <div class="text-danger">
-                                                    ({{ $message }})
-                                                </div>
-                                            
-                                            @endif
-                                        
                                         </strong></h3>
                                     </div>
                                     <div class="text-danger d-flex justify-content-center">Note: Remember your triage login code.</div>
