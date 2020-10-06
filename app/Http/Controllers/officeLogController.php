@@ -29,7 +29,7 @@ class officeLogController extends Controller
         $clients = Activity::with('Office','client')
                             ->where('office_id',$office->office_id)
                             ->get();
-
+        
         return view('office.office_log.index', compact('clients','office'));
     }
 

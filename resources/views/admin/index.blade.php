@@ -28,6 +28,8 @@
                 <div class="header text-secondary">
                     <h1>Employee and Guest users</h1>
                 </div>
+                <div class="alert alert-success" id="untag_alert">
+                </div>
                 <div class=""> 
                     <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                    <div class="">
@@ -45,7 +47,11 @@
                             <tbody>
                             @foreach($clients as $client)
                                 @if($client->user['type'] != 'admin')
+                                    @if($client->user->tag != 0)
+                                    <tr class="table table-danger">
+                                    @else
                                     <tr>
+                                    @endif
                                     <td>{{ $client->user['username'] }}</td>
                                     <td>{{ $client->first_name.' '.$client->last_name }}</td>
                                     <td>
@@ -58,7 +64,7 @@
                                         @endif
                        
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <a class="" id="client_view" href="#" data-toggle="modal" data-target="#exampleModal" 
                                         data-client_id="{{ $client->id }}"
                                         data-firstName="{{ $client->first_name }}"
@@ -71,12 +77,16 @@
                                             <i class="fa fa-edit" aria-hidden="true"></i>
                                         </a>
                                         <span id="first_nameData" ></span>
-                                        <span class="text-info">|</span>
                                       
-                          
-                                        <a href="" title="Tag this user">
-                                            <i class="fa fa-tags" aria-hidden="true" ></i>
+                                        @if($client->user->tag != 0)
+                                        <span class="text-info">|</span>
+                                        <a href="#" title="Untag this user" id="untag" 
+                                            data-userId="{{ $client->user->id }}" 
+                                            data-username="{{ $client->user->first_name }}">
+
+                                            <i class="fa fa-window-close" aria-hidden="true" ></i>
                                         </a>
+                                        @endif
                                     </td>
                                     <!-- <td class="text-center">
                                     
@@ -303,6 +313,30 @@
 <script>
     $(document).ready(function()
     {
+        $('#untag_alert').hide();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // untag person
+
+        function untag(id)
+        {
+            $.ajax({
+            url: 'untag',
+            type: 'post',
+            data: {
+                _token:'{{ csrf_token() }}',
+                id:id
+            },
+            success: function(data){
+                $('#untag_alert').html(data).show();
+            }
+        })
+        }
+
         $('#example').DataTable({
             order:[[1,'asc']]
         });
@@ -340,6 +374,16 @@
         $(document).on('click','#tags', function(){
             $('#office_name').html('<b>'+$(this).attr('data-officeName')+'</b>');
             $('#office_id').val($(this).attr('data-office_id'));
+        })
+
+        $(document).on('click','#untag', function(){
+            var userId = $(this).attr('data-userId');
+            // console.log($(this).attr('data-userId'));
+            var _confirmation = confirm("Are you sure to confirm the selected user?");
+            if(_confirmation == true)
+            {
+                untag(userId);
+            }
         })
     })
 </script>

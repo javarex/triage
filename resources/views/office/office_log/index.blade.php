@@ -204,6 +204,7 @@
                         to:to
                     },
                     success: function(data){
+                        console.log(data);
                         $('.table_log').html(data);
                         $('#example').DataTable({
                             "bSort" : false

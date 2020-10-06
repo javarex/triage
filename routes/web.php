@@ -48,4 +48,5 @@ Route::get('/loadActivity/{id}', 'ActivityController@loadData');
 Route::post('/admin/client', 'AdminController@updateClient');
 
 Route::post('/tag', 'TagController@store');
+Route::post('/untag', 'TagController@untagUser');
 

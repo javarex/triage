@@ -41,4 +41,12 @@ class TagController extends Controller
         }
         return redirect('admin')->with('successTag','new tag created successfully!');
     }
+
+    public function untagUser(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        $user->update(['tag' => 0]);
+
+        return $user->first_name.' '.$user->last_name.' untagged successfully!';
+    }
 }
