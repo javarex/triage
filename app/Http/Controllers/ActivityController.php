@@ -48,7 +48,7 @@ class ActivityController extends Controller
             $activities = $activities->with('client')
                                     ->where('office_id', $id)
                                     ->where('created_at','like', '%'.$dateNow.'%')
-                                    ->where('approve',0)
+                                    
                                     ->orderBy('created_at', 'desc')
                                     ->get();
         }
