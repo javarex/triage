@@ -301,7 +301,7 @@
 
             $(document).on('click','.time-out', function(){
                 
-                var _confirmation = confirm("Are you sure to log out this client?");
+                var _confirmation = confirm("Are you sure to logout this client?");
                 if(_confirmation == true)
                 {
                     setTimeOut($(this).attr('data-activityId'));
@@ -310,7 +310,7 @@
 
             $(document).on('click','.time-in', function(){
                 
-                var _confirmation = confirm("Are you sure to log out this client?");
+                var _confirmation = confirm("Are you sure to login this client?");
                 if(_confirmation == true)
                 {
                     setTimeIn($(this).attr('data-activityId'));
