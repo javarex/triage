@@ -62,6 +62,8 @@ class TriageController extends Controller
             'answer10' => 'required',
             'answer11' => 'required',
             'answer12' => 'required',
+            'answer13' => 'required',
+            'answer14' => 'required',
         ]);
         
         if(is_null($request->venue)){
@@ -83,9 +85,9 @@ class TriageController extends Controller
         for ($i=0; $i < 13; $i++) { 
             $location = $request->default_value;
             $answer_name = $request['answer'.strval($i+1)];
-            if($i == 3 && $answer_name == "yes"){
+            if($i == 5 && $answer_name == "yes"){
                 $location = $request->input('location1');
-            }else if($i == 4 && $answer_name == "yes"){
+            }else if($i == 6 && $answer_name == "yes"){
                 $location = $request->input('location2');
             }
             $output[$i] = [
@@ -125,10 +127,10 @@ class TriageController extends Controller
                             ->whereDate('created_at',$date_of_activity->format('Y-m-d'))
                             ->where('activity_id',$activity_id)
                             ->get();
-
+        $url_activity = $activity_id;
         // dd($clients);
        
-        return view('triage.show', compact('triages', 'activity', 'client_logs'));
+        return view('triage.show', compact('triages', 'activity', 'client_logs','url_activity'));
     }
 
     public function update(Request $request, $id)

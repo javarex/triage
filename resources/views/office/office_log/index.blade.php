@@ -259,6 +259,23 @@
                     }
                 })
             }
+
+            function setTimeIn(activityId)
+            {
+                $.ajax({
+                    url: 'officeLog/setTimeIn',
+                    type: 'post',
+                    data: {
+                        _token: '{{  csrf_token() }}',
+                        id: activityId
+                    },
+                    success: function(data)
+                    {
+                        console.log(data);
+                        loadData();
+                    }
+                })
+            }
             $('#myModal').on('shown.bs.modal', function () {
                 $('#myInput').trigger('focus')
             })
@@ -288,6 +305,15 @@
                 if(_confirmation == true)
                 {
                     setTimeOut($(this).attr('data-activityId'));
+                }
+            })
+
+            $(document).on('click','.time-in', function(){
+                
+                var _confirmation = confirm("Are you sure to log out this client?");
+                if(_confirmation == true)
+                {
+                    setTimeIn($(this).attr('data-activityId'));
                 }
             })
         })

@@ -82,7 +82,7 @@
                                 <th>Venue</th>
                                 <th>Date</th>
                                 <th>Time</th>
-                                <th>Action</th>
+                                <th><i class="fa fa-cog" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -147,7 +147,7 @@
       <div class="modal-body" id="printProfile">
         <div class="row container">
             <div class="col-md-12 px-0 d-flex justify-content-center">
-                <span><i class="fa fa-user-circle fa-5x mt-2" aria-hidden="true"></i></span><span style="cursor:pointer" title="Scan me!">{!! QrCode::size('100')->generate('mis3ddo.dvodeoro.ph:8086/officeLog/create?clientid='.Auth::user()->id) !!}</span>
+                <span style="cursor:pointer" title="Scan me!">{!! QrCode::size('200')->generate('mis3ddo.dvodeoro.ph:8086/officeLog/create?clientid='.Auth::user()->id) !!}</span>
                 <!-- <a href="#"><span class=""><i class="fas fa-edit    "></i>Edit</span></a> -->
             </div>
             <div class="col-md-12 px-0 d-flex justify-content-center">

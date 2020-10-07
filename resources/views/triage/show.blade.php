@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-7">
         <div class="card shadow">
             <div class="card-header" style="background-color:#d7e2ea">
                 <h3 class="text-primary text-center">
@@ -11,8 +11,8 @@
                 </h3>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered mt-2 text-center">
+                <div >
+                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Activity</th>
@@ -41,7 +41,11 @@
                                     {{ date('h:i a', strtotime($client->created_at))}}
                                 </td>
                                 <td>
-                                    <a href="{{ route('triage.show', $client->id ) }}" title="View form" id="history_link" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    @if($client->id == $url_activity)
+                                        <span><i class="fa fa-check" aria-hidden="true"></i></span>
+                                    @else
+                                        <a href="{{ route('triage.show', $client->id ) }}" title="View form" id="history_link" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    @endif
                                 </td>
                             </tr>
                         @empty
@@ -59,11 +63,11 @@
     </div>
     <!-- right side -->
     
-    <div class="col-md-7">
+    <div class="col-md-5">
         <div class="card shadow">
             <div class="card-body">
-                <div id="history_details">
-                    <table class="table table-striped table-bordered">
+                <div id="history_details" class="">
+                    <table class="table table-striped table-bordered table-responsive">
                         <thead>
                             <tr>
                                 <th>CRITERIA</th>
@@ -89,7 +93,7 @@
                                 @endif
                                     <tr>
                                         <td>{{ $triage->criteria['question']}}</td>
-                                        <td class="text-nowrap">
+                                        <td class="text-nowrap text-center" width="20%">
                                             {{ $triage->answer}}
 
                                             @if(!(is_null($triage->location)))
@@ -125,5 +129,10 @@
     function goBack() {
     window.history.back();
     }
+    $(document).ready(function(){
+        $('#example').DataTable({
+            "bSort" : false
+        });
+    })
 </script>
 @endsection

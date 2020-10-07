@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-    protected $fillable = ['client_id','activity','office_id','venue','approve','tag_id','time_out'];
+    protected $fillable = ['client_id','activity','office_id','venue','approve','tag_id','time_in','time_out'];
     protected $dates = ['created_at','updated_at'];
 
     public function client()

@@ -8,7 +8,7 @@
             @csrf
                 <div class="row pl-5">
                     <div class="col-md-1"></div>
-                    <div class="col-md-5">
+                    <diva class="col-md-5">
                         <div class="card shadow card-primary">
                             <div class="card-header text-primary" style="background-color:#d7e2ea">
                                 <h3>
@@ -48,7 +48,7 @@
                                 </div>
                                 
                                 <div class="form-group row venue">
-                                    <label for="venue" class="col-md-4 col-form-label text-md-right"></label>
+                                    <label for="venue" class="col-md-4 col-form-label text-md-right">Visit destination</label>
                                     
                                     <div class="col-md-6">
                                         <div class="form-check form-check-inline text-no">
@@ -82,11 +82,30 @@
                                 
                             </div>
                         </div>
-                    </div>
+                        <div class="col-md-12 p-0 mt-1">
+                               
+                                
+                                @if ($errors->any())
+                                    <div class="alert alert-danger" role="alert">
+                                        <p>
+                                            <b>NOTE:</b> All input field is required including the <b>"CRITERIA"</b> form.
+                                            All fields with <b>*</b> are required please don't leave it empty! 
+                                        </p>
+                                    </div>
+                                @else
+                                    <div class="alert alert-info" role="alert">
+                                        <p>
+                                            <b>NOTE:</b> All input field is required including the <b>"CRITERIA"</b> form.
+                                        </p>
+                                    </div>
+                                @endif
+                                
+                        </div>
+                    </diva>
                     
                     <div class="col-md-6">
                         <div class="">
-                        <table class="table table-light table-hover table-bordered ">
+                        <table class="table table-light table-hover table-bordered table-responsive">
                             <thead>
                                 <tr>
                                 <th>CRITERIA</th>
@@ -103,7 +122,7 @@
                                             <td colspan="3" class="font-weight-bold bg-primary text-light">A. SINTOMAS <span class="font-weight-normal">({{ strtoupper('Naa ba kay gibati sa mga sumusunod')}})</span></td>
                                         </tr>
                                     @elseif($question->id == 6)
-                                        <tr>tra
+                                        <tr>
                                             <td colspan="3" class="font-weight-bold bg-primary text-light">B. TRAVEL HISTORY <span class="font-weight-normal">({{ strtoupper('for the past 14 days')}})</span></td>
                                         </tr>
                                     @elseif($question->id == 8)
@@ -113,6 +132,11 @@
                                     @endif
                                     <tr>
                                         <td>
+                                            @error('answer'.$question->id)
+                                                <span class="font-weight-bold text-danger">
+                                                    *
+                                                </span>
+                                            @enderror
                                             {{ $question->question}}
                                             @if($question->id == 6)
                                                 <input type="text" class="form-control" id="location1" placeholder="Specify location" name="location1">
@@ -120,8 +144,8 @@
                                                 <input type="text" class="form-control" id="location2" placeholder="Specify location" name="location2">
                                             @endif
                                         </td>
-                                        <td><input type="radio" name="answer{{$question->id}}" id="yes_{{$question->id}}" value="yes" {{ old('answer1') == 'yes' ? 'checked' : '' }}></td>
-                                        <td><input type="radio" name="answer{{$question->id}}" id="no_{{$question->id}}" value="no" {{ old('answer1') == 'no' ? 'checked' : '' }}></td>
+                                        <td><input type="radio" name="answer{{$question->id}}" id="yes_{{$question->id}}" value="yes" {{ old('answer1'.$question->id) == 'yes' ? 'checked' : '' }}></td>
+                                        <td><input type="radio" name="answer{{$question->id}}" id="no_{{$question->id}}" value="no" {{ old('answer'.$question->id) == 'no' ? 'checked' : '' }}></td>
                                     </tr>
                                 @endforeach
                             </tbody>

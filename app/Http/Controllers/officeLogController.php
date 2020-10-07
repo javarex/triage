@@ -7,6 +7,7 @@ use App\Office;
 use App\User;
 use App\Client;
 use App\Activity;
+use App\Criteria;
 use App\Triage_form;
 use Auth;
 
@@ -35,13 +36,18 @@ class officeLogController extends Controller
 
     public function create(Request $request)
     {
+        $questions = Criteria::all();
+        $triage = Triage_form::all();
+        $offices = Office::orderBy('name', 'asc')
+                            ->get();
+
         $_user = User::with('client')
                         ->where('username', $request->clientId)
                         ->first();
         
         if(!(is_null($_user)) && $_user->tag == 0){
 
-            return view('office.office_log.create', compact('_user'));
+            return view('office.office_log.create', compact('_user','questions'));
         }elseif(!(is_null($_user)) && $_user->tag != 0 ){
             return redirect()->back()->with('usernameErr','This client is being tagged!');
         }else{
@@ -119,10 +125,12 @@ class officeLogController extends Controller
     public function storeTriage(Request $request)
     {
 
-        
+        $mytime = Carbon::now();
+        $mytime->format('H:i:s');
         
         $request['activity'] = $request->activity;
         $request['venue'] = $request->venue;
+        $request['time_in'] = $mytime;
         $activity = Activity::create($request->all());
         
          
@@ -132,9 +140,9 @@ class officeLogController extends Controller
         for ($i=0; $i < 13; $i++) { 
             $location = $request->default_value;
             $answer_name = $request['answer'.strval($i+1)];
-            if($i == 3 && $answer_name == "yes"){
+            if($i == 5 && $answer_name == "yes"){
                 $location = $request->input('location1');
-            }else if($i == 4 && $answer_name == "yes"){
+            }else if($i == 6 && $answer_name == "yes"){
                 $location = $request->input('location2');
             }
             $output[$i] = [
