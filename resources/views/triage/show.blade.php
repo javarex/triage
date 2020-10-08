@@ -105,13 +105,10 @@
                             </tbody>
                         </thead>
                     </table>
-                    <div class="d-flex justify-content-end">
-                        <div class="col-md-12 row d-flex justify-content-end">
-                            <div class="col-md-5 ">
+                    <div class="">
+                        <div class="">
+                            <div class="col-md-12 ">
                                 <button class="btn btn-danger btn-block" onclick="goBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i> BACK</button>
-                            </div>
-                            <div class="col-md-5 ">
-                                <a href="{{ route('triage.create') }}" class="btn btn-primary btn-block"><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
                             </div>
                         </div>
                     </div>

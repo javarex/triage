@@ -11,17 +11,11 @@ class OfficeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
-
     public function index()
     {
-        $user_type = Auth::user()->type;
-        if($user_type != 'office')
-        {
-            Auth::logout();
-            return redirect('login');
-        }
+        
         return redirect('/officeLog');
     }
 

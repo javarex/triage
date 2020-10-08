@@ -22,7 +22,7 @@
     <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
 </head>
-<body style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538)">
+<body style="background-image: radial-gradient(#fff3c0 , #fcd538, gold)">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color:#442900;">
             <div class="container">

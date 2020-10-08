@@ -12,8 +12,17 @@
 */
 
 Route::get('/', function () {
-    $link = '';
-    return view('auth.login', compact('link'));
+   
+    if(!(is_null(Auth::user()))){
+        if (Auth::user()->type == 'admin') {
+            return redirect('/admin');
+        }elseif (Auth::user()->type == 'office') {
+            return redirect('/officeLog');
+        }else{
+            return redirect('/triage');
+        }
+    }
+    return view('auth.login');
 });
 
 Route::get('/logout', function()
@@ -23,8 +32,11 @@ Route::get('/logout', function()
 });
 Auth::routes();
 
-Route::get('/admin/login','AdminController@loginForm')->name('admin.login');
-Route::resource('/admin', 'AdminController');
+
+Route::get('/admin/login', function(){
+    return view('admin.loginForm');
+});
+Route::resource('/admin', 'AdminController')->middleware('admin');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/client/create','ClientController@create')->name('client.create');
@@ -33,12 +45,12 @@ Route::post('/client','ClientController@store')->name('client.store');
 Route::resource('office','OfficeController');
 Route::post('/office/clientLog', 'OfficeController@clientLog');
 
-Route::resource('officeLog', 'officeLogController');
+Route::resource('officeLog', 'officeLogController')->middleware('office');;
 Route::post('/officeLog1','officeLogController@storeTriage');
 
 //Triage Routes
 
-Route::resource('triage', 'TriageController');
+Route::resource('triage', 'TriageController')->middleware('client');
 
 Route::post('/officeLog/approveStatus/{id}', 'ActivityController@updateStatus');
 Route::get('/approveStatus/{id}', 'ActivityController@loadRecord');

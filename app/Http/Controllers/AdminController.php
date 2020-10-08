@@ -10,15 +10,8 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-   
-    
-    public function loginForm()
-    {
-        return view('admin.loginForm');
-    }
 
-    
-    
+   
     public function index()
     {
         $user_id = Auth::user()->id;

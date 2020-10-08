@@ -36,7 +36,7 @@
                         
                         <div class="form-group row d-flex justify-content-center">
                                 @if (Route::has('password.request'))
-                                <a class="" href="{{ route('admin.login') }}">
+                                <a class="" href="/admin/login">
                                     {{ __('Login as office') }}
                                 </a>
                                 <span class="mx-2"> | </span>

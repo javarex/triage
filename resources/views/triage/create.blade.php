@@ -105,7 +105,7 @@
                     
                     <div class="col-md-6">
                         <div class="">
-                        <table class="table table-light table-hover table-bordered table-responsive bg-primary text-warning" >
+                        <table class="table table-light table-striped table-bordered table-responsive bg-primary text-warning" >
                             <thead>
                                 <tr>
                                 <th>CRITERIA</th>
@@ -153,11 +153,11 @@
                         
                         <div class="row pb-3">
                             <div class="col-md-2"></div>
-                            <div class="col-md-5 ">
-                                <button type="button" class="btn btn-danger btn-block" onclick="goBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i> BACK</button>
-                            </div>
                             <div class="col-md-5">
                                 <button class="btn btn-primary btn-block"><i class="fa fa-check" aria-hidden="true"></i> SUBMIT</button>
+                            </div>
+                            <div class="col-md-5 ">
+                                <button type="button" class="btn btn-danger btn-block" onclick="goBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i> BACK</button>
                             </div>
                         </div>
                         </div>

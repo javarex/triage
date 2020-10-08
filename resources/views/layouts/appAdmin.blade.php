@@ -24,7 +24,7 @@
     <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
     @yield('styless')
 </head>
-<body style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538)">
+<body style="background-image: radial-gradient(#fff3c0 , #fcd538, gold)">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
