@@ -50,5 +50,4 @@ Route::post('/admin/client', 'AdminController@updateClient');
 
 Route::post('/tag', 'TagController@store');
 Route::post('/untag', 'TagController@untagUser');
-Route::get('/qrCode', 'ClientController@qrGenerate');
 

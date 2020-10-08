@@ -167,7 +167,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="/qrCode" class="btn btn-primary" id="print_qr"><i class="fa fa-fw fa-save" aria-hidden="true"></i>Save</a>
+        <a href="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(300)->generate( Auth::user()->username )) !!}" class="btn btn-primary" id="print_qr" download="triage_QRCode"><i class="fa fa-fw fa-save" aria-hidden="true"></i>Save</a>
         <!-- onclick="printDiv('printProfile')" -->
       </div>
     </div>
