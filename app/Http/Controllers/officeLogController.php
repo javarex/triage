@@ -15,11 +15,7 @@ use Illuminate\Http\Request;
 
 class officeLogController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('office');
-    }
-    
+   
     public function index()
     {
         

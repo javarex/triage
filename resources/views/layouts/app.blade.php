@@ -58,16 +58,7 @@
                             </li>
                         @endif
                     @else
-                    <li class="nav-item">
-                        @if(Auth::user()->type == 'admin')
-                         <a href="/admin" class="nav-link text-warning">HOME |</a>
-                         @elseif(Auth::user()->type == 'office')
-                         <a href="/officeLog" class="nav-link text-warning">HOME |</a>
-                         @else
-                         <a href="/triage" class="nav-link text-warning">HOME |</a> 
-                        @endif
-                        
-                    </li>
+                    
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color:#ECC633">
                             {{ Auth::user()->first_name }}<span class="caret"></span>

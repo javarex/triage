@@ -28,7 +28,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color:#442900;">
             <div class="container">
-            <a class="navbar-brand" href="{{ url('/triage') }}">
+                <a class="navbar-brand" href="{{ url('/triage') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
                     <img src="{{ asset('image/triagez.png') }}" title="PLGU - DAVAO DE ORO" width="120" height="61" >
                 </a>

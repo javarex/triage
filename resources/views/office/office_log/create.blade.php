@@ -63,7 +63,7 @@
                     
                     <div class="col-md-6">
                         <div class="">
-                        <table class="table table-light table-hover table-bordered table-responsive bg-primary text-warning">
+                        <table class="table table-light table-striped table-bordered table-responsive bg-primary text-warning">
                             <thead>
                                 <tr>
                                 <th>CRITERIA</th>
@@ -106,32 +106,17 @@
                         
                         <div class="row pb-3">
                             <div class="col-md-2"></div>
-                            <div class="col-md-5 pt-1">
-                                <button type="button" class="btn btn-danger btn-block" onclick="goBack()">CANCEL</button>
-                            </div>
-                            <div class="col-md-5 pt-1">
-                                <button class="btn btn-primary btn-block" name="triage" value="submit">SUBMIT</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
 
-                </div>
-            
-                <!-- <div class="form-group row">
-                    <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First name') }}</label>
-            
-                    <div class="col-md-6">
-                        <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" autocomplete="first_name" autofocus>
-            
-                        @error('first_name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                            <div class="col-md-5 pt-1">
+                                <button class="btn btn-primary btn-block" name="triage" value="submit"><i class="fa fa-check-circle" aria-hidden="true"></i> SUBMIT</button>
+                            </div>
+                            <div class="col-md-5 pt-1">
+                                <button type="button" class="btn btn-danger btn-block" onclick="goBack()"><i class="fa fa-times-circle" aria-hidden="true"></i> CANCEL</button>
+                            </div>
+                        </div>
+                        </div>
                     </div>
-                </div> -->
-                
+                </div>
             </form>
         </div>
     </div>

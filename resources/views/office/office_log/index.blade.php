@@ -27,7 +27,7 @@
 
 @section('content')
 <div class="row" >
-    <div class="col-md-12 m-auto" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
+    <div class="col-md-12 m-auto" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">  
         <div class="card p-3 text-secondary" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
             <form action="{{ route('officeLog.create') }}" method="get">
                 <div class="row container">
