@@ -27,12 +27,12 @@
 
 @section('content')
 <div class="row" >
-    <div class="col-md-12 m-auto" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">  
+    <div class="col-md-12 m-auto" style="">  
         <div class="card p-3 text-secondary" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
             <form action="{{ route('officeLog.create') }}" method="get">
                 <div class="row container">
                     <div class="col-md-9">
-                        <h1>{{ strtoupper(Auth::user()->first_name)}}</h1>
+                        <h1 class="font-weight-bold text-primary">{{ strtoupper(Auth::user()->first_name)}}</h1>
                     </div>
                     <div class="col-md-3">
                         <div class="input-group mb-3">
