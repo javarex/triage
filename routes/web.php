@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    $link = '';
+    return view('auth.login', compact('link'));
 });
 
 Route::get('/logout', function()
