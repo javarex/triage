@@ -148,19 +148,16 @@
         <div class="row container">
             <div class="col-md-12 px-0 d-flex justify-content-center">
                 <span style="cursor:pointer" title="Scan me!">{!! QrCode::size('200')->generate(Auth::user()->username) !!}</span>
-                <!-- <a href="#"><span class=""><i class="fas fa-edit    "></i>Edit</span></a> -->
+               
             </div>
             <div class="col-md-12 px-0 d-flex justify-content-center">
-                <h1>{{ Auth::user()->first_name.' '.Auth::user()->last_name}}</h1>
-                <!-- <a href="#"><span class=""><i class="fas fa-edit    "></i>Edit</span></a> -->
+                <h1>{{ Auth::user()->first_name.' '.Auth::user()->last_name}}</h1>>
             </div>
             <div class="col-md-12 px-0 d-flex justify-content-center">
                 <label for=""><i class="fas fa-mobile-alt    "></i> Contact #: {{ $client_id->contact_number }}</label>
-                <!-- <a href="#"><span class=""><i class="fas fa-edit    "></i>Edit</span></a> -->
             </div>
             <div class="col-md-12 px-0 d-flex justify-content-center">
                 <label for=""><i class="fas fa-map-marker-alt    "></i> Address: {{ $client_id->address }}</label>
-                <!-- <a href="#"><span class=""><i class="fas fa-edit    "></i>Edit</span></a> -->
             </div>
            
         </div>
@@ -168,7 +165,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <a href="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(300)->generate( Auth::user()->username )) !!}" class="btn btn-primary" id="print_qr" download="triage_QRCode"><i class="fa fa-fw fa-save" aria-hidden="true"></i>Save</a>
-        <!-- onclick="printDiv('printProfile')" -->
+       
       </div>
     </div>
   </div>
