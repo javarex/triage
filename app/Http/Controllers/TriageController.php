@@ -10,6 +10,10 @@ use App\Triage_form;
 use App\Office;
 use App\Activity;
 use Auth;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
