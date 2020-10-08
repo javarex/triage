@@ -17,9 +17,9 @@
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-md-12 m-auto">
-        <div class="card p-3 text-secondary">
+<div class="row" >
+    <div class="col-md-12 m-auto" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
+        <div class="card p-3 text-secondary" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
             <form action="{{ route('officeLog.create') }}" method="get">
                 <div class="row container">
                     <div class="col-md-9">
@@ -43,10 +43,10 @@
                 </div>
             </form>
         </div>
-        <div class="card shadow ">
-            <div class="card-header" style="background-color:#d7e2ea">
+        <div class="card shadow bg-primary text-warning">
+            <div class="card-header">
                 <div class="col-md-12">
-                    <h3 class="text-primary text-center">
+                    <h3 class="text-center">
                 
                         <strong><i class="fa fa-history" aria-hidden="true"></i> RECENT LOGS</strong>
                     </h3>
@@ -54,7 +54,7 @@
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end">
-                    <a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-calendar-alt    "></i> Sort by date range</a>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal" class="text-warning"><i class="fas fa-calendar-alt    "></i> Sort by date range</a>
                     <input type="hidden" id="office_id1" value="{{ Auth::user()->office_id }}"> 
                 </div>
                 <div class="table_log">

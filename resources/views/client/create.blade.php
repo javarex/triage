@@ -1,13 +1,12 @@
-@extends('layouts.appClient')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+            <div class="">
 
-                <div class="card-body">
+                <div class="card-body font-weight-bold text-primary">
                     <form method="POST" action="{{ route('client.store')}}" autocomplete="off" class="form1">
                         @csrf
 
@@ -122,15 +121,6 @@
                             </div>
                         </div>
 
-                        <!-- <div class="form-group row ">
-                            <label for="office" class="col-md-4 col-form-label text-md-right misc_label">QR Code</label>
-
-                            <div class="col-md-6" id="">
-                                 {!! QrCode::size(100)->generate('mis3ddo.dvodeoro.ph:8086/officeLog/create?clientid=4') !!}
-                            </div>
-                        </div> -->
-
-
                         <div class="form-group row user_type_group">
                             <label for="office" class="col-md-4 col-form-label text-md-right misc_label">Office</label>
 
@@ -144,48 +134,34 @@
                             </div>
                         </div>
 
-                     
-
-
-                        <!-- <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div> -->
-
                         <div class="form-group row">
                             <label for="triage_code" class="col-md-4 col-form-label text-md-right">{{ __('Triage code')}}</label>
 
                             <div class="col-md-6">
-                                <div class="alert alert-info mt-1 p-1 ">
+                                <div class="card py-3">
                                     <div class="d-flex justify-content-center">
-                                        <h3><strong>
-                                            {{ $code }}
-                                        </strong></h3>
+                                        <h2 class="font-weight-bold">{{ $code }}</h2>
                                     </div>
                                     <div class="text-danger d-flex justify-content-center">Note: Remember your triage login code.</div>
                                 </div>
                                 <input type="hidden" class="form-control" value="{{ $code }}" name="code">
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <label for="triage_code" class="col-md-4 my-auto col-form-label text-md-right">{{ __('QR code')}}</label>
 
-
+                            <div class="col-md-6">
+                                <div class=" mt-1 p-0 ">
+                                    <div class="d-flex justify-content-center bg-light">
+                                        {!! QrCode::size('200')->backgroundColor(250, 244, 215)->color(68, 41, 0)->generate($code) !!}
+                                    </div>
+                                </div>
+                                <input type="hidden" class="form-control" value="{{ $code }}" name="code">
+                            </div>
+                        </div>
+                        
+                        
                         <div class="form-group row mb-0">
                         <label for="triage_code" class="col-md-4 col-form-label text-md-right"></label>
                             <div class="col-md-3 mt-2">

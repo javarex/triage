@@ -1,42 +1,43 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 @section('content')
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-5">
-                <div class="card ">
-                    <div class="card-header bg-info text-light font-weight-bolder">
-                        Login
-                    </div>
-                    <div class="card-body">
+        <div class="row pt-5">
+            <div class="col-md-6 ">
+                <img src="{{ asset('image/triagez.png')}}" class="img-fluid" alt="">
+            </div>
+            <div class="col-md-6 p-5">
+                <div class="">
+                    <div class="font-weight-bold">
                         <form action="{{ route('login') }}" method="post" autocomplete="off">
                             @csrf
 
-                            <div class="form-group row">
-                                <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username')}}</label>
-                                
+                            <div class="form-group row">                                
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autofocus>
+                                    <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autofocus placeholder="Username">
                                 </div>
                             </div>
-
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-                                
                                 <div class="col-md-8">
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" autofocus>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" autofocus placeholder="Password">
                                 </div>
                             </div>
-
-                            <div class="form-group row">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="/" class="btn btn-danger btn-block"><i class="fas fa-arrow-left">Back </i></a>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt    ">Login </i></button>    
+                                </div>
+                            </div>
+                            <!-- <div class="form-group row">
                                 <label class="col-md-4 text-md-right"></label>
 
                                 <div class="col-md-8">
                                     <button class="btn btn-link btn-lg"><i class="fas fa-sign-in-alt    ">Login </i></button>
                                 </div>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                 </div>

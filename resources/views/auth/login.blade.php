@@ -2,20 +2,19 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
+    <div class="row">
+        <div class="col-md-6 ">
+            <img src="{{ asset('image/triagez.png')}}" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-6 p-5">
+            <div class="">
+                <div class="font-weight-bold">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Triage code') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="off" autofocus>
+                        <div class="form-group row pt-3 d-flex justify-content-center text-center">
+                            <div class="col-md-8">
+                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="off" placeholder="Triage code" autofocus>
                                 <input type="hidden" value="admin" name="password">
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
@@ -25,22 +24,25 @@
                             </div>
                         </div>
 
-                       
-                        
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="form-group row d-flex justify-content-center text-center">
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-primary btn-block">
                                     {{ __('Login') }}
                                 </button>
+                            </div>
+                        </div>
 
+                       
+                        
+                        <div class="form-group row d-flex justify-content-center">
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('client.create') }}">
-                                        {{ __('Register as client') }}
-                                    </a>
-                                    |
-                                    <a class="btn btn-link" href="{{ route('admin.login') }}">
-                                        {{ __('Login as office') }}
-                                    </a>
+                                <a class="" href="{{ route('admin.login') }}">
+                                    {{ __('Login as office') }}
+                                </a>
+                                <span class="mx-2"> | </span>
+                                <a class="text-right" href="{{ route('client.create') }}">
+                                    {{ __('Register') }}
+                                </a>
                                 @endif
                             </div>
                         </div>

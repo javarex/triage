@@ -37,9 +37,9 @@
 
 
 <div class="row ">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card shadow ">
-            <div class="card-header" style="background-color:#d7e2ea">
+            <div class="card-header" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
                 <div class="row">
                     <div class="col-md-12">
                         <h3 class="text-primary text-center">
@@ -73,9 +73,9 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body"  style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
                 <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%; background-color:#442900; color:#fcd538">
                         <thead>
                             <tr>
                                 <th>Activity</th>
@@ -111,7 +111,7 @@
                                     {{ date('h:i a', strtotime($client->created_at))}}
                                 </td>
                                 <td>
-                                    <a href="{{ route('triage.show', $client->id ) }}" id="history_link" title="View form" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <a href="{{ route('triage.show', $client->id ) }}" id="history_link" title="View form" data-activity="{{ $client->id }}" class="text-warning"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -126,50 +126,14 @@
     
     </div>
     
-    <div class="col-md-6 bg-light rounded-left shadow-lg p-0">
-        <img src="{{ asset('vendor/img/stop_covid.png') }}" width="100%" height="100%" alt="">
-    </div>
+   
     <!-- right side -->
     
     <!-- <div class="col-md-12" style='background-image:url("../public/vendor/img/stop_covid.png")'></div> -->
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="printProfile">
-        <div class="row container">
-            <div class="col-md-12 px-0 d-flex justify-content-center">
-                <span style="cursor:pointer" title="Scan me!">{!! QrCode::size('200')->generate(Auth::user()->username) !!}</span>
-               
-            </div>
-            <div class="col-md-12 px-0 d-flex justify-content-center">
-                <h1>{{ Auth::user()->first_name.' '.Auth::user()->last_name}}</h1>>
-            </div>
-            <div class="col-md-12 px-0 d-flex justify-content-center">
-                <label for=""><i class="fas fa-mobile-alt    "></i> Contact #: {{ $client_id->contact_number }}</label>
-            </div>
-            <div class="col-md-12 px-0 d-flex justify-content-center">
-                <label for=""><i class="fas fa-map-marker-alt    "></i> Address: {{ $client_id->address }}</label>
-            </div>
-           
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(300)->generate( Auth::user()->username )) !!}" class="btn btn-primary" id="print_qr" download="triage_QRCode"><i class="fa fa-fw fa-save" aria-hidden="true"></i>Save</a>
-       
-      </div>
-    </div>
-  </div>
-</div>
+@include('triage.include')
 
 
 @endsection

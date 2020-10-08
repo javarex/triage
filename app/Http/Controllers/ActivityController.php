@@ -67,7 +67,7 @@ class ActivityController extends Controller
         }
         
         
-        $output.='<table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+        $output.='<table id="example" class="table table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
         <thead>
             <tr class="text-center">
                 <th>Code</th>

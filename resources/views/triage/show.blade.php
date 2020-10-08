@@ -2,17 +2,17 @@
 
 @section('content')
 
-<div class="row">
+<div class="row mt-2">
     <div class="col-md-7">
-        <div class="card shadow">
-            <div class="card-header" style="background-color:#d7e2ea">
+        <div class="card shadow" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
+            <div class="card-header">
                 <h3 class="text-primary text-center">
                     <strong><i class="fa fa-history" aria-hidden="true"></i> YOUR RECENT ACTIVITIES</strong>
                 </h3>
             </div>
             <div class="card-body">
                 <div >
-                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap text-warning bg-primary" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Activity</th>
@@ -44,7 +44,7 @@
                                     @if($client->id == $url_activity)
                                         <span><i class="fa fa-check" aria-hidden="true"></i></span>
                                     @else
-                                        <a href="{{ route('triage.show', $client->id ) }}" title="View form" id="history_link" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <a href="{{ route('triage.show', $client->id ) }}" title="View form" id="history_link" class="text-warning" data-activity="{{ $client->id }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     @endif
                                 </td>
                             </tr>
@@ -65,9 +65,9 @@
     
     <div class="col-md-5">
         <div class="card shadow">
-            <div class="card-body">
+            <div class="">
                 <div id="history_details" class="">
-                    <table class="table table-striped table-bordered table-responsive">
+                    <table class="table table-light table-hover table-bordered table-responsive bg-primary text-warning">
                         <thead>
                             <tr>
                                 <th>CRITERIA</th>
@@ -120,6 +120,7 @@
         </div>
     </div>
 </div>
+@include('triage.include')
 
 
 @endsection

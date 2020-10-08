@@ -10,13 +10,13 @@
                     <div class="col-md-1"></div>
                     <diva class="col-md-5">
                         <div class="card shadow card-primary">
-                            <div class="card-header text-primary" style="background-color:#d7e2ea">
+                            <div class="card-header text-primary" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
                                 <h3>
                                     <strong><i class="fas fa-file-alt    "></i> TRIAGE SCREENING FORM</strong>
                                 </h3>
                             </div>
                             
-                            <div class="card-body">
+                            <div class="card-body bg-primary text-warning">
 
                             <!-- generated Form number -->
                                 <div class="form-group row ">
@@ -32,7 +32,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Date') }}</label>
+                                    <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Date:') }}</label>
                                 
                                     <div class="col-md-6">
                                         <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ now()->format('m/d/Y') }}" readonly>
@@ -40,7 +40,7 @@
                                 </div>
                                 
                                 <div class="form-group row ">
-                                    <label for="activity" class="col-md-4 col-form-label text-md-right">{{ __('Purpose of Visit') }}</label>
+                                    <label for="activity" class="col-md-4 col-form-label text-md-right">{{ __('Purpose of Visit:') }}</label>
                                 
                                     <div class="col-md-6">
                                         <input type="text" class="form-control @error('activity') is-invalid @enderror" name="activity" value="{{ old('activity') }}">
@@ -48,7 +48,7 @@
                                 </div>
                                 
                                 <div class="form-group row venue">
-                                    <label for="venue" class="col-md-4 col-form-label text-md-right">Visit destination</label>
+                                    <label for="venue" class="col-md-4 col-form-label text-md-right">Visit destination:</label>
                                     
                                     <div class="col-md-6">
                                         <div class="form-check form-check-inline text-no">
@@ -105,7 +105,7 @@
                     
                     <div class="col-md-6">
                         <div class="">
-                        <table class="table table-light table-hover table-bordered table-responsive">
+                        <table class="table table-light table-hover table-bordered table-responsive bg-primary text-warning" >
                             <thead>
                                 <tr>
                                 <th>CRITERIA</th>
@@ -119,15 +119,15 @@
                                 @foreach($questions as $question)
                                     @if($question->id == 1)
                                         <tr>
-                                            <td colspan="3" class="font-weight-bold bg-primary text-light">A. SINTOMAS <span class="font-weight-normal">({{ strtoupper('Naa ba kay gibati sa mga sumusunod')}})</span></td>
+                                            <td colspan="3" class="font-weight-bold bg-primary text-light" >A. SINTOMAS <span class="font-weight-normal">({{ strtoupper('Naa ba kay gibati sa mga sumusunod')}})</span></td>
                                         </tr>
                                     @elseif($question->id == 6)
                                         <tr>
-                                            <td colspan="3" class="font-weight-bold bg-primary text-light">B. TRAVEL HISTORY <span class="font-weight-normal">({{ strtoupper('for the past 14 days')}})</span></td>
+                                            <td colspan="3" class="font-weight-bold bg-primary text-light" >B. TRAVEL HISTORY <span class="font-weight-normal">({{ strtoupper('for the past 14 days')}})</span></td>
                                         </tr>
                                     @elseif($question->id == 8)
                                         <tr>
-                                            <td colspan="3" class="font-weight-bold bg-primary text-light">C. EXPOSURE HISTORY <span class="font-weight-normal">({{ strtoupper('for the past 14 days')}})</span></td>
+                                            <td colspan="3" class="font-weight-bold bg-primary text-light" >C. EXPOSURE HISTORY <span class="font-weight-normal">({{ strtoupper('for the past 14 days')}})</span></td>
                                         </tr>
                                     @endif
                                     <tr>
@@ -164,24 +164,11 @@
                     </div>
 
                 </div>
-            
-                <!-- <div class="form-group row">
-                    <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First name') }}</label>
-            
-                    <div class="col-md-6">
-                        <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" autocomplete="first_name" autofocus>
-            
-                        @error('first_name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div> -->
                 
             </form>
         </div>
     </div>
+    @include('triage.include')
 
 @endsection
 

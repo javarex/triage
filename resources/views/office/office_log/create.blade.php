@@ -8,17 +8,14 @@
                 <div class="row pl-5">
                     <div class="col-md-1"></div>
                     <div class="col-md-5">
-                        <div class="col-md-12 p-0 mt-1">
-                            <div class="alert alert-danger" role="alert">
-                                <p>
-                                    <b>NOTE:</b> All input field is required including the <b>"CRITERIA"</b> form.
-                                </p>
+                        <div class="card shadow" >
+                            <div class="card-header text-primary" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
+                                <h3>
+                                    <strong><i class="fas fa-file-alt    "></i> TRIAGE SCREENING FORM</strong>
+                                </h3>
                             </div>
-                        </div>
-                        <div class="card shadow card-primary">
-                            <div class="card-header" style="background-color:gold; color:red"><h3>TRIAGE SCREENING FORM</h3></div>
                             
-                            <div class="card-body">
+                            <div class="card-body bg-primary text-warning">
 
                             <div class="form-group row">
                                 <label for="venue" class="col-md-3 col-form-label text-md-right">{{ __('Activity') }}</label>
@@ -53,14 +50,20 @@
                             
                             </div>
                         </div>
-
+                        <div class="col-md-12 p-0 mt-1">
+                            <div class="alert alert-danger" role="alert">
+                                <p>
+                                    <b>NOTE:</b> All input field is required including the <b>"CRITERIA"</b> form.
+                                </p>
+                            </div>
+                        </div>
                         
 
                     </div>
                     
                     <div class="col-md-6">
                         <div class="">
-                        <table class="table table-light table-hover table-bordered ">
+                        <table class="table table-light table-hover table-bordered table-responsive bg-primary text-warning">
                             <thead>
                                 <tr>
                                 <th>CRITERIA</th>

@@ -40,14 +40,16 @@ class TriageController extends Controller
 
     public function create()
     {  
-        
+        $user_id = Auth::user()->id;
+        $client_id = Client::where('user_id',$user_id)
+                            ->first();
         $questions = Criteria::all();
         $triage = Triage_form::all();
         $offices = Office::orderBy('name', 'asc')
                             ->get();
 
         
-        return view('triage.create', compact('questions','triage','offices'));
+        return view('triage.create', compact('questions','triage','offices','client_id'));
     }
 
     public function store(Request $request)
@@ -114,7 +116,7 @@ class TriageController extends Controller
         
         $user_id = Auth::user()->id;
         $client_id = Client::where('user_id',$user_id)
-        ->first();
+                    ->first();
         $client_logs = Activity::with('client','office')
                         ->where('client_id',$client_id->id)
                         ->orderBy('id', 'desc')
@@ -134,7 +136,7 @@ class TriageController extends Controller
         $url_activity = $activity_id;
         // dd($clients);
        
-        return view('triage.show', compact('triages', 'activity', 'client_logs','url_activity'));
+        return view('triage.show', compact('triages', 'activity', 'client_logs','url_activity','client_id'));
     }
 
     public function update(Request $request, $id)
