@@ -147,7 +147,7 @@
       <div class="modal-body" id="printProfile">
         <div class="row container">
             <div class="col-md-12 px-0 d-flex justify-content-center">
-                <span style="cursor:pointer" title="Scan me!">{!! QrCode::size('200')->generate('mis3ddo.dvodeoro.ph:8086/officeLog/create?clientid='.Auth::user()->id) !!}</span>
+                <span style="cursor:pointer" title="Scan me!">{!! QrCode::size('200')->generate(Auth::user()->username) !!}</span>
                 <!-- <a href="#"><span class=""><i class="fas fa-edit    "></i>Edit</span></a> -->
             </div>
             <div class="col-md-12 px-0 d-flex justify-content-center">
@@ -167,7 +167,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(300)->generate( Auth::user()->username )) !!}" class="btn btn-primary" id="print_qr" download="triage_QRCode"><i class="fa fa-fw fa-save" aria-hidden="true"></i>Save</a>
+        <!-- <a href="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(300)->generate( Auth::user()->username )) !!}" class="btn btn-primary" id="print_qr" download="triage_QRCode"><i class="fa fa-fw fa-save" aria-hidden="true"></i>Save</a> -->
         <!-- onclick="printDiv('printProfile')" -->
       </div>
     </div>
