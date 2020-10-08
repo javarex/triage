@@ -154,7 +154,7 @@
                             <div class="col-md-6">
                                 <div class=" mt-1 p-0 ">
                                     <div class="d-flex justify-content-center bg-light">
-                                        {!! QrCode::size('200')->backgroundColor(250, 244, 215)->color(68, 41, 0)->generate($code) !!}
+                                        {!! QrCode::size('200')->color(68, 41, 0)->generate($code) !!}
                                     </div>
                                 </div>
                                 <input type="hidden" class="form-control" value="{{ $code }}" name="code">
