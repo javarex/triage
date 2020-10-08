@@ -163,16 +163,14 @@
                         
                         
                         <div class="form-group row mb-0">
-                        <label for="triage_code" class="col-md-4 col-form-label text-md-right"></label>
-                            <div class="col-md-3 mt-2">
+                            <label for="triage_code" class="col-md-4 col-form-label text-md-right"></label>
+                            <div class="col-md-6 mt-2">
                                 <button type="submit" class="btn btn-primary btn-block">
-                                <i class="fa fa-check" aria-hidden="true"></i>
+                                    <i class="fa fa-check" aria-hidden="true"></i>
                                     {{ __('Register') }}
                                 </button>
-                            </div>
-                            <div class="col-md-3 mt-2">
                                 <button type="button" onclick="goBack()" class="btn btn-danger btn-block">
-                                <i class="fa fa-times" aria-hidden="true"></i>
+                                    <i class="fa fa-times" aria-hidden="true"></i>
                                     {{ __('Cancel') }}
                                 </button>
                             </div>

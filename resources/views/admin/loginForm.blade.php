@@ -24,11 +24,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <a href="/" class="btn btn-danger btn-block"><i class="fas fa-arrow-left">Back </i></a>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <button class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt    ">Login </i></button>    
+                                </div>
+                                <div class="col-md-8 mt-1">
+                                    <a href="/" class="btn btn-danger btn-block"><i class="fas fa-arrow-left">Back </i></a>
                                 </div>
                             </div>
                             <!-- <div class="form-group row">
