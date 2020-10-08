@@ -167,7 +167,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="print_qr" onclick="printDiv('printProfile')"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+        <a href="/qrCode" class="btn btn-primary" id="print_qr"><i class="fa fa-fw fa-save" aria-hidden="true"></i>Save</a>
+        <!-- onclick="printDiv('printProfile')" -->
       </div>
     </div>
   </div>

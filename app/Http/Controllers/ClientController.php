@@ -91,4 +91,11 @@ class ClientController extends Controller
         }
 
     }
+
+    public function qrGenerate()
+    {
+        $qrcode = QrCode::size(500)
+            ->format('png')
+            ->generate('raymart', storage_path('app/public/qrcodes/'.'example'.'.png'));
+    }
 }
