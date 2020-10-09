@@ -17,7 +17,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-7 bg-light border">
+            <div class="col-md-7 bg-primary border text-warning">
                 @if($message = Session::get('success_update'))
                 <div class="col-md-12 px-0">
                     <div class="alert alert-success"  role="alert">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 @endif
-                <div class="header text-secondary">
+                <div class="header">
                     <h1>Employee and Guest users</h1>
                 </div>
                 <div class="alert alert-success" id="untag_alert">
@@ -33,7 +33,7 @@
                 <div class=""> 
                     <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                    <div class="">
-                        <table id="example" class="table table-dark table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                        <table id="example" class="table table-primary table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
                             <thead class="">
                                 <tr>
                                     <th>Triage Code</th>

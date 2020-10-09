@@ -90,7 +90,7 @@
                         @foreach($client_logs as $client)
                             @if($client->tag_id != 0)
                             
-                            <tr class="table-danger">
+                            <tr class="bg-danger">
                             @else 
                             <tr>
                             @endif
