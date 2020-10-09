@@ -144,9 +144,9 @@
                             </tbody>
                         </table>
                         <!-- modal edit -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" style="background-image: radial-gradient(#fff3c0 , #fcd538, gold)" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <div class="modal-content">
+                                <div class="modal-content bg-warning text-primary font-weight-bolder">
                                     <form action="/admin/client" method="post" autocomplete="off">
                                         
                                         <div class="modal-header">

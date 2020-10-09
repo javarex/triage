@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
 class AdminController extends Controller 
 {
@@ -43,9 +44,10 @@ class AdminController extends Controller
         return Excel::download(new ActivitiesExport, 'Credentials.csv');
     }
 
-    public function import() 
+    public function import(Request $request) 
     {
-        Excel::import(new ActivitiesImport,request()->file('file'));
+        Excel::import(new ActivitiesImport, $request->file);
+     
            
         return back();
     }

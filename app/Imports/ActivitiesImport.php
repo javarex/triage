@@ -6,6 +6,7 @@ use App\Activity;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
+
 class ActivitiesImport implements ToModel,WithHeadingRow
 {
     /**
