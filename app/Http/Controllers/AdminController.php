@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Client;
 use App\Office;
+use App\Exports\ActivitiesExport;
+use App\Imports\ActivitiesImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class AdminController extends Controller
+class AdminController extends Controller 
 {
 
    
@@ -31,5 +35,18 @@ class AdminController extends Controller
         $user = User::findOrFail($client->user_id);
         $user->update($request->all());
         return redirect('admin')->with('success_update',$client->first_name.' '.$client->last_name.' Saved changes!');
+    }
+
+
+    public function export() 
+    {
+        return Excel::download(new ActivitiesExport, 'Credentials.csv');
+    }
+
+    public function import() 
+    {
+        Excel::import(new ActivitiesImport,request()->file('file'));
+           
+        return back();
     }
 }

@@ -25,13 +25,48 @@
                     </div>
                 </div>
                 @endif
-                <div class="header">
+                <!-- <div class="col-md-7">
+                    <input type="file" name="file" class="form-control">
+                </div> -->
+                <div class="modal fade" id="modal_import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-primary" id="exampleModalLabel">Select File</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('import') }}" method="post">
+                            @csrf
+                            <div class="modal-body">
+                                <input type="file" name="file" class="form-control">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                <div class="header pt-2">
+                    <div class="col-md-4 px-0">
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal_import"><i class="fas fa-file-import    "></i> Import</button>
+                        <a class="btn btn-warning btn-sm" href="{{ route('export') }}"><i class="fas fa-file-export    "></i> Export</a>
+                    </div>
                     <h1>Employee and Guest users</h1>
                 </div>
                 <div class="alert alert-success" id="untag_alert">
                 </div>
                 <div class=""> 
-                    <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                    <div class="row">
+
+                        <div class="col-md-1">
+                            <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                        </div>
+                       
+                    </div>
                    <div class="">
                         <table id="example" class="table table-primary table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
                             <thead class="">

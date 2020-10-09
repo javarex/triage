@@ -64,3 +64,5 @@ Route::post('/admin/client', 'AdminController@updateClient');
 Route::post('/tag', 'TagController@store');
 Route::post('/untag', 'TagController@untagUser');
 
+Route::get('export', 'AdminController@export')->name('export');
+Route::post('import', 'AdminController@import')->name('import');
