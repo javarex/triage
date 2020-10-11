@@ -9,9 +9,9 @@ use App\Exports\ActivitiesExport;
 use App\Imports\ActivitiesImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller 
 {
@@ -46,8 +46,21 @@ class AdminController extends Controller
 
     public function import(Request $request) 
     {
-        Excel::import(new ActivitiesImport, $request->file);
-     
+        $this->validate($request,[
+            'file'  =>  'required|mimes:xlsx'
+        ]);
+        dd('asdf');
+        
+        $path = $request->file('file')->getRealPath();
+        $data = Excel::load($path)->get();
+
+        if($data->count() > 0){
+            foreach ($data->toArray() as $key => $value) {
+                foreach ($value as $row) {
+                    dd($row['id']);
+                }
+            }
+        }
            
         return back();
     }

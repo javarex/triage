@@ -18,16 +18,22 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7 bg-primary border text-warning">
-                @if($message = Session::get('success_update'))
+            @error('file')
+            <div class="alert alert-danger" role="alert">
+                {{ $message }}
+            </div>
+            @enderror
+                @if($message1 = Session::get('success_update'))
                 <div class="col-md-12 px-0">
                     <div class="alert alert-success"  role="alert">
-                            {{ $message }}
+                            {{ $message1 }}
                     </div>
                 </div>
                 @endif
                 <!-- <div class="col-md-7">
                     <input type="file" name="file" class="form-control">
                 </div> -->
+
                 <div class="modal fade" id="modal_import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -37,19 +43,19 @@
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{ route('import') }}" method="post">
-                            @csrf
+                        <form enctype="multipart/form-data" method="post" action="{{ url('/import') }}">
+                            {{ csrf_field() }}
                             <div class="modal-body">
-                                <input type="file" name="file" class="form-control">
+                                <input type="file" name="file"  class="form-control">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary">Save changes</button>
+                                <input type="submit" class="btn btn-primary" value="Upload">
                             </div>
                         </form>
                         </div>
                     </div>
-                    </div>
+                </div>
                 <div class="header pt-2">
                     <div class="col-md-4 px-0">
                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal_import"><i class="fas fa-file-import    "></i> Import</button>

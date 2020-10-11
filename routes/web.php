@@ -65,4 +65,4 @@ Route::post('/tag', 'TagController@store');
 Route::post('/untag', 'TagController@untagUser');
 
 Route::get('export', 'AdminController@export')->name('export');
-Route::post('import', 'AdminController@import')->name('import');
+Route::post('/import', 'AdminController@import');
