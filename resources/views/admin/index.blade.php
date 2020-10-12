@@ -30,10 +30,6 @@
                     </div>
                 </div>
                 @endif
-                <!-- <div class="col-md-7">
-                    <input type="file" name="file" class="form-control">
-                </div> -->
-
                 <div class="modal fade" id="modal_import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">

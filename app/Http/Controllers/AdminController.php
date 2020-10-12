@@ -47,21 +47,20 @@ class AdminController extends Controller
     public function import(Request $request) 
     {
         $this->validate($request,[
-            'file'  =>  'required|mimes:xlsx'
+            'file'  =>  'required|mimes:xlsx,csv,txt'
         ]);
-        dd('asdf');
         
         $path = $request->file('file')->getRealPath();
         $data = Excel::load($path)->get();
-
-        if($data->count() > 0){
-            foreach ($data->toArray() as $key => $value) {
-                foreach ($value as $row) {
-                    dd($row['id']);
-                }
-            }
+        
+        foreach ($data as $key => $value) {
+            dd(date('H:i:s', strtotime($value->current_time)));
+            $client = User::with('client')
+                            ->where('username', $value->username)
+                            ->first();
+            dd($client);
         }
-           
+        
         return back();
     }
 }
