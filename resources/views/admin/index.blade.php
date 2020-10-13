@@ -30,6 +30,13 @@
                     </div>
                 </div>
                 @endif
+                @if($message2 = Session::get('success_import'))
+                <div class="col-md-12 px-0">
+                    <div class="alert alert-success"  role="alert">
+                            {{ $message2 }}
+                    </div>
+                </div>
+                @endif
                 <div class="modal fade" id="modal_import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">

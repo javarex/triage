@@ -7,10 +7,10 @@ use App\Client;
 use App\Office;
 use App\Exports\ActivitiesExport;
 use App\Imports\ActivitiesImport;
+use App\Imports\ActivityImport1;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller 
@@ -50,17 +50,8 @@ class AdminController extends Controller
             'file'  =>  'required|mimes:xlsx,csv,txt'
         ]);
         
-        $path = $request->file('file')->getRealPath();
-        $data = Excel::load($path)->get();
+        Excel::import(new ActivityImport1, $request->file('file'));
         
-        foreach ($data as $key => $value) {
-            dd(date('H:i:s', strtotime($value->current_time)));
-            $client = User::with('client')
-                            ->where('username', $value->username)
-                            ->first();
-            dd($client);
-        }
-        
-        return back();
+        return back()->with('success_import','All is well!');
     }
 }
