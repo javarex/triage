@@ -33,6 +33,9 @@
                 <div class="row container">
                     <div class="col-md-9">
                         <h1 class="font-weight-bold text-primary">{{ strtoupper(Auth::user()->first_name)}}</h1>
+                        <div>
+                            <input type="file" accept="image/*;capture=camera">
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <div class="input-group mb-3">
