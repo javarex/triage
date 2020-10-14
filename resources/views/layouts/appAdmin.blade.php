@@ -66,6 +66,9 @@
                                                     document.getElementById('logout-form').submit();">
                                     <i class="fa fa-power-off" aria-hidden="true"></i> {{ __('Logout') }}
                                 </a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#adminEdit">
+                                    <i class="fas fa-user-edit    "></i> Edit Profile
+                                </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
@@ -78,6 +81,59 @@
             </div>
         </nav>
 
+        <!-- Modal -->
+        <div class="modal fade" id="adminEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-edit  fa-3x   "></i> USER EDIT</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('admin.update', Auth::user()->id)}}" method="post">
+                    @csrf
+                    @method('PATCH')
+                    <div class="modal-body">
+
+                        <div class="form-group row">
+                            <label for="first_name" class="col-md-4 col-form-label text-md-right">
+                                First name
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ old('first_name') ?? Auth::user()->first_name }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="username" class="col-md-4 col-form-label text-md-right">
+                                Username
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" name="username" id="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') ?? Auth::user()->username }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">
+                                Password
+                            </label>
+                            <div class="col-md-6">
+                                <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
+                            </div>
+                        </div>
+                    </div>
+
+                        
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        <!-- End modal -->
         <main class="py-4">
             @yield('content')
         </main>

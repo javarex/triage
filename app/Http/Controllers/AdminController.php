@@ -12,6 +12,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Crypt;
+
 
 class AdminController extends Controller 
 {
@@ -19,6 +22,8 @@ class AdminController extends Controller
    
     public function index()
     {
+        
+        
         $user_id = Auth::user()->id;
         $clients = Client::with('user','office')
                         ->orderBy('first_name', 'asc')
@@ -38,6 +43,18 @@ class AdminController extends Controller
         return redirect('admin')->with('success_update',$client->first_name.' '.$client->last_name.' Saved changes!');
     }
 
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->password = bcrypt($request->password);
+        $user->username = $request->username;
+        $user->first_name = $request->first_name;
+        $user->update();
+        
+        $client = Client::where('user_id', $id)->first();
+        $client->update(['first_name' => $request['first_name']]);
+        return redirect('/');
+    }
 
     public function export() 
     {

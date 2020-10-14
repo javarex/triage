@@ -26,6 +26,39 @@
 @endsection
 
 @section('content')
+<div class="modal fade" id="adminEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i> User's info</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form action="" >
+            
+            <div class="modal-body d-flex justify-content-center">
+
+              
+                <div class="text-center">
+                    <span style="cursor:pointer" title="Scan me!">{!! QrCode::size('200')->color(68, 41, 0)->generate(Auth::user()->username) !!}</span>
+                    <p>{{Auth::user()->username}}</p>
+                </div>
+
+                
+                
+              
+            </div>
+
+                
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
 <div class="row" >
     <div class="col-md-12 m-auto" style="">  
         <div class="card p-3 text-secondary" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
@@ -33,9 +66,6 @@
                 <div class="row container">
                     <div class="col-md-9">
                         <h1 class="font-weight-bold text-primary">{{ strtoupper(Auth::user()->first_name)}}</h1>
-                        <div>
-                            <input type="file" accept="image/*;capture=camera">
-                        </div>
                     </div>
                     <div class="col-md-3">
                         <div class="input-group mb-3">

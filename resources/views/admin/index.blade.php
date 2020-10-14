@@ -118,7 +118,20 @@
                                         data-sex="{{ $client->sex }}"
                                         data-address="{{ $client->address }}"
                                         data-contactNumber="{{ $client->contact_number }}" title="View or edit details">
-                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                            <i class="fas fa-user-edit    "></i>
+                                        </a>
+
+                                        <span id="first_nameData" class="text-warning">|</span>
+                                        <a class="" id="client_log" href="#" data-toggle="modal" data-target="#exampleModal" 
+                                        data-client_id="{{ $client->id }}"
+                                        data-firstName="{{ $client->first_name }}"
+                                        data-middleName="{{ $client->middle_name }}"
+                                        data-lastName="{{ $client->last_name }}"
+                                        data-age="{{ $client->age }}"
+                                        data-sex="{{ $client->sex }}"
+                                        data-address="{{ $client->address }}"
+                                        data-contactNumber="{{ $client->contact_number }}" title="Trace log of this user">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                         <span id="first_nameData" ></span>
                                       
@@ -132,20 +145,7 @@
                                         </a>
                                         @endif
                                     </td>
-                                    <!-- <td class="text-center">
-                                    
-                                        <a class="" href="">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </a>
-                                        <span class="text-info">|</span>
-                                        <a class="" href="">
-                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                        </a>
-                                        <span class="text-info">|</span>
-                                        <a href="">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>
-                                    </td> -->
+                                  
                                     </tr>
                                 @endif
 
@@ -222,6 +222,8 @@
                             </div>
                         </div>
                         <!-- end modal edit  -->
+
+                        
                    </div>
                 </div>
             </div>

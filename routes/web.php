@@ -67,6 +67,3 @@ Route::post('/untag', 'TagController@untagUser');
 Route::get('export', 'AdminController@export')->name('export');
 Route::post('/import', 'AdminController@import');
 
-Route::get('scan', function(){
-    return view('test');
-});
