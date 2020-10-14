@@ -37,7 +37,7 @@ class ActivityImport1 implements ToCollection, WithHeadingRow
                     
                 ]);
                
-            } 
+            }
             
         }
     }
