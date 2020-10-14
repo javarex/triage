@@ -122,7 +122,7 @@
                                         </a>
 
                                         <span id="first_nameData" class="text-warning">|</span>
-                                        <a class="" id="client_log" href="#" data-toggle="modal" data-target="#exampleModal" 
+                                        <a class="" id="client_log" href="#"  
                                         data-client_id="{{ $client->id }}"
                                         data-firstName="{{ $client->first_name }}"
                                         data-middleName="{{ $client->middle_name }}"
@@ -171,7 +171,7 @@
                                                 <div class="form-group row">
                                                     <input type="hidden" id="client_id" name="client_id">
                                                     <label for="first_name" class="col-md-12 px-0">First name</label>
-                                                    <input type="text" name="first_name" class="form-control" id="first_name" >
+                                                    <input type="text" name="first_name" class="form-control" id="firstName" >
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="middle_name" class="col-md-12 px-0">Middle name</label>
@@ -388,12 +388,7 @@
         });
         $('#example1').DataTable();
         
-        $(document).on('click','#client_view', function(){
-            
-
-            // var inputName = ["first_name","middle_name", "last_name"];
-            // var inputValues = ["data-firstName","data-middleName","data-lastName"];
-            
+        $(document).on('click','#client_view', function(){            
             
     
             var firstName = $(this).attr('data-firstName');
@@ -406,7 +401,7 @@
             var client_id = $(this).attr('data-client_id');
 
             $('#client_id').val(client_id);
-            $('#first_name').val(firstName);
+            $('#firstName').val(firstName);
             $('#middle_name').val(middleName);
             $('#last_name').val(lastName);
             $('#address').val(address);
