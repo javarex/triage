@@ -20,6 +20,9 @@ use Illuminate\Http\Response;
 
 class TriageController extends Controller
 {
+   
+    
+
     public function index()
     {
         

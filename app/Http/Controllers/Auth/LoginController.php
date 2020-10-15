@@ -61,7 +61,7 @@ class LoginController extends Controller
             }
             elseif($users_query->type == 'office')
             {
-                return redirect('/office');
+                return redirect('/officeLog');
             }
         
         }else{

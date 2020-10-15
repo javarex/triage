@@ -16,7 +16,11 @@ class CheckClient
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->type === 'admin' || Auth::user()->type === 'office') {
+        if(Auth::check()){
+            if (Auth::user()->type === 'admin' || Auth::user()->type === 'office') {
+                return redirect('/');
+            } 
+        }else{
             return redirect('/');
         }
         return $next($request);

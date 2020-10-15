@@ -13,11 +13,6 @@ class OfficeController extends Controller
     {
         $this->middleware('admin');
     }
-    public function index()
-    {
-        
-        return redirect('/officeLog');
-    }
 
     //for admin create office
     public function create()
