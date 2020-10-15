@@ -24,11 +24,10 @@ Route::get('/', function () {
     }
     return view('auth.login');
 });
-
 Route::get('/logout', function()
 {
     Auth::logout();
-    return redirect('/admin/login');
+    return redirect('/');
 });
 Auth::routes();
 
@@ -66,4 +65,4 @@ Route::post('/untag', 'TagController@untagUser');
 
 Route::get('export', 'AdminController@export')->name('export');
 Route::post('/import', 'AdminController@import');
-
+Route::resource('test', 'TestController');

@@ -96,6 +96,8 @@
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
     @yield('scripts')
 </body>
 </html>

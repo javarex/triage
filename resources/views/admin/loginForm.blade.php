@@ -7,6 +7,7 @@
             <div class="col-md-6 ">
                 <img src="{{ asset('image/triagez.png')}}" class="img-fluid" alt="">
             </div>
+            
             <div class="col-md-6 p-5">
                 <div class="">
                     <div class="font-weight-bold">

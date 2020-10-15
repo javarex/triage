@@ -47,6 +47,7 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
+        
         $users_query = User::where('username',$request->username)
                             ->where('status','<>',NULL)
                             ->first();
