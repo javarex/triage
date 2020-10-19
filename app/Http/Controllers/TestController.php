@@ -12,6 +12,6 @@ class TestController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->first_name);
+        dd($request->user_pic);
     }
 }
