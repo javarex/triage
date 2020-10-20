@@ -121,7 +121,7 @@
 @endsection
 @section('content')
 <div class="container-fluid px-1 py-5 mx-auto">
-    <form action="{{route('test.store')}}" autocomplete="off" method="post" runat="server">
+    <form action="{{route('test.store')}}" autocomplete="off" method="post" runat="server" id="registration_form">
         @csrf
         <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-9 col-md-10">
@@ -197,7 +197,7 @@
                                     
                                     <div class="col-md-3">
                                         <label for="birthday" class="font-weight-bold d-flex justify-content-left">*Birthday</label>
-                                        <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="middle_name" value="{{ old('birthday') }}"  placeholder="Date of birth" onblur="validate(4)">
+                                        <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}"  placeholder="Date of birth" onblur="validate(4)">
 
                                         @error('birthday')
                                             <span class="invalid-feedback" role="alert">
@@ -240,8 +240,17 @@
                         <h4 class="heading"><i class="fas fa-user-cog    "></i> SETTING UP YOUR ACCOUNT</h4>
                         <div class="row justify-content-center mb-4">
                             <div class="col-xl-7 col-lg-8 col-10 list text-left"> <label class="text-danger mb-3">* Required</label>
-                                <div class="form-group "> <label class="form-control-label">*Contact Number </label> <input type="text" id="contact_number" name="contact_number" placeholder="11-digits" class="form-control" onblur="validate2(6)"> </div>
-                                <div class="form-group "> <label class="form-control-label">*Email Address </label> <input type="text" id="email" name="email" placeholder="Message" class="form-control" onblur="validate2(7)"> </div>
+                                
+                                <div class="form-group "> 
+                                    <label class="form-control-label">*Contact Number </label> 
+                                    <input type="text" id="contact_number" name="contact_number" placeholder="11-digits" class="form-control" onblur="validate2(6)">
+                                </div>
+
+                                <div class="form-group "> 
+                                    <label class="form-control-label">*Email Address </label> 
+                                    <input type="text" id="email" name="email" placeholder="example@example.com" class="form-control" onblur="validate2(7)"> 
+                                </div>
+
                                 <div class="form-group "> <label class="form-control-label">*User type (Guest/Employee)</label>
                                     <select name="user_type" id="user_type" class="form-control" onblur="validate2(8)">
                                         <option value=""></option>
@@ -310,7 +319,7 @@
                             </div>
                         </div> 
                         <button type="button" class="btn btn-success rounded-0 mb-5 prev">Back</button> 
-                        <button type="button" id="next2" class="btn btn-success rounded-0 mb-5 next" onclick="validate2(0)">Next</button>
+                        <button type="button" id="next3" class="btn btn-success rounded-0 mb-5 next" onclick="validate2(0)">Next</button>
                     </div>
                 </div>
                 <div class="card b-0 rounded-0">
@@ -334,7 +343,7 @@
                         </div> 
                         
                         <button type="button" class="btn btn-success rounded-0 mb-5 prev">Back</button>
-                        <button id="next3" class="btn btn-success rounded-0 mb-5 next">Confirm</button>
+                        <button id="next4" class="btn btn-success rounded-0 mb-5 next">Confirm</button>
                     </div>
                 </div>
             </div>
@@ -506,10 +515,12 @@ $(document).ready(function(){
     var current_fs, next_fs, previous_fs;
     var val21 = false;
     var val22 = true;
+    var val23 = true;
     $(".next").click(function(){
         var str1 = "next1";
         var str2 = "next2";
         var str3 = "next3";
+        var str4 = "next4";
         
         
         if(!str1.localeCompare($(this).attr('id')) && $('#first_name').val() != "" && $('#last_name').val() != "" && $('#address').val() != "" && $('#birthday').val() != "" && $('#sex').val() != "") {
@@ -529,12 +540,23 @@ $(document).ready(function(){
                 val22 = false;
             }
         }
-        if(!str3.localeCompare($(this).attr('id'))){
-            console.log("success");
+
+        if ($(this).attr('id') == str3) {
+            if(!str3.localeCompare($(this).attr('id')) && $('#user_pic ').val() != "" && $('#user_id ').val() != "" && $('#user_with_id').val() != "") {
+                val21 = true;
+                val22 = true;
+                val23 = true;
+            }
+            else {
+                val22 = false;
+            }
         }
+        // if(!str3.localeCompare($(this).attr('id'))){
+        //     console.log("success");
+        // }
         console.log(val21);
         console.log(val22);
-        if((val21 == true && val22 == true) || !str3.localeCompare($(this).attr('id'))) {
+        if((val21 == true && val22 == true) || !str4.localeCompare($(this).attr('id'))) {
             current_fs = $(this).parent().parent();
             next_fs = $(this).parent().parent().next();
 
