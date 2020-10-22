@@ -433,15 +433,15 @@
             }
         }
 
-        if(val>=7 || val == 0){
-            if(v7.value == "") {
-                v7.style.borderColor = "red";
-                flag = false;
-            }else {
-                v7.style.borderColor = "green";
-                flag = true;
-            }
-        }
+        // if(val>=7 || val == 0){
+        //     if(v7.value == "") {
+        //         v7.style.borderColor = "red";
+        //         flag = false;
+        //     }else {
+        //         v7.style.borderColor = "green";
+        //         flag = true;
+        //     }
+        // }
 
         if(val>=8 || val == 0){
             if(v8.value == "") {
@@ -532,7 +532,7 @@ $(document).ready(function(){
         }
 
         if ($(this).attr('id') == str2) {
-            if(!str2.localeCompare($(this).attr('id')) && $('#contact_number').val() != "" && $('#email_address').val() != "" && $('#user_type').val() != "") {
+            if(!str2.localeCompare($(this).attr('id')) && $('#contact_number').val() != "" && $('#user_type').val() != "") {
                 val21 = true;
                 val22 = true;
             }

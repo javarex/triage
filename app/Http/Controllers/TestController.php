@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mail\EmailVerificationMail;
+use Illuminate\Support\Facades\Mail;
+
 
 class TestController extends Controller
 {
@@ -12,6 +15,6 @@ class TestController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->user_pic);
+        Mail::to('raymartnayreitanong11@gmail.com')->send(new EmailVerificationMail());
     }
 }

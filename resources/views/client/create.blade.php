@@ -7,7 +7,7 @@
             <div class="">
 
                 <div class="card-body font-weight-bold text-primary">
-                    <form method="POST" action="{{ route('client.store')}}" autocomplete="off" class="form1">
+                    <form method="POST" action="{{ route('client.store') }}" autocomplete="off" class="form1">
                         @csrf
 
                         @if($message = Session::get('delete'))
@@ -91,8 +91,16 @@
                             <label for="contact_number" class="col-md-4 col-form-label text-md-right">{{ __('Contact number')}}</label>
 
                             <div class="col-md-6">
-                            <input type="hidden" name="type" value="guest">
+             
                                 <input type="text" maxlength="11" name="contact_number" class="form-control @error('contact_number') is-invalid @enderror" value="{{ old('contact_number') }}" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email')}}</label>
+
+                            <div class="col-md-6">
+                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
                             </div>
                         </div>
 

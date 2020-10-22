@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 class ClientController extends Controller
 {
     
+    
     public function index()
     {
 
@@ -46,14 +47,15 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-        
         $this->Validate($request, [
             'first_name'=> 'required|regex:/^[a-z0-9 .\-]+$/i',
             'last_name' => 'required|regex:/^[a-z0-9 .\-]+$/i',
             'age'       => ['required', 'string', 'max:255'],
             'address'   => ['required', 'string', 'max:255'],
-        ]);
-
+            'email'     => ['email'],
+            ]);
+            
+       
         $code_generarated = $request->code;
         $users = User::where('username',$code_generarated)->first();
         
@@ -71,6 +73,9 @@ class ClientController extends Controller
             $request['address'] = ucwords($request->address);
             $request['status'] = '1';
             $user = User::create($request->all());
+            
+            $user->sendEmailVerificationNotification();
+            
             $request['user_id'] = $user->id;
             $client = Client::create($request->all());
             $userLogin = $user->where('id', $client->user_id)->first();

@@ -24,12 +24,14 @@ Route::get('/', function () {
     }
     return view('auth.login');
 });
+
+
 Route::get('/logout', function()
 {
     Auth::logout();
     return redirect('/');
 });
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
 Route::get('/admin/login', function(){
@@ -49,7 +51,7 @@ Route::post('/officeLog1','officeLogController@storeTriage');
 
 //Triage Routes
 
-Route::resource('triage', 'TriageController')->middleware('client');
+Route::resource('triage', 'TriageController')->middleware(['client' => 'verified']);
 
 Route::post('/officeLog/approveStatus/{id}', 'ActivityController@updateStatus');
 Route::get('/approveStatus/{id}', 'ActivityController@loadRecord');
