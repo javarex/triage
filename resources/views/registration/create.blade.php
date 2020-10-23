@@ -197,7 +197,7 @@
                                     
                                     <div class="col-md-3">
                                         <label for="birthday" class="font-weight-bold d-flex justify-content-left">*Birthday</label>
-                                        <input id="birthday" type="date" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}"  placeholder="Date of birth" onblur="validate(4)">
+                                        <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}"  placeholder="Date of birth" onblur="validate(4)">
 
                                         @error('birthday')
                                             <span class="invalid-feedback" role="alert">
@@ -311,7 +311,7 @@
                                     <div class="col-md-5">
                                         <img id="user_id_pic" src="#" alt="" class="img-fluid">
                                     </div>
-                                    <input type="file" id="user_id" name="user_pic_id" accept="image/*;capture=camera" class="form-control" style="display:none;" value="{{ old('user_id') }}"> 
+                                    <input type="file" id="user_pic_id" name="user_pic_id" accept="image/*;capture=camera" class="form-control" style="display:none;" value="{{ old('user_id') }}"> 
                                 </div> 
 
                                 <div class="form-group row"> 
@@ -536,7 +536,7 @@ $(document).ready(function(){
         readURL(this);
     });
 
-    $("#user_id").change(function(){
+    $("#user_pic_id").change(function(){
         readURL1(this);
     });
 
@@ -643,7 +643,7 @@ $(document).ready(function(){
         
     });
     $("#icon_id").click(function () {
-        $("#user_id").trigger('click');
+        $("#user_pic_id").trigger('click');
         
     });
     $("#icon_userWithID").click(function () {

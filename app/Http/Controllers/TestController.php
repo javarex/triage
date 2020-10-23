@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Mail\EmailVerificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 use App\Office;
 use App\User;
 use App\Client;
@@ -52,6 +53,8 @@ class TestController extends Controller
             Storage::makeDirectory($request->first_name.'_'.$request->last_name);
 
             $request->file('user_pic')->storeAs($request->first_name.'_'.$request->last_name, 'face.'.$ext);
+            $request->file('user_pic_id')->storeAs($request->first_name.'_'.$request->last_name, 'valid_id.'.$ext);
+            $request->file('user_with_id')->storeAs($request->first_name.'_'.$request->last_name, 'holding_id.'.$ext);
 
             $request['username'] = $request->code;
             $request['password'] = bcrypt('admin');
@@ -62,6 +65,7 @@ class TestController extends Controller
             $request['status'] = '1';
             $user = User::create($request->all());
             $request['user_id'] = $user->id;
+            $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
             
             $user->sendEmailVerificationNotification();
             
