@@ -121,7 +121,7 @@
 @endsection
 @section('content')
 <div class="container-fluid px-1 py-5 mx-auto">
-    <form action="{{route('test.store')}}" autocomplete="off" method="post" runat="server" id="registration_form">
+    <form action="{{route('registration.store')}}" autocomplete="off" method="post" runat="server" id="registration_form" enctype="multipart/form-data">
         @csrf
         <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-9 col-md-10">
@@ -197,7 +197,7 @@
                                     
                                     <div class="col-md-3">
                                         <label for="birthday" class="font-weight-bold d-flex justify-content-left">*Birthday</label>
-                                        <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}"  placeholder="Date of birth" onblur="validate(4)">
+                                        <input id="birthday" type="date" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}"  placeholder="Date of birth" onblur="validate(4)">
 
                                         @error('birthday')
                                             <span class="invalid-feedback" role="alert">
@@ -243,20 +243,29 @@
                                 
                                 <div class="form-group "> 
                                     <label class="form-control-label">*Contact Number </label> 
-                                    <input type="text" id="contact_number" name="contact_number" placeholder="11-digits" class="form-control" onblur="validate2(6)">
+                                    <input type="text" id="contact_number" name="contact_number" maxlength="11" placeholder="11-digits" class="form-control" onblur="validate2(6)" value="{{ old('contact_number') }}">
                                 </div>
 
                                 <div class="form-group "> 
                                     <label class="form-control-label">*Email Address </label> 
-                                    <input type="text" id="email" name="email" placeholder="example@example.com" class="form-control" onblur="validate2(7)"> 
+                                    <input type="text" id="email" name="email" placeholder="example@example.com" class="form-control" onblur="validate2(7)" value="{{ old('email') }}"> 
                                 </div>
 
                                 <div class="form-group "> <label class="form-control-label">*User type (Guest/Employee)</label>
-                                    <select name="user_type" id="user_type" class="form-control" onblur="validate2(8)">
+                                    <select name="type" id="user_type" class="form-control" onblur="validate2(8)">
                                         <option value=""></option>
                                         <option value="employee">Employee (Province of Davao de Oro)</option>
                                         <option value="guest">Guest</option>
                                     </select> 
+                                </div>
+
+                                <div class="form-group user_type_group"> <label class="form-control-label">*Select Office</label>
+                                    <select class="form-control" name="office_id" id="office">
+                                        <option value=""></option>
+                                        @foreach( $offices as $office )
+                                            <option value="{{ $office->id }}">{{ $office->name }}</option>
+                                        @endforeach
+                                </select>
                                 </div>
                                 
                             </div>
@@ -291,7 +300,7 @@
                                     <div class="col-md-5">
                                         <img id="user_face" src="#" alt="" class="img-fluid">
                                     </div>
-                                    <input type="file" id="user_pic" name="user_pic" accept="image/*;capture=camera" class="form-control" style="display:none;"> 
+                                    <input type="file" id="user_pic" name="user_pic" accept="image/*;capture=camera" class="form-control" style="display:none;" value="{{ old('user_pic') }}"> 
                                 </div> 
 
                                 <div class="form-group row"> 
@@ -302,7 +311,7 @@
                                     <div class="col-md-5">
                                         <img id="user_id_pic" src="#" alt="" class="img-fluid">
                                     </div>
-                                    <input type="file" id="user_id" name="user_id" accept="image/*;capture=camera" class="form-control" style="display:none;"> 
+                                    <input type="file" id="user_id" name="user_pic_id" accept="image/*;capture=camera" class="form-control" style="display:none;" value="{{ old('user_id') }}"> 
                                 </div> 
 
                                 <div class="form-group row"> 
@@ -313,7 +322,7 @@
                                     <div class="col-md-5">
                                         <img id="user_with_id_pic" src="#" alt="" class="img-fluid">
                                     </div>
-                                    <input type="file" id="user_with_id" name="user_with_id" accept="image/*;capture=camera" class="form-control" style="display:none;"> 
+                                    <input type="file" id="user_with_id" name="user_with_id" accept="image/*;capture=camera" class="form-control" style="display:none;" value="{{ old('user_with_id') }}"> 
                                 </div> 
 
                             </div>
@@ -336,6 +345,15 @@
                     </div>
                     <div class="p-3 justify-content-center text-center">
                         <h4 class="heading">Registration Summary</h4>
+                        <div class="form-group row"> 
+                            <label class="form-control-label col-md-12">Triage Code </label> 
+                            <div class="pl-5 col-md-3">
+                                <h2 class="font-weight-bold">{{ $code }}</h2>
+                            </div>
+                            <input type="hidden" class="form-control" value="{{ $code }}" name="code">
+                        </div> 
+
+
                         <div class="row d-flex justify-content-center">
                             <div class="mb-4">
                                 <h6 class="confirm">Verify all entered details and press confirm</h6>
@@ -458,6 +476,26 @@
 
 
 $(document).ready(function(){
+
+    // for userType office
+
+    $('.user_type_group').hide();
+
+    $('#user_type').change(function()
+    {
+        if($(this).val() == 'employee')
+        {
+            $('.user_type_group').fadeIn(600);
+            $('#office').attr('required', true);
+
+        }else{
+            $('.user_type_group').fadeOut(600);
+            $('#office').removeAttr('required');
+            $('#office').val('');
+        }
+        return false;
+    });
+
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();

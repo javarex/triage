@@ -26,11 +26,8 @@ Route::get('/', function () {
 });
 
 
-Route::get('/logout', function()
-{
-    Auth::logout();
-    return redirect('/');
-});
+Route::get('/logout', 'LogoutController@logout_user');
+
 Auth::routes(['verify' => true]);
 
 
@@ -67,4 +64,4 @@ Route::post('/untag', 'TagController@untagUser');
 
 Route::get('export', 'AdminController@export')->name('export');
 Route::post('/import', 'AdminController@import');
-Route::resource('test', 'TestController');
+Route::resource('registration', 'TestController');

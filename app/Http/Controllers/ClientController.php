@@ -47,6 +47,7 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
+        
         $this->Validate($request, [
             'first_name'=> 'required|regex:/^[a-z0-9 .\-]+$/i',
             'last_name' => 'required|regex:/^[a-z0-9 .\-]+$/i',

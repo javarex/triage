@@ -56,6 +56,7 @@ class LoginController extends Controller
 
         if(!(is_null($users_query)))
         {
+            
             if($users_query->type == 'admin')
             {
                 return redirect('/admin');
@@ -70,5 +71,6 @@ class LoginController extends Controller
            
         }
     }
+    
 
 }

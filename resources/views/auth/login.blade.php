@@ -40,7 +40,7 @@
                                     {{ __('Login as office') }}
                                 </a>
                                 <span class="mx-2"> | </span>
-                                <a class="text-right" href="{{ route('client.create') }}">
+                                <a class="text-right" href="{{ route('registration.create') }}">
                                     {{ __('Register') }}
                                 </a>
                                 @endif
