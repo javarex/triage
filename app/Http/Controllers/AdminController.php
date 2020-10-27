@@ -69,7 +69,7 @@ class AdminController extends Controller
         ]);
 
         Excel::import(new EmployeesImport, $request->file('file'));
-        
+        set_time_limit(3000);
         return back()->with('success_import','All is well!');
     }
 }
