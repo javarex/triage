@@ -77,7 +77,7 @@
                        
                     </div>
                    <div class="">
-                        <table id="example" class="table table-primary table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
+                        <table id="example" class="table bg-primary table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
                             <thead class="">
                                 <tr>
                                     <th>Triage Code</th>
@@ -91,7 +91,8 @@
                             <tbody>
                             @foreach($clients as $client)
                                 @if($client->user['type'] != 'admin')
-                                    @if($client->user->tag != 0)
+                                    @if($client->user['tag'] != 0)
+                                
                                     <tr class="table table-danger">
                                     @else
                                     <tr>
@@ -108,6 +109,7 @@
                                         @endif
                        
                                     </td>
+                                    
                                     <td width="10%">
                                         <a class="" id="client_view" href="#" data-toggle="modal" data-target="#exampleModal" 
                                         data-client_id="{{ $client->id }}"
@@ -120,7 +122,7 @@
                                         data-contactNumber="{{ $client->contact_number }}" title="View or edit details">
                                             <i class="fas fa-user-edit    "></i>
                                         </a>
-
+                                        
                                         <span id="first_nameData" class="text-warning">|</span>
                                         <a class="" id="client_log" href="#"  
                                         data-client_id="{{ $client->id }}"
@@ -134,8 +136,8 @@
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                         <span id="first_nameData" ></span>
-                                      
-                                        @if($client->user->tag != 0)
+                                        @if($client->user['tag'] != 0)
+                                        
                                         <span class="text-info">|</span>
                                         <a href="#" title="Untag this user" id="untag" 
                                             data-userId="{{ $client->user->id }}" 
@@ -150,6 +152,7 @@
                                 @endif
 
                             @endforeach
+                            
                             </tbody>
                         </table>
                         <!-- modal edit -->

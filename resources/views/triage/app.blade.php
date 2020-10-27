@@ -62,8 +62,11 @@
                             
                                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#profile"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
 
-                                <a class="dropdown-item" href="/logout"
-                                 >
+                                <a class="dropdown-item" href="{{ route('client.edit', Auth::user()->id ) }}">
+                                    <i class="fas fa-pen-alt    "></i> {{ __('Edit')}}
+                                </a>
+
+                                <a class="dropdown-item" href="/logout">
 
                                     <i class="fa fa-power-off" aria-hidden="true"></i> {{ __('Logout') }}
                                 </a>

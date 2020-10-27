@@ -28,7 +28,11 @@ Route::get('/', function () {
 
 Route::get('/logout', 'LogoutController@logout_user');
 
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true], function (){
+    if (is_null(Auth::user()->email)) {
+        return redirect('/triage');
+    }
+});
 
 
 Route::get('/admin/login', function(){
@@ -37,13 +41,13 @@ Route::get('/admin/login', function(){
 Route::resource('/admin', 'AdminController')->middleware('admin');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/client/create','ClientController@create')->name('client.create');
-Route::post('/client','ClientController@store')->name('client.store');
+
+Route::resource('client','ClientController');
 
 Route::resource('office','OfficeController');
 Route::post('/office/clientLog', 'OfficeController@clientLog');
 
-Route::resource('officeLog', 'officeLogController')->middleware('office');
+Route::resource('officeLog', 'officeLogController')->middleware(['office' => 'verified']);
 Route::post('/officeLog1','officeLogController@storeTriage');
 
 //Triage Routes

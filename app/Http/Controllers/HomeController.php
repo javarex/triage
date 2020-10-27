@@ -27,7 +27,8 @@ class HomeController extends Controller
         if($user_type == 'admin')
         {
             return redirect('/admin');
+        }elseif($user_type == 'office'){
+            return redirect('/officeLog');
         }
-        return view('home');
     }
 }

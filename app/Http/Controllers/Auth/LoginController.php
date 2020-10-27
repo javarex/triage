@@ -52,7 +52,7 @@ class LoginController extends Controller
                             ->where('status','<>',NULL)
                             ->first();
        
-        $userId = Auth::id();
+        // $userId = Auth::user()->id;
 
         if(!(is_null($users_query)))
         {
@@ -65,7 +65,6 @@ class LoginController extends Controller
             {
                 return redirect('/officeLog');
             }
-        
         }else{
             return redirect('/logout');
            

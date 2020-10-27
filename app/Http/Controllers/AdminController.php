@@ -8,6 +8,7 @@ use App\Office;
 use App\Exports\ActivitiesExport;
 use App\Imports\ActivitiesImport;
 use App\Imports\ActivityImport1;
+use App\Imports\EmployeesImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -23,8 +24,8 @@ class AdminController extends Controller
     public function index()
     {
         
-        
         $user_id = Auth::user()->id;
+        
         $clients = Client::with('user','office')
                         ->orderBy('first_name', 'asc')
                         ->get();
@@ -40,7 +41,7 @@ class AdminController extends Controller
         $client->update($request->all());
         $user = User::findOrFail($client->user_id);
         $user->update($request->all());
-        return redirect('admin')->with('success_update',$client->first_name.' '.$client->last_name.' Saved changes!');
+        return redirect('admin')->with('success_update',$client->first_name.' '.$client->last_name.' information successfully changed!');
     }
 
     public function update(Request $request, $id)
@@ -66,8 +67,8 @@ class AdminController extends Controller
         $this->validate($request,[
             'file'  =>  'required|mimes:xlsx,csv,txt'
         ]);
-        
-        Excel::import(new ActivityImport1, $request->file('file'));
+
+        Excel::import(new EmployeesImport, $request->file('file'));
         
         return back()->with('success_import','All is well!');
     }
