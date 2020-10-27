@@ -47,12 +47,12 @@ Route::resource('client','ClientController');
 Route::resource('office','OfficeController');
 Route::post('/office/clientLog', 'OfficeController@clientLog');
 
-Route::resource('officeLog', 'officeLogController')->middleware(['office' => 'verified']);
+Route::resource('officeLog', 'officeLogController')->middleware('office');
 Route::post('/officeLog1','officeLogController@storeTriage');
 
 //Triage Routes
 
-Route::resource('triage', 'TriageController')->middleware(['client' => 'verified']);
+Route::resource('triage', 'TriageController')->middleware('client');
 
 Route::post('/officeLog/approveStatus/{id}', 'ActivityController@updateStatus');
 Route::get('/approveStatus/{id}', 'ActivityController@loadRecord');

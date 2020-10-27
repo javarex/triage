@@ -37,6 +37,9 @@
                     </div>
                 </div>
                 @endif
+                
+                <!-- Start modal for import -->
+
                 <div class="modal fade" id="modal_import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -59,11 +62,20 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- End modal for import -->
                 <div class="header pt-2">
-                    <div class="col-md-4 px-0">
-                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal_import"><i class="fas fa-file-import    "></i> Import</button>
-                        <a class="btn btn-warning btn-sm" href="{{ route('export') }}"><i class="fas fa-file-export    "></i> Export</a>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal_import"><i class="fas fa-file-import    "></i> Import</button>
+                            <a class="btn btn-warning btn-sm" href="{{ route('export') }}"><i class="fas fa-file-export    "></i> Export</a>
+                        </div>
+                        
+                        <div class="col-md-8 d-flex justify-content-end">
+                            <a href="" class="btn btn-warning btn-sm"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Temporary verify</a>
+                        </div>
                     </div>
+
                     <h1>Employee and Guest users</h1>
                 </div>
                 <div class="alert alert-success" id="untag_alert">
