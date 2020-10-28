@@ -25,7 +25,7 @@ class AdminController extends Controller
     {
         
         $user_id = Auth::user()->id;
-        
+        dd($user_id);
         $clients = Client::with('user','office')
                         ->orderBy('first_name', 'asc')
                         ->get();
@@ -68,7 +68,7 @@ class AdminController extends Controller
             'file'  =>  'required|mimes:xlsx,csv,txt'
         ]);
 
-        Excel::import(new EmployeesImport, $request->file('file'));
+        Excel::import(new ActivityImport1, $request->file('file'));
         return back()->with('success_import','All is well!');
     }
 }
