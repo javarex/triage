@@ -25,7 +25,6 @@ class AdminController extends Controller
     {
         
         $user_id = Auth::user()->id;
-        dd($user_id);
         $clients = Client::with('user','office')
                         ->orderBy('first_name', 'asc')
                         ->get();
