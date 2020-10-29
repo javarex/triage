@@ -67,7 +67,7 @@ class AdminController extends Controller
             'file'  =>  'required|mimes:xlsx,csv,txt'
         ]);
 
-        Excel::import(new ActivityImport1, $request->file('file'));
+        Excel::import(new EmployeesImport, $request->file('file'));
         return back()->with('success_import','All is well!');
     }
 }
