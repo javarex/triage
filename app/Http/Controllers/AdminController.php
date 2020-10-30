@@ -25,13 +25,11 @@ class AdminController extends Controller
     {
         
         $user_id = Auth::user()->id;
-        $clients = Client::with('user','office')
+        $clients = User::with('office')
+                        ->where('role','<>',0)
                         ->orderBy('first_name', 'asc')
                         ->get();
-        $offices = User::with('office')
-                        ->where('type','office')
-                        ->get();
-        return view('admin.index', compact('clients','offices'));
+        return view('admin.index', compact('clients'));
     }
 
     public function updateClient(Request $request)

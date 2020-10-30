@@ -88,6 +88,7 @@
                         <tbody>
                     
                         @foreach($client_logs as $client)
+                        {{ dd( $client_logs )}}
                             @if($client->tag_id != 0)
                             
                             <tr class="bg-danger">

@@ -140,6 +140,19 @@
                     <div class="p-3 text-center">
                         <h4 class="heading"></h4>
                         <div class="row d-flex justify-content-center">
+                        <div class="col-md-12 ">
+                            <div class="container">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul class="list-group">
+                                        @foreach ($errors->all() as $error)
+                                            <li class="list-group-item">{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            </div>
+                        </div>
                         <h4 class="heading"><i class="fa fa-info-circle" aria-hidden="true"></i> PERSONAL INFORMATION</h4>
                             <div class="col-md-12 ">
                                 <div class="row">
@@ -160,7 +173,7 @@
                                     </div>
                                     
                                     <div class="col-md-3">
-                                        <label for="first_name" class="font-weight-bold d-flex justify-content-left">Middle Name</label>
+                                        <label for="middle_name" class="font-weight-bold d-flex justify-content-left">Middle Name</label>
                                         <input id="middle_name" type="text" class="form-control @error('middle_name') is-invalid @enderror" name="middle_name" value="{{ old('middle_name') }}"  placeholder="Enter Middle Name">
 
                                         @error('middle_name')
@@ -171,7 +184,7 @@
                                     </div>
                                     
                                     <div class="col-md-3">
-                                        <label for="first_name" class="font-weight-bold d-flex justify-content-left">*Last Name</label>
+                                        <label for="last_name" class="font-weight-bold d-flex justify-content-left">*Last Name</label>
                                         <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}"  placeholder="Enter Last Name" onblur="validate(2)" >
 
                                         @error('last_name')
@@ -244,18 +257,28 @@
                                 <div class="form-group "> 
                                     <label class="form-control-label">*Contact Number </label> 
                                     <input type="text" id="contact_number" name="contact_number" maxlength="11" placeholder="11-digits" class="form-control" onblur="validate2(6)" value="{{ old('contact_number') }}">
+                                    <div class="text-danger">
+                                        @error('contact_number')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
                                 </div>
 
                                 <div class="form-group "> 
                                     <label class="form-control-label">*Email Address </label> 
                                     <input type="text" id="email" name="email" placeholder="example@example.com" class="form-control" onblur="validate2(7)" value="{{ old('email') }}"> 
+                                    <div class="text-danger">
+                                        @error('email')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
                                 </div>
 
                                 <div class="form-group "> <label class="form-control-label">*User type (Guest/Employee)</label>
-                                    <select name="type" id="user_type" class="form-control" onblur="validate2(8)">
+                                    <select name="role" id="user_type" class="form-control" onblur="validate2(8)" required>
                                         <option value=""></option>
-                                        <option value="employee">Employee (Province of Davao de Oro)</option>
-                                        <option value="guest">Guest</option>
+                                        <option value="1">Employee (Province of Davao de Oro)</option>
+                                        <option value="2">Guest</option>
                                     </select> 
                                 </div>
 
@@ -483,7 +506,7 @@ $(document).ready(function(){
 
     $('#user_type').change(function()
     {
-        if($(this).val() == 'employee')
+        if($(this).val() == '1')
         {
             $('.user_type_group').fadeIn(600);
             $('#office').attr('required', true);

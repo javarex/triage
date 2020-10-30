@@ -51,17 +51,17 @@ class LoginController extends Controller
         $users_query = User::where('username',$request->username)
                             ->where('status','<>',NULL)
                             ->first();
-       
+      
         // $userId = Auth::user()->id;
 
         if(!(is_null($users_query)))
         {
             
-            if($users_query->type == 'admin')
+            if($users_query->role == 0)
             {
                 return redirect('/admin');
             }
-            elseif($users_query->type == 'office')
+            elseif($users_query->role == 3)
             {
                 return redirect('/officeLog');
             }

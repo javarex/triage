@@ -24,7 +24,7 @@ class TestController extends Controller
         
         $digits = sprintf('%02d',mt_rand(01, 99));
         $leters = substr(str_shuffle($alphaList),0,2);
-        $code = $leters.$digits;
+        $code = 'DDO_'.$leters.$digits;
 
         $flag = false;
 
@@ -32,20 +32,22 @@ class TestController extends Controller
         return view('registration.create', compact('offices','code'));
     }
     public function store(Request $request)
-    {
+    {  
         $this->Validate($request, [
             'first_name'=> 'required|regex:/^[a-z0-9 .\-]+$/i',
             'last_name' => 'required|regex:/^[a-z0-9 .\-]+$/i',
-            'address'   => ['required', 'string', 'max:255'],
+            'address'   => 'required',
             'email'     => ['email'],
+            'contact_number'     => 'required|regex:/(09)[0-9]{9}/',
             ]);
             
         $code_generarated = $request->code;
         $users = User::where('username',$code_generarated)->first();
-        
-        $userDuplication = Client::where('first_name', $request->first_name)
-        ->where('last_name', $request->last_name)
-        ->first();
+            
+        $userDuplication = User::where('first_name', $request->first_name)
+                                ->where('last_name', $request->last_name)
+                                ->where('username',$code_generarated)
+                                ->first();
         if(is_null($users) && is_null($userDuplication))
         {
             $ext = $request->user_pic->getClientOriginalExtension();
@@ -63,14 +65,13 @@ class TestController extends Controller
             $request['last_name'] = ucwords($request->last_name);
             $request['address'] = ucwords($request->address);
             $request['status'] = '1';
-            $user = User::create($request->all());
-            $request['user_id'] = $user->id;
+            $request['tag'] = '0';
             $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
+            $user = User::create($request->all());
             
-            $user->sendEmailVerificationNotification();
             
-            $client = Client::create($request->all());
-            $userLogin = $user->where('id', $client->user_id)->first();
+            
+            $userLogin = $user->where('id', $user->id)->first();
             $authUser = Auth::user();
             if(is_null($authUser)){
                 Auth::login($userLogin);

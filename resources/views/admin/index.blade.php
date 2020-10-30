@@ -102,14 +102,14 @@
                        
                             <tbody>
                             @foreach($clients as $client)
-                                @if($client->user['type'] != 'admin')
-                                    @if($client->user['tag'] != 0)
+                                @if($client->role == 1 || $client->role == 2)
+                                    @if($client->tag != 0)
                                 
                                     <tr class="table table-danger">
                                     @else
                                     <tr>
                                     @endif
-                                    <td>{{ $client->user['username'] }}</td>
+                                    <td>{{ $client->username }}</td>
                                     <td>{{ $client->first_name.' '.$client->last_name }}</td>
                                     <td>
                                         @if(is_null($client->office['name'] ))
@@ -148,7 +148,7 @@
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                         <span id="first_nameData" ></span>
-                                        @if($client->user['tag'] != 0)
+                                        @if($client->tag != 0)
                                         
                                         <span class="text-info">|</span>
                                         <a href="#" title="Untag this user" id="untag" 
@@ -268,9 +268,11 @@
                             </thead>
                         
                             <tbody>
-                            @foreach($offices as $office)
+                            @foreach($clients as $office)
+
+                                @if($office->role == 3)
                                 <tr>
-                                    <td >{{ $office->office['name'] }}</td>
+                                    <td >{{ $office->first_name }}</td>
                                     <td width="30%" class="text-center">{{ $office->username }}</td>
                                     @if( is_null($office->status))
                                         <td width="30">
@@ -296,6 +298,7 @@
                                         </a>
                                     </td>
                                 </tr>
+                                @endif
                             @endforeach
                             </tbody>
                         </table>

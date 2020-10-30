@@ -18,7 +18,7 @@ class CheckAdmin
     {
         if(Auth::check())
         {
-            if (Auth::user()->type !== 'admin') {
+            if (Auth::user()->role !== 0) {
                 return redirect('/');
             }
         }else{

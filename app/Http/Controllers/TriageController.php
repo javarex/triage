@@ -27,20 +27,21 @@ class TriageController extends Controller
     {
    
         $user_id = Auth::user()->id;
-        $client_id = Client::where('user_id',$user_id)
+        $client_id = User::where('id',$user_id)
                             ->first();
  
         $client_logs = Activity::with('client','office')
-                                ->where('client_id',$client_id->id)
+                                ->where('client_id',$user_id)
                                 ->orderBy('created_at', 'desc')
                                 ->get();
+  
         return view('triage.index', compact('client_logs','client_id'));
     }
 
     public function create()
     {  
         $user_id = Auth::user()->id;
-        $client_id = Client::where('user_id',$user_id)
+        $client_id = User::where('id',$user_id)
                             ->first();
         $questions = Criteria::all();
         $triage = Triage_form::all();

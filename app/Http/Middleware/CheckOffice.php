@@ -18,7 +18,7 @@ class CheckOffice
     {
         if(Auth::check())
         {
-            if (Auth::user()->type !== 'office') {
+            if (Auth::user()->type !== 3) {
                 return redirect('/');
             }
         }else{
