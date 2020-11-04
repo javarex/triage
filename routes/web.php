@@ -73,3 +73,7 @@ Route::resource('registration', 'TestController');
 //check duplication
 
 Route::post('/checkDuplication', 'TestController@checkName');
+
+//validate name for registration
+Route::post('/validateInputs', 'TestController@validateNames');
+
