@@ -163,7 +163,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-1 mr-4"></div>
                                     <div class="col-md-3">
-                                        <label for="first_name" class="font-weight-bold d-flex justify-content-left">*First Name</label>
+                                        <label for="first_name" class="font-weight-bold d-flex justify-content-left"><small class="text-danger">*</small> Name</label>
                                         <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}"  placeholder="Enter First Name" onblur="validate(1)">
 
                                         @error('first_name')
