@@ -397,12 +397,31 @@
 @section('scripts')
 <script>
 
+    var flagForNameDuplicate = false;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
+    function check_name(first_name, last_name)
+    {
+        $.ajax({
+            url : '/checkDuplication',
+            type: 'post',
+            data : {
+                token: '{{  csrf_token() }}',
+                first_name: first_name,
+                last_name: last_name,
+            },
+            success: function(data){
+                if(data == "success"){
+                    flagForNameDuplicate = true;
+                }else{
+                    flagForNameDuplicate = false;
+                }
+            }
+        })
+    }
     function validate(val) {
         var v1 = document.getElementById("first_name");
         var v2 = document.getElementById("last_name");
@@ -593,7 +612,12 @@ $(document).ready(function(){
         
         
         if(!str1.localeCompare($(this).attr('id')) && $('#first_name').val() != "" && $('#last_name').val() != "" && $('#address').val() != "" && $('#birthday').val() != "" && $('#sex').val() != "") {
-            val21 = true;
+            check_name($('#first_name').val(), $('#last_name').val());
+            if(flagForNameDuplicate){
+                val21 = true;
+            }else{
+                val21 = false;
+            }
             
         }
         else {
