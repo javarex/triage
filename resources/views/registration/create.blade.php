@@ -152,6 +152,7 @@
                                 </div>
                             @endif
                             </div>
+                            
                         </div>
                         <h4 class="heading"><i class="fa fa-info-circle" aria-hidden="true"></i> PERSONAL INFORMATION</h4>
                             <div class="col-md-12 ">
@@ -395,6 +396,13 @@
 
 @section('scripts')
 <script>
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     function validate(val) {
         var v1 = document.getElementById("first_name");
         var v2 = document.getElementById("last_name");

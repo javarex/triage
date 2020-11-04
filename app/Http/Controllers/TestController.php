@@ -37,7 +37,6 @@ class TestController extends Controller
             'first_name'=> 'required|regex:/^[a-z0-9 .\-]+$/i',
             'last_name' => 'required|regex:/^[a-z0-9 .\-]+$/i',
             'address'   => 'required',
-            'email'     => ['email'],
             'contact_number'     => 'required|regex:/(09)[0-9]{9}/',
             ]);
             
@@ -46,7 +45,6 @@ class TestController extends Controller
             
         $userDuplication = User::where('first_name', $request->first_name)
                                 ->where('last_name', $request->last_name)
-                                ->where('username',$code_generarated)
                                 ->first();
         if(is_null($users) && is_null($userDuplication))
         {
@@ -82,10 +80,12 @@ class TestController extends Controller
             
 
         }elseif (!(is_null($userDuplication))) {
-            return back()->with('delete','Information already exist!')
+            return back()->withErrors(['existErr','Information already exist!'])
                         ->withInput();
         }elseif (!(is_null($users))) {
-            return back()->with('delete','This code is already used');
+            return back()->withErrors(['codeErr','This code is already used']);
         }
     }
+
+  
 }

@@ -206,13 +206,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group row">
-                                                    <div class="col-md-4 px-0">
-                                                        <div class="row container">
-                                                            <label for="age" class="col-md-12 px-0">Age</label>
-                                                            <input type="text" name="age" class="form-control" id="age" >
-                                                        </div>
-                                                    </div>
+                                                <daiv class="form-group row">
                                                     <div class="col-md-4 px-0 ">
                                                         <div class="row container">
                                                             <label for="sex" class="col-md-12 px-0">Sex</label>
@@ -225,7 +219,7 @@
                                                             <input type="text" name="contact_number" class="form-control" id="contact_number" >
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </daiv>
                                             </div>
                                         </div>
                                         <div class="modal-footer">

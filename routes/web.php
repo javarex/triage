@@ -69,3 +69,7 @@ Route::post('/untag', 'TagController@untagUser');
 Route::get('export', 'AdminController@export')->name('export');
 Route::post('/import', 'AdminController@import');
 Route::resource('registration', 'TestController');
+
+//check duplication
+
+Route::post('/checkDuplication', 'TestController@checkName');

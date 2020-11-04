@@ -34,11 +34,9 @@ class AdminController extends Controller
 
     public function updateClient(Request $request)
     {
-        $client = Client::findOrFail($request->client_id);
-        $client->update($request->all());
-        $user = User::findOrFail($client->user_id);
+        $user = User::findOrFail($request->client_id);
         $user->update($request->all());
-        return redirect('admin')->with('success_update',$client->first_name.' '.$client->last_name.' information successfully changed!');
+        return redirect('admin')->with('success_update',$user->first_name.' '.$user->last_name.' information successfully changed!');
     }
 
     public function update(Request $request, $id)
