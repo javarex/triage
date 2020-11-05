@@ -398,11 +398,13 @@
 <script>
 
     var flagForNameDuplicate = false;
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
     function check_name(first_name, last_name)
     {
         $.ajax({
@@ -414,7 +416,7 @@
                 last_name: last_name,
             },
             success: function(data){
-                if(data == "success"){
+                if( data.length != 0 ){
                     flagForNameDuplicate = true;
                 }else{
                     flagForNameDuplicate = false;

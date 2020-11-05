@@ -89,14 +89,9 @@ class TestController extends Controller
 
     public function checkName(Request $request)
     {
-        $names = User::where('first_name', $request->first_name)
+        return User::where('first_name', $request->first_name)
                     ->where('last_name', $request->last_name)
                     ->first();
                     
-        if(!empty($names)){
-            return true;
-        }else{
-            return false;
-        }
     }
 }
