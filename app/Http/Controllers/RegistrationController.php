@@ -38,7 +38,7 @@ class RegistrationController extends Controller
             'first_name'=> 'required|regex:/^[a-z0-9 .\-]+$/i',
             'last_name' => 'required|regex:/^[a-z0-9 .\-]+$/i',
             'address'   => 'required',
-            'contact_number'     => 'required|regex:/(09)[0-9]{9}/',
+            
             ]);
             
         $code_generarated = $request->code;
@@ -98,13 +98,37 @@ class RegistrationController extends Controller
 
     public function validateNames(Request $request)
     {
-       
+
         $validator = $request->validate([
             'first_name'=> 'required|alpha',
             'last_name'=> 'required|alpha',
             'address'=> 'required',
             'birthday'=> 'required',
             'sex'=> 'required',
+        ]);
+ 
+
+        if(!$validator){
+            return Response::json([
+                'success' => false,
+                'errors' => $validator
+        
+            ], 400); // 400 being the HTTP code for an invalid request.
+        }else{
+            return Response::json(['success' => true], 200);
+        }
+        
+
+       
+    }
+
+    public function validateStep2(Request $request)
+    {
+       
+ 
+        $validator = $request->validate([
+            'contact_number'     => 'required|regex:/(09)[0-9]{9}/',
+            'email'=> 'email',
         ]);
 
         if(!$validator){

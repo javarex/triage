@@ -76,4 +76,5 @@ Route::post('/checkDuplication', 'RegistrationController@checkName');
 
 //validate name for registration
 Route::post('/validateInputs', 'RegistrationController@validateNames');
+Route::post('/validateInputs2', 'RegistrationController@validateStep2');
 
