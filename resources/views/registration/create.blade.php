@@ -558,7 +558,7 @@ $(document).ready(function(){
                 });
                 $('#errorItems').html(output);
 
-            }
+            },
         })
     }
 
@@ -644,7 +644,6 @@ $(document).ready(function(){
         var str2 = "next2";
         var str3 = "next3";
         var str4 = "next4";
-        console.log("kini"+flagForNameDuplicate);
         validateNames($('#first_name').val(),$('#last_name').val());
         if(!str1.localeCompare($(this).attr('id')) && $('#first_name').val() != "" && $('#last_name').val() != "" && $('#address').val() != "" && $('#birthday').val() != "" && $('#sex').val() != "" && flagForNameDuplicate) {
                 val21 = true;    
@@ -676,8 +675,6 @@ $(document).ready(function(){
         // if(!str3.localeCompare($(this).attr('id'))){
         //     console.log("success");
         // }
-        console.log(val21);
-        console.log(val22);
         if((val21 == true && val22 == true) || !str4.localeCompare($(this).attr('id'))) {
             current_fs = $(this).parent().parent();
             next_fs = $(this).parent().parent().next();
