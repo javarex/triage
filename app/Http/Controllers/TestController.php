@@ -7,6 +7,7 @@ use App\Mail\EmailVerificationMail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 use Carbon\Carbon;
 use App\Office;
 use App\User;
@@ -105,15 +106,13 @@ class TestController extends Controller
         ]);
 
         if($validator->fails()){
-            return Response::json(array(
+            return Response::json([
                 'success' => false,
                 'errors' => $validator->getMessageBag()->toArray()
         
-            ), 400); // 400 being the HTTP code for an invalid request.
-        }else{
-
-            return Response::json(array('success' => true), 200);
+            ], 400); // 400 being the HTTP code for an invalid request.
         }
+        return Response::json(['success' => true], 200);
 
        
     }

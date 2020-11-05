@@ -539,8 +539,9 @@ $(document).ready(function(){
                 first_name:first_name,
                 last_name:last_name,
                 },
+            dataType: 'json',
             success: function(data){
-                alert('sadfsdf');
+                alert(data.success);
             },
             error: function(xhr, status, error){
                 var element = document.getElementById("errorsAlert");
