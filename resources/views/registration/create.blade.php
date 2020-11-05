@@ -649,6 +649,7 @@ $(document).ready(function(){
         var str2 = "next2";
         var str3 = "next3";
         var str4 = "next4";
+        console.log("kini"+flagForNameDuplicate);
         validateNames($('#first_name').val(),$('#last_name').val());
         if(!str1.localeCompare($(this).attr('id')) && $('#first_name').val() != "" && $('#last_name').val() != "" && $('#address').val() != "" && $('#birthday').val() != "" && $('#sex').val() != "" && flagForNameDuplicate) {
                 val21 = true;    
