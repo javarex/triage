@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\EmailVerificationMail;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 use Carbon\Carbon;
 use App\Office;
 use App\User;
@@ -91,7 +93,27 @@ class TestController extends Controller
     {
         return User::where('first_name', $request->first_name)
                     ->where('last_name', $request->last_name)
-                    ->first();
-                    
+                    ->first();     
+        
+    }
+
+    public function validateNames(Request $request)
+    {
+       
+        $validator = $this->Validate($request,[
+            'first_name'=> 'alpha',
+            'last_name'=> 'alpha',
+        ]);
+
+        if($validator->fails()){
+            return Response::json([
+                'success' => false,
+                'errors' => $validator->getMessageBag()->toArray()
+        
+            ], 400); // 400 being the HTTP code for an invalid request.
+        }
+        return Response::json(['success' => true], 200);
+
+       
     }
 }

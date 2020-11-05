@@ -142,15 +142,11 @@
                         <div class="row d-flex justify-content-center">
                         <div class="col-md-12 ">
                             <div class="container">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
+                                <div id="errorsAlert">
                                     <ul class="list-group">
-                                        @foreach ($errors->all() as $error)
-                                            <li class="list-group-item">{{ $error }}</li>
-                                        @endforeach
+                                        <li id="errorItems"></li>
                                     </ul>
                                 </div>
-                            @endif
                             </div>
                             
                         </div>
@@ -163,7 +159,11 @@
                                 <div class="form-group row">
                                     <div class="col-md-1 mr-4"></div>
                                     <div class="col-md-3">
+<<<<<<< HEAD
                                         <label for="first_name" class="font-weight-bold d-flex justify-content-left"><small class="text-danger">*</small> Name</label>
+=======
+                                        <label for="first_name" class="font-weight-bold d-flex justify-content-left"><small class="text-danger">*</small>First Name</label>
+>>>>>>> 77f36bc2346deee91269de706cb504f49ac2afad
                                         <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}"  placeholder="Enter First Name" onblur="validate(1)">
 
                                         @error('first_name')
@@ -185,7 +185,7 @@
                                     </div>
                                     
                                     <div class="col-md-3">
-                                        <label for="last_name" class="font-weight-bold d-flex justify-content-left">*Last Name</label>
+                                        <label for="last_name" class="font-weight-bold d-flex justify-content-left"><small class="text-danger">*</small>Last Name</label>
                                         <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}"  placeholder="Enter Last Name" onblur="validate(2)" >
 
                                         @error('last_name')
@@ -199,7 +199,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-1 mr-4"></div>
                                     <div class="col-md-3">
-                                        <label for="address" class="font-weight-bold d-flex justify-content-left">*Address</label>
+                                        <label for="address" class="font-weight-bold d-flex justify-content-left"><small class="text-danger">*</small>Address</label>
                                         <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}"  placeholder="Purok, Brgy, Municpality, Province" onblur="validate(3)">
 
                                         @error('address')
@@ -210,7 +210,7 @@
                                     </div>
                                     
                                     <div class="col-md-3">
-                                        <label for="birthday" class="font-weight-bold d-flex justify-content-left">*Birthday</label>
+                                        <label for="birthday" class="font-weight-bold d-flex justify-content-left"><small class="text-danger">*</small>Birthday</label>
                                         <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}"  placeholder="Date of birth" onblur="validate(4)">
 
                                         @error('birthday')
@@ -221,7 +221,7 @@
                                     </div>
                                     
                                     <div class="col-md-3">
-                                        <label for="sex" class="font-weight-bold d-flex justify-content-left">*Sex</label>
+                                        <label for="sex" class="font-weight-bold d-flex justify-content-left"><small class="text-danger">*</small>Sex</label>
                                         <select name="sex" id="sex" class="form-control @error('sex') is-invalid @enderror" onblur="validate(5)">
                                             <option value=""></option>
                                             <option value="male">Male</option>
@@ -416,14 +416,18 @@
                 last_name: last_name,
             },
             success: function(data){
-                if( data.length != 0 ){
-                    flagForNameDuplicate = true;
-                }else{
+                if(Object.keys(data).length != 0){
                     flagForNameDuplicate = false;
                 }
+            },
+            error: function(reject){
+                flagForNameDuplicate=true;
             }
         })
     }
+
+    
+
     function validate(val) {
         var v1 = document.getElementById("first_name");
         var v2 = document.getElementById("last_name");
@@ -529,6 +533,40 @@
 
 $(document).ready(function(){
 
+    //Validate inputs 
+    function validateNames(first_name,last_name,){
+        var output = '';
+        $.ajax({
+            url: '/validateInputs',
+            type: 'post',
+            data: {
+                token: '{{  csrf_token() }}',
+                first_name:first_name,
+                last_name:last_name,
+                },
+            dataType: 'json',
+            success: function(data){
+                alert(data.success);
+            },
+            error: function(xhr, status, error){
+                var element = document.getElementById("errorsAlert");
+                var element1 = document.getElementById("errorItems");
+                element.classList.add('alert','alert-danger');
+                element.setAttribute('role','alert');
+                element1.classList.add('list-group-item');
+                
+
+                $.each(xhr.responseJSON.errors, function (key, item) 
+                {
+                    output += item[0]+'<br>';
+                  
+                });
+                $('#errorItems').html(output);
+
+            },
+        })
+    }
+
     // for userType office
 
     $('.user_type_group').hide();
@@ -611,16 +649,9 @@ $(document).ready(function(){
         var str2 = "next2";
         var str3 = "next3";
         var str4 = "next4";
-        
-        
-        if(!str1.localeCompare($(this).attr('id')) && $('#first_name').val() != "" && $('#last_name').val() != "" && $('#address').val() != "" && $('#birthday').val() != "" && $('#sex').val() != "") {
-            check_name($('#first_name').val(), $('#last_name').val());
-            if(flagForNameDuplicate){
-                val21 = true;
-            }else{
-                val21 = false;
-            }
-            
+        validateNames($('#first_name').val(),$('#last_name').val());
+        if(!str1.localeCompare($(this).attr('id')) && $('#first_name').val() != "" && $('#last_name').val() != "" && $('#address').val() != "" && $('#birthday').val() != "" && $('#sex').val() != "" && flagForNameDuplicate) {
+                val21 = true;    
         }
         else {
             val21 = false;
@@ -649,8 +680,6 @@ $(document).ready(function(){
         // if(!str3.localeCompare($(this).attr('id'))){
         //     console.log("success");
         // }
-        console.log(val21);
-        console.log(val22);
         if((val21 == true && val22 == true) || !str4.localeCompare($(this).attr('id'))) {
             current_fs = $(this).parent().parent();
             next_fs = $(this).parent().parent().next();
