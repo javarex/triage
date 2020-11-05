@@ -90,6 +90,7 @@
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('js/notify.min.js') }}"></script>
   
     
     
