@@ -20,7 +20,7 @@ Route::get('/', function () {
             return redirect('/officeLog');
         }else{
             return redirect('/triage');
-        }
+        }   
     }
     return view('auth.login');
 });

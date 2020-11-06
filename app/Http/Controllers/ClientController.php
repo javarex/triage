@@ -6,6 +6,8 @@ use App\Office;
 use App\Client;
 use App\User;
 use Auth;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -28,14 +30,13 @@ class ClientController extends Controller
     {
         
 
-        $offices = Office::orderBy('name', 'asc')
-                        ->get();
+      
         //generate code
         $alphaList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         
         $digits = sprintf('%02d',mt_rand(01, 99));
-        $leters = substr(str_shuffle($alphaList),0,2);
-        $code = $leters.$digits;
+        $leters = substr(str_shuffle($alphaList),0,3);
+        $code = 'DDO'.$leters.$digits;
 
         $flag = false;
 
@@ -51,49 +52,46 @@ class ClientController extends Controller
         $this->Validate($request, [
             'first_name'=> 'required|regex:/^[a-z0-9 .\-]+$/i',
             'last_name' => 'required|regex:/^[a-z0-9 .\-]+$/i',
-            'age'       => ['required', 'string', 'max:255'],
-            'address'   => ['required', 'string', 'max:255'],
-            'email'     => ['email'],
+            'birthday'  => 'required',
+            'address'   => 'required|string', 
+            'email'     => 'required|email',
+            'sex'     => 'required',
             ]);
             
        
         $code_generarated = $request->code;
-        $users = User::where('username',$code_generarated)->first();
+        $users = User::where('qrcode',$code_generarated)->first();
         
-        $userDuplication = Client::where('first_name', $request->first_name)
+        $userDuplication = User::where('first_name', $request->first_name)
                                     ->where('last_name', $request->last_name)
                                     ->first();
+        $date = Carbon::now(); 
         if(is_null($users) && is_null($userDuplication))
         {
+            if(!Storage::exists($date->toDateString()) )
+            {
+                Storage::makeDirectory($date->toDateString());
+            }
+            $ext = $request->user_face->getClientOriginalExtension();
 
-            $request['username'] = $request->code;
-            $request['password'] = bcrypt('admin');
+            $request->file('user_face')->storeAs($date->toDateString(), $request->first_name.'-'.$request->last_name.'-'.'face.'.$ext);
+            $request->file('user_valid_id')->storeAs($date->toDateString(), $request->first_name.'-'.$request->last_name.'-'.'valid_id.'.$ext);
+
+            $request['qrcode'] = $request->code;
             $request['first_name'] = ucwords($request->first_name);
             $request['middle_name'] = ucwords($request->middle_name);
             $request['last_name'] = ucwords($request->last_name);
             $request['address'] = ucwords($request->address);
-            $request['status'] = '1';
+            $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
             $user = User::create($request->all());
-            
-            $user->sendEmailVerificationNotification();
-            
-            $request['user_id'] = $user->id;
-            $client = Client::create($request->all());
-            $userLogin = $user->where('id', $client->user_id)->first();
-            $authUser = Auth::user();
-            if(is_null($authUser)){
-                Auth::login($userLogin);
-                return redirect('/triage');
-            }else{
-                return redirect('/admin');
-            }
-            
 
+            return redirect('/');
+        
         }elseif (!(is_null($userDuplication))) {
             return back()->with('delete','Information already exist!')
                         ->withInput();
         }elseif (!(is_null($users))) {
-            return back()->with('delete','This code is already used');
+            return back()->withInput('delete','This code is already used');
         }
 
     }
