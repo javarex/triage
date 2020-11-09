@@ -38,7 +38,17 @@
 
 <div class="row pt-2">
     <div class="col-md-12">
-    
+        <div class="row">
+            <div class="col-md-4" style="background-color:rgba(241, 236, 215, .8)">
+                <!-- left side content                 -->
+            </div>
+            <div class="col-md-4 text-center p-5">
+                <div class="col-md-12 d-flex justify-content-center">
+                    {!! QrCode::size('200')->color(68, 41, 0)->margin(1)->generate(Auth::user()->qrcode) !!}
+                </div>
+                <span class="font-weight-bold">{{Auth::user()->qrcode}}</span>
+            </div>
+        </div>
     </div>
     
    

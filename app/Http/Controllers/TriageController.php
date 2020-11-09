@@ -25,13 +25,7 @@ class TriageController extends Controller
 
     public function index()
     {
-   
-        $user_id = Auth::user()->id;
-        $client_id = User::where('id',$user_id)
-                            ->first();
- 
-  
-        return view('triage.index', compact('client_logs','client_id'));
+        return view('triage.index');
     }
 
     public function create()
