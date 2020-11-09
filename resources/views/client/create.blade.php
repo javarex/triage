@@ -33,7 +33,7 @@
                                             </div>
                                         
                                             <div class="col-md-12">
-                                                <input type="hidden" name="role" value="3" >
+                                                <input type="hidden" name="role" value="2" >
                                                 <input type="hidden" name="code" value="{{$code}}" >
                                                 <input id="first_name" type="text" required class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}"  autofocus>
                                             </div>
@@ -138,27 +138,6 @@
                                     <h2>Account Setup</h2>
                                 </div>
 
-                                   
-                                <div class="col-md-12 form-group">
-                                        
-                                    <div class="col-md-12">
-                                        <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Email address') }}</span>
-                                    </div>
-                                
-                                    <div class="col-md-12">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" >
-                                        <div class="alert alert-warning" role="alert">
-                                            Note: Please input a valid email address. The QR code will be sent to your email.
-                                        </div>
-                                    </div>
-                                
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                   
                                 <div class="col-md-12 form-group">
                                         
                                     <div class="col-md-12">
@@ -179,14 +158,17 @@
                                 <div class="col-md-12 form-group">
                                         
                                     <div class="col-md-12">
-                                        <span class="font-weight-normal">{{ __('Profile photo') }}</span>
+                                        <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Email address') }}</span>
                                     </div>
                                 
                                     <div class="col-md-12">
-                                        <input id="user_face" type="file" class="form-control @error('user_face') is-invalid @enderror" name="user_face" value="{{ old('user_face') }}" >
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" >
+                                        <!-- <div class="alert alert-warning" role="alert">
+                                            Note: Please input a valid email address. The QR code will be sent to your email.
+                                        </div> -->
                                     </div>
                                 
-                                    @error('user_face')
+                                    @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -196,20 +178,31 @@
                                 <div class="col-md-12 form-group">
                                         
                                     <div class="col-md-12">
-                                        <span class="font-weight-normal">{{ __('Valid ID') }}</span>
+                                        <span for="" class="">{{ __('QR code')}}</span>
                                     </div>
                                 
-                                    <div class="col-md-12">
-                                        <input id="user_valid_id" type="file" class="form-control @error('user_valid_id') is-invalid @enderror" name="user_valid_id" value="{{ old('user_valid_id') }}" >
+                                    <div class="col-md-12 ">
+                                        <div class=" mt-1 p-0 text-center">
+                                            <div class="d-flex justify-content-center">
+                                                {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate($code) !!}
+                                                <br>
+                                            </div>
+                                                <span>{{$code}}</span>
+                                                <input type="hidden" name="password" id="" value="{{$code}}">
+                                        </div>
                                     </div>
                                 
-                                    @error('user_valid_id')
+                                    @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-
+                                   
+                                
+                                
+                                   
+                                
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-12">
                                         <button type="submit" id="next" class="btn btn-primary btn-block">

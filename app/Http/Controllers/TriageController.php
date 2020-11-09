@@ -30,10 +30,6 @@ class TriageController extends Controller
         $client_id = User::where('id',$user_id)
                             ->first();
  
-        $client_logs = Activity::with('client','office')
-                                ->where('client_id',$user_id)
-                                ->orderBy('created_at', 'desc')
-                                ->get();
   
         return view('triage.index', compact('client_logs','client_id'));
     }

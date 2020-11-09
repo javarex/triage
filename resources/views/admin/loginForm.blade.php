@@ -16,12 +16,12 @@
 
                             <div class="form-group row">                                
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autofocus placeholder="Username">
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autofocus placeholder="Email address">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-8">
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" autofocus placeholder="Password">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" placeholder="Password (Please use QR code value)">
                                 </div>
                             </div>
                             <div class="row">

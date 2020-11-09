@@ -55,7 +55,7 @@ class ClientController extends Controller
             'birthday'  => 'required',
             'address'   => 'required|string', 
             'email'     => 'required|email',
-            'sex'     => 'required',
+            'sex'       => 'required',
             ]);
             
        
@@ -72,16 +72,13 @@ class ClientController extends Controller
             {
                 Storage::makeDirectory($date->toDateString());
             }
-            $ext = $request->user_face->getClientOriginalExtension();
-
-            $request->file('user_face')->storeAs($date->toDateString(), $request->first_name.'-'.$request->last_name.'-'.'face.'.$ext);
-            $request->file('user_valid_id')->storeAs($date->toDateString(), $request->first_name.'-'.$request->last_name.'-'.'valid_id.'.$ext);
 
             $request['qrcode'] = $request->code;
             $request['first_name'] = ucwords($request->first_name);
             $request['middle_name'] = ucwords($request->middle_name);
             $request['last_name'] = ucwords($request->last_name);
             $request['address'] = ucwords($request->address);
+            $request['password'] = bcrypt($request->code);
             $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
             $user = User::create($request->all());
 
