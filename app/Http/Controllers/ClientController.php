@@ -78,8 +78,13 @@ class ClientController extends Controller
             $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
             $user = User::create($request->all());
 
-            return redirect('/');
-        
+            if(!Auth::check()){
+                Auth::login($user);
+                return redirect('/triage');
+            }else{
+                return redirect('/admin');
+            }
+       
         }elseif (!(is_null($userDuplication))) {
             return back()->with('delete','Information already exist!')
                         ->withInput();

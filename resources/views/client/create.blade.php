@@ -174,31 +174,6 @@
                                         </span>
                                     @enderror
                                 </div>
-                                   
-                                <div class="col-md-12 form-group">
-                                        
-                                    <div class="col-md-12">
-                                        <span for="" class="">{{ __('QR code')}}</span>
-                                    </div>
-                                
-                                    <div class="col-md-12 ">
-                                        <div class=" mt-1 p-0 text-center">
-                                            <div class="d-flex justify-content-center">
-                                                {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate($code) !!}
-                                                <br>
-                                            </div>
-                                                <span>{{$code}}</span>
-                                                <input type="hidden" name="password" id="" value="{{$code}}">
-                                        </div>
-                                    </div>
-                                
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                   
                                 
                                 
                                    
