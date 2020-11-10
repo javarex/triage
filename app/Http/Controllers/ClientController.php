@@ -68,11 +68,7 @@ class ClientController extends Controller
         $date = Carbon::now(); 
         if(is_null($users) && is_null($userDuplication))
         {
-            if(!Storage::exists($date->toDateString()) )
-            {
-                Storage::makeDirectory($date->toDateString());
-            }
-
+         
             $request['qrcode'] = $request->code;
             $request['first_name'] = ucwords($request->first_name);
             $request['middle_name'] = ucwords($request->middle_name);

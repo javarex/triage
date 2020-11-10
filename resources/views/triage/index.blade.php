@@ -36,17 +36,60 @@
 
 
 
-<div class="row pt-2">
+<div class="row">
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-4" style="background-color:rgba(241, 236, 215, .8)">
+            <div class="col-md-3 vh-100 pt-5" style="background-color:white">
                 <!-- left side content                 -->
-            </div>
-            <div class="col-md-4 text-center p-5">
-                <div class="col-md-12 d-flex justify-content-center">
-                    {!! QrCode::size('200')->color(68, 41, 0)->margin(1)->generate(Auth::user()->qrcode) !!}
+                <div class="row text-center">
+                    <div class="col-md-12 d-flex justify-content-center text-center ">
+                        <h1>
+                        <i class="fa fa-user-circle fa-5x" aria-hidden="true"></i>
+                        </h1>
+                    </div>
+                    <div class="col-md-12">
+                        <h3>{{Auth::user()->first_name.' '.Auth::user()->last_name}}</h3>
+                    </div>
+                    
+
+                    <div class="col-md-12 container pt-4 text-left">
+
+                        <!-- birthday       -->
+                        <div class="row pt-1 border border-left-0 border-right-0 border-top-0 border-bottom-1">
+                            <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-birthday-cake    "></i></label>
+                            
+                            <div class="col-md-8 px-1"> 
+                            
+                                {{date('F d, Y', strtotime(Auth::user()->birthday))}}
+                            </div>
+                        </div>        
+                        <!-- Gender       -->
+                        <div class="row pt-1 border border-left-0 border-right-0 border-top-0 border-bottom-1">
+                            <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-venus-mars    "></i></label>
+                            
+                            <div class="col-md-8 px-1"> 
+                            
+                                {{ucwords(Auth::user()->sex)}}
+                            </div>
+                        </div>   
+                        <!-- Contact number       -->
+                        <div class="row pt-1 border border-left-0 border-right-0 border-top-0 border-bottom-1">
+                            <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fa fa-phone" aria-hidden="true"></i></label>
+                            
+                            <div class="col-md-8 px-1"> 
+                                {{ucwords(Auth::user()->contact_number)}}
+                            </div>
+                        </div>   
+                        <!-- Email       -->
+                        <div class="row pt-1 border border-left-0 border-right-0 border-top-0 border-bottom-1">
+                            <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-at    "></i></label>
+                            
+                            <div class="col-md-8 px-1"> 
+                                {{ucwords(Auth::user()->email)}}
+                            </div>
+                        </div>   
+                    </div>
                 </div>
-                <span class="font-weight-bold">{{Auth::user()->qrcode}}</span>
             </div>
         </div>
     </div>
@@ -58,7 +101,7 @@
 </div>
 
 <!-- Modal -->
-
+@include('triage.editQr')
 
 @endsection
 

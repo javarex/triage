@@ -23,7 +23,7 @@
     <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
 </head>
 <!-- background-image: radial-gradient(circle, #fff3c0 , #fcd538, gold) -->
-<body style="background-color:rgba(241, 236, 215, .8)">
+<body style="background-color:gold">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color:#442900;">
             <div class="container-fluid ml-0 p-0">
