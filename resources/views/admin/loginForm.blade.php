@@ -16,7 +16,7 @@
 
                             <div class="form-group row">                                
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autofocus placeholder="Email address">
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email address">
                                 </div>
                             </div>
                             <div class="form-group row">
