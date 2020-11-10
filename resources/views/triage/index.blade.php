@@ -49,9 +49,15 @@
                                 {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate(Auth::user()->qrcode) !!}
                             </div>
                             <div class="col-md-12">
+                                @if(is_null($user->qredit))
                                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#editQr" title="Edit QR Code">
                                     <span class="font-weight-bold">{{Auth::user()->qrcode}}</span> <i class="fas fa-edit    "></i>
                                 </a>
+                                @else
+                                 <span class="" id="editted_qr" style="cursor:pointer">
+                                    <i class="fas fa-qrcode    "></i><span class="font-weight-bold">{{Auth::user()->qredit}}</span>
+                                 </span>
+                                @endif
                             </div>
 
                             <div class="col-md-12 container pt-4 text-left">
@@ -146,7 +152,9 @@
             printElement($('#printProfile'));
         })
 
-       
+       $('#editted_qr').click(function(){
+           $.notify('You already change your QR code.','error');
+       })
     })
 </script>
 @endsection

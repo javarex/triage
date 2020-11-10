@@ -78,3 +78,5 @@ Route::post('/checkDuplication', 'RegistrationController@checkName');
 Route::post('/validateInputs', 'RegistrationController@validateNames');
 Route::post('/validateInputs2', 'RegistrationController@validateStep2');
 
+// edit qr code 
+Route::post('/qrEdit','TriageController@qrEdit');

@@ -20,7 +20,7 @@ class ClientController extends Controller
     
     public function index()
     {
-
+       
         return view('client.index');
     }
     
@@ -93,5 +93,7 @@ class ClientController extends Controller
         }
 
     }
+
+    
 
 }
