@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Office;
 use App\Client;
 use App\User;
+use App\Province;
+use App\Municipal;
+use App\Barangay;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -40,9 +44,11 @@ class ClientController extends Controller
 
         $flag = false;
 
+        $provinces = Province::all();
+
         $users = User::where('username',$code)->first();
 
-        return view('client.create', compact('offices','code'));
+        return view('client.create', compact('code','provinces'));
     }
    
 
@@ -94,6 +100,17 @@ class ClientController extends Controller
 
     }
 
+    public function loadMunicipals($id){
+        $municipals = Municipal::where('province_id', $id)
+                                ->get();
+        return $municipals;
+    }
+
+    public function loadBarangays($id){
+        $barangays = Barangay::where('municipal_id', $id)
+                                ->get();
+        return $barangays;
+    }
     
 
 }

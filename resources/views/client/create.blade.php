@@ -24,7 +24,7 @@
 
                                     <div class="col-md-6">
                                         <div class="col-md-12">
-                                            <h2>Personal information</h2>
+                                            <h4>Account Details</h4>
                                         </div>
                                         <div class="col-md-12 form-group">
                                         
@@ -118,7 +118,7 @@
                                         
                                         <div class="col-md-12 form-group">
                                             <div class="col-md-12">
-                                                <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Address') }}</span>
+                                                <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Current address') }}</span>
                                             </div>
                                             <div class="col-md-12">
                                                 <input id="address" type="text" class="form-control @error('last_name') is-invalid @enderror" name="address" value="{{ old('address') }}" >
@@ -134,9 +134,70 @@
                             
                             <!-- diri -->
                             <div class="col-md-6 border border-secondary border-right-0 border-top-0 border-bottom-0 border-left-2 ">
-                                <div class="col-md-12">
-                                    <h2>Account Setup</h2>
+                                <!-- Province -->
+                                <div class="col-md-12 form-group">
+                                        
+                                    <div class="col-md-12">
+                                        <span class="font-weight-normal">{{ __('Province') }}</span>
+                                    </div>
+                                
+                                    <div class="col-md-12">
+                                        <select name="province" class="form-control @error('province') is-invalid @enderror" id="province" required>
+                                            <option value=""></option>
+                                            @foreach($provinces as $province)
+                                                <option value="{{$province->id}}">{{$province->province}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                
+                                    @error('province')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
+                                <!-- Province -->
+                                <div class="col-md-12 form-group">
+                                        
+                                    <div class="col-md-12">
+                                        <span class="font-weight-normal ">{{ __('Municipality') }}</span>
+                                    </div>
+                                
+                                    <div class="col-md-12">
+                                        <select name="municipality" class="form-control @error('municipality') is-invalid @enderror" disabled id="municipality" required>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                
+                                    @error('municipality')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <!-- Barangay -->
+                                <div class="col-md-12 form-group">
+                                        
+                                    <div class="col-md-12">
+                                        <span class="font-weight-normal ">{{ __('Barangay') }}</span>
+                                    </div>
+                                
+                                    <div class="col-md-12">
+                                        <select name="barangay" class="form-control @error('barangay') is-invalid @enderror" disabled id="barangay" required>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                
+                                    @error('barangay')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                
+                                <!-- <div class="col-md-12">
+                                    <h2>Account Setup</h2>
+                                </div> -->
 
                                 <div class="col-md-12 form-group">
                                         
@@ -148,7 +209,7 @@
                                         <input id="contact_number" type="text" placeholder="e.g. 09080564755" maxlength="11" class="form-control @error('contact_number') is-invalid @enderror" name="contact_number" value="{{ old('contact_number') }}" >
                                     </div>
                                 
-                                    @error('email')
+                                    @error('contact_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -169,6 +230,24 @@
                                     </div>
                                 
                                     @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                
+                                   
+                                <div class="col-md-12 form-group">
+                                        
+                                    <div class="col-md-12">
+                                        <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Password') }}</span>
+                                    </div>
+                                
+                                    <div class="col-md-12">
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" >
+                                    </div>
+                                
+                                    @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -211,6 +290,49 @@
         function goBack() {
             window.history.back();
         }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // function to load municipality
+
+        function loadMunicipals(id)
+        {
+            var output = '<option></option>';
+            $.ajax({
+                url: '/load/municipal/'+id,
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $.each( data, function( key, value ) {
+                        output += '<option value="'+value.id+'">'+value.municipal+'</option>';
+                        console.log( key + ": " + value.municipal );
+                    });
+                    $('#municipality').html(output);
+                }
+            })
+        }
+        // function to load Barangay
+
+        function loadBarangays(id)
+        {
+            var output = '<option></option>';
+            $.ajax({
+                url: '/load/barangay/'+id,
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $.each( data, function( key, value ) {
+                        output += '<option value="'+value.id+'">'+value.barangay+'</option>';
+                    });
+                    $('#barangay').html(output);
+                }
+            })
+        }
+
         $(document).ready(function() {
             //birthday script
             $( "#birthday" ).datepicker({
@@ -220,6 +342,27 @@
             });
             //birthday script
 
+            $(document).on('change','#province', function(){
+                if($(this).val() != ''){
+                    $('#municipality').removeAttr('disabled');
+                    loadMunicipals($(this).val());
+                }else{
+                    loadMunicipals(0);
+                    $('#municipality').attr('disabled', true);
+                }
+            });
+
+            //on change municipal 
+
+            $(document).on('change','#municipality', function (){
+                if($(this).val != ''){
+                    $('#barangay').removeAttr('disabled');
+                    loadBarangays($(this).val());
+                }else{
+                    $('#barangay').attr('disabled', true);
+                    loadBarangays(0);
+                }
+            });
         })
     </script>
 @endsection

@@ -80,3 +80,7 @@ Route::post('/validateInputs2', 'RegistrationController@validateStep2');
 
 // edit qr code 
 Route::post('/qrEdit','TriageController@qrEdit');
+
+// load address
+Route::get('/load/municipal/{id}','ClientController@loadMunicipals');
+Route::get('/load/barangay/{id}','ClientController@loadBarangays');
