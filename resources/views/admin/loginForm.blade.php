@@ -1,7 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- for page loader -->
+<div class="o-page-loader">
+    <div class="o-page-loader--content">
+        <div class="o-page-loader--spinner"></div>
+        <div class="o-page-loader--message">
+            <span>Loading...</span>
+        </div>
+    </div>
+</div>
 
+<!-- end page loader -->
     <div class="container">
         <div class="row pt-5">
             <div class="col-md-6 ">
@@ -48,17 +58,3 @@
 
 @endsection
 
-@section('scripts')
-<script>
-    $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
-        $(window).on('load', function(){
-        setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
-        });
-        function removeLoader(){
-            $( "#loadingDiv" ).fadeOut(500, function() {
-            // fadeOut complete. Remove the loading div
-            $( "#loadingDiv" ).remove(); //makes page more lightweight 
-        });  
-    }
-</script>
-@endsection
