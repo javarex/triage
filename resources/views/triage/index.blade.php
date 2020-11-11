@@ -1,36 +1,5 @@
 @extends('triage.app')
 
-@section('styless')
-    <style>
-        img {
-            display: block;
-            max-width: 100%;
-            height: auto;
-        }
-        
-        @media screen {
-            #printSection {
-                display: none;
-            }
-        }
-
-        @media print {
-            body * {
-                visibility:hidden;
-            }
-            #printSection, #printSection * {
-                visibility:visible;
-            }
-            #printSection {
-                position:absolute;
-                left:0;
-                top:0;
-            }
-        }
-
-
-    </style>
-@endsection
 
 @section('content')
 
@@ -46,7 +15,11 @@
                     <div class="card-body pb-0">
                         <div class="row text-center">
                             <div class="col-md-12 d-flex justify-content-center text-center ">
-                                {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate(Auth::user()->qrcode) !!}
+                                @if(is_null(Auth::user()->qredit))
+                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate(Auth::user()->qrcode) !!}
+                                @else
+                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate(Auth::user()->qredit) !!}
+                                @endif
                             </div>
                             <div class="col-md-12">
                                 @if(is_null($user->qredit))
@@ -78,15 +51,6 @@
                                         <b> ({{$years}} Years old)</b>
                                     </div>
                                 </div>        
-                                <!-- Gender       -->
-                                <div class="row pt-1 border border-left-0 border-right-0 border-top-0 border-bottom-1">
-                                    <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-venus-mars    "></i></label>
-                                    
-                                    <div class="col-md-8 px-1"> 
-                                    
-                                        {{ucwords(Auth::user()->sex)}}
-                                    </div>
-                                </div>   
                                 <!-- Address       -->
                                 <div class="row pt-1 border border-left-0 border-right-0 border-top-0 border-bottom-1">
                                     <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-map-marker-alt    "></i></label>
