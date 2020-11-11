@@ -26,58 +26,59 @@
 </head>
 
 <style>
-    .loader-wrapper {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #242f3f;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+ .loader,
+    .loader:after {
+        border-radius: 50%;
+        width: 10em;
+        height: 10em;
     }
-    .loader {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    position: relative;                      
-    border: 4px solid #Fff;
-    animation: loader 2s infinite ease;
+    .loader {            
+        margin: 200px auto;
+        font-size: 10px;
+        position: relative;
+        text-indent: -9999em;
+        border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+        border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+        border-left: 1.1em solid #ffffff;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation: load8 1.1s infinite linear;
+        animation: load8 1.1s infinite linear;
     }
-    .loader-inner {
-    vertical-align: top;
-    display: inline-block;
-    width: 100%;
-    background-color: #fff;
-    animation: loader-inner 2s infinite ease-in;
+    @-webkit-keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
     }
-    @keyframes loader {
-    0% { transform: rotate(0deg);}
-    25% { transform: rotate(180deg);}
-    50% { transform: rotate(180deg);}
-    75% { transform: rotate(360deg);}
-    100% { transform: rotate(360deg);}
+    @keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
     }
-    @keyframes loader-inner {
-    0% { height: 0%;}
-    25% { height: 0%;}
-    50% { height: 100%;}
-    75% { height: 100%;}
-    100% { height: 0%;}
-    }
-    body {
-    background-image: url("/images/img.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
+    #loadingDiv {
+        position:absolute;;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-color:#000;
     }
 </style>
-<body style="background-color: #ecf527">
+<body style="background-image: radial-gradient(#fff3c0 , #fcd538, gold)">
     <main class="container py-5" >
         @yield('content')
-        <div class="loader-wrapper">
-            <span class="loader"><span class="loader-inner"></span></span>
-        </div>
     </main>
 
     <script src="{{ asset('js/app.js') }}"></script>
@@ -86,9 +87,4 @@
 
 </body>
 </html>
-<script>
-    $(window).on("load",function(){
-        $(".loader-wrapper").fadeOut("slow");
-    });
-</script>
     @yield('scripts')

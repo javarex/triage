@@ -144,11 +144,11 @@
 <script src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/notify.min.js') }}"></script>
-    <script>
-        $(window).on("load",function(){
-            $(".loader-wrapper").fadeOut("slow");
-        });
-    </script>
     @yield('scripts')
+    <script>
+$(window).on("load",function(){
+     $(".loader-wrapper").fadeOut("slow");
+});
+</script
 </body>
 </html>
