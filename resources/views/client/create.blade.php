@@ -121,7 +121,7 @@
                                                 <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Current address') }}</span>
                                             </div>
                                             <div class="col-md-12">
-                                                <input id="address" type="text" class="form-control @error('last_name') is-invalid @enderror" name="address" value="{{ old('address') }}" >
+                                                <input id="address" type="text" class="form-control @error('last_name') is-invalid @enderror" name="address" value="{{ old('address') }}" placeholder="Purok/Street/Village">
                                             </div>
                                         
                                             @error('address')
@@ -142,7 +142,7 @@
                                     </div>
                                 
                                     <div class="col-md-12">
-                                        <select name="province" class="form-control @error('province') is-invalid @enderror" id="province" required>
+                                        <select name="province_id" class="form-control @error('province') is-invalid @enderror" id="province" required>
                                             <option value=""></option>
                                             @foreach($provinces as $province)
                                                 <option value="{{$province->id}}">{{$province->province}}</option>
@@ -164,7 +164,7 @@
                                     </div>
                                 
                                     <div class="col-md-12">
-                                        <select name="municipality" class="form-control @error('municipality') is-invalid @enderror" disabled id="municipality" required>
+                                        <select name="municipal_id" class="form-control @error('municipality') is-invalid @enderror" disabled id="municipality" required>
                                             <option value=""></option>
                                         </select>
                                     </div>
@@ -183,7 +183,7 @@
                                     </div>
                                 
                                     <div class="col-md-12">
-                                        <select name="barangay" class="form-control @error('barangay') is-invalid @enderror" disabled id="barangay" required>
+                                        <select name="barangay_id" class="form-control @error('barangay') is-invalid @enderror" disabled id="barangay" required>
                                             <option value=""></option>
                                         </select>
                                     </div>
@@ -343,6 +343,7 @@
             //birthday script
 
             $(document).on('change','#province', function(){
+                
                 if($(this).val() != ''){
                     $('#municipality').removeAttr('disabled');
                     loadMunicipals($(this).val());
@@ -355,7 +356,7 @@
             //on change municipal 
 
             $(document).on('change','#municipality', function (){
-                if($(this).val != ''){
+                if($(this).val() != ''){
                     $('#barangay').removeAttr('disabled');
                     loadBarangays($(this).val());
                 }else{
@@ -363,6 +364,7 @@
                     loadBarangays(0);
                 }
             });
+            
         })
     </script>
 @endsection

@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'qrcode','username', 'password', 'first_name', 'middle_name', 'last_name','address','sex','birthday','contact_number', 'role','qredit', 'email','email_verified_at'
+        'qrcode','username', 'password', 'first_name', 'middle_name', 'last_name','address','barangay_id','municipal_id','province_id','sex','birthday','contact_number', 'role','qredit', 'email','email_verified_at'
     ];
     protected $dates = ['created_at', 'updated_at'];
     
@@ -39,13 +39,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function client()
-    {
-        return $this->hasOne('App\Client');
-    }
+    public function province(){
+        return $this->belongsTo('App\Province');
+    } 
 
-    public function office()
-    {
-        return $this->belongsTo('App\Office');
-    }
+    public function municipal(){
+        return $this->belongsTo('App\Municipal');
+    } 
+
+    public function barangay(){
+        return $this->belongsTo('App\Barangay');
+    } 
 }

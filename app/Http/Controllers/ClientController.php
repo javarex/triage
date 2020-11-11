@@ -80,7 +80,7 @@ class ClientController extends Controller
             $request['middle_name'] = ucwords($request->middle_name);
             $request['last_name'] = ucwords($request->last_name);
             $request['address'] = ucwords($request->address);
-            $request['password'] = bcrypt($request->code);
+            $request['password'] = bcrypt($request->password);
             $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
             $user = User::create($request->all());
 
@@ -106,8 +106,8 @@ class ClientController extends Controller
         return $municipals;
     }
 
-    public function loadBarangays($id){
-        $barangays = Barangay::where('municipal_id', $id)
+    public function loadBarangays($bid){
+        $barangays = Barangay::where('municipal_id', $bid)
                                 ->get();
         return $barangays;
     }

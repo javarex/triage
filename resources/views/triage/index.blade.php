@@ -75,6 +75,7 @@
                                     <div class="col-md-8 px-1"> 
                                     
                                         {{date('F d, Y', strtotime(Auth::user()->birthday))}}
+                                        <b> ({{$years}} Years old)</b>
                                     </div>
                                 </div>        
                                 <!-- Gender       -->
@@ -91,7 +92,7 @@
                                     <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-map-marker-alt    "></i></label>
                                     
                                     <div class="col-md-8 px-1"> 
-                                        {{ucwords(Auth::user()->address)}}
+                                        {{ucwords(Auth::user()->address).', '.$user->barangay->barangay.', '.$user->municipal->municipal.', '.$user->province->province}}
                                     </div>
                                 </div>   
                                 <!-- Contact number       -->
@@ -107,7 +108,7 @@
                                     <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-at    "></i></label>
                                     
                                     <div class="col-md-8 px-1"> 
-                                        {{ucwords(Auth::user()->email)}}
+                                        {{Auth::user()->email}}
                                     </div>
                                 </div>   
                             </div>
