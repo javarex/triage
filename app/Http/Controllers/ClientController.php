@@ -55,13 +55,15 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         
-        $this->Validate($request, [
+        $this->validate($request, [
             'first_name'=> 'required|regex:/^[a-z0-9 .\-]+$/i',
             'last_name' => 'required|regex:/^[a-z0-9 .\-]+$/i',
             'birthday'  => 'required',
-            'address'   => 'required|string', 
+            'address'   => 'required|string',
+            'contact_number' => 'required|regex:/(09)[0-9]{9}/', 
             'email'     => 'required|email',
             'sex'       => 'required',
+            'password'  => 'required|confirmed',
             ]);
             
        

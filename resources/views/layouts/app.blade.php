@@ -27,7 +27,7 @@
 <body style="background-image: radial-gradient(#fff3c0 , #fcd538, gold)">
     <div id="app">
         
-        <main class="py-2" >
+        <main class="container py-5" >
             @yield('content')
         </main>
     </div>
