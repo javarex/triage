@@ -228,7 +228,7 @@
                                         
                                             <div class="col-md-12">
                                                 <input class="form-control-file" name="valid_id" type="file" accept="image/*;capture=camera">
-                                                @error('email')
+                                                @error('valid_id')
                                                     <small class="text-danger" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </small>
@@ -253,7 +253,7 @@
                                                 </div>
                                             
                                                 <div class="col-md-12">
-                                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" >
+                                                    <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" >
                                                     <!-- <div class="alert alert-warning" role="alert">
                                                         Note: Please input a valid email address. The QR code will be sent to your email.
                                                     </div> -->

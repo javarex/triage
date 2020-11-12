@@ -42,7 +42,7 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'email';
+        return 'username';
     }
 
     public function authenticated(Request $request, $user)

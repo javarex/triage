@@ -34,7 +34,6 @@ class ClientController extends Controller
     {
         
 
-      
         //generate code
         $alphaList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         
@@ -54,7 +53,11 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-        
+        $date = Carbon::now(); 
+        $directory = date('m-d-Y', strtotime($date));
+        if(!Storage::exists($directory)) {
+            Storage::makeDirectory($directory); //creates directory
+        }
         $this->validate($request, [
             'first_name'        => 'required|regex:/^[a-z0-9 .\-]+$/i',
             'last_name'         => 'required|regex:/^[a-z0-9 .\-]+$/i',
@@ -64,6 +67,7 @@ class ClientController extends Controller
             'username'          => 'required',
             'sex'               => 'required',
             'password'          => 'required|confirmed',
+            'valid_id'          => 'required|mimes:jpeg,bmp,png|max:2000', 
             ]);
             
        
@@ -73,9 +77,13 @@ class ClientController extends Controller
         $userDuplication = User::where('first_name', $request->first_name)
                                     ->where('last_name', $request->last_name)
                                     ->first();
-        $date = Carbon::now(); 
+        
+        
         if(is_null($users) && is_null($userDuplication))
         {
+            $ext = $request->valid_id->getClientOriginalExtension();
+
+            $request->file('valid_id')->storeAs($directory, $request->last_name.'-'.$request->first_name.'.'.$ext);
          
             $request['qrcode'] = $request->code;
             $request['first_name'] = ucwords($request->first_name);
