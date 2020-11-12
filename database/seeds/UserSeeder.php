@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         $userData = [];
         $password = bcrypt('password');
 
-       for ($i = 0; $i < 10; $i++) {
+       for ($i = 0; $i < 1000000; $i++) {
 
            $rand = Str::random(10);
 
