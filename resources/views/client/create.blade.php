@@ -241,7 +241,7 @@
                                         </div>
                                     
                                         <div class="col-md-12">
-                                            <input class="" name="valid_id" type="file" accept="image/*;capture=camera">
+                                            <input class="form-control-file" name="valid_id" type="file" accept="image/*;capture=camera">
                                             @error('email')
                                                 <small class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
