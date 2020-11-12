@@ -68,12 +68,14 @@ Route::post('/untag', 'TagController@untagUser');
 
 Route::get('export', 'AdminController@export')->name('export');
 Route::post('/import', 'AdminController@import');
-Route::resource('registration', 'TestController');
+Route::resource('registration', 'RegistrationController');
 
 //check duplication
 
-Route::post('/checkDuplication', 'TestController@checkName');
+Route::post('/checkDuplication', 'RegistrationController@checkName');
 
 //validate name for registration
-Route::post('/validateInputs', 'TestController@validateNames');
+Route::post('/validateInputs', 'RegistrationController@validateNames');
 
+Route::post('/transmit', 'ApiController@transmit');
+Route::get('/download', 'ApiController@download');

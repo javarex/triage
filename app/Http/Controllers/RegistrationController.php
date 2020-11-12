@@ -14,8 +14,7 @@ use App\User;
 use App\Client;
 use Auth;
 
-
-class TestController extends Controller
+class RegistrationController extends Controller
 {
     public function create()
     {
@@ -101,8 +100,11 @@ class TestController extends Controller
     {
        
         $validator = $request->validate([
-            'first_name'=> 'alpha',
-            'last_name'=> 'alpha',
+            'first_name'=> 'required|alpha',
+            'last_name'=> 'required|alpha',
+            'address'=> 'required',
+            'birthday'=> 'required',
+            'sex'=> 'required',
         ]);
 
         if(!$validator){
