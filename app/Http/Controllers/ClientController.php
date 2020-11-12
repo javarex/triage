@@ -56,14 +56,14 @@ class ClientController extends Controller
     {
         
         $this->validate($request, [
-            'first_name'=> 'required|regex:/^[a-z0-9 .\-]+$/i',
-            'last_name' => 'required|regex:/^[a-z0-9 .\-]+$/i',
-            'birthday'  => 'required',
-            'address'   => 'required|string',
-            'contact_number' => 'required|regex:/(09)[0-9]{9}/', 
-            'email'     => 'required|email',
-            'sex'       => 'required',
-            'password'  => 'required|confirmed',
+            'first_name'        => 'required|regex:/^[a-z0-9 .\-]+$/i',
+            'last_name'         => 'required|regex:/^[a-z0-9 .\-]+$/i',
+            'birthday'          => 'required',
+            'address'           => 'required|string',
+            'contact_number'    => 'required|regex:/(09)[0-9]{9}/', 
+            'username'          => 'required',
+            'sex'               => 'required',
+            'password'          => 'required|confirmed',
             ]);
             
        
@@ -103,13 +103,13 @@ class ClientController extends Controller
     }
 
     public function loadMunicipals($id){
-        $municipals = Municipal::where('province_id', $id)
+        $municipals = Municipal::where('provCode', $id)
                                 ->get();
         return $municipals;
     }
 
     public function loadBarangays($bid){
-        $barangays = Barangay::where('municipal_id', $bid)
+        $barangays = Barangay::where('citymunCode', $bid)
                                 ->get();
         return $barangays;
     }

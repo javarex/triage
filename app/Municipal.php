@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Municipal extends Model
 {
-    protected $fillable = ['municipas','province_id'];
-    protected $dates = ['created_at', 'updated_at'];
+    protected $fillable = ['psgcCode','citymunDesc','regDesc','provCode','citymunCode'];
 
     public function user(){
         return $this->hasOne('App\User');
