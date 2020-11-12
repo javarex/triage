@@ -237,6 +237,23 @@
                                     <div class="col-md-12 form-group">
                                             
                                         <div class="col-md-12">
+                                            <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Valid ID') }}</span>
+                                        </div>
+                                    
+                                        <div class="col-md-12">
+                                            <input class="" name="valid_id" type="file" accept="image/*;capture=camera">
+                                            @error('email')
+                                                <small class="text-danger" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </small>
+                                            @enderror
+                                        </div>
+                                    
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                            
+                                        <div class="col-md-12">
                                             <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Email address') }}</span>
                                         </div>
                                     
