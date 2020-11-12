@@ -150,9 +150,7 @@
                                     <div class="col-md-1 mr-4"></div>
                                     <div class="col-md-3">
                                         <label for="first_name" class="font-weight-bold d-flex justify-content-left"><small class="text-danger">*</small>First Name</label>
-
                                         <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}"  placeholder="Enter First Name">
-
 
                                         @error('first_name')
                                             <span class="invalid-feedback" role="alert">
@@ -246,11 +244,6 @@
                                 <div class="form-group "> 
                                     <label class="form-control-label">*Contact Number </label> 
                                     <input type="text" id="contact_number" name="contact_number" maxlength="11" placeholder="11-digits" class="form-control" onblur="validate2(6)" value="{{ old('contact_number') }}">
-                                    <div class="text-danger">
-                                        @error('contact_number')
-                                            {{ $message }}
-                                        @enderror
-                                    </div>
                                 </div>
 
                                 <div class="form-group "> 
@@ -261,18 +254,6 @@
                                             {{ $message }}
                                         @enderror
                                     </div>
-                                </div>
-
-                                <div class="form-group "> <label class="form-control-label">*Account type (Guest/Establishment)</label>
-                                    <select name="role" id="role" class="form-control" onblur="validate2(8)" required>
-                                        <option value=""></option>
-                                        <option value="1">Establishment</option>
-                                        <option value="2">Guest</option>
-                                    </select> 
-                                </div>
-
-                                <div class="form-group user_type_group"> <label class="form-control-label">*Name of establishment</label>
-                                    <input type="text" id="establishment" name="establishment" class="form-control" value="{{ old('establishment') }}"> 
                                 </div>
                                 
                             </div>
@@ -374,11 +355,384 @@
             </div>
         </div>
     </form>
-
 </div>
 @endsection
 
 @section('scripts')
 <script>
+
+    //variables declaration
+    var flagForNameDuplicate = false;
+    var flagForValidates = false;
+    var sample = '';
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function check_name(first_name, last_name)
+    {
+        var tmp = false;
+        $.ajax({
+            async: false,
+            url : '/checkDuplication',
+            type: 'post',
+            data : {
+                token: '{{  csrf_token() }}',
+                first_name: first_name,
+                last_name: last_name,
+            },
+            success: function(data){
+                if(Object.keys(data).length != 0){
+                    tmp = false;
+                }else{
+                    tmp = true;
+
+                }
+            }
+        })
+        return tmp;
+    }
+
+   
+    
+ 
+
+
+$(document).ready(function(){
+
+    
+   //check name duplication
+
+   function check_name(first_name, last_name)
+    {
+        var tmp = false;
+        $.ajax({
+            async: false,
+            url : '/checkDuplication',
+            type: 'post',
+            data : {
+                token: '{{  csrf_token() }}',
+                first_name: first_name,
+                last_name: last_name,
+            },
+            success: function(data){
+                if(Object.keys(data).length != 0){
+                    $.notify('This record already exist!', "error");
+                  
+                    tmp = false;
+
+                }else{
+                    tmp = true;
+
+                }
+            }
+        })
+        return tmp;
+    }
+    
+
+
+
+    //Validate inputs 
+    
+    function validateNames(first_name,last_name,address,birthday,sex,contact_number,email){
+        var output = '';
+        tmp = false;
+        $.ajax({
+            async: false,
+            url: '/validateInputs',
+            type: 'post',
+            data: {
+                token: '{{  csrf_token() }}',
+                first_name:first_name,
+                last_name:last_name,
+                address:address,
+                birthday:birthday,
+                sex:sex,
+                contact_number:contact_number,
+                email:email,
+                },
+            dataType: 'json',
+            success: function(data){
+                tmp = true;
+            },
+            error: function(xhr, status, error){
+                var element = document.getElementById("errorsAlert");
+                var element1 = document.getElementById("errorItems");
+                
+
+                $.each(xhr.responseJSON.errors, function (key, item) 
+                {
+                    output += item[0]+'<br>';
+                  
+                    if (key === 'first_name') {
+                        $('#first_name').notify(item[0], "error")   
+                    }else if(key === 'last_name'){
+                        $('#last_name').notify(item[0], "error")
+                    }else if(key === 'address'){
+                        $('#address').notify(item[0], "error")
+                    }else if(key === 'birthday'){
+                        $('#birthday').notify(item[0], "error")
+                    }else if(key === 'sex'){
+                        $('#sex').notify(item[0], "error")
+                    }
+                });
+
+                    // $('.display_error').notify(error.errors, "error");
+                
+                tmp = false;
+            },
+        })
+        return tmp;
+    }
+
+
+
+    // Step 2 function
+
+    function validateNames(contact_number,email){
+        tmp = false;
+        $.ajax({
+            async: false,
+            url: '/validateInputs2',
+            type: 'post',
+            data: {
+                token: '{{  csrf_token() }}',
+                contact_number:contact_number,
+                email:email,
+                },
+            dataType: 'json',
+            success: function(data){
+                tmp = true;
+            },
+            error: function(xhr, status, error){
+                var element = document.getElementById("errorsAlert");
+                var element1 = document.getElementById("errorItems");
+                
+
+                $.each(xhr.responseJSON.errors, function (key, item) 
+                {
+                    output += item[0]+'<br>';
+                  
+                    if (key === 'contact_number') {
+                        $('#contact_number').notify(item[0], "error")   
+                    }else if(key === 'email'){
+                        $('#email').notify(item[0], "error")
+                    }
+                });
+
+                    // $('.display_error').notify(error.errors, "error");
+                
+                tmp = false;
+            },
+        })
+        return tmp;
+    }
+
+    //step 2 end
+    function validateStep2(contact)
+    {
+
+    }
+    
+
+    // for userType office
+
+    $('.user_type_group').hide();
+
+    $('#role').change(function()
+    {
+        if($(this).val() == '1')
+        {
+            $('.user_type_group').fadeIn(600);
+            $('#establishment').attr('required', true);
+
+        }else{
+            $('.user_type_group').fadeOut(600);
+            $('#establishment').removeAttr('required');
+            $('#establishment').val('');
+        }
+        return false;
+    });
+
+
+    //for photo displaying 
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#user_face').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    function readURL1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#user_id_pic').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#user_with_id_pic').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#user_pic").change(function(){
+        readURL(this);
+    });
+
+    $("#user_pic_id").change(function(){
+        readURL1(this);
+    });
+
+    $("#user_with_id").change(function(){
+        readURL2(this);
+    });
+    
+    $( "#birthday" ).datepicker({
+        changeYear: true,
+        changeMonth: true,
+        yearRange: "1930:2020"
+    });
+    
+    var current_fs, next_fs, previous_fs;
+    var val21 = false;
+    var val22 = true;
+    var val23 = true;
+
+    $(document).on('click','.next', function (){
+        var str1 = "next1";
+        var str2 = "next2";
+        var str3 = "next3";
+        var str4 = "next4";
+
+        //hide div from validation
+        $('#errorItems').html('');
+        $('#errorsAlert').hide();
+
+        
+        flagForValidates = validateNames($('#first_name').val(), $('#last_name').val(),$('#address').val(),$('#last_name').val(),$('#last_name').val());
+        flagForNameDuplicate = check_name($('#first_name').val(), $('#last_name').val());
+        console.log(flagForNameDuplicate);
+
+        if (flagForValidates && flagForNameDuplicate) {
+            if(!str1.localeCompare($(this).attr('id')) && $('#first_name').val() != "" && $('#last_name').val() != "" && $('#address').val() != "" && $('#birthday').val() != "" && $('#sex').val() != "") {
+                val21 = true;    
+            }
+            else {
+                val21 = false;
+            }
+        }else{
+            if (flagForNameDuplicate == false) {
+
+                $('#errorsAlert').addClass('alert alert-danger').attr('role','alert');
+                $('#errorItems').html('<ul class="list-group"><li class="list-group-item">First name and Last name already exist!</li></ul>');
+                $('#errorsAlert').show();
+            }
+            val21 = false;    
+
+        }
+
+        if ($(this).attr('id') == str2) {
+            if(!str2.localeCompare($(this).attr('id')) && $('#contact_number').val() != "" && $('#user_type').val() != "") {
+                val21 = true;
+                val22 = true;
+            }
+            else {
+                val22 = false;
+            }
+        }
+
+        if ($(this).attr('id') == str3) {
+            if(!str3.localeCompare($(this).attr('id')) && $('#user_pic ').val() != "" && $('#user_id ').val() != "" && $('#user_with_id').val() != "") {
+                val21 = true;
+                val22 = true;
+                val23 = true;
+            }
+            else {
+                val22 = false;
+            }
+        }
+        // if(!str3.localeCompare($(this).attr('id'))){
+        //     console.log("success");
+        // }
+        if((val21 == true && val22 == true) || !str4.localeCompare($(this).attr('id'))) {
+            current_fs = $(this).parent().parent();
+            next_fs = $(this).parent().parent().next();
+
+            $(current_fs).removeClass("show");
+            $(next_fs).addClass("show");
+
+            current_fs.animate({}, {
+                step: function() {
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+
+                    next_fs.css({
+                        'display': 'block'
+                    });
+                }
+            });
+        }
+    });
+    
+
+    $(".prev").click(function(){
+
+        current_fs = $(this).parent().parent();
+        previous_fs = $(this).parent().parent().prev();
+
+        $(current_fs).removeClass("show");
+        $(previous_fs).addClass("show");
+
+        current_fs.animate({}, {
+            step: function() {
+
+            current_fs.css({
+                'display': 'none',
+                'position': 'relative'
+            });
+
+            previous_fs.css({
+                'display': 'block'
+            });
+        }
+        });
+    });
+    $("#icon_face").click(function () {
+        $("#user_pic").trigger('click');
+        
+    });
+    $("#icon_id").click(function () {
+        $("#user_pic_id").trigger('click');
+        
+    });
+    $("#icon_userWithID").click(function () {
+        $("#user_with_id").trigger('click');
+        
+    });
+});
+
 </script>
 @endsection

@@ -1,130 +1,96 @@
 @extends('triage.app')
 
-@section('styless')
-    <style>
-        img {
-            display: block;
-            max-width: 100%;
-            height: auto;
-        }
-        
-        @media screen {
-            #printSection {
-                display: none;
-            }
-        }
-
-        @media print {
-            body * {
-                visibility:hidden;
-            }
-            #printSection, #printSection * {
-                visibility:visible;
-            }
-            #printSection {
-                position:absolute;
-                left:0;
-                top:0;
-            }
-        }
-
-
-    </style>
-@endsection
 
 @section('content')
+<!-- for page loader -->
+<div class="o-page-loader">
+    <div class="o-page-loader--content">
+        <div class="o-page-loader--spinner"></div>
+        <div class="o-page-loader--message">
+            <span>Loading...</span>
+        </div>
+    </div>
+</div>
+
+<!-- end page loader -->
 
 
-
-<div class="row pt-2">
+<div class="row">
     <div class="col-md-12">
-        <div class="card shadow ">
-            <div class="card-header" style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="text-primary text-center">
-                            <strong><i class="fa fa-history" aria-hidden="true"></i> YOUR RECENT ACTIVITIES</strong>
-                        </h3>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row">
-                            @if(Auth::user()->tag)
-                            <div class="col-md-8">
-                                <div class="alert alert-danger" role="alert">
-                                    <b>Notice: You cannot fill a new form because you are being tagged by the system!</b>
-                                </div>
+        <div class="row">
+        <div class="col-md-4"></div>
+            <div class="col-md-4 pt-5" style="background-color:white;">
+                <!-- left side content                 -->
+                <div class="card">
+                    <div class="card-body pb-0">
+                        <div class="row text-center">
+                            <div class="col-md-12 d-flex justify-content-center text-center ">
+                                @if(is_null(Auth::user()->qredit))
+                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate(Auth::user()->qrcode) !!}
+                                @else
+                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate(Auth::user()->qredit) !!}
+                                @endif
                             </div>
-                            <div class="col-md-4 m-auto">
-                                <div class="d-flex justify-content-end">
-                                    <a href="{{ route('triage.create') }}" class="btn btn-sm btn-primary disabled" ><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
-                                </div>
+                            <div class="col-md-12">
+                                @if(is_null($user->qredit))
+                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#editQr" title="Edit QR Code">
+                                    <span class="font-weight-bold">{{Auth::user()->qrcode}}</span> <i class="fas fa-edit    "></i>
+                                </a>
+                                @else
+                                 <span class="" id="editted_qr" style="cursor:pointer">
+                                    <i class="fas fa-qrcode    "></i><span class="font-weight-bold">{{Auth::user()->qredit}}</span>
+                                 </span>
+                                @endif
                             </div>
-                            @else
-                            <div class="col-md-8">
-                                
+
+                            <div class="col-md-12 container pt-4 text-left">
+                                <div class="row border border-left-0 border-right-0 border-top-0 border-bottom-1">
+                                    <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fa fa-user" aria-hidden="true"></i></label>
+                                    
+                                    <div class="col-md-8 px-1"> 
+                                        {{Auth::user()->first_name.' '.Auth::user()->last_name}}
+                                    </div>
+                                </div>  
+                                <!-- birthday       -->
+                                <div class="row pt-1 border border-left-0 border-right-0 border-top-0 border-bottom-1">
+                                    <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-birthday-cake    "></i></label>
+                                    
+                                    <div class="col-md-8 px-1"> 
+                                    
+                                        {{date('F d, Y', strtotime(Auth::user()->birthday))}}
+                                        <b> ({{$years}} Years old)</b>
+                                    </div>
+                                </div>        
+                                <!-- Address       -->
+                                <div class="row pt-1 border border-left-0 border-right-0 border-top-0 border-bottom-1">
+                                    <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-map-marker-alt    "></i></label>
+                                    
+                                    <div class="col-md-8 px-1"> 
+                                        {{ucwords(Auth::user()->address).', '.$user->barangay->barangay.', '.$user->municipal->municipal.', '.$user->province->province}}
+                                    </div>
+                                </div>   
+                                <!-- Contact number       -->
+                                <div class="row pt-1 border border-left-0 border-right-0 border-top-0 border-bottom-1">
+                                    <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fa fa-phone" aria-hidden="true"></i></label>
+                                    
+                                    <div class="col-md-8 px-1"> 
+                                        {{ucwords(Auth::user()->contact_number)}}
+                                    </div>
+                                </div>   
+                                <!-- Email       -->
+                                <div class="row pt-1 ">
+                                    <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-at    "></i></label>
+                                    
+                                    <div class="col-md-8 px-1"> 
+                                        {{Auth::user()->email}}
+                                    </div>
+                                </div>   
                             </div>
-                            <div class="col-md-4 m-auto">
-                                <div class="d-flex justify-content-end">
-                                    <a href="{{ route('triage.create') }}" class="btn btn-sm btn-primary" ><i class="fas fa-pen-alt    "></i> FILL NEW FORM</a>
-                                </div>
-                            </div>
-                            @endif
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card-body"  style="background-image: linear-gradient(to bottom,#fff3c0 , #fcd538);">
-                <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%; background-color:#442900; color:#fcd538">
-                        <thead>
-                            <tr>
-                                <th>Activity</th>
-                                <th>Venue</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th><i class="fa fa-cog" aria-hidden="true"></i></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    
-                        @foreach($client_logs as $client)
-                        {{ dd( $client_logs )}}
-                            @if($client->tag_id != 0)
-                            
-                            <tr class="bg-danger">
-                            @else 
-                            <tr>
-                            @endif
-                                <td>
-                                {{ $client->activity }}
-                                </td>
-                                <td>
-                                    @if( is_null($client->office_id))
-                                        {{ $client->venue }}
-                                    @else
-                                        {{ $client->office['name'] }}
-                                    @endif
-                                </td>
-                                <td>
-                                    {{ $client->created_at->format('m/d/Y')}}
-                                </td>
-                                <td>
-                                    {{ date('h:i a', strtotime($client->created_at))}}
-                                </td>
-                                <td>
-                                    <a href="{{ route('triage.show', $client->id ) }}" id="history_link" title="View form" data-activity="{{ $client->id }}" class="text-warning"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-              
-                
-            </div>
-            
         </div>
-    
     </div>
     
    
@@ -134,8 +100,7 @@
 </div>
 
 <!-- Modal -->
-@include('triage.include')
-
+@include('triage.editQr')
 
 @endsection
 
@@ -162,7 +127,9 @@
             printElement($('#printProfile'));
         })
 
-       
+       $('#editted_qr').click(function(){
+           $.notify('You already change your QR code.','error');
+       })
     })
 </script>
 @endsection

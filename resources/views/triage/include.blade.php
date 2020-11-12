@@ -20,7 +20,7 @@
                 <label for=""><i class="fas fa-mobile-alt    "></i> Triage Code: <strong>{{ Auth::user()->username }}</strong></label>
             </div>
             <div class="col-md-12 px-0 d-flex justify-content-center">
-                <label for=""><i class="fas fa-map-marker-alt    "></i> Address: {{ $client_id->address }}</label>
+                <label for=""><i class="fas fa-map-marker-alt    "></i> Address: {{ Auth::user()->address }}</label>
             </div>
            
         </div>

@@ -25,17 +25,11 @@ class TriageController extends Controller
 
     public function index()
     {
-   
-        $user_id = Auth::user()->id;
-        $client_id = User::where('id',$user_id)
-                            ->first();
- 
-        $client_logs = Activity::with('client','office')
-                                ->where('client_id',$user_id)
-                                ->orderBy('created_at', 'desc')
-                                ->get();
-  
-        return view('triage.index', compact('client_logs','client_id'));
+        $user = User::with('barangay','municipal','province')
+                    ->where('id', Auth::user()->id)->first();
+        $dateOfBirth = $user->birthday;
+        $years = Carbon::parse($dateOfBirth)->age;
+        return view('triage.index',compact('user','years'));
     }
 
     public function create()
@@ -148,6 +142,13 @@ class TriageController extends Controller
         }
         return redirect()->back();
         
+    }
+
+    public function qrEdit(Request $request)
+    {
+        $user = User::findOrFail(Auth::user()->id);
+        $user->update($request->all());
+       return redirect('/triage')->with('success','QR code successfully change!');
     }
 
 }

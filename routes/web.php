@@ -20,7 +20,7 @@ Route::get('/', function () {
             return redirect('/officeLog');
         }else{
             return redirect('/triage');
-        }
+        }   
     }
     return view('auth.login');
 });
@@ -76,6 +76,16 @@ Route::post('/checkDuplication', 'RegistrationController@checkName');
 
 //validate name for registration
 Route::post('/validateInputs', 'RegistrationController@validateNames');
+Route::post('/validateInputs2', 'RegistrationController@validateStep2');
+
 
 Route::post('/transmit', 'ApiController@transmit');
 Route::get('/download', 'ApiController@download');
+
+// edit qr code 
+Route::post('/qrEdit','TriageController@qrEdit');
+
+// load address
+Route::get('/load/municipal/{id}','ClientController@loadMunicipals');
+Route::get('/load/barangay/{bid}','ClientController@loadBarangays');
+

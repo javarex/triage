@@ -9,7 +9,7 @@
         <div class="col-md-6 p-5">
             <div class="">
                 <div class="font-weight-bold">
-                    <form method="POST" action="{{ route('login') }}">
+                    <!-- <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row pt-3 d-flex justify-content-center text-center">
@@ -34,19 +34,22 @@
 
                        
                         
-                        <div class="form-group row d-flex justify-content-center">
-                                @if (Route::has('password.request'))
-                                <a class="" href="/admin/login">
-                                    {{ __('Login as office') }}
-                                </a>
-                                <span class="mx-2"> | </span>
-                                <a class="text-right" href="{{ route('registration.create') }}">
-                                    {{ __('Register') }}
-                                </a>
-                                @endif
-                            </div>
+                    </form> -->
                         
-                    </form>
+                        <div class="col-md-8 mt-5 row d-flex justify-content-center">
+                            @if (Route::has('password.request'))
+                           <div class="col-md-12">
+                                <a class="btn btn-primary btn-block" href="/admin/login">
+                                    {{ __('Sign in') }}
+                                </a>
+                           </div>
+                           <div class="col-md-12">
+                                <a class=" btn btn-primary btn-block" href="{{ route('client.create') }}">
+                                    {{ __('Sign up') }}
+                                </a>
+                           </div>
+                            @endif
+                        </div>
                 </div>
             </div>
         </div>

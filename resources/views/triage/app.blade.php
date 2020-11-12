@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>DdO QR</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
@@ -21,11 +21,14 @@
     <link href="{{ asset('vendor/fontawesome-free-5.14.0/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
 </head>
-<body style="background-image: radial-gradient(#fff3c0 , #fcd538, gold)">
+
+<!-- background-image: radial-gradient(circle, #fff3c0 , #fcd538, gold) -->
+<body style="background-color:gold">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color:#442900;">
-            <div class="container">
+            <div class="container-fluid ml-0 p-0">
                 <a class="navbar-brand" href="{{ url('/triage') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
                     <img src="{{ asset('image/triagez.png') }}" title="PLGU - DAVAO DE ORO" width="120" height="61" >
@@ -62,9 +65,9 @@
                             
                                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#profile"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
 
-                                <a class="dropdown-item" href="{{ route('client.edit', Auth::user()->id ) }}">
+                                <!-- <a class="dropdown-item" href="{{ route('client.edit', Auth::user()->id ) }}">
                                     <i class="fas fa-pen-alt    "></i> {{ __('Edit')}}
-                                </a>
+                                </a> -->
 
                                 <a class="dropdown-item" href="/logout">
 
@@ -80,9 +83,8 @@
             </div>
         </nav>
 
-        <main class="container" >
+        <main class="container-fluid py-3" >
             @yield('content')
-            
         </main>
     </div>
 
@@ -91,7 +93,9 @@
 <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
-    @yield('scripts')
+<script src="{{ asset('js/notify.min.js') }}"></script>
+<script src="{{ asset('js/pageLoader.js') }}"></script>
 
+@yield('scripts')
 </body>
 </html>

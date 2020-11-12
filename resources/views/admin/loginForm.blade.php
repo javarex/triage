@@ -1,7 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- for page loader -->
+<div class="o-page-loader">
+    <div class="o-page-loader--content">
+        <div class="o-page-loader--spinner"></div>
+        <div class="o-page-loader--message">
+            <span>Loading...</span>
+        </div>
+    </div>
+</div>
 
+<!-- end page loader -->
     <div class="container">
         <div class="row pt-5">
             <div class="col-md-6 ">
@@ -16,12 +26,12 @@
 
                             <div class="form-group row">                                
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autofocus placeholder="Username">
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email address">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-8">
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" autofocus placeholder="Password">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" placeholder="Password (Please use QR code value)">
                                 </div>
                             </div>
                             <div class="row">
@@ -47,3 +57,4 @@
     </div>
 
 @endsection
+

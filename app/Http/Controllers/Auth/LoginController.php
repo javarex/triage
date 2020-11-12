@@ -42,14 +42,13 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'username';
+        return 'email';
     }
 
     public function authenticated(Request $request, $user)
     {
         
         $users_query = User::where('username',$request->username)
-                            ->where('status','<>',NULL)
                             ->first();
       
         // $userId = Auth::user()->id;
@@ -61,7 +60,7 @@ class LoginController extends Controller
             {
                 return redirect('/admin');
             }
-            elseif($users_query->role == 3)
+            elseif($users_query->role == 2)
             {
                 return redirect('/officeLog');
             }
