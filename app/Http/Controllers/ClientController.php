@@ -43,7 +43,7 @@ class ClientController extends Controller
 
         $flag = false;
 
-        $provinces = Province::all();
+        $provinces = Province::orderBy('provDesc', 'asc')->get();
 
         $users = User::where('username',$code)->first();
 
@@ -112,12 +112,14 @@ class ClientController extends Controller
 
     public function loadMunicipals($id){
         $municipals = Municipal::where('provCode', $id)
+                                ->orderBy('citymunDesc', 'asc')
                                 ->get();
         return $municipals;
     }
 
     public function loadBarangays($bid){
         $barangays = Barangay::where('citymunCode', $bid)
+                            ->orderBy('brgyDesc', 'asc')
                                 ->get();
         return $barangays;
     }
