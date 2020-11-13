@@ -12,8 +12,11 @@
 </div>
 
 <!-- end page loader -->
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container pt-0">
+    <div class="row justify-content-center ">
+        <div class="col-md-12 d-flex justify-content-center">
+            <img src="{{ asset('image/ddoqr.png') }}" class="img-fluid pb-1" width="100" height="100">
+        </div>
         <div class="col-md-10">
             <div class="bg-primary">
                 <div class="card-body font-weight-bold text-primary bg-light shadow">
@@ -126,6 +129,9 @@
 
                                 <div class="col-md-4 card">
                                     <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="">Contact Information</h3>
+                                    </div>
                                         <!-- Province -->
                                         <div class="col-md-12 form-group">
                                                                                     
@@ -221,6 +227,26 @@
                                         </div>  
 
                                         <div class="col-md-12 form-group">
+                                                    
+                                            <div class="col-md-12">
+                                                <span class="font-weight-normal"><small class="text-danger font-weight-bold"></small>{{ __('Email address') }}</span>
+                                            </div>
+                                        
+                                            <div class="col-md-12">
+                                                <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" >
+                                                <!-- <div class="alert alert-warning" role="alert">
+                                                    Note: Please input a valid email address. The QR code will be sent to your email.
+                                                </div> -->
+                                                @error('email')
+                                                    <small class="text-danger" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </small>
+                                                @enderror
+                                            </div>
+                                        
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
                                                 
                                             <div class="col-md-12">
                                                 <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Valid ID') }}</span>
@@ -245,25 +271,6 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h3 class="">Account Setup</h3>
-                                            </div>
-                                            <div class="col-md-12 form-group">
-                                                    
-                                                <div class="col-md-12">
-                                                    <span class="font-weight-normal"><small class="text-danger font-weight-bold"></small>{{ __('Email address') }}</span>
-                                                </div>
-                                            
-                                                <div class="col-md-12">
-                                                    <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" >
-                                                    <!-- <div class="alert alert-warning" role="alert">
-                                                        Note: Please input a valid email address. The QR code will be sent to your email.
-                                                    </div> -->
-                                                    @error('email')
-                                                        <small class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </small>
-                                                    @enderror
-                                                </div>
-                                            
                                             </div>
                                             
                                             <div class="col-md-12 form-group">
