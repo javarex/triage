@@ -25,7 +25,7 @@
                     <div class="card-body pb-0">
                         <div class="row text-center">
                             <div class="col-md-12 d-flex justify-content-center text-center ">
-                           
+                            <img src="{{asset('storage/'.$directory.'/'.Auth::user()->valid_id.'')}}" alt="Image" width="100" height="100"/>
                                 @if(is_null(Auth::user()->qredit))
                                     {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate(Auth::user()->qrcode) !!}
                                 @else
