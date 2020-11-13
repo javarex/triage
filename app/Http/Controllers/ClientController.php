@@ -24,7 +24,7 @@ class ClientController extends Controller
     
     public function index()
     {
-       
+        
         return view('client.index');
     }
     
@@ -55,15 +55,11 @@ class ClientController extends Controller
     {
         $date = Carbon::now(); 
         $directory = date('m-d-Y', strtotime($date));
-        if(!Storage::exists($directory)) {
-            Storage::makeDirectory($directory); //creates directory
-        }
         $this->validate($request, [
             'first_name'        => 'required|regex:/^[a-z0-9 .\-]+$/i',
             'last_name'         => 'required|regex:/^[a-z0-9 .\-]+$/i',
             'birthday'          => 'required',
             'address'           => 'required|string',
-            'contact_number'    => 'required|regex:/(09)[0-9]{9}/', 
             'username'          => 'required',
             'sex'               => 'required',
             'password'          => 'required|confirmed',
@@ -81,18 +77,30 @@ class ClientController extends Controller
         
         if(is_null($users) && is_null($userDuplication))
         {
-            $ext = $request->valid_id->getClientOriginalExtension();
+            
+            $fileName =  $request->file('valid_id');
+            $file = $fileName->getClientOriginalName();
+            $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
+            $request->valid_id->storeAs($directory, $file_name);
 
-            $request->file('valid_id')->storeAs($directory, $request->last_name.'-'.$request->first_name.'.'.$ext);
-         
-            $request['qrcode'] = $request->code;
-            $request['first_name'] = ucwords($request->first_name);
-            $request['middle_name'] = ucwords($request->middle_name);
-            $request['last_name'] = ucwords($request->last_name);
-            $request['address'] = ucwords($request->address);
-            $request['password'] = bcrypt($request->password);
-            $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
-            $user = User::create($request->all());
+
+            $data['qrcode'] = $request->code;
+            $data['username'] = $request->username;
+            $data['sex'] = $request->sex;
+            $data['email'] = $request->email;
+            $data['province_id'] = $request->province_id;
+            $data['barangay_id'] = $request->barangay_id;
+            $data['municipal_id'] = $request->municipal_id;
+            $data['role'] = $request->role;
+            $data['contact_number'] = $request->contact_number;
+            $data['first_name'] = ucwords($request->first_name);
+            $data['middle_name'] = ucwords($request->middle_name);
+            $data['last_name'] = ucwords($request->last_name);
+            $data['address'] = ucwords($request->address);
+            $data['password'] = bcrypt($request->password);
+            $data['birthday'] = date('Y-m-d', strtotime($request->birthday));
+            $data['valid_id'] = $file_name;
+            $user = User::create($data);
 
             if(!Auth::check()){
                 Auth::login($user);

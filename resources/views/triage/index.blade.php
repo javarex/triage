@@ -25,6 +25,7 @@
                     <div class="card-body pb-0">
                         <div class="row text-center">
                             <div class="col-md-12 d-flex justify-content-center text-center ">
+                           
                                 @if(is_null(Auth::user()->qredit))
                                     {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate(Auth::user()->qrcode) !!}
                                 @else
@@ -66,7 +67,7 @@
                                     <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-map-marker-alt    "></i></label>
                                     
                                     <div class="col-md-8 px-1"> 
-                                        {{ucwords(Auth::user()->address).', '.$user->barangay->barangay.', '.$user->municipal->municipal.', '.$user->province->province}}
+                                        {{ $address }}
                                     </div>
                                 </div>   
                                 <!-- Contact number       -->

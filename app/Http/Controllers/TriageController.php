@@ -29,7 +29,13 @@ class TriageController extends Controller
                     ->where('id', Auth::user()->id)->first();
         $dateOfBirth = $user->birthday;
         $years = Carbon::parse($dateOfBirth)->age;
-        return view('triage.index',compact('user','years'));
+        $date = Auth::user()->created_at;
+        $brgy = strtolower($user->barangay->brgyDesc);
+        $municipal = strtolower($user->municipal->citymunDesc);
+        $province = strtolower($user->province->provDesc);
+        $address = ucwords($brgy.', '.$municipal.', '.$province);
+        $directory = date('m-d-Y', strtotime($date));
+        return view('triage.index',compact('user','years','directory','address'));
     }
 
     public function create()

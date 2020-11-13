@@ -10,8 +10,8 @@
       <div class="modal-body" id="printProfile">
         <div class="row container">
             <div class="col-md-12 px-0 d-flex justify-content-center">
-                <span style="cursor:pointer" title="Scan me!">{!! QrCode::size('200')->color(68, 41, 0)->generate(Auth::user()->username) !!}</span>
-               
+              <img src="{{asset('storage/'.$directory.'/'.Auth::user()->valid_id.'')}}" alt="Image" width="100" height="100"/>
+
             </div>
             <div class="col-md-12 px-0 d-flex justify-content-center">
                 <h1>{{ Auth::user()->first_name.' '.Auth::user()->last_name}}</h1>
