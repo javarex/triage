@@ -62,7 +62,7 @@ class LoginController extends Controller
             }
             elseif($users_query->role == 2)
             {
-                return redirect('/officeLog');
+                return redirect('/triage');
             }
         }else{
             return redirect('/logout');
