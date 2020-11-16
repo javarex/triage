@@ -34,7 +34,7 @@
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                 <!-- diri -->
                                 <div class="row">
-                                    <div class="col-md-4 card card-body">
+                                    <div class="col-md-4 card">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h4>Personal Information</h4>
@@ -78,6 +78,23 @@
                                                 <div class="col-md-12">
                                                     <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" >
                                                     @error('last_name')
+                                                        <small class="text-danger" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </small>
+                                                    @enderror
+                                                </div>
+                                            
+                                            </div>
+                                            
+                                            <div class="col-md-12 form-group">
+                                            
+                                                <div class="col-md-12">
+                                                    <span class="font-weight-normal">{{ __('Extension name') }}</span>
+                                                </div>
+                                            
+                                                <div class="col-md-12">
+                                                    <input id="extension_name" type="text" class="form-control" name="extension_name" value="{{ old('extension_name') }}" placeholder="ex. Jr., Sr., I, II etc... (Optional)">
+                                                    @error('extension_name')
                                                         <small class="text-danger" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </small>
@@ -198,7 +215,7 @@
                                                 <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Purok') }}</span>
                                             </div>
                                             <div class="col-md-12">
-                                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" placeholder="" required>
+                                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" placeholder="e.g. 1" required>
                                                 @error('address')
                                                     <small class="text-danger" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -249,7 +266,7 @@
                                         <div class="col-md-12 form-group">
                                                 
                                             <div class="col-md-12">
-                                                <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Valid ID') }}</span>
+                                                <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Valid ID') }} <small class="text-danger font-weight-bold">(Max file size of 2MB)</small></span>
                                             </div>
                                         
                                             <div class="col-md-12">

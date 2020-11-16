@@ -17,6 +17,7 @@ use BaconQrCode\Writer;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Crypt;
 
 class TriageController extends Controller
 {
@@ -35,7 +36,16 @@ class TriageController extends Controller
         $province = strtolower($user->province->provDesc);
         $address = ucwords($brgy.', '.$municipal.', '.$province);
         $directory = date('m-d-Y', strtotime($date));
-        return view('triage.index',compact('user','years','directory','address'));
+        $first_name = Crypt::decryptString($user->first_name);
+        $last_name = Crypt::decryptString($user->last_name);
+        $middle_name = Crypt::decryptString($user->middle_name);
+        if($user->suffix){
+            $Users_name = $first_name.' '.strtoupper($middle_name[0]).'. '.$last_name.' '.$user->suffix.'.'; 
+        }else{
+            $Users_name = $first_name.' '.strtoupper($middle_name[0]).'. '.$last_name;
+        }
+        
+        return view('triage.index',compact('user','years','directory','address','Users_name','first_name'));
     }
 
     public function create()

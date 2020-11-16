@@ -19,7 +19,7 @@
     <div class="col-md-12">
         <div class="row">
         <div class="col-md-4"></div>
-            <div class="col-md-4 pt-5" style="background-color:white;">
+            <div class="col-md-4 py-3" style="background-color:white;">
                 <!-- left side content                 -->
                 <div class="card">
                     <div class="card-body pb-0">
@@ -48,7 +48,7 @@
                                     <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fa fa-user" aria-hidden="true"></i></label>
                                     
                                     <div class="col-md-8 px-1"> 
-                                        {{Auth::user()->first_name.' '.Auth::user()->last_name}}
+                                        {{$Users_name}}
                                     </div>
                                 </div>  
                                 <!-- birthday       -->

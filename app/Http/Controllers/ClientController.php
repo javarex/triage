@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Crypt;
 
 class ClientController extends Controller
 {
@@ -77,7 +77,6 @@ class ClientController extends Controller
         
         if(is_null($users) && is_null($userDuplication))
         {
-            
             $fileName =  $request->file('valid_id');
             $file = $fileName->getClientOriginalName();
             $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
@@ -92,10 +91,11 @@ class ClientController extends Controller
             $data['barangay_id'] = $request->barangay_id;
             $data['municipal_id'] = $request->municipal_id;
             $data['role'] = $request->role;
+            $data['verified'] = 0;
             $data['contact_number'] = $request->contact_number;
-            $data['first_name'] = ucwords($request->first_name);
-            $data['middle_name'] = ucwords($request->middle_name);
-            $data['last_name'] = ucwords($request->last_name);
+            $data['first_name'] = Crypt::encryptString(ucwords($request->first_name));
+            $data['middle_name'] = Crypt::encryptString(ucwords($request->middle_name));
+            $data['last_name'] = Crypt::encryptString(ucwords($request->last_name));
             $data['address'] = ucwords($request->address);
             $data['password'] = bcrypt($request->password);
             $data['birthday'] = date('Y-m-d', strtotime($request->birthday));
