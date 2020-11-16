@@ -77,8 +77,8 @@ class ClientController extends Controller
         $allUsers = User::all();
         
         foreach ($allUsers as $value) {
-            $tempFirstName = Crypt::decryptString($value->first_name);
-            $tempLastName = Crypt::decryptString($value->last_name);
+            $tempFirstName = $value->first_name;
+            $tempLastName = $value->last_name;
             if(strcasecmp($request->first_name, $tempFirstName) == 0 && strcasecmp($request->last_name, $tempLastName) == 0 && strcasecmp($value->suffix, $request->suffix) == 0)
             {
                 $duplicatedName = false;
@@ -102,9 +102,9 @@ class ClientController extends Controller
             $data['verified'] = 0;
             $data['suffix'] = $request->suffix;
             $data['contact_number'] = $request->contact_number;
-            $data['first_name'] = Crypt::encryptString(ucwords($request->first_name));
-            $data['middle_name'] = Crypt::encryptString(ucwords($request->middle_name));
-            $data['last_name'] = Crypt::encryptString(ucwords($request->last_name));
+            $data['first_name'] = ucwords($request->first_name);
+            $data['middle_name'] = ucwords($request->middle_name);
+            $data['last_name'] = ucwords($request->last_name);
             $data['address'] = ucwords($request->address);
             $data['password'] = bcrypt($request->password);
             $data['birthday'] = date('Y-m-d', strtotime($request->birthday));

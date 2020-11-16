@@ -36,9 +36,9 @@ class TriageController extends Controller
         $province = strtolower($user->province->provDesc);
         $address = ucwords($brgy.', '.$municipal.', '.$province);
         $directory = date('m-d-Y', strtotime($date));
-        $first_name = Crypt::decryptString($user->first_name);
-        $last_name = Crypt::decryptString($user->last_name);
-        $middle_name = Crypt::decryptString($user->middle_name);
+        $first_name =$user->first_name;
+        $last_name =$user->last_name;
+        $middle_name =$user->middle_name;
         if($user->suffix){
             $Users_name = $first_name.' '.strtoupper($middle_name[0]).'. '.$last_name.' '.$user->suffix.'.'; 
         }else{
