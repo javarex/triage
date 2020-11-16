@@ -1,5 +1,23 @@
 @extends('layouts.app')
 
+@section('styles')
+
+    <style>
+        .divider{
+            border-right: solid #b8b5ab 1px;
+            border-bottom:none;
+        }
+        @media only screen and (max-width: 767px)
+        {
+            .divider{
+                border-right:none;
+                border-bottom:solid #b8b5ab 1px;
+                margin-bottom:10px;
+            } 
+        }
+    </style>
+
+@endsection
 @section('content')
 <!-- for page loader -->
 <div class="o-page-loader">
@@ -12,11 +30,15 @@
 </div>
 
 <!-- end page loader -->
-<div class="container pt-0">
+<div class="container">
     <div class="row justify-content-center ">
         <div class="col-md-12 d-flex justify-content-center">
             <img src="{{ asset('image/ddoqr.png') }}" class="img-fluid pb-1" width="100" height="100">
         </div>
+        <div class="col-md-12 d-flex justify-content-center">
+            <h1 class="text-primary"> <i class="fas fa-qrcode    "></i> Davao de Oro Tracking System</h1>
+        </div>
+        
         <div class="col-md-10">
             <div class="bg-primary">
                 <div class="card-body font-weight-bold text-primary bg-light shadow">
@@ -34,7 +56,7 @@
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                 <!-- diri -->
                                 <div class="row">
-                                    <div class="col-md-4 card">
+                                    <div class="col-md-4 card-body divider">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h4>Personal Information</h4>
@@ -93,7 +115,7 @@
                                                 </div>
                                             
                                                 <div class="col-md-12">
-                                                    <input id="extension_name" type="text" class="form-control" name="extension_name" value="{{ old('extension_name') }}" placeholder="ex. Jr., Sr., I, II etc... (Optional)">
+                                                    <input id="suffix" type="text" class="form-control" name="suffix" value="{{ old('suffix') }}" placeholder="ex. Jr., Sr., I, II etc... (Optional)">
                                                     @error('extension_name')
                                                         <small class="text-danger" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -144,7 +166,7 @@
                                 
                                 <!-- diri -->
 
-                                <div class="col-md-4 card">
+                                <div class="col-md-4 card-body divider">
                                     <div class="row">
                                     <div class="col-md-12">
                                         <h3 class="">Contact Information</h3>
@@ -159,9 +181,6 @@
                                             <div class="col-md-12">
                                                 <select name="province_id" class="form-control" id="province" required>
                                                     <option value=""></option>
-                                                    @foreach($provinces as $province)
-                                                        <option value="{{$province->id}}" id="province_select" data-provCode="{{$province->provCode}}">{{$province->provDesc}}</option>
-                                                    @endforeach
                                                 </select>
                                                 @error('province')
                                                     <small class="text-danger" role="alert">
@@ -233,7 +252,7 @@
                                             </div>
 
                                             <div class="col-md-12">
-                                                <input id="contact_number" type="text" maxlength="11" placeholder="09123456789" required class="form-control" name="contact_number" value="{{ old('contact_number') }}" >
+                                                <input id="contact_number" type="text" maxlength="11" placeholder="09123456789" class="form-control" name="contact_number" value="{{ old('contact_number') }}" >
                                             </div>
 
                                             @error('contact_number')
@@ -283,7 +302,7 @@
                                     
                                 </div>
 
-                                    <div class="col-md-4 card">
+                                    <div class="col-md-4 card-body">
 
                                         <div class="row">
                                             <div class="col-md-12">
@@ -455,6 +474,31 @@
                 }
             })
             
+            // select2 scripts
+
+            loadProvince();
+            $('#province').select2();
+            $('#municipality').select2();
+            $('#barangay').select2();
+
         })
+
+        // function to load Province
+
+        function loadProvince()
+        {
+            var output = '<option></option>';
+            $.ajax({
+                url: '/load/province',
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $.each( data, function( key, value ) {
+                        output += '<option value="'+value.id+'"  data-provCode="'+value.provCode+'">'+value.provDesc+'</option>';
+                    });
+                    $('#province').html(output);
+                }
+            })
+        }
     </script>
 @endsection

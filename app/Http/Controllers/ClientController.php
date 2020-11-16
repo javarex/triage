@@ -44,15 +44,19 @@ class ClientController extends Controller
         $flag = false;
 
         $provinces = Province::orderBy('provDesc', 'asc')->get();
+        $list_of_provinces = "";
 
         $users = User::where('username',$code)->first();
-
         return view('client.create', compact('code','provinces'));
     }
    
 
     public function store(Request $request)
     {
+        $duplicatedName = true;
+
+        
+
         $date = Carbon::now(); 
         $directory = date('m-d-Y', strtotime($date));
         $this->validate($request, [
@@ -70,19 +74,23 @@ class ClientController extends Controller
         $code_generarated = $request->code;
         $users = User::where('qrcode',$code_generarated)->first();
         
-        $userDuplication = User::where('first_name', $request->first_name)
-                                    ->where('last_name', $request->last_name)
-                                    ->first();
+        $allUsers = User::all();
         
-        
-        if(is_null($users) && is_null($userDuplication))
+        foreach ($allUsers as $value) {
+            $tempFirstName = Crypt::decryptString($value->first_name);
+            $tempLastName = Crypt::decryptString($value->last_name);
+            if(strcasecmp($request->first_name, $tempFirstName) == 0 && strcasecmp($request->last_name, $tempLastName) == 0 && strcasecmp($value->suffix, $request->suffix) == 0)
+            {
+                $duplicatedName = false;
+                break;
+            }
+        }
+        if(is_null($users) && $duplicatedName)
         {
             $fileName =  $request->file('valid_id');
             $file = $fileName->getClientOriginalName();
             $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
             $request->valid_id->storeAs($directory, $file_name);
-
-
             $data['qrcode'] = $request->code;
             $data['username'] = $request->username;
             $data['sex'] = $request->sex;
@@ -92,6 +100,7 @@ class ClientController extends Controller
             $data['municipal_id'] = $request->municipal_id;
             $data['role'] = $request->role;
             $data['verified'] = 0;
+            $data['suffix'] = $request->suffix;
             $data['contact_number'] = $request->contact_number;
             $data['first_name'] = Crypt::encryptString(ucwords($request->first_name));
             $data['middle_name'] = Crypt::encryptString(ucwords($request->middle_name));
@@ -109,7 +118,7 @@ class ClientController extends Controller
                 return redirect('/admin');
             }
        
-        }elseif (!(is_null($userDuplication))) {
+        }elseif ($duplicatedName == false ) {
             return back()->with('delete','Information already exist!')
                         ->withInput();
         }elseif (!(is_null($users))) {
@@ -132,5 +141,10 @@ class ClientController extends Controller
         return $barangays;
     }
     
+    public function loadProvince()
+    {
+        $province = Province::orderBy('provDesc', 'asc')->get();
+        return $province;
+    }
 
 }

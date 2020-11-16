@@ -88,4 +88,5 @@ Route::post('/qrEdit','TriageController@qrEdit');
 // load address
 Route::get('/load/municipal/{id}','ClientController@loadMunicipals');
 Route::get('/load/barangay/{bid}','ClientController@loadBarangays');
+Route::get('/load/province','ClientController@loadProvince');
 

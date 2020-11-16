@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'first_name', 
         'middle_name', 
         'last_name',
+        'suffix',
         'address',
         'barangay_id',
         'municipal_id',
