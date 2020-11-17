@@ -32,15 +32,9 @@
                                 @endif
                             </div>
                             <div class="col-md-12">
-                                @if(is_null($user->qredit))
-                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#editQr" title="Edit QR Code">
+                                <span href="#" class="dropdown-item" data-toggle="modal" data-target="#editQr" title="Edit QR Code">
                                     <span class="font-weight-bold">{{$user->qrcode}}</span> <i class="fas fa-edit    "></i>
-                                </a>
-                                @else
-                                 <span class="" id="editted_qr" style="cursor:pointer">
-                                    <i class="fas fa-qrcode    "></i><span class="font-weight-bold">{{$user->qredit}}</span>
-                                 </span>
-                                @endif
+                                </span>
                             </div>
 
                             <div class="col-md-12 container pt-4 text-left">

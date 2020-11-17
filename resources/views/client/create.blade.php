@@ -6,6 +6,7 @@
         .divider{
             border-right: solid #b8b5ab 1px;
             border-bottom:none;
+            width: 100%;
         }
         @media only screen and (max-width: 767px)
         {
@@ -13,6 +14,7 @@
                 border-right:none;
                 border-bottom:solid #b8b5ab 1px;
                 margin-bottom:10px;
+                width: 100%;
             } 
         }
     </style>
@@ -50,16 +52,16 @@
         <div class="col-md-10">
             <div class="bg-primary">
                 <div class="card-body font-weight-bold text-primary bg-light shadow">
-                    <form method="POST" action="{{ route('client.store') }}" autocomplete="off" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('client.store') }}" autocomplete="off" enctype="multipart/form-data" id="register">
                         @csrf
 
                         @if($message = Session::get('delete'))
                                                 
                             <div class="text-danger text-center ">
-                                <h3>{{ $message }}</h3>
+                                <h3> <i class="fas fa-engine-warning    "></i>{{ $message }}</h3>
                             </div>
                         
-                        @endif 
+                        @endif
                         <div class="row">
                             <div class="col-md-4 card-body divider">
                                 <div class="col-md-12">
@@ -136,8 +138,8 @@
                                     <div class="col-md-12">
                                         <select name="sex" id="sex" class="form-control" name="sex" value="{{ old('sex') }}" autocomplete="sex" required>
                                             <option value=""></option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
+                                            <option value="male" {{ old('sex') == 'male' ? 'selected' : '' }}>Male</option>
+                                            <option value="female" {{ old('sex') == 'female' ? 'selected' : '' }}>Female</option>
                                         </select>
                                         @error('sex')
                                             <small class="text-danger" role="alert">
@@ -184,7 +186,7 @@
                                         </div>
 
                                         <div class="col-md-12">
-                                            <select name="province_id" class="form-control" id="province" required >
+                                            <select name="province_id" class="form-control" id="province" required style="width:100%">
                                                 <option value=""></option>
                                             </select>
                                             @error('province')
@@ -204,7 +206,7 @@
                                         </div>
                     
                                         <div class="col-md-12">
-                                            <select name="municipal_id" class="form-control" disabled id="municipality" required>
+                                            <select name="municipal_id" class="form-control" disabled id="municipality" required style="width:100%">
                                                 <option value=""></option>
                                             </select>
                                             @error('municipality')
@@ -224,7 +226,7 @@
                                         </div>
                     
                                         <div class="col-md-12">
-                                            <select name="barangay_id" class="form-control"  disabled id="barangay" required>
+                                            <select name="barangay_id" class="form-control"  disabled id="barangay" required style="width:100%">
                                                 <option value=""></option>
                                             </select>
                                             @error('barangay')
@@ -403,41 +405,7 @@
             }
         });
 
-        // function to load municipality
-
-        function loadMunicipals(id)
-        {
-            var output = '<option></option>';
-            $.ajax({
-                url: '/load/municipal/'+id,
-                type: 'get',
-                dataType: 'json',
-                success: function(data){
-                    $.each( data, function( key, value ) {
-                        output += '<option value="'+value.id+'"  data-munCode="'+value.citymunCode+'">'+value.citymunDesc+'</option>';
-                        console.log( key + ": " + value.citymunDesc );
-                    });
-                    $('#municipality').html(output);
-                }
-            })
-        }
-        // function to load Barangay
-
-        function loadBarangays(id)
-        {
-            var output = '<option></option>';
-            $.ajax({
-                url: '/load/barangay/'+id,
-                type: 'get',
-                dataType: 'json',
-                success: function(data){
-                    $.each( data, function( key, value ) {
-                        output += '<option value="'+value.id+'">'+value.brgyDesc+'</option>';
-                    });
-                    $('#barangay').html(output);
-                }
-            })
-        }
+       
 
         $(document).ready(function() {
             //birthday script
@@ -488,12 +456,15 @@
             $('#municipality').select2();
             $('#barangay').select2();
 
+           
         })
 
         // function to load Province
 
         function loadProvince()
         {
+            const genderOldValue = '{{ old("province") }}';
+            console.log(genderOldValue);
             var output = '<option></option>';
             $.ajax({
                 url: '/load/province',
@@ -504,6 +475,42 @@
                         output += '<option value="'+value.id+'"  data-provCode="'+value.provCode+'">'+value.provDesc+'</option>';
                     });
                     $('#province').html(output);
+                }
+            })
+        }
+
+         // function to load municipality
+
+         function loadMunicipals(id)
+        {
+            var output = '<option></option>';
+            $.ajax({
+                url: '/load/municipal/'+id,
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $.each( data, function( key, value ) {
+                        output += '<option value="'+value.id+'"  data-munCode="'+value.citymunCode+'">'+value.citymunDesc+'</option>';
+                        console.log( key + ": " + value.citymunDesc );
+                    });
+                    $('#municipality').html(output);
+                }
+            })
+        }
+        // function to load Barangay
+
+        function loadBarangays(id)
+        {
+            var output = '<option></option>';
+            $.ajax({
+                url: '/load/barangay/'+id,
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $.each( data, function( key, value ) {
+                        output += '<option value="'+value.id+'">'+value.brgyDesc+'</option>';
+                    });
+                    $('#barangay').html(output);
                 }
             })
         }

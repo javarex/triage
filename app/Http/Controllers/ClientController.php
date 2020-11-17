@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
+use Spatie\Image\Image;
 
 class ClientController extends Controller
 {
@@ -56,7 +57,7 @@ class ClientController extends Controller
         $duplicatedName = true;
 
         
-
+       
         $date = Carbon::now(); 
         $directory = date('m-d-Y', strtotime($date));
         $this->validate($request, [
@@ -73,6 +74,7 @@ class ClientController extends Controller
        
         $code_generarated = $request->code;
         $users = User::where('qrcode',$code_generarated)->first();
+        $username = User::where('username',$request->username)->first();
         
         $allUsers = User::all();
         
@@ -85,11 +87,18 @@ class ClientController extends Controller
                 break;
             }
         }
-        if(is_null($users) && $duplicatedName)
+        if(is_null($users) && $duplicatedName && $username == null)
         {
+            
             $fileName =  $request->file('valid_id');
             $file = $fileName->getClientOriginalName();
             $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
+            
+            Image::load($fileName)
+                ->optimize()
+                ->quality(50)
+                ->save();
+
             $request->valid_id->storeAs($directory, $file_name);
             $data['qrcode'] = $request->code;
             $data['username'] = $request->username;
@@ -111,8 +120,8 @@ class ClientController extends Controller
             $data['valid_id'] = $file_name;
             $user = User::create($data);
 
-            if(!Auth::check()){
-                Auth::login($user);
+            if(!auth()->check()){
+               auth()->login($user);
                 return redirect('/triage');
             }else{
                 return redirect('/admin');
@@ -122,7 +131,11 @@ class ClientController extends Controller
             return back()->with('delete','Information already exist!')
                         ->withInput();
         }elseif (!(is_null($users))) {
-            return back()->withInput(['delete'],'This code is already used');
+            return back()->with('delete','This code is already used!')
+                        ->withInput();
+        }elseif (!(is_null($username))) {
+            return back()->with('delete','Username already used!')
+                        ->withInput();
         }
     }
 
