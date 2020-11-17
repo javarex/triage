@@ -20,14 +20,14 @@
 @endsection
 @section('content')
 <!-- for page loader -->
-<div class="o-page-loader">
+{{-- <div class="o-page-loader">
     <div class="o-page-loader--content">
         <div class="o-page-loader--spinner"></div>
         <div class="o-page-loader--message">
             <span>Loading...</span>
         </div>
     </div>
-</div>
+</div> --}}
 
 <!-- end page loader -->
 <div class="container">

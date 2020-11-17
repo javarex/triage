@@ -8,14 +8,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>DdO QR</title>
-
-    <!-- Scripts -->
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
-
-
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,11 +18,21 @@
     <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+
+    @yield('styles')
 </head>
-@yield('styles')
 
 <body style="background-image: radial-gradient(#fff3c0 , #fcd538, gold)">
-
+    <!-- for page loader -->
+    <div class="o-page-loader">
+        <div class="o-page-loader--content">
+            <div class="o-page-loader--spinner"></div>
+            <div class="o-page-loader--message">
+                <span>Loading...</span>
+            </div>
+        </div>
+    </div>
+    
     <main class="container py-3" >
         @yield('content')
     </main>
@@ -38,7 +43,7 @@
     <script src="{{ asset('js/notify.min.js') }}"></script>
     <script src="{{ asset('js/pageLoader.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
-
+    
+    @yield('scripts')
 </body>
 </html>
-    @yield('scripts')

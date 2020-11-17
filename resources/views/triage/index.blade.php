@@ -25,20 +25,20 @@
                     <div class="card-body pb-0">
                         <div class="row text-center">
                             <div class="col-md-12 d-flex justify-content-center text-center ">
-                                @if(is_null(Auth::user()->qredit))
-                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate(Auth::user()->qrcode) !!}
+                                @if(is_null($user->qredit))
+                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate($user->qrcode) !!}
                                 @else
-                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate(Auth::user()->qredit) !!}
+                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate($user->qredit) !!}
                                 @endif
                             </div>
                             <div class="col-md-12">
                                 @if(is_null($user->qredit))
                                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#editQr" title="Edit QR Code">
-                                    <span class="font-weight-bold">{{Auth::user()->qrcode}}</span> <i class="fas fa-edit    "></i>
+                                    <span class="font-weight-bold">{{$user->qrcode}}</span> <i class="fas fa-edit    "></i>
                                 </a>
                                 @else
                                  <span class="" id="editted_qr" style="cursor:pointer">
-                                    <i class="fas fa-qrcode    "></i><span class="font-weight-bold">{{Auth::user()->qredit}}</span>
+                                    <i class="fas fa-qrcode    "></i><span class="font-weight-bold">{{$user->qredit}}</span>
                                  </span>
                                 @endif
                             </div>
@@ -57,7 +57,7 @@
                                     
                                     <div class="col-md-8 px-1"> 
                                     
-                                        {{date('F d, Y', strtotime(Auth::user()->birthday))}}
+                                        {{date('F d, Y', strtotime($user->birthday))}}
                                         <b> ({{$years}} Years old)</b>
                                     </div>
                                 </div>        
@@ -74,7 +74,7 @@
                                     <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fa fa-phone" aria-hidden="true"></i></label>
                                     
                                     <div class="col-md-8 px-1"> 
-                                        {{ucwords(Auth::user()->contact_number)}}
+                                        {{ucwords($user->contact_number)}}
                                     </div>
                                 </div>   
                                 <!-- Email       -->
@@ -82,7 +82,7 @@
                                     <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-at    "></i></label>
                                     
                                     <div class="col-md-8 px-1"> 
-                                        {{Auth::user()->email}}
+                                        {{$user->email}}
                                     </div>
                                 </div>   
                             </div>
