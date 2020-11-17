@@ -20,14 +20,21 @@
 @endsection
 @section('content')
 <!-- for page loader -->
+
 <!-- <div class="o-page-loader">
+
+    <div class="o-page-loader">
+
     <div class="o-page-loader--content">
         <div class="o-page-loader--spinner"></div>
         <div class="o-page-loader--message">
             <span>Loading...</span>
         </div>
     </div>
+
 </div> -->
+
+
 
 <!-- end page loader -->
 <div class="container">
@@ -54,7 +61,7 @@
                         
                         @endif 
                         <div class="row">
-                            <div class="col-md-4 divider">
+                            <div class="col-md-4 card-body divider">
                                 <div class="col-md-12">
                                     <h4>Personal Information</h4>
                                 </div>
@@ -177,7 +184,7 @@
                                         </div>
 
                                         <div class="col-md-12">
-                                            <select name="province_id" class="form-control" id="province" required>
+                                            <select name="province_id" class="form-control" id="province" required >
                                                 <option value=""></option>
                                             </select>
                                             @error('province')
@@ -217,7 +224,7 @@
                                         </div>
                     
                                         <div class="col-md-12">
-                                            <select name="barangay_id" class="form-control @error('barangay') is-invalid @enderror" disabled id="barangay" required>
+                                            <select name="barangay_id" class="form-control"  disabled id="barangay" required>
                                                 <option value=""></option>
                                             </select>
                                             @error('barangay')

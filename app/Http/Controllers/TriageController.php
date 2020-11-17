@@ -9,7 +9,6 @@ use App\User;
 use App\Triage_form;
 use App\Office;
 use App\Activity;
-use Auth;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
@@ -21,28 +20,30 @@ use Illuminate\Support\Facades\Crypt;
 
 class TriageController extends Controller
 {
-   
-    
-
     public function index()
     {
+        $currentUser = auth()->user();
+
         $user = User::with('barangay','municipal','province')
-                    ->where('id', Auth::user()->id)->first();
+                    ->where('id', $currentUser->id)->first();
+
         $dateOfBirth = $user->birthday;
         $years = Carbon::parse($dateOfBirth)->age;
-        $date = Auth::user()->created_at;
+        $date = $currentUser->created_at;
         $brgy = strtolower($user->barangay->brgyDesc);
         $municipal = strtolower($user->municipal->citymunDesc);
         $province = strtolower($user->province->provDesc);
         $address = ucwords($brgy.', '.$municipal.', '.$province);
         $directory = date('m-d-Y', strtotime($date));
+
         $first_name =$user->first_name;
         $last_name =$user->last_name;
         $middle_name =$user->middle_name;
+
         if($user->suffix){
             $Users_name = $first_name.' '.strtoupper($middle_name[0]).'. '.$last_name.' '.$user->suffix.'.'; 
         }else{
-            $Users_name = $first_name.' '.strtoupper($middle_name[0]).'. '.$last_name;
+            $Users_name = $first_name.' '.$last_name;
         }
         
         return view('triage.index',compact('user','years','directory','address','Users_name','first_name'));
@@ -50,7 +51,7 @@ class TriageController extends Controller
 
     public function create()
     {  
-        $user_id = Auth::user()->id;
+        $user_id = auth()->user()->id;
         $client_id = User::where('id',$user_id)
                             ->first();
         $questions = Criteria::all();
@@ -124,7 +125,7 @@ class TriageController extends Controller
     public function show($activity_id)
     {
         
-        $user_id = Auth::user()->id;
+        $user_id = auth()->user()->id;
         $client_id = Client::where('user_id',$user_id)
                     ->first();
         $client_logs = Activity::with('client','office')
@@ -162,7 +163,7 @@ class TriageController extends Controller
 
     public function qrEdit(Request $request)
     {
-        $user = User::findOrFail(Auth::user()->id);
+        $user = User::findOrFail(auth()->user()->id);
         $user->update($request->all());
        return redirect('/triage')->with('success','QR code successfully change!');
     }

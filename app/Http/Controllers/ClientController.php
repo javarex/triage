@@ -122,9 +122,8 @@ class ClientController extends Controller
             return back()->with('delete','Information already exist!')
                         ->withInput();
         }elseif (!(is_null($users))) {
-            return back()->withInput('delete','This code is already used');
+            return back()->withInput(['delete'],'This code is already used');
         }
-
     }
 
     public function loadMunicipals($id){
