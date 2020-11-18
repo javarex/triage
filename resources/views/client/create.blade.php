@@ -186,8 +186,11 @@
                                         </div>
 
                                         <div class="col-md-12">
-                                            <select name="province_id" class="form-control" id="province" required style="width:100%">
+                                            <select name="provDesc" class="form-control" id="province" required style="width:100%">
                                                 <option value=""></option>
+                                                @foreach($provinces as $province => $key)
+                                                <option value="{{$key->provDesc}}" data-provCode="{{$key->provCode}}" {{ old('provDesc') == $key->provDesc ? 'selected' : '' }}>{{$key->provDesc}}</option>
+                                                @endforeach
                                             </select>
                                             @error('province')
                                                 <small class="text-danger" role="alert">
@@ -206,8 +209,8 @@
                                         </div>
                     
                                         <div class="col-md-12">
-                                            <select name="municipal_id" class="form-control" disabled id="municipality" required style="width:100%">
-                                                <option value=""></option>
+                                            <select name="citymunDesc" class="form-control" disabled id="municipality" required style="width:100%">
+                                                <option value="" ></option>
                                             </select>
                                             @error('municipality')
                                                 <small class="text-danger" role="alert">
@@ -226,7 +229,7 @@
                                         </div>
                     
                                         <div class="col-md-12">
-                                            <select name="barangay_id" class="form-control"  disabled id="barangay" required style="width:100%">
+                                            <select name="brgyDesc" class="form-control"  disabled id="barangay" required style="width:100%">
                                                 <option value=""></option>
                                             </select>
                                             @error('barangay')
@@ -302,7 +305,7 @@
                                         </div>
                                     
                                         <div class="col-md-12">
-                                            <input class="form-control-file" name="valid_id" type="file" accept="image/*;capture=camera">
+                                            <input class="form-control-file" name="valid_id" id="valid_id" type="file" accept="image/*;capture=camera" required>
                                             @error('valid_id')
                                                 <small class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -371,14 +374,14 @@
 
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
-                                            <button type="submit" id="next" class="btn btn-primary btn-block">
+                                            <button type="submit" id="submitForm" class="btn btn-primary btn-block">
                                                 <i class="fa fa-check" aria-hidden="true"></i>
                                                 {{ __('Sign up') }}
                                             </button>
-                                            <button type="button" onclick="goBack()" class="btn btn-danger btn-block">
+                                            <a href="/" class="btn btn-danger btn-block">
                                                 <i class="fa fa-times" aria-hidden="true"></i>
                                                 {{ __('Cancel') }}
-                                            </button>    
+                                            </a>    
                                         </div>
                                     </div>
                                 </div>
@@ -395,19 +398,19 @@
 @section('scripts')
     <script>
     
-        function goBack() {
-            window.history.back();
-        }
+       
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
        
 
         $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             //birthday script
             $( "#birthday" ).datepicker({
                 changeYear: true,
@@ -416,10 +419,16 @@
             });
             //birthday script
 
+            // if ($('#province').val() != '') {
+            //     $('#municipality').removeAttr('disabled');
+            //     loadMunicipals($('#province').val());
+            // }
+
             $(document).on('change','#province', function(){
                 var provCode = $(this).find(':selected').attr('data-provCode');
                 if($(this).val() != ''){
                     $('#municipality').removeAttr('disabled');
+                    
                     loadMunicipals(provCode);
                 }else{
                     loadMunicipals(0);
@@ -448,10 +457,29 @@
                     $('#confirm_password').html('<small class="text-danger font-weight-bold">*</small>')
                 }
             })
+            // $('#submitForm').click(function(){
+            //     var first_name = $('#first_name').val();
+            //     var last_name = $('#last_name').val();
+            //     var suffix = $('#suffix').val();
+            //     var sex = $('#sex').val();
+            //     var birthday = $('#birthday').val();
+            //     var province = $('#province').val();
+            //     var municipality = $('#municipality').val();
+            //     var barangay = $('#barangay').val();
+            //     var address = $('#address').val();
+            //     var valid_id = $('#valid_id').val();
+            //     var username = $('#username').val();
+            //     var password = $('#password').val();
+
+            //     validateInputs(first_name, last_name, suffix, sex, birthday, province, municipality, barangay, address,valid_id, username, password);
+
+            // });
+
+            
             
             // select2 scripts
 
-            loadProvince();
+            // loadProvince();
             $('#province').select2();
             $('#municipality').select2();
             $('#barangay').select2();
@@ -463,8 +491,6 @@
 
         function loadProvince()
         {
-            const genderOldValue = '{{ old("province") }}';
-            console.log(genderOldValue);
             var output = '<option></option>';
             $.ajax({
                 url: '/load/province',
@@ -472,8 +498,10 @@
                 dataType: 'json',
                 success: function(data){
                     $.each( data, function( key, value ) {
-                        output += '<option value="'+value.id+'"  data-provCode="'+value.provCode+'">'+value.provDesc+'</option>';
+                        output += '<option value="'+value.provDesc+'"  data-provCode="'+value.provCode+'">'+value.provDesc+'</option>';
+                       
                     });
+
                     $('#province').html(output);
                 }
             })
@@ -490,8 +518,8 @@
                 dataType: 'json',
                 success: function(data){
                     $.each( data, function( key, value ) {
-                        output += '<option value="'+value.id+'"  data-munCode="'+value.citymunCode+'">'+value.citymunDesc+'</option>';
-                        console.log( key + ": " + value.citymunDesc );
+                        output += '<option value="'+value.citymunDesc+'"  data-munCode="'+value.citymunCode+'">'+value.citymunDesc+'</option>';
+                       
                     });
                     $('#municipality').html(output);
                 }
@@ -508,11 +536,52 @@
                 dataType: 'json',
                 success: function(data){
                     $.each( data, function( key, value ) {
-                        output += '<option value="'+value.id+'">'+value.brgyDesc+'</option>';
+                        output += '<option value="'+value.brgyDesc+'">'+value.brgyDesc+'</option>';
                     });
                     $('#barangay').html(output);
                 }
             })
+        }
+
+        //validate Inputs
+        function validateInputs(first_name, last_name, suffix, sex, birthday, province, municipal, barangay, address,valid_id, username, password)
+        {
+            $.ajax({
+                
+                url: '/validateInputs',
+                type: 'post',
+                data: {
+                    token: '{{  csrf_token() }}',
+                    first_name: first_name,
+                    last_name: last_name,
+                    suffix: suffix,
+                    sex: sex,
+                    birthday: birthday,
+                    provDesc: province,
+                    citymunDesc: municipal,
+                    brgyDesc: barangay,
+                    address: address,
+                    valid_id: valid_id,
+                    username: username,
+                    password: password,
+                },
+                dataType: 'json',
+                success: function(data){
+                    console.log(data);
+                },
+                error: function(xhr, status, error){
+                
+
+                $.each(xhr.responseJSON.errors, function (key, item) 
+                {
+                    console.log(item);
+                });
+
+                    // $('.display_error').notify(error.errors, "error");
+                
+                tmp = false;
+            },
+            });
         }
     </script>
 @endsection

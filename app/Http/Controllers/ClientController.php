@@ -93,7 +93,7 @@ class ClientController extends Controller
             $fileName =  $request->file('valid_id');
             $file = $fileName->getClientOriginalName();
             $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
-            
+
             Image::load($fileName)
                 ->optimize()
                 ->quality(50)
@@ -104,9 +104,9 @@ class ClientController extends Controller
             $data['username'] = $request->username;
             $data['sex'] = $request->sex;
             $data['email'] = $request->email;
-            $data['province_id'] = $request->province_id;
-            $data['barangay_id'] = $request->barangay_id;
-            $data['municipal_id'] = $request->municipal_id;
+            $data['provDesc'] = $request->provDesc;
+            $data['brgyDesc'] = $request->brgyDesc;
+            $data['citymunDesc'] = $request->citymunDesc;
             $data['role'] = $request->role;
             $data['verified'] = 0;
             $data['suffix'] = $request->suffix;
@@ -157,6 +157,29 @@ class ClientController extends Controller
     {
         $province = Province::orderBy('provDesc', 'asc')->get();
         return $province;
+    }
+
+    //validate input
+
+    public function validateInputs(Request $request)
+    {
+        $validator = $request->validate([
+            'first_name'            => 'required|regex:/^[a-z0-9 .\-]+$/i',
+            'last_name'             => 'required|regex:/^[a-z0-9 .\-]+$/i',
+            'suffix'                => 'required',
+            'sex'                   => 'required',
+            'birthday'              => 'required',
+            'address'               => 'required',
+            'provDesc'              => 'required',
+            'citymunDesc'           => 'required',
+            'brgyDesc'              => 'required',
+            'valid_id'              => 'required|mimes:jpg,jpeg,png|max:2048', 
+            'username'              => 'required',
+            'password'              => 'required|confirmed',
+        ]);
+
+  
+        
     }
 
 }

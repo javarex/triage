@@ -10,11 +10,13 @@ use App\Imports\ActivitiesImport;
 use App\Imports\ActivityImport1;
 use App\Imports\EmployeesImport;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Collection;
 
 
 class AdminController extends Controller 
@@ -23,13 +25,18 @@ class AdminController extends Controller
    
     public function index()
     {
-        
-        $user_id = Auth::user()->id;
-        $clients = User::with('office')
-                        ->where('role','<>',0)
-                        ->orderBy('first_name', 'asc')
+        $newJson = '';
+        $clients = User::where('role','<>',0)
                         ->get();
-        return view('admin.index', compact('clients'));
+        $newArray = array();
+        foreach ($clients as $client) {
+            if($client->role != 0){
+                $decrypted_firstname = Crypt::decryptString($client->first_name);
+                $decrypted_last_name = Crypt::decryptString($client->last_name);
+                 array_push($newArray, array('first_name' => $decrypted_firstname, 'last_name' => $decrypted_last_name, 'qrcode'=> $client->qrcode ));
+            }
+        }
+        return view('admin.index',compact('clients','newArray'));
     }
 
     public function updateClient(Request $request)

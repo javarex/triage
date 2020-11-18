@@ -76,7 +76,7 @@
                         </div>
                     </div>
 
-                    <h1>Employee and Guest users</h1>
+                    <h1>REGISTERED CITIZENS</h1>
                 </div>
                 <div class="alert alert-success" id="untag_alert">
                 </div>
@@ -89,80 +89,23 @@
                        
                     </div>
                    <div class="">
-                        <table id="example" class="table bg-primary table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
+                        <table id="clientTable" class="table bg-primary table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
                             <thead class="">
                                 <tr>
-                                    <th>Triage Code</th>
+                                    <th>QR Code</th>
                                     <th>Name</th>
-                                    <th>Office</th>
                                     <th><i class="fa fa-cog" aria-hidden="true"></i></th>
                                     <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
                                 </tr>
                             </thead>
                        
                             <tbody>
-                            @foreach($clients as $client)
-                                @if($client->role == 1 || $client->role == 2)
-                                    @if($client->tag != 0)
-                                
-                                    <tr class="table table-danger">
-                                    @else
-                                    <tr>
-                                    @endif
-                                    <td>{{ $client->username }}</td>
-                                    <td>{{ $client->first_name.' '.$client->last_name }}</td>
-                                    <td>
-                                        @if(is_null($client->office['name'] ))
-                                            {{ __('N/A') }}
-                       
-                                        @else
-                       
-                                            {{ $client->office['name'] }}
-                                        @endif
-                       
-                                    </td>
-                                    
-                                    <td width="10%">
-                                        <a class="" id="client_view" href="#" data-toggle="modal" data-target="#exampleModal" 
-                                        data-client_id="{{ $client->id }}"
-                                        data-firstName="{{ $client->first_name }}"
-                                        data-middleName="{{ $client->middle_name }}"
-                                        data-lastName="{{ $client->last_name }}"
-                                        data-age="{{ $client->age }}"
-                                        data-sex="{{ $client->sex }}"
-                                        data-address="{{ $client->address }}"
-                                        data-contactNumber="{{ $client->contact_number }}" title="View or edit details">
-                                            <i class="fas fa-user-edit    "></i>
-                                        </a>
-                                        
-                                        <span id="first_nameData" class="text-warning">|</span>
-                                        <a class="" id="client_log" href="#"  
-                                        data-client_id="{{ $client->id }}"
-                                        data-firstName="{{ $client->first_name }}"
-                                        data-middleName="{{ $client->middle_name }}"
-                                        data-lastName="{{ $client->last_name }}"
-                                        data-age="{{ $client->age }}"
-                                        data-sex="{{ $client->sex }}"
-                                        data-address="{{ $client->address }}"
-                                        data-contactNumber="{{ $client->contact_number }}" title="Trace log of this user">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </a>
-                                        <span id="first_nameData" ></span>
-                                        @if($client->tag != 0)
-                                        
-                                        <span class="text-info">|</span>
-                                        <a href="#" title="Untag this user" id="untag" 
-                                            data-userId="{{ $client->user->id }}" 
-                                            data-username="{{ $client->user->first_name }}">
-
-                                            <i class="fa fa-window-close" aria-hidden="true" ></i>
-                                        </a>
-                                        @endif
-                                    </td>
-                                  
-                                    </tr>
-                                @endif
-
+                            @foreach($newArray as $client)
+                                <tr>
+                                    <td>{{$client['qrcode']}}</td>
+                                    <td>{{$client['first_name'].' '.$client['last_name']}}</td>
+                                    <td width="10"></td>
+                                </tr>
                             @endforeach
                             
                             </tbody>
@@ -176,7 +119,7 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-user-circle" aria-hidden="true"></i> CLIENT INFORMATION</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
+                                            <span aria-hidden="true">&times;<span>
                                             </button>
                                         </div>
                                         
@@ -251,7 +194,7 @@
                 <div class="">
                     <a href="{{ route('office.create') }}"><span class="fas fa-plus    ">ADD OFFICE</span> </a>
                     <div class="">
-                        <table id="example1" class="table table-dark table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                        <!-- <table id="example1" class="table table-dark table-striped table-bordered dt-responsive nowrap" style="width:100%">
                             <thead class="">
                                 <tr>
                                     <th>Name</th>
@@ -262,40 +205,15 @@
                             </thead>
                         
                             <tbody>
-                            @foreach($clients as $office)
-
-                                @if($office->role == 3)
-                                <tr>
-                                    <td >{{ $office->first_name }}</td>
-                                    <td width="30%" class="text-center">{{ $office->username }}</td>
-                                    @if( is_null($office->status))
-                                        <td width="30">
-                                            <form action="{{ route('office.update',$office->id ) }}" method="post">
-                                                @csrf
-
-                                                @method('PATCH')
-                                                <input type="hidden" name="status" value="1">
-                                                <button type="submit" class="badge badge-primary">
-                                                    Click to approve
-                                                </button>
-                                            </form>
-                                        </td>
-                                    @else
-                                        <td width="30">
-                                            <span class="badge badge-success">Approved</span>
-                                        </td>
-                                    @endif
-
-                                    <td width="10%">
-                                        <a href="#" data-toggle="modal" data-target="#modalTag" data-officeName="{{ $office->office->name }}" data-office_id="{{ $office->office->id }}" id="tags">
-                                            <i class="fa fa-tags" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endif
-                            @endforeach
+                                @foreach($newArray as $client)
+                                    <tr>
+                                        <td>{{$client['first_name']}}</td>
+                                        <td>{{$client['last_name']}}</td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
                             </tbody>
-                        </table>
+                        </table> -->
 
                         <!-- modal tags -->
 
@@ -395,7 +313,7 @@
         })
         }
 
-        $('#example').DataTable({
+        $('#clientTable').DataTable({
             order:[[1,'asc']]
         });
         $('#example1').DataTable();

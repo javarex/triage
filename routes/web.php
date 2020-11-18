@@ -14,9 +14,9 @@
 Route::get('/', function () {
    
     if(!(is_null(Auth::user()))){
-        if (Auth::user()->type == 'admin') {
+        if (Auth::user()->type == 0) {
             return redirect('/admin');
-        }elseif (Auth::user()->type == 'office') {
+        }elseif (Auth::user()->type == 1) {
             return redirect('/officeLog');
         }else{
             return redirect('/triage');
@@ -75,8 +75,7 @@ Route::resource('registration', 'RegistrationController');
 Route::post('/checkDuplication', 'RegistrationController@checkName');
 
 //validate name for registration
-Route::post('/validateInputs', 'RegistrationController@validateNames');
-Route::post('/validateInputs2', 'RegistrationController@validateStep2');
+Route::post('/validateInputs', 'ClientController@validateInputs');
 
 
 Route::post('/transmit', 'ApiController@transmit');

@@ -32,8 +32,8 @@
                                 @endif
                             </div>
                             <div class="col-md-12">
-                                <span href="#" class="dropdown-item" data-toggle="modal" data-target="#editQr" title="Edit QR Code">
-                                    <span class="font-weight-bold">{{$user->qrcode}}</span> <i class="fas fa-edit    "></i>
+                                <span href="#" class="dropdown-item" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
+                                    <span class="font-weight-bold">{{$user->qrcode}}</span> 
                                 </span>
                             </div>
 

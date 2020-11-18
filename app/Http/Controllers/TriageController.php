@@ -22,17 +22,14 @@ class TriageController extends Controller
 {
     public function index()
     {
-        $currentUser = auth()->user();
-
-        $user = User::with('barangay','municipal','province')
-                    ->where('id', $currentUser->id)->first();
+        $user = auth()->user();
 
         $dateOfBirth = $user->birthday;
         $years = Carbon::parse($dateOfBirth)->age;
-        $date = $currentUser->created_at;
-        $brgy = strtolower($user->barangay->brgyDesc);
-        $municipal = strtolower($user->municipal->citymunDesc);
-        $province = strtolower($user->province->provDesc);
+        $date = $user->created_at;
+        $brgy = strtolower($user->brgyDesc);
+        $municipal = strtolower($user->citymunDesc);
+        $province = strtolower($user->provDesc);
         $address = ucwords($brgy.', '.$municipal.', '.$province);
         $directory = date('m-d-Y', strtotime($date));
 
