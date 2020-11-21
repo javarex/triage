@@ -34,12 +34,12 @@ class RegistrationController extends Controller
     }
     public function store(Request $request)
     {  
-        $this->Validate($request, [
-            'first_name'=> 'required|regex:/^[a-z0-9 .\-]+$/i',
-            'last_name' => 'required|regex:/^[a-z0-9 .\-]+$/i',
-            'address'   => 'required',
+        // $this->Validate($request, [
+        //     'first_name'=> 'required|regex:/^[a-z0-9 .\-]+$/i',
+        //     'last_name' => 'required|regex:/^[a-z0-9 .\-]+$/i',
+        //     'address'   => 'required',
             
-            ]);
+        //     ]);
             
         $code_generarated = $request->code;
         $users = User::where('username',$code_generarated)->first();
