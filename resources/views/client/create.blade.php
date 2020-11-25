@@ -21,25 +21,7 @@
 
 @endsection
 @section('content')
-<!-- for page loader -->
-
-<!-- <div class="o-page-loader">
-
-    <div class="o-page-loader">
-
-    <div class="o-page-loader--content">
-        <div class="o-page-loader--spinner"></div>
-        <div class="o-page-loader--message">
-            <span>Loading...</span>
-        </div>
-    </div>
-
-</div> -->
-
-
-
-<!-- end page loader -->
-<div class="container">
+<div class="">
     <div class="row justify-content-center ">
         <div class="col-md-12 d-flex justify-content-center">
             <img src="{{ asset('image/ddoqr.png') }}" class="img-fluid pb-1" width="100" height="100">
@@ -51,7 +33,7 @@
         
         <div class="col-md-10">
             <div class="bg-primary">
-                <div class="card-body font-weight-bold text-primary bg-light shadow">
+                <div class="card font-weight-bold text-primary shadow" style="background-color:#ffe56c">
                     <form method="POST" action="{{ route('client.store') }}" autocomplete="off" enctype="multipart/form-data" id="register">
                         @csrf
 
@@ -238,7 +220,6 @@
                                                 </small>
                                             @enderror
                                         </div>
-                    
                                     </div>
                                     <!-- purok -->
                                     <div class="col-md-12 form-group">
@@ -541,47 +522,6 @@
                     $('#barangay').html(output);
                 }
             })
-        }
-
-        //validate Inputs
-        function validateInputs(first_name, last_name, suffix, sex, birthday, province, municipal, barangay, address,valid_id, username, password)
-        {
-            $.ajax({
-                
-                url: '/validateInputs',
-                type: 'post',
-                data: {
-                    token: '{{  csrf_token() }}',
-                    first_name: first_name,
-                    last_name: last_name,
-                    suffix: suffix,
-                    sex: sex,
-                    birthday: birthday,
-                    provDesc: province,
-                    citymunDesc: municipal,
-                    brgyDesc: barangay,
-                    address: address,
-                    valid_id: valid_id,
-                    username: username,
-                    password: password,
-                },
-                dataType: 'json',
-                success: function(data){
-                    console.log(data);
-                },
-                error: function(xhr, status, error){
-                
-
-                $.each(xhr.responseJSON.errors, function (key, item) 
-                {
-                    console.log(item);
-                });
-
-                    // $('.display_error').notify(error.errors, "error");
-                
-                tmp = false;
-            },
-            });
         }
     </script>
 @endsection

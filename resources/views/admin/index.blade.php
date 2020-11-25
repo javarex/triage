@@ -191,32 +191,11 @@
                     @endif
                 </div>
 
+            <!-- include modal for establishment registration admin/include_files/modalRegistration -->
+                @include('admin.include_files.modalRegistration')
                 <div class="">
-                    <a href="{{ route('office.create') }}"><span class="fas fa-plus    ">ADD OFFICE</span> </a>
+                    <a href="create/establishment"><span class="fas fa-plus">ADD ESTABLISHMENT</span> </a>
                     <div class="">
-                        <!-- <table id="example1" class="table table-dark table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                            <thead class="">
-                                <tr>
-                                    <th>Name</th>
-                                    <th class="text-center">Username</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center"><i class="fa fa-cog" aria-hidden="true"></i></th>
-                                </tr>
-                            </thead>
-                        
-                            <tbody>
-                                @foreach($newArray as $client)
-                                    <tr>
-                                        <td>{{$client['first_name']}}</td>
-                                        <td>{{$client['last_name']}}</td>
-                                        <td></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table> -->
-
-                        <!-- modal tags -->
-
                         <div class="modal fade" id="modalTag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -283,6 +262,8 @@
             </div>
         </div>
     </div>
+
+    
 @endsection
 
 @section('scripts')

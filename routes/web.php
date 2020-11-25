@@ -14,9 +14,9 @@
 Route::get('/', function () {
    
     if(!(is_null(Auth::user()))){
-        if (Auth::user()->type == 0) {
+        if (Auth::user()->role == 0) {
             return redirect('/admin');
-        }elseif (Auth::user()->type == 1) {
+        }elseif (Auth::user()->role == 1) {
             return redirect('/officeLog');
         }else{
             return redirect('/triage');
@@ -38,45 +38,37 @@ Auth::routes(['verify' => true], function (){
 Route::get('/admin/login', function(){
     return view('admin.loginForm');
 });
-Route::resource('/admin', 'AdminController')->middleware('admin');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-Route::resource('client','ClientController');
-
-Route::resource('office','OfficeController');
-Route::post('/office/clientLog', 'OfficeController@clientLog');
-
-Route::resource('officeLog', 'officeLogController')->middleware('office');
-Route::post('/officeLog1','officeLogController@storeTriage');
 
 //Triage Routes
 
 Route::resource('triage', 'TriageController')->middleware('client');
 
-Route::post('/officeLog/approveStatus/{id}', 'ActivityController@updateStatus');
-Route::get('/approveStatus/{id}', 'ActivityController@loadRecord');
-Route::post('/officeLog/setTimeOut', 'ActivityController@setTimeOut');
-Route::post('/officeLog/setTimeIn', 'ActivityController@setTimeIn');
-
-Route::get('/loadActivity/{id}', 'ActivityController@loadData');    
-
-Route::post('/admin/client', 'AdminController@updateClient');
 
 Route::post('/tag', 'TagController@store');
 Route::post('/untag', 'TagController@untagUser');
 
+//admin routes and controllers
+
+Route::post('/admin/client', 'AdminController@updateClient');
+Route::resource('/admin', 'AdminController')->middleware('admin');
 Route::get('export', 'AdminController@export')->name('export');
 Route::post('/import', 'AdminController@import');
-Route::resource('registration', 'RegistrationController');
+Route::get('create/establishment', 'AdminController@create');
 
-//check duplication
 
-Route::post('/checkDuplication', 'RegistrationController@checkName');
+// Client routes/controllers
 
-//validate name for registration
+Route::resource('client','ClientController');
 Route::post('/validateInputs', 'ClientController@validateInputs');
+Route::get('/load/municipal/{id}','ClientController@loadMunicipals');
+Route::get('/load/barangay/{bid}','ClientController@loadBarangays');
+Route::get('/load/province','ClientController@loadProvince');
 
+
+// Scanner routes
 
 Route::post('/transmit', 'ApiController@transmit');
 Route::get('/download', 'ApiController@download');
@@ -84,8 +76,8 @@ Route::get('/download', 'ApiController@download');
 // edit qr code 
 Route::post('/qrEdit','TriageController@qrEdit');
 
-// load address
-Route::get('/load/municipal/{id}','ClientController@loadMunicipals');
-Route::get('/load/barangay/{bid}','ClientController@loadBarangays');
-Route::get('/load/province','ClientController@loadProvince');
 
+// establishment
+
+Route::get('estab/register', 'EstablishmentController@create');
+Route::get('create/establishment', 'AdminController@create');

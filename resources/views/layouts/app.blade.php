@@ -33,7 +33,7 @@
         </div>
     </div>
     
-    <main class="container py-3" >
+    <main class="container py-3">
         @yield('content')
     </main>
     
