@@ -26,10 +26,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
-                                    <button class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt    ">Login </i></button>    
+                                    <button class="btn btn-choco btn-block"><i class="fas fa-sign-in-alt    "> </i> Login</button>    
                                 </div>
                                 <div class="col-md-8 mt-1">
-                                    <a href="/" class="btn btn-danger btn-block"><i class="fas fa-arrow-left">Back </i></a>
+                                    <a href="/" class="btn btn-danger btn-block"><i class="fas fa-arrow-left"></i> Back </a>
                                 </div>
                             </div>
                             <!-- <div class="form-group row">

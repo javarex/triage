@@ -14,8 +14,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/fontawesome-free-5.14.0/css/all.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
 
@@ -32,14 +33,17 @@
             </div>
         </div>
     </div>
-    
+
+    @if(auth()->user())
+        @include('layouts.navbar.navbar_admin')
+    @endif
     <main class="container py-3">
         @yield('content')
     </main>
     
 
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/jquery.steps.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/jquery.steps.min.js') }}"></script> -->
     <script src="{{ asset('js/notify.min.js') }}"></script>
     <script src="{{ asset('js/pageLoader.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>

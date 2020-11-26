@@ -1,0 +1,25 @@
+.btn-choco{
+    background-color: #442900;
+    color: azure;
+    border-color: azure;
+}
+.btn:hover{
+    color: rgb(235, 80, 45);
+    background-color: rgb(223, 218, 70);
+    font-weight: bolder;
+    border-color: chocolate;
+    
+}
+
+.text-choco{
+    color:  #442900;
+}
+.bg-choco{
+    background-color: #442900;
+}
+.bg-choco{
+    background-color:#442900!important
+}
+a.bg-choco:focus,a.bg-choco:hover,button.bg-choco:focus,button.bg-choco:hover{
+    background-color:#311e00!important
+}

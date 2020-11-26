@@ -58,6 +58,14 @@ Route::get('export', 'AdminController@export')->name('export');
 Route::post('/import', 'AdminController@import');
 Route::get('create/establishment', 'AdminController@create');
 
+// Establishment routes
+Route::get('/establishment/create', 'EstablishmentController@create');
+Route::post('establishment', 'EstablishmentController@store');
+Route::middleware(['admin'])->group(function () {
+    Route::get('admin/establishment', 'AdminController@show')->name('establish');
+});
+
+
 
 // Client routes/controllers
 
@@ -76,8 +84,3 @@ Route::get('/download', 'ApiController@download');
 // edit qr code 
 Route::post('/qrEdit','TriageController@qrEdit');
 
-
-// establishment
-
-Route::get('estab/register', 'EstablishmentController@create');
-Route::get('create/establishment', 'AdminController@create');

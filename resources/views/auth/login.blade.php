@@ -39,12 +39,12 @@
                         <div class="col-md-8 mt-5 row d-flex justify-content-center">
                             @if (Route::has('password.request'))
                            <div class="col-md-12">
-                                <a class="btn btn-primary btn-block" href="/admin/login">
+                                <a class="btn btn-choco btn-block" href="/admin/login">
                                     {{ __('Sign in') }}
                                 </a>
                            </div>
                            <div class="col-md-12">
-                                <a class=" btn btn-primary btn-block" href="{{ route('client.create') }}">
+                                <a class=" btn btn-choco btn-block" href="{{ route('client.create') }}">
                                     {{ __('Sign up') }}
                                 </a>
                            </div>

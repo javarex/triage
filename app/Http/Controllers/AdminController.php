@@ -30,7 +30,6 @@ class AdminController extends Controller
     {
         $newJson = '';
         $user = auth()->user();
-        dd($user);
         $clients = User::where('role','<>',0)
                         ->get();
         $newArray = array();
@@ -100,4 +99,8 @@ class AdminController extends Controller
         Excel::import(new EmployeesImport, $request->file('file'));
         return back()->with('success_import','All is well!');
     }
+     public function show ()
+     {
+         return view('establishment.index');
+     }
 }

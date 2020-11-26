@@ -1,4 +1,4 @@
-@extends('layouts.appAdmin')
+@extends('layouts.app')
 
 
 @section('styless')
@@ -17,7 +17,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-7 bg-primary border text-warning">
+            <div class="col-md-7 bg-choco border text-warning">
             @error('file')
             <div class="alert alert-danger" role="alert">
                 {{ $message }}
@@ -89,7 +89,7 @@
                        
                     </div>
                    <div class="">
-                        <table id="clientTable" class="table bg-primary table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
+                        <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
                             <thead class="">
                                 <tr>
                                     <th>QR Code</th>
