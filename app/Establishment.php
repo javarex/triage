@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Establishment extends Model
 {
     protected $fillable = [
+        'user_id',
         'establishment_name',
         'establishment_type',
         'provCode',
@@ -21,4 +22,8 @@ class Establishment extends Model
         'coordinate_lat',
     ];
     protected $dates = ['created_at', 'updated_at'];
+
+    public function terminal(){
+        return $this->hasMany('App\Terminal');
+    }
 }

@@ -56,13 +56,13 @@ class LoginController extends Controller
         if(!(is_null($users_query)))
         {
             
-            if($users_query->role == 0)
-            {
+            if($users_query->role == 0){
                 return redirect('/admin');
             }
-            elseif($users_query->role == 2)
-            {
+            elseif($users_query->role == 2){
                 return redirect('/triage');
+            }elseif($users_query->role == 1){
+                return redirect('/establishment');
             }
         }else{
             return redirect('/logout');

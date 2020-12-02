@@ -378,7 +378,7 @@
                 
                 $.ajax({
                     type:'POST',
-                    url:'/establishment',
+                    url:'/establishmentValidate',
                     data:data,
                     success:function(data){
                         if($.isEmptyObject(data.error)){

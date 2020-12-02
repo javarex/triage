@@ -7,6 +7,9 @@ use App\Client;
 use App\Province;
 use App\Municipal;
 use App\Barangay;
+use App\Establishment;
+use App\Terminal;
+use Auth;
 use Validator;
 use Illuminate\Support\Facades\Response;
 use App\Establishment_type;
@@ -16,7 +19,14 @@ class EstablishmentController extends Controller
 {
     public function index()
     {
-        return view('establishment.index');
+        $establishment = Establishment::where('user_id', auth()->user()->id)->first();
+        $establishment_id = $establishment->id;
+        $role = auth()->user()->role;
+        $terminals = Terminal::with('establishment')
+                                ->where('establishment_id',$establishment_id)
+                                ->orderBy('number','asc')
+                                ->get();
+        return view('establishment.index',compact('role','terminals'));
     }
 
     public function create()
@@ -30,7 +40,7 @@ class EstablishmentController extends Controller
         return view('establishment.create', compact('provinces','establishment_type','municipals','barangays','user'));
     }
 
-    public function store(Request $request)
+    public function establishmentValidate(Request $request)
     {
             
      
@@ -46,15 +56,40 @@ class EstablishmentController extends Controller
             'username'              =>  'required',
             'password'              =>  'required|confirmed',
         ]);
+        
+        
+        return response()->json(['error'=>$validator->errors()->all()]);
+    }
+
+    public function store(Request $request)
+    {
+        $data_user['username'] = $request->username;
+        $data_user['password'] = bcrypt($request->password);
+        $data_user['role'] = 1;
+        $data_user['verified'] = 0;
+        $data_user['first_name'] = $request->establishment_name;
+        $user = User::create($data_user);
+
+        // Request Establishment
+
+        $request['user_id'] = $user->id;
+        $request['admin_name'] = $request->first_name.' '.$request->last_name;
         $request['provCode'] = $request->province;
         $request['citymunCode'] = $request->municipal;
         $request['brgyCode'] = $request->barangay;
-        $check = Post::create($input);
-        if($validator->passes()){
-
-            return response()->json(['success' => 'Addedd new record']);
-        }
         
-        return response()->json(['error'=>$validator->errors()->all()]);
+        $establishment = Establishment::create($request->all());
+        auth()->login($user);
+        return redirect('establishment')->with('successful', 'New record addedd successfully!');
+    }
+
+    public function terminalStore(Request $request)
+    {
+        $establishment = Establishment::where('user_id', auth()->user()->id)->first();
+        $establishment_id = $establishment->id;
+        $request['establishment_id'] = $establishment_id;
+        $terminal = Terminal::create($request->all());
+
+        return redirect('/establishment')->with('addedTerminal','Terminal: '.$terminal->description.' successfully added!');
     }
 }

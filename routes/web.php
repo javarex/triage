@@ -13,11 +13,11 @@
 
 Route::get('/', function () {
    
-    if(!(is_null(Auth::user()))){
-        if (Auth::user()->role == 0) {
+    if(!(is_null(auth()->user()))){
+        if (auth()->user()->role == 0) {
             return redirect('/admin');
-        }elseif (Auth::user()->role == 1) {
-            return redirect('/officeLog');
+        }elseif (auth()->user()->role == 1) {
+            return redirect('/establishment');
         }else{
             return redirect('/triage');
         }   
@@ -60,10 +60,14 @@ Route::get('create/establishment', 'AdminController@create');
 
 // Establishment routes
 Route::get('/establishment/create', 'EstablishmentController@create');
+// Route::get('/establishment', 'EstablishmentController@index');
 Route::post('establishment', 'EstablishmentController@store');
-Route::middleware(['admin'])->group(function () {
-    Route::get('admin/establishment', 'AdminController@show')->name('establish');
+Route::post('establishmentValidate', 'EstablishmentController@establishmentValidate');
+Route::middleware(['establishment'])->group(function () {
+    Route::post('addTerminal', 'EstablishmentController@terminalStore');
+    Route::get('/establishment', 'EstablishmentController@index');
 });
+
 
 
 

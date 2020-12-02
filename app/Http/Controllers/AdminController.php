@@ -28,24 +28,22 @@ class AdminController extends Controller
    
     public function index()
     {
+        $role = auth()->user()->role;
         $newJson = '';
         $user = auth()->user();
         $clients = User::where('role','<>',0)
                         ->get();
         $newArray = array();
         foreach ($clients as $client) {
-            if($client->role != 0){
-                try {
-                    $decrypted_firstname = Crypt::decryptString($client->first_name);
-                    $decrypted_last_name = Crypt::decryptString($client->last_name);
-                } catch (\Throwable $th) {
-                    $decrypted_firstname = $client->first_name;
-                    $decrypted_last_name = $client->last_name;
-                }
+            
+            if($client->role != 0 && $client->role != 1){
+                $decrypted_firstname = $this->decryptValue($client->first_name);
+               
+                $decrypted_last_name = $this->decryptValue($client->last_name);
                  array_push($newArray, array('first_name' => $decrypted_firstname, 'last_name' => $decrypted_last_name, 'qrcode'=> $client->qrcode ));
             }
         }
-        return view('admin.index',compact('clients','newArray','user'));
+        return view('admin.index',compact('clients','newArray','user','role'));
     }
 
     public function create()
@@ -102,5 +100,17 @@ class AdminController extends Controller
      public function show ()
      {
          return view('establishment.index');
+     }
+
+     protected function decryptValue($myString)
+     {
+         try {
+             //code...
+             $result = Crypt::decryptString($myString);
+            
+         } catch (DecryptException $e) {
+             $result = $myString;
+         }
+         return $result;
      }
 }

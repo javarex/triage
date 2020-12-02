@@ -17,6 +17,13 @@
 @section('content')
     <div class="container">
         <div class="row">
+        
+            @if($message1 = Session::get('successful'))
+            <div class="col-md-12 alert alert-success" role="alert" id="successAdd">
+                {{ $message1 }}
+            </div>
+            @endif
+
             <div class="col-md-7 bg-choco border text-warning">
             @error('file')
             <div class="alert alert-danger" role="alert">
@@ -194,7 +201,7 @@
             <!-- include modal for establishment registration admin/include_files/modalRegistration -->
                 @include('admin.include_files.modalRegistration')
                 <div class="">
-                    <a href="create/establishment"><span class="fas fa-plus">ADD ESTABLISHMENT</span> </a>
+                    <a href="establishment/create"><span class="fas fa-plus">ADD ESTABLISHMENT</span> </a>
                     <div class="">
                         <div class="modal fade" id="modalTag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

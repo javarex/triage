@@ -1,4 +1,4 @@
-@extends('layouts.app_establishmentCreate')
+@extends('layouts.app')
 @section('styles')
     <style>
         .divider{
@@ -30,12 +30,12 @@
         </div>
 
         <div class="col-md-12 d-flex justify-content-center">
-            <h1 class="text-primary"> <i class="fas fa-qrcode    "></i> Davao de Oro Tracking System</h1>
+            <h1 class="text-choco"> <i class="fas fa-qrcode    "></i> Davao de Oro Tracking System</h1>
         </div>
         
         <div class="col-md-10">
-            <div class="bg-primary">
-                <div class="card font-weight-bold text-primary shadow " style="background-color:#ffe56c">
+            <div class="bg-choco">
+                <div class="card font-weight-bold text-choco shadow " style="background-color:#ffe56c">
                     <form method="POST" action="{{ route('admin.store') }}" autocomplete="off" enctype="multipart/form-data" id="register">
                         @csrf
 
@@ -264,7 +264,7 @@
 
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
-                                            <button type="submit" id="submitForm" class="btn btn-primary btn-block">
+                                            <button type="submit" id="submitForm" class="btn btn-choco btn-block">
                                                 <i class="fa fa-check" aria-hidden="true"></i>
                                                 {{ __('Sign up') }}
                                             </button>

@@ -14,11 +14,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet"> 
     <link href="{{ asset('vendor/fontawesome-free-5.14.0/css/all.min.css') }}" rel="stylesheet">
     <!-- <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
 
     @yield('styles')
 </head>
@@ -35,8 +37,13 @@
     </div>
 
     @if(auth()->user())
-        @include('layouts.navbar.navbar_admin')
+        @if(auth()->user()->role == 0)
+            @include('layouts.navbar.navbar_admin')
+        @elseif(auth()->user()->role == 1)
+            @include('layouts.navbar.navbar_establishment')
+        @endif
     @endif
+
     <main class="container py-3">
         @yield('content')
     </main>
@@ -47,6 +54,10 @@
     <script src="{{ asset('js/notify.min.js') }}"></script>
     <script src="{{ asset('js/pageLoader.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
     
     @yield('scripts')
 </body>
