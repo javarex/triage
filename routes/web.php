@@ -65,6 +65,7 @@ Route::post('establishment', 'EstablishmentController@store');
 Route::post('establishmentValidate', 'EstablishmentController@establishmentValidate');
 Route::middleware(['establishment'])->group(function () {
     Route::post('addTerminal', 'EstablishmentController@terminalStore');
+    Route::patch('updateEstablishment/{user_id}', 'EstablishmentController@updateEstablishment');
     Route::get('/establishment', 'EstablishmentController@index');
 });
 

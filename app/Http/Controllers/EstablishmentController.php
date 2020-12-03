@@ -21,6 +21,7 @@ class EstablishmentController extends Controller
     {
         $establishment = Establishment::where('user_id', auth()->user()->id)->first();
         $establishment_id = $establishment->id;
+        
         $role = auth()->user()->role;
         $terminals = Terminal::with('establishment')
                                 ->where('establishment_id',$establishment_id)
@@ -53,7 +54,7 @@ class EstablishmentController extends Controller
             'agency_head'           =>  'required',
             'first_name'            =>  'required',
             'last_name'             =>  'required',
-            'username'              =>  'required',
+            'username'              =>  'required|unique:users,username',
             'password'              =>  'required|confirmed',
         ]);
         
@@ -81,6 +82,24 @@ class EstablishmentController extends Controller
         $establishment = Establishment::create($request->all());
         auth()->login($user);
         return redirect('establishment')->with('successful', 'New record addedd successfully!');
+    }
+
+    public function updateEstablishment(Request $request, $user_id)
+    {
+        $user = User::findOrFail($user_id);
+       
+        $user->update([
+            'first_name' => $request->name,
+            'password'  => bcrypt($request->password)
+        ]);
+        $establishment = new Establishment;
+        $establishment_id = $establishment->where('user_id', $user_id)->first();
+        
+        $establishment_update = Establishment::findOrFail($establishment_id->id);
+        $establishment_update->update([
+            'establishment_name' => $request->name,
+        ]);
+        return redirect('establishment')->with('successUpdate','Record updated successfully');
     }
 
     public function terminalStore(Request $request)
