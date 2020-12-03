@@ -17,7 +17,7 @@
                     </a>
                 </li>
                 <li class="nav-item "> 
-                    <a href="{{ route('establish') }}" class="nav-link text-warning">
+                    <a href="establishment" class="nav-link text-warning">
                         <i class="fa fa-building" aria-hidden="true"></i> Establishment
                     </a>
                 </li>

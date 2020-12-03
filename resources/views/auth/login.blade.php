@@ -44,9 +44,15 @@
                                 </a>
                            </div>
                            <div class="col-md-12">
-                                <a class=" btn btn-choco btn-block" href="{{ route('client.create') }}">
-                                    {{ __('Sign up') }}
-                                </a>
+                                <div class="dropdown">
+                                    <a class="btn btn-choco btn-block dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Sign Up
+                                    </a>
+                                    <div class="dropdown-menu" style="width:100%" aria-labelledby="dropdownMenuLink">
+                                        <a href="{{ route('client.create') }}" class="dropdown-item text-choco"> <i class="fa fa-user" aria-hidden="true"></i> Register as citizen</a>
+                                        <a href="/establishment/create" class="dropdown-item text-choco"> <i class="fa fa-user" aria-hidden="true"></i> Register as establishment</a>
+                                    </div>
+                                </div>
                            </div>
                             @endif
                         </div>
