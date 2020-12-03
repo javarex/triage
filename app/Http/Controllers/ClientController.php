@@ -111,7 +111,7 @@ class ClientController extends Controller
             $data['verified'] = 0;
             $data['suffix'] = $request->suffix;
             $data['contact_number'] = $request->contact_number;
-            $data['first_name'] = Crypt::encryptString(ucwords($request->first_name));
+            $data['first_name'] = ucwords($request->first_name);
             $data['middle_name'] = ucwords($request->middle_name);
             $data['last_name'] = ucwords($request->last_name);
             $data['address'] = ucwords($request->address);
