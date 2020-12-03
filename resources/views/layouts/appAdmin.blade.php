@@ -9,17 +9,12 @@
 
         <title>DdO QR</title>
 
-        <!-- Scripts -->
-        <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
-    
-
         <!-- Fonts -->
        
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('vendor/fontawesome-free-5.14.0/css/all.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
         @yield('styles')

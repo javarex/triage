@@ -9,18 +9,13 @@
 
     <title>DdO QR</title>
     <!-- Fonts -->
-    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
-
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet"> 
-    <link href="{{ asset('vendor/fontawesome-free-5.14.0/css/all.min.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet"> -->
+   
     <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet"> -->
 
     @yield('styles')
 </head>
@@ -50,14 +45,11 @@
     
 
     <script src="{{ asset('js/app.js') }}"></script>
-    <!-- <script src="{{ asset('js/jquery.steps.min.js') }}"></script> -->
+
     <script src="{{ asset('js/notify.min.js') }}"></script>
     <script src="{{ asset('js/pageLoader.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
-    <!-- <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script> -->
+   
     
     @yield('scripts')
 </body>
