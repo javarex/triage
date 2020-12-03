@@ -15,7 +15,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet"> 
    
     <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+
 
     @yield('styles')
 </head>
@@ -44,11 +44,9 @@
     </main>
     
 
-    <script src="{{ asset('js/app.js') }}"></script>
 
-    <script src="{{ asset('js/notify.min.js') }}"></script>
     <script src="{{ asset('js/pageLoader.js') }}"></script>
-    <script src="{{ asset('js/select2.min.js') }}"></script>
+
    
     
     @yield('scripts')

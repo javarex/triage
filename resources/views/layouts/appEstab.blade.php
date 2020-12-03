@@ -8,13 +8,10 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>DdO QR</title>
-
-        <!-- Fonts -->
-       
-
+        
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet"> 
         <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
         @yield('styles')
@@ -33,7 +30,7 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
+                        <!-- <ul class="navbar-nav mr-auto">
                             <li class="nav-item "> 
                                 <a href="#" class="nav-link text-warning">
                                     <i class="fa fa-user" aria-hidden="true"></i> User
@@ -44,7 +41,7 @@
                                     <i class="fa fa-building" aria-hidden="true"></i> Establishment
                                 </a>
                             </li>
-                        </ul>
+                        </ul> -->
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
@@ -95,17 +92,17 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{route('admin.update', Auth::user()->id)}}" method="post">
+                    <form action="/updateEstablishment/{{ auth()->user()->id }}" method="post">
                         @csrf
                         @method('PATCH')
                         <div class="modal-body">
 
                             <div class="form-group row">
-                                <label for="first_name" class="col-md-4 col-form-label text-md-right">
-                                    First name
+                                <label for="name" class="col-md-4 col-form-label text-md-right">
+                                    Name
                                 </label>
                                 <div class="col-md-6">
-                                    <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ old('first_name') ?? Auth::user()->first_name }}">
+                                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') ?? Auth::user()->first_name }}">
                                 </div>
                             </div>
 

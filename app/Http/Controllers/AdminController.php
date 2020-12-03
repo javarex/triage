@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Client;
-use App\Office;
+use App\Province;
+use App\Municipal;
+use App\Barangay;
+use App\Establishment_type;
 use App\Exports\ActivitiesExport;
 use App\Imports\ActivitiesImport;
 use App\Imports\ActivityImport1;
@@ -25,18 +28,39 @@ class AdminController extends Controller
    
     public function index()
     {
+        $role = auth()->user()->role;
         $newJson = '';
+        $user = auth()->user();
         $clients = User::where('role','<>',0)
                         ->get();
         $newArray = array();
         foreach ($clients as $client) {
-            if($client->role != 0){
-                $decrypted_firstname = Crypt::decryptString($client->first_name);
-                $decrypted_last_name = Crypt::decryptString($client->last_name);
+            
+            if($client->role != 0 && $client->role != 1){
+                $decrypted_firstname = $this->decryptValue($client->first_name);
+               
+                $decrypted_last_name = $this->decryptValue($client->last_name);
                  array_push($newArray, array('first_name' => $decrypted_firstname, 'last_name' => $decrypted_last_name, 'qrcode'=> $client->qrcode ));
             }
         }
-        return view('admin.index',compact('clients','newArray'));
+        return view('admin.index',compact('clients','newArray','user','role'));
+    }
+
+    public function create()
+    { 
+        $user = auth()->user();
+        $establishment_type = Establishment_type::orderBy('type', 'asc')->get();
+        $provinces = Province::orderBy('provDesc', 'asc')->get();
+        $municipals = Municipal::orderBy('citymunDesc', 'asc')->get();
+        $barangays = Barangay::orderBy('brgyDesc', 'asc')->get();
+        return view('admin.create', compact('provinces','establishment_type','municipals','barangays','user'));
+    }
+
+    public function store(Request $request)
+    {
+        $validator = $request->validate([
+            'establishment_name' => 'required'
+        ]);
     }
 
     public function updateClient(Request $request)
@@ -73,4 +97,20 @@ class AdminController extends Controller
         Excel::import(new EmployeesImport, $request->file('file'));
         return back()->with('success_import','All is well!');
     }
+     public function show ()
+     {
+         return view('establishment.index');
+     }
+
+     protected function decryptValue($myString)
+     {
+         try {
+             //code...
+             $result = Crypt::decryptString($myString);
+            
+         } catch (DecryptException $e) {
+             $result = $myString;
+         }
+         return $result;
+     }
 }

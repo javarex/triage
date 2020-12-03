@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Support\Facades\Auth;
 use Closure;
+use Auth;
 
-class CheckOffice
+class CheckEstablishment
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class CheckOffice
     {
         if(Auth::check())
         {
-            if (Auth::user()->type !== 1) {
+            if (Auth::user()->role !== 1) {
                 return redirect('/');
             }
         }else{

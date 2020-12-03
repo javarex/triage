@@ -13,7 +13,7 @@ use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
-
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Crypt;
@@ -32,11 +32,10 @@ class TriageController extends Controller
         $province = strtolower($user->provDesc);
         $address = ucwords($brgy.', '.$municipal.', '.$province);
         $directory = date('m-d-Y', strtotime($date));
-
-        $first_name =$user->first_name;
-        $last_name =$user->last_name;
-        $middle_name =$user->middle_name;
-
+        $first_name = $this->decryptValue($user->first_name);
+        $last_name = $this->decryptValue($user->last_name);
+        
+        $middle_name =$user->middle_name; 
         if($user->suffix){
             $Users_name = $first_name.' '.strtoupper($middle_name[0]).'. '.$last_name.' '.$user->suffix.'.'; 
         }else{
@@ -165,4 +164,15 @@ class TriageController extends Controller
        return redirect('/triage')->with('success','QR code successfully change!');
     }
 
+    protected function decryptValue($myString)
+    {
+        try {
+            //code...
+            $result = Crypt::decryptString($myString);
+           
+        } catch (DecryptException $e) {
+            $result = $myString;
+        }
+        return $result;
+    }
 }

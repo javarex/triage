@@ -17,7 +17,14 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-7 bg-primary border text-warning">
+        
+            @if($message1 = Session::get('successful'))
+            <div class="col-md-12 alert alert-success" role="alert" id="successAdd">
+                {{ $message1 }}
+            </div>
+            @endif
+
+            <div class="col-md-7 bg-choco border text-warning">
             @error('file')
             <div class="alert alert-danger" role="alert">
                 {{ $message }}
@@ -89,7 +96,7 @@
                        
                     </div>
                    <div class="">
-                        <table id="clientTable" class="table bg-primary table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
+                        <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
                             <thead class="">
                                 <tr>
                                     <th>QR Code</th>
@@ -191,32 +198,11 @@
                     @endif
                 </div>
 
+            <!-- include modal for establishment registration admin/include_files/modalRegistration -->
+                @include('admin.include_files.modalRegistration')
                 <div class="">
-                    <a href="{{ route('office.create') }}"><span class="fas fa-plus    ">ADD OFFICE</span> </a>
+                    <a href="establishment/create"><span class="fas fa-plus">ADD ESTABLISHMENT</span> </a>
                     <div class="">
-                        <!-- <table id="example1" class="table table-dark table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                            <thead class="">
-                                <tr>
-                                    <th>Name</th>
-                                    <th class="text-center">Username</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center"><i class="fa fa-cog" aria-hidden="true"></i></th>
-                                </tr>
-                            </thead>
-                        
-                            <tbody>
-                                @foreach($newArray as $client)
-                                    <tr>
-                                        <td>{{$client['first_name']}}</td>
-                                        <td>{{$client['last_name']}}</td>
-                                        <td></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table> -->
-
-                        <!-- modal tags -->
-
                         <div class="modal fade" id="modalTag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -283,6 +269,8 @@
             </div>
         </div>
     </div>
+
+    
 @endsection
 
 @section('scripts')
