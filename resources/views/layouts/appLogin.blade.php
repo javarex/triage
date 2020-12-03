@@ -16,7 +16,6 @@
    
     <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
 
-
     @yield('styles')
 </head>
 
@@ -44,6 +43,7 @@
     </main>
     
 
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <script src="{{ asset('js/pageLoader.js') }}"></script>
 
