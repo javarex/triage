@@ -34,7 +34,7 @@
         <div class="col-md-10">
             <div class="bg-primary">
                 <div class="card font-weight-bold text-choco shadow" style="background-color:#ffe56c">
-                    <form method="POST" action="{{ route('client.store') }}" autocomplete="off" enctype="multipart/form-data" id="register">
+                    <form method="POST" action="{{ route('client.store') }}" role="form" autocomplete="off" enctype="multipart/form-data" id="register">
                         @csrf
 
                         @if($message = Session::get('delete'))
@@ -56,7 +56,7 @@
                                     <div class="col-md-12">
                                         <input type="hidden" name="role" value="2" >
                                         <input type="hidden" name="code" value="{{$code}}" >
-                                        <input id="first_name" type="text" required class="form-control" name="first_name" value="{{ old('first_name') }}"  autofocus>
+                                        <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}"  autofocus>
                                     @error('first_name')
                                         <small class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -118,7 +118,7 @@
                                         <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Sex') }}</span>
                                     </div>
                                     <div class="col-md-12">
-                                        <select name="sex" id="sex" class="form-control" name="sex" value="{{ old('sex') }}" autocomplete="sex" required>
+                                        <select name="sex" id="sex" class="form-control" name="sex" value="{{ old('sex') }}" autocomplete="sex" >
                                             <option value=""></option>
                                             <option value="male" {{ old('sex') == 'male' ? 'selected' : '' }}>Male</option>
                                             <option value="female" {{ old('sex') == 'female' ? 'selected' : '' }}>Female</option>
@@ -168,10 +168,10 @@
                                         </div>
 
                                         <div class="col-md-12">
-                                            <select name="provDesc" class="form-control" id="province" required style="width:100%">
+                                            <select name="provCode" class="form-control" id="province"  style="width:100%">
                                                 <option value=""></option>
                                                 @foreach($provinces as $province => $key)
-                                                <option value="{{$key->provDesc}}" data-provCode="{{$key->provCode}}" {{ old('provDesc') == $key->provDesc ? 'selected' : '' }}>{{$key->provDesc}}</option>
+                                                <option value="{{$key->provCode}}" data-provCode="{{$key->provCode}}" {{ old('provCode') == $key->provCode ? 'selected' : '' }}>{{$key->provDesc}}</option>
                                                 @endforeach
                                             </select>
                                             @error('province')
@@ -191,7 +191,7 @@
                                         </div>
                     
                                         <div class="col-md-12">
-                                            <select name="citymunDesc" class="form-control" disabled id="municipality" required style="width:100%">
+                                            <select name="citymunCode" class="form-control" disabled id="municipality"  style="width:100%">
                                                 <option value="" ></option>
                                             </select>
                                             @error('municipality')
@@ -211,10 +211,10 @@
                                         </div>
                     
                                         <div class="col-md-12">
-                                            <select name="brgyDesc" class="form-control"  disabled id="barangay" required style="width:100%">
+                                            <select name="brgyCode" class="form-control"  disabled id="barangay"  style="width:100%">
                                                 <option value=""></option>
                                             </select>
-                                            @error('barangay')
+                                            @error('brgyCode')
                                                 <small class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </small>
@@ -227,7 +227,7 @@
                                             <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Purok') }}</span>
                                         </div>
                                         <div class="col-md-12">
-                                            <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" placeholder="e.g. 1" required>
+                                            <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" placeholder="e.g. 1" >
                                             @error('address')
                                                 <small class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -286,7 +286,7 @@
                                         </div>
                                     
                                         <div class="col-md-12">
-                                            <input class="form-control-file" name="valid_id" id="valid_id" type="file" accept="image/*;capture=camera" required>
+                                            <input class="form-control-file" name="valid_id" id="valid_id" type="file" accept="image/*;capture=camera" >
                                             @error('valid_id')
                                                 <small class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -386,11 +386,7 @@
 
         $(document).ready(function() {
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+          
 
             //birthday script
             $( "#birthday" ).datepicker({
@@ -438,23 +434,44 @@
                     $('#confirm_password').html('<small class="text-danger font-weight-bold">*</small>')
                 }
             })
-            // $('#submitForm').click(function(){
-            //     var first_name = $('#first_name').val();
-            //     var last_name = $('#last_name').val();
-            //     var suffix = $('#suffix').val();
-            //     var sex = $('#sex').val();
-            //     var birthday = $('#birthday').val();
-            //     var province = $('#province').val();
-            //     var municipality = $('#municipality').val();
-            //     var barangay = $('#barangay').val();
-            //     var address = $('#address').val();
-            //     var valid_id = $('#valid_id').val();
-            //     var username = $('#username').val();
-            //     var password = $('#password').val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#register').submit(function(e){
+               
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url:  '/validateInputs',
+                    type: 'POST',              
+                    data: formData,
+                    cache       : false,
+                    contentType : false,
+                    processData : false,
+                    success: function(result)
+                    {
+                        
+                        if($.isEmptyObject(result.error)){
+                            window.location.href = "/";
+                        }else{
+                            $.each(result, function(key, value) {
+                                $.notify(value, 'error');
+                            })
+                        }
+                    },
+                    error: function(xhr, status, error)
+                    {
+                        $.each(xhr.responseJSON.errors, function (key, item) 
+                        {
+                           $.notify(item[0], 'error');
+                           return false;
+                        });
+                    },
+                });
 
-            //     validateInputs(first_name, last_name, suffix, sex, birthday, province, municipality, barangay, address,valid_id, username, password);
-
-            // });
+            });
 
             
             
@@ -499,7 +516,7 @@
                 dataType: 'json',
                 success: function(data){
                     $.each( data, function( key, value ) {
-                        output += '<option value="'+value.citymunDesc+'"  data-munCode="'+value.citymunCode+'">'+value.citymunDesc+'</option>';
+                        output += '<option value="'+value.citymunCode+'"  data-munCode="'+value.citymunCode+'">'+value.citymunDesc+'</option>';
                        
                     });
                     $('#municipality').html(output);
@@ -517,11 +534,13 @@
                 dataType: 'json',
                 success: function(data){
                     $.each( data, function( key, value ) {
-                        output += '<option value="'+value.brgyDesc+'">'+value.brgyDesc+'</option>';
+                        output += '<option value="'+value.brgyCode+'">'+value.brgyDesc+'</option>';
                     });
                     $('#barangay').html(output);
                 }
             })
         }
+
+      
     </script>
 @endsection

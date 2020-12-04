@@ -35,8 +35,8 @@
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item "> 
-                                <a href="#" class="nav-link text-warning">
-                                    <i class="fa fa-user" aria-hidden="true"></i> User
+                                <a href="userModule" class="nav-link text-warning">
+                                    <i class="fa fa-user" aria-hidden="true"></i> Citizens
                                 </a>
                             </li>
                             <li class="nav-item "> 

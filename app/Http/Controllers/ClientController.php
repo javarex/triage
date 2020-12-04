@@ -51,11 +51,12 @@ class ClientController extends Controller
         return view('client.create', compact('code','provinces'));
     }
    
+    
 
     public function store(Request $request)
     {
         $duplicatedName = true;
-
+        
         
        
         $date = Carbon::now(); 
@@ -104,9 +105,9 @@ class ClientController extends Controller
             $data['username'] = $request->username;
             $data['sex'] = $request->sex;
             $data['email'] = $request->email;
-            $data['provDesc'] = $request->provDesc;
-            $data['brgyDesc'] = $request->brgyDesc;
-            $data['citymunDesc'] = $request->citymunDesc;
+            $data['provCode'] = $request->provCode;
+            $data['brgyCode'] = $request->brgyCode;
+            $data['citymunCode'] = $request->citymunCode;
             $data['role'] = $request->role;
             $data['verified'] = 0;
             $data['suffix'] = $request->suffix;
@@ -163,23 +164,66 @@ class ClientController extends Controller
 
     public function validateInputs(Request $request)
     {
+        $duplicatedName = true;
+        
         $validator = $request->validate([
             'first_name'            => 'required|regex:/^[a-z0-9 .\-]+$/i',
             'last_name'             => 'required|regex:/^[a-z0-9 .\-]+$/i',
-            'suffix'                => 'required',
             'sex'                   => 'required',
             'birthday'              => 'required',
             'address'               => 'required',
-            'provDesc'              => 'required',
-            'citymunDesc'           => 'required',
-            'brgyDesc'              => 'required',
+            'provCode'              => 'required',
+            'citymunCode'           => 'required',
+            'brgyCode'              => 'required',
             'valid_id'              => 'required|mimes:jpg,jpeg,png|max:2048', 
-            'username'              => 'required',
+            'username'              => 'required|unique:users',
             'password'              => 'required|confirmed',
         ]);
-
-  
+        $allUsers = User::all();
         
+        foreach ($allUsers as $value) {
+            $tempFirstName = $value->first_name;
+            $tempLastName = $value->last_name;
+            if(strcasecmp($request->first_name, $tempFirstName) == 0 && strcasecmp($request->last_name, $tempLastName) == 0 && strcasecmp($value->suffix, $request->suffix) == 0)
+            {
+                $duplicatedName = false;
+                break;
+            }
+        }
+        if($duplicatedName){
+            if($validator ){
+                $fileName =  $request->file('valid_id');
+                $file = $fileName->getClientOriginalName();
+                $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
+        
+                $data['qrcode'] = $request->code;
+                $data['username'] = $request->username;
+                $data['sex'] = $request->sex;
+                $data['email'] = $request->email;
+                $data['provCode'] = $request->provCode;
+                $data['brgyCode'] = $request->brgyCode;
+                $data['citymunCode'] = $request->citymunCode;
+                $data['role'] = $request->role;
+                $data['verified'] = 0;
+                $data['suffix'] = $request->suffix;
+                $data['contact_number'] = $request->contact_number;
+                $data['first_name'] = ucwords($request->first_name);
+                $data['middle_name'] = ucwords($request->middle_name);
+                $data['last_name'] = ucwords($request->last_name);
+                $data['address'] = ucwords($request->address);
+                $data['password'] = bcrypt($request->password);
+                $data['birthday'] = date('Y-m-d', strtotime($request->birthday));
+                $data['valid_id'] = $file_name;
+                
+                $user = User::create($data);
+                auth()->login($user);
+                return response()->json(['success'=> 'Successfully added!']);
+            }else{
+                return response()->json(['error'=>$validator->errors()->all()]);
+            }
+        }else{
+            return response()->json(['error'=> 'Record already exist']);
+        }
     }
 
 }

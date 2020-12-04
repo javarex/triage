@@ -57,6 +57,9 @@ Route::resource('/admin', 'AdminController')->middleware('admin');
 Route::get('export', 'AdminController@export')->name('export');
 Route::post('/import', 'AdminController@import');
 Route::get('create/establishment', 'AdminController@create');
+Route::middleware(['admin'])->group(function () {
+    Route::get('userModule','AdminController@userModule_index');
+});
 
 // Establishment routes
 Route::get('/establishment/create', 'EstablishmentController@create');
