@@ -168,10 +168,10 @@
                                         </div>
 
                                         <div class="col-md-12">
-                                            <select name="provCode" class="form-control" id="province"  style="width:100%">
+                                            <select name="province" class="form-control" id="province"  style="width:100%">
                                                 <option value=""></option>
                                                 @foreach($provinces as $province => $key)
-                                                <option value="{{$key->provCode}}" data-provCode="{{$key->provCode}}" {{ old('provCode') == $key->provCode ? 'selected' : '' }}>{{$key->provDesc}}</option>
+                                                <option value="{{$key->id}}" data-provCode="{{$key->provCode}}" {{ old('provCode') == $key->provCode ? 'selected' : '' }}>{{$key->provDesc}}</option>
                                                 @endforeach
                                             </select>
                                             @error('province')
@@ -191,7 +191,7 @@
                                         </div>
                     
                                         <div class="col-md-12">
-                                            <select name="citymunCode" class="form-control" disabled id="municipality"  style="width:100%">
+                                            <select name="municipality" class="form-control" disabled id="municipality"  style="width:100%">
                                                 <option value="" ></option>
                                             </select>
                                             @error('municipality')
@@ -211,10 +211,10 @@
                                         </div>
                     
                                         <div class="col-md-12">
-                                            <select name="brgyCode" class="form-control"  disabled id="barangay"  style="width:100%">
+                                            <select name="barangay" class="form-control"  disabled id="barangay"  style="width:100%">
                                                 <option value=""></option>
                                             </select>
-                                            @error('brgyCode')
+                                            @error('barangay')
                                                 <small class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </small>
@@ -516,7 +516,7 @@
                 dataType: 'json',
                 success: function(data){
                     $.each( data, function( key, value ) {
-                        output += '<option value="'+value.citymunCode+'"  data-munCode="'+value.citymunCode+'">'+value.citymunDesc+'</option>';
+                        output += '<option value="'+value.id+'"  data-munCode="'+value.citymunCode+'">'+value.citymunDesc+'</option>';
                        
                     });
                     $('#municipality').html(output);
@@ -534,7 +534,7 @@
                 dataType: 'json',
                 success: function(data){
                     $.each( data, function( key, value ) {
-                        output += '<option value="'+value.brgyCode+'">'+value.brgyDesc+'</option>';
+                        output += '<option value="'+value.id+'">'+value.brgyDesc+'</option>';
                     });
                     $('#barangay').html(output);
                 }

@@ -172,9 +172,9 @@ class ClientController extends Controller
             'sex'                   => 'required',
             'birthday'              => 'required',
             'address'               => 'required',
-            'provCode'              => 'required',
-            'citymunCode'           => 'required',
-            'brgyCode'              => 'required',
+            'province'              => 'required',
+            'municipality'          => 'required',
+            'barangay'              => 'required',
             'valid_id'              => 'required|mimes:jpg,jpeg,png|max:2048', 
             'username'              => 'required|unique:users',
             'password'              => 'required|confirmed',
@@ -200,9 +200,9 @@ class ClientController extends Controller
                 $data['username'] = $request->username;
                 $data['sex'] = $request->sex;
                 $data['email'] = $request->email;
-                $data['provCode'] = $request->provCode;
-                $data['brgyCode'] = $request->brgyCode;
-                $data['citymunCode'] = $request->citymunCode;
+                $data['provinces_id'] = $request->province;
+                $data['barangays_id'] = $request->barangay;
+                $data['municipals_id'] = $request->municipality;
                 $data['role'] = $request->role;
                 $data['verified'] = 0;
                 $data['suffix'] = $request->suffix;

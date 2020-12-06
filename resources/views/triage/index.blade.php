@@ -19,17 +19,15 @@
     <div class="col-md-12">
         <div class="row">
         <div class="col-md-4"></div>
-            <div class="col-md-4 py-3" style="background-color:white;">
+            <div class="col-md-4 py-3" style="background-color:white;" id="divID">
                 <!-- left side content                 -->
                 <div class="card">
                     <div class="card-body pb-0">
                         <div class="row text-center">
                             <div class="col-md-12 d-flex justify-content-center text-center ">
-                                @if(is_null($user->qredit))
-                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate($user->qrcode) !!}
-                                @else
-                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(0)->generate($user->qredit) !!}
-                                @endif
+                               
+                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(5)->generate($user->qrcode) !!}
+                               
                             </div>
                             <div class="col-md-12">
                                 <span href="#" class="dropdown-item" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
@@ -63,22 +61,23 @@
                                         {{ $address }}
                                     </div>
                                 </div>   
-                                <!-- Contact number       -->
                                 <div class="row pt-1 border border-left-0 border-right-0 border-top-0 border-bottom-1">
-                                    <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fa fa-phone" aria-hidden="true"></i></label>
+                                    <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-print    "></i></label>
                                     
                                     <div class="col-md-8 px-1"> 
-                                        {{ucwords($user->contact_number)}}
+
+                                    <a href="#" class="font-weight-bolder" data-toggle="modal" data-target="#idPrint">
+                                         Print ID
+                                    </a>
+                                        <!-- <a href="#" id="printme" class="link" onclick="javascript:printDiv('divID')" style="color: blue;">
+                                            <span>
+                                                Print ID
+                                            </span>
+                                        </a> -->
                                     </div>
                                 </div>   
-                                <!-- Email       -->
-                                <div class="row pt-1 ">
-                                    <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fas fa-at    "></i></label>
-                                    
-                                    <div class="col-md-8 px-1"> 
-                                        {{$user->email}}
-                                    </div>
-                                </div>   
+                                
+                                   
                             </div>
                         </div>
                     </div>
@@ -101,17 +100,40 @@
 @section('scripts')
 <script>
     
-    function printDiv(divName){
-			var printContents = document.getElementById(divName).innerHTML;
-			var originalContents = document.body.innerHTML;
+   
 
-			document.body.innerHTML = printContents;
+        function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
 
-			window.print();
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML = 
+              "<html><head><title></title></head><body><center></center>" + 
+              divElements + "</body></html>";
 
-			document.body.innerHTML = originalContents;
+            //Print Page
+            window.print();
 
-		}
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
+
+             
+            
+
+          
+        }
+
+        function printForm() {
+            printJS({
+                printable: 'printDiv',
+                type: 'html',
+                targetStyles: ['*'],
+                
+            })
+        }
     $(document).ready(function (){
         $('#example').DataTable({
             "bSort" : false
