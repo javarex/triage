@@ -109,7 +109,7 @@ class AdminController extends Controller
         $role = auth()->user()->role;
         $newJson = '';
         $user = auth()->user();
-        $clients = User::with('barangay','municipal','province')
+        $clients = User::with('barangay')
                         ->where('role','<>',0)
                         ->get();
         dd($clients);
@@ -143,6 +143,12 @@ class AdminController extends Controller
              $result = $myString;
          }
          return $result;
+
+         try {
+             //code...
+         } catch (\Throwable $th) {
+             //throw $th;
+         }
      }
 
      
