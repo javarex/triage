@@ -19,7 +19,7 @@
     <div class="col-md-12">
         <div class="row ">
         <div class="col-md-5"></div>
-            <div class="col-md-3 py-3 d-flex justify-content-center " style="background-color:#925209;" id="divID">
+            <div class="col-md-3 p-2 d-flex justify-content-center " style="background-color:#925209;" id="divID">
                 <!-- left side content                 -->
                 <div class="card  px-0">
                     <div class="card-body pb-0">

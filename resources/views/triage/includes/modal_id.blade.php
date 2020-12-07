@@ -27,7 +27,7 @@
                                         PROVINCE OF DAVAO DE ORO
                                     </div>
                                 </div>
-                                <div class="col-md-12 py-2 text-center" >
+                                <div class="col-md-12 py-2 d-flex justify-content-center" >
                                     <div class="mb-0 " style="font-size:8pt; font-weight:bolder">Covid-19 Contact Tracing System<span class="font-weight-bolder">(CCTS Card)</span></div>
                                     
                                 </div>
