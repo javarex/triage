@@ -18,13 +18,13 @@
 <div class="row">
     <div class="col-md-12">
         <div class="row ">
-        <div class="col-md-5"></div>
-            <div class="col-md-3 p-2 d-flex justify-content-center " style="background-color:#FFED97;" id="divID">
+        <div class="col-md-4"></div>
+            <div class="col-md-4 p-2 d-flex justify-content-center " style="background-color:#FFED97;" id="divID">
                 <!-- left side content                 -->
                 <div class="card  px-0">
                     <div class="card-body pb-0 text-light" style="background-color:#603C03;">
                         <div class="row text-center">
-                            <div class="col-md-12 d-flex justify-content-center text-center ">
+                            <div class="col-md-12 d-flex justify-content-center text-center">
                                 {!! QrCode::size('110')->color(68, 41, 0)->margin(1)->generate($user->qrcode) !!}
                             </div>
                             <div class="col-md-12">
