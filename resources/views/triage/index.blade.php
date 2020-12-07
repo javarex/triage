@@ -17,20 +17,18 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="row">
-        <div class="col-md-4"></div>
-            <div class="col-md-4 py-3" style="background-color:white;" id="divID">
+        <div class="row ">
+        <div class="col-md-5"></div>
+            <div class="col-md-3 py-3 d-flex justify-content-center " style="background-color:#925209;" id="divID">
                 <!-- left side content                 -->
-                <div class="card">
+                <div class="card  px-0">
                     <div class="card-body pb-0">
                         <div class="row text-center">
                             <div class="col-md-12 d-flex justify-content-center text-center ">
-                               
-                                    {!! QrCode::size('200')->color(68, 41, 0)->margin(5)->generate($user->qrcode) !!}
-                               
+                                {!! QrCode::size('110')->color(68, 41, 0)->margin(1)->generate($user->qrcode) !!}
                             </div>
                             <div class="col-md-12">
-                                <span href="#" class="dropdown-item" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
+                                <span href="#" class="dropdown-item" style="font-size:10px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
                                     <span class="font-weight-bold">{{$user->qrcode}}</span> 
                                 </span>
                             </div>
