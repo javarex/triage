@@ -219,7 +219,7 @@ class ClientController extends Controller
                 auth()->login($user);
                 return response()->json(['success'=> 'Successfully added!']);
             }else{
-                return response()->json(['error'=>$validator->errors()->all()]);
+                return response()->json(['error'=>$validator->errors()->all() ]);
             }
         }else{
             return response()->json(['error'=> 'Record already exist']);

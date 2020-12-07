@@ -111,4 +111,27 @@ class EstablishmentController extends Controller
 
         return redirect('/establishment')->with('addedTerminal','Terminal: '.$terminal->description.' successfully added!');
     }
+
+    public function editTerminal(Request $request, $terminalId)
+    {
+        $validator = Validator::make($request->all(),[
+            'number'        => 'required|numeric',
+            'description'   => 'required'
+        ]);
+        if($validator->fails())
+        {
+            return response()->json(['error' => $validator->errors()->all() ]);
+        }else{
+            $terminal = Terminal::findOrFail($terminalId);
+            $terminal->update($request->all());
+ 
+             return response()->json(['success' => 'Update successfully' ]);
+        }
+        
+    }
+
+    public function destroy($terminal_id)
+    {
+        
+    }
 }

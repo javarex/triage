@@ -142,6 +142,7 @@
         </div>
 
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/notify.min.js') }}"></script>
         <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('js/dataTables.responsive.min.js') }}"></script>

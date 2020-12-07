@@ -70,6 +70,8 @@ Route::middleware(['establishment'])->group(function () {
     Route::post('addTerminal', 'EstablishmentController@terminalStore');
     Route::patch('updateEstablishment/{user_id}', 'EstablishmentController@updateEstablishment');
     Route::get('/establishment', 'EstablishmentController@index');
+    Route::post('/editTerminal/{terminalId}', 'EstablishmentController@editTerminal');
+    Route::post('/deleteTerminal/{terminalId}', 'EstablishmentController@deleteTerminal');
 });
 
 

@@ -35,8 +35,8 @@
                         <td>{{$terminal->number}}</td>
                         <td>{{$terminal->description}}</td>
                         <td  class="text-center w-25">
-                            <a href="#" class="btn btn-success btn-sm" title="View or Edit this terminal"><i class="fa fa-fw fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm" title="Delete this terminal"><i class="fa fa-fw fa-trash"></i></a>
+                            <a href="#" class="btn btn-success btn-sm" data-terminal_id="{{$terminal->id}}" id="terminalEdit_btn" title="View or Edit this terminal" data-toggle="modal" data-target="#editTerminal"><i class="fa fa-fw fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger btn-sm" data-terminal_id="{{$terminal->id}}" title="Delete this terminal"><i class="fa fa-fw fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -45,51 +45,60 @@
         </div>
     </div>
 
-    <div class="modal fade" id="add_establishmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form action="/addTerminal" method="post" autocomplete="off" id="form_addTerminal">
-            @csrf
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add New Terminal</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" id="printProfile">
-                        <div class="row container">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="number" class="form-control-mod" name="number" placeholder="Terminal Number" required>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control-mod" name="description" placeholder="Terminal Description" required>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button  class="btn btn-choco" id="submit_addTerminal">Save</button>                
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+    @include('establishment.includes.modals')
 @endsection
 
 @section('scripts')
     <script>
+        var formEdit_id = '';
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-           
+            
+            $(document).on('click','#terminalEdit_btn', function () {
+                formEdit_id = $(this).attr('data-terminal_id');
+            });
+           $(document).on('click','#submit_editTerminal', function (){
+               var terminalNumber = $('#terminalNumber').val();
+               var terminal_Description = $('#terminal_Description').val();
+               var terminal_Description = $('#terminal_id').val();
+               editTerminal(form_editTerminal,formEdit_id);
+           })
         })
+
+        function deleteTerminal(){
+            $.ajax({
+                type:'POST',
+                url: '/deleteTerminal/'+terminal_id,
+                data:form_inputs,
+                dataType:'json',
+                success: function(data){
+                   
+                }
+            })
+        }
+
+        function editTerminal(form_editTerminal, terminal_id)
+        {
+            form_inputs = $('#form_editTerminal').serialize();
+            $.ajax({
+                type:'POST',
+                url: '/editTerminal/'+terminal_id,
+                data:form_inputs,
+                dataType:'json',
+                success: function(data){
+                    if($.isEmptyObject(data.error)){
+                        location.reload(true);
+                    }else{
+                        $.each(data, function(key, value) {
+                            $.notify(value[0], 'error');
+                        })
+                    }
+                }
+            })
+        }
     </script>
 @endsection
