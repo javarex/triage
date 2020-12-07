@@ -11,46 +11,46 @@
       <div class="modal-body ">
 
         <div id="printDiv" class="">
-            <div class="row p-2">
-                <div class="col-md-2 mr-1"></div>
-                <div class="col-md-8 border border-1 border-dark mt-1">
+            <div class="row py-2 px-3">
+                <div class="col-md-6 border border-1 border-dark mt-1">
                     <div class="row">
                         <div class="col-md-9 pt-2 pl-1 bg-light text-nowrap  ">
                            <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <img src="{{ asset('image/ddo.png') }}" width="75" height="75" alt="">
                                 </div>
-                                <div class="col-md-8 pl-0 pt-1">
+                                <div class="col-md-8 pt-3 pl-4" style="font-size:9pt">
                                     <div class="d-flex justify-content-start">
                                         <strong class="">Republic of the Philippines</strong>
                                     </div>
                                     <div class="text-nowrap d-flex justify-content-start font-weight-bolder">
                                         PROVINCE OF DAVAO DE ORO
                                     </div>
-                                    <div class="text-nowrap d-flex justify-content-start">
-                                        Municipality of Nabunturan
-                                    </div>
                                 </div>
-                                <div class="col-md-12 py-2 " >
-                                    <h6 class="mb-0 ">CCTS Card <i>(Covid-19 Contact Tracing System)</i></h6>
+                                <div class="col-md-12 py-2 text-center" >
+                                    <h6 class="mb-0 " style="font-size:9pt; font-weight:bolder">CCTS Card <i>(Covid-19 Contact Tracing System)</i></h6>
                                     
                                 </div>
                                 <div class="col-md-12 d-inline">
-                                    <div class=""><b>CCTS Code:</b> </div><i>{{$user->qrcode}}</i>
+                                    <i></i>
                                 </div>
                                 <div class="col-md-12 d-inline">
-                                    <div class=""><b>Fullname:</b> </div><i>{{$Users_name}}</i>
+                                   <h3 class="font-weight-bolder text-center">{{$Users_name}}</h3>
                                 </div>
                                 <div class="col-md-12 d-inline">
-                                    <div class=""><b>Address:</b></div> <i>{{$address}}</i>
+                                     <div class="text-center">{{$address}}</div>
                                 </div>
                            </div>
                         </div>
                         <div class="col-md-3" style="border-left:solid grey 1px;">
                             <div class="row">
-                                <div class="col-md-12 py-1 d-flex justify-content-center" style="border-bottom: solid black 1px">
-                                    {!! QrCode::size('130')->color(68, 41, 0)->margin(0)->generate($user->qrcode) !!}
+                                <div class="col-md-12 p-0 d-flex justify-content-center" style="border-bottom: solid black 1px">
+                                    <div class="row">
+                                        <div class="col-md-12 pt-1 d-flex justify-content-center">{!! QrCode::size('90')->color(68, 41, 0)->margin(0)->generate($user->qrcode) !!}</div>
+                                        <div class="col-md-12 text-center font-weight-bolder" style="font-size:8pt">{{ $user->qrcode}}</div>
+                                    </div>
                                 </div>
+                                
                                 <div class="col-md-12 d-flex justify-content-center pt-5" >
                                     <h3 class="text-secondary">1x1</h3>
                                 </div>
