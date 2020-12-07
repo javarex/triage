@@ -19,16 +19,16 @@
     <div class="col-md-12">
         <div class="row ">
         <div class="col-md-5"></div>
-            <div class="col-md-3 p-2 d-flex justify-content-center " style="background-color:#925209;" id="divID">
+            <div class="col-md-3 p-2 d-flex justify-content-center " style="background-color:#FFED97;" id="divID">
                 <!-- left side content                 -->
                 <div class="card  px-0">
-                    <div class="card-body pb-0">
+                    <div class="card-body pb-0 text-light" style="background-color:#603C03;">
                         <div class="row text-center">
                             <div class="col-md-12 d-flex justify-content-center text-center ">
                                 {!! QrCode::size('110')->color(68, 41, 0)->margin(1)->generate($user->qrcode) !!}
                             </div>
                             <div class="col-md-12">
-                                <span href="#" class="dropdown-item" style="font-size:10px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
+                                <span style="font-size:10px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
                                     <span class="font-weight-bold">{{$user->qrcode}}</span> 
                                 </span>
                             </div>
@@ -64,9 +64,11 @@
                                     
                                     <div class="col-md-8 px-1"> 
 
-                                    <a href="#" class="font-weight-bolder" data-toggle="modal" data-target="#idPrint">
-                                         Print ID
-                                    </a>
+                                    <span class="badge badge-primary">
+                                        <a href="#" class="font-weight-bolder text-light" data-toggle="modal" data-target="#idPrint">
+                                            Print ID
+                                        </a>
+                                    </span>
                                         <!-- <a href="#" id="printme" class="link" onclick="javascript:printDiv('divID')" style="color: blue;">
                                             <span>
                                                 Print ID

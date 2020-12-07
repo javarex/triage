@@ -24,13 +24,9 @@
 <div class="">
     <div class="row justify-content-center ">
         <div class="col-md-12 d-flex justify-content-center">
-            <img src="{{ asset('image/ddoqr.png') }}" class="img-fluid pb-1" width="100" height="100">
+            <img src="{{ asset('image/triage_h.png') }}" class="img-fluid pb-2" width="200" >
         </div>
 
-        <div class="col-md-12 d-flex justify-content-center">
-            <h1 class="text-choco"> <i class="fas fa-qrcode    "></i> Davao de Oro Tracking System</h1>
-        </div>
-        
         <div class="col-md-10">
             <div class="bg-primary">
                 <div class="card font-weight-bold text-choco shadow" style="background-color:#ffe56c">
