@@ -22,7 +22,7 @@ Route::get('/', function () {
             return redirect('/triage');
         }   
     }
-    return view('auth.login');
+    return view('admin.loginForm');
 });
 
 

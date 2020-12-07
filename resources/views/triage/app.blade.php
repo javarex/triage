@@ -22,16 +22,17 @@
     <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/signin.css') }}" rel="stylesheet">
 </head>
 
 <!-- background-image: radial-gradient(circle, #fff3c0 , #fcd538, gold) -->
-<body style="background-color:gold">
+<body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color:#442900;">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm py-0" style="background-color:#442900;">
             <div class="container-fluid ml-0 p-0">
                 <a class="navbar-brand" href="{{ url('/triage') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
-                    <img src="{{ asset('image/triagez.png') }}" title="PLGU - DAVAO DE ORO" width="120" height="61" >
+                    <img src="{{ asset('image/triage_h.png') }}" class="img-fluid pb-1" title="PLGU - DAVAO DE ORO" width="80" > 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" style="background-color:white;" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -84,7 +85,7 @@
         @include('triage.includes.modal_id')
         </nav>
 
-        <main class="container-fluid py-3" >
+        <main class="container pt-5" style="height:89vh">
             @yield('content')
         </main>
     </div>

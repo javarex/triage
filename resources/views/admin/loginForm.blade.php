@@ -2,46 +2,82 @@
 
 @section('content')
 <!-- end page loader -->
-    <div class="container">
-        <div class="row pt-5">
-            <div class="col-md-6 ">
-                <img src="{{ asset('image/triagez.png')}}" class="img-fluid" alt="">
-            </div>
-            
-            <div class="col-md-5 p-5 card card-body" style="background-color:transparent">
-                <form action="{{route('login')}}" method="post" autocomplete="off">
-                    @csrf  
-                    <div class="form-group row d-flex justify-content-center">                                
-                        <div class="col-md-10">
-                            <input type="text" class="form-control-mod @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="Username">
-                        </div>
-                    </div>
-                    <div class="form-group row d-flex justify-content-center">
-                        <div class="col-md-10">
-                            <input type="password" class="form-control-mod @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-10">
-                            <button class="btn btn-choco btn-block"><i class="fas fa-sign-in-alt    "> </i> Login</button>    
-                        </div>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-10 mt-1">
-                            <a href="/" class="btn btn-danger btn-block"><i class="fas fa-arrow-left"></i> Back </a>
-                        </div>
-                    </div>
-                    <!-- <div class="form-group row">
-                        <label class="col-md-4 text-md-right"></label>
+<div class="container pt-5">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+						<img src="{{ asset('image/triage.png')}}" class="image-fluid" width="160" alt="Logo">
+					</div>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+					<form action="{{route('login')}}" method="post" autocomplete="off">
+                    @csrf 
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" name="username" class="form-control input_user" value="{{ old('username') }}" placeholder="username">
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
+							<input type="password" name="password" class="form-control input_pass" placeholder="password">
+						</div>
+						
+							<div class="d-flex justify-content-center mt-3 login_container">
+				 	<button name="button" class="btn login_btn">Login</button>
+				   </div>
+					</form>
+				</div>
+		
+				<div class="mt-4">
+					<div class="d-flex justify-content-center links text-light">
+						Don't have an account? <a href="#" class="ml-2" data-toggle="modal" data-target="#modal_signUp">Sign Up</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-                        <div class="col-md-8">
-                            <button class="btn btn-link btn-lg"><i class="fas fa-sign-in-alt    ">Login </i></button>
+    <div class="modal fade" id="modal_signUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body bg-choco">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/establishment/create" class="text-choco">
+                    <div class="card card-body text-center shadow bg-light">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3><i class="fas fa-building    "></i></h3>
+                            </div>
+                            <div class="col-md-12">
+                                <h3>Establishment</h3>
+                            </div>
                         </div>
-                    </div> -->
-                </form>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="/client/create" class="text-choco">
+                    <div class="card card-body text-center shadow bg-light">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3><i class="fas fa-user    "></i></h3>
+                            </div>
+                            <div class="col-md-12">
+                                <h3>Citizen</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
+      </div>
     </div>
-
+  </div>
+</div>
 @endsection
 

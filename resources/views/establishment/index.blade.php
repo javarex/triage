@@ -13,7 +13,7 @@
             @endif
             <div class="row">
                 <div class="col-md-5">
-                    <h1 class="text-choco">
+                    <h1 class="text-light">
                         <i class="fa fa-fw fa-home"></i>TERMINALS
                     </h1>
                 </div>

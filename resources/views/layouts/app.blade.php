@@ -16,11 +16,12 @@
    
     <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/signin.css') }}" rel="stylesheet">
 
     @yield('styles')
 </head>
 
-<body style="background-image: radial-gradient(#fff3c0 , #fcd538, gold)">
+<body>
     <!-- for page loader -->
     <div class="o-page-loader">
         <div class="o-page-loader--content">
