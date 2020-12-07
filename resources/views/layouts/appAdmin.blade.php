@@ -35,8 +35,8 @@
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item "> 
-                                <a href="#" class="nav-link text-warning">
-                                    <i class="fa fa-user" aria-hidden="true"></i> User
+                                <a href="userModule" class="nav-link text-warning">
+                                    <i class="fa fa-user" aria-hidden="true"></i> Citizens
                                 </a>
                             </li>
                             <li class="nav-item "> 
@@ -108,6 +108,8 @@
                                     <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ old('first_name') ?? Auth::user()->first_name }}">
                                 </div>
                             </div>
+
+                           
 
                             <div class="form-group row">
                                 <label for="username" class="col-md-4 col-form-label text-md-right">

@@ -24,10 +24,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'last_name',
         'suffix',
         'address',
-        'brgyDesc',
-        'citymunDesc',
-        'provDesc',
-        'sex','birthday',
+        'provinces_id',
+        'municipals_id',
+        'barangays_id',
+        'sex',
+        'birthday',
         'contact_number', 
         'role',
         'qredit',
@@ -57,15 +58,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function province(){
+    public function provinces(){
         return $this->belongsTo('App\Province');
     } 
 
-    public function municipal(){
+    public function municipals(){
         return $this->belongsTo('App\Municipal');
     } 
 
-    public function barangay(){
+    public function barangays(){
         return $this->belongsTo('App\Barangay');
     } 
 }

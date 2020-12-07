@@ -8,6 +8,7 @@ use App\Province;
 use App\Municipal;
 use App\Barangay;
 use App\Establishment_type;
+use Carbon\Carbon;
 use App\Exports\ActivitiesExport;
 use App\Imports\ActivitiesImport;
 use App\Imports\ActivityImport1;
@@ -102,6 +103,36 @@ class AdminController extends Controller
          return view('establishment.index');
      }
 
+
+     public function userModule_index()
+     {
+        $role = auth()->user()->role;
+        $newJson = '';
+        $user = auth()->user();
+        $clients = User::with('barangay','municipal','province')
+                        ->where('role','<>',0)
+                        ->get();
+        dd($clients);
+        $newArray = array();
+        foreach ($clients as $client) {
+            
+            if($client->role != 0 && $client->role != 1){
+                $decrypted_firstname = $this->decryptValue($client->first_name);
+               
+                $decrypted_last_name = $this->decryptValue($client->last_name);
+                 array_push($newArray, array(
+                     'first_name'   => $decrypted_firstname, 
+                     'last_name'    => $decrypted_last_name, 
+                     'qrcode'       => $client->qrcode,
+                     'age'          =>  Carbon::parse($client->birthday)->age ,
+                     'gender'       => $client->sex,
+                     'address'      =>  $client->barangay['brgyDesc'],
+                ));
+            }
+        }
+        return view('admin.user.index',compact('clients','newArray','user','role'));
+     }
+
      protected function decryptValue($myString)
      {
          try {
@@ -113,4 +144,6 @@ class AdminController extends Controller
          }
          return $result;
      }
+
+     
 }

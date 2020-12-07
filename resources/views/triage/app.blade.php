@@ -60,9 +60,9 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color:#ECC633">
                                 {{ $first_name }}<span class="caret"></span>
                             </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             
+                            
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#profile"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
 
                                 <!-- <a class="dropdown-item" href="{{ route('client.edit', Auth::user()->id ) }}">
@@ -81,6 +81,7 @@
                     </ul>
                 </div>
             </div>
+        @include('triage.includes.modal_id')
         </nav>
 
         <main class="container-fluid py-3" >
@@ -95,6 +96,7 @@
 <script src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/notify.min.js') }}"></script>
 <script src="{{ asset('js/pageLoader.js') }}"></script>
+<script src="{{ asset('js/print.js') }}"></script>
 
 @yield('scripts')
 </body>

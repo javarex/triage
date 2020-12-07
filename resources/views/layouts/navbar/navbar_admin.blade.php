@@ -13,11 +13,11 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item "> 
                     <a href="#" class="nav-link text-warning">
-                        <i class="fa fa-user" aria-hidden="true"></i> User
+                        <i class="fa fa-user" aria-hidden="true"></i> Citizens
                     </a>
                 </li>
                 <li class="nav-item "> 
-                    <a href="establishment" class="nav-link text-warning">
+                    <a href="userModule" class="nav-link text-warning">
                         <i class="fa fa-building" aria-hidden="true"></i> Establishment
                     </a>
                 </li>

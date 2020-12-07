@@ -44,8 +44,8 @@
                                 </a>
                            </div>
                            <div class="col-md-12">
-                                <div class="dropdown">
-                                    <a class="btn btn-choco btn-block dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown">
+                                        <a class="btn btn-choco btn-block dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Sign Up
                                     </a>
                                     <div class="dropdown-menu" style="width:100%" aria-labelledby="dropdownMenuLink">
