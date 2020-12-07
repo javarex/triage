@@ -84,7 +84,7 @@
         @include('triage.includes.modal_id')
         </nav>
 
-        <main class="container-fluid py-3" >
+        <main class="container-fluid py-5" >
             @yield('content')
         </main>
     </div>
