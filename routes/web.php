@@ -59,6 +59,10 @@ Route::post('/import', 'AdminController@import');
 Route::get('create/establishment', 'AdminController@create');
 Route::middleware(['admin'])->group(function () {
     Route::get('userModule','AdminController@userModule_index');
+    Route::get('adminEstab','AdminController@establishment_index');
+    Route::get('ccts_reports','AdminController@report');
+    Route::post('generateReport','AdminController@generateReport');
+    Route::post('/user/getUser/','AdminController@getUser')->name('user.getUser');
 });
 
 // Establishment routes

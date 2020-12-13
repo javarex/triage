@@ -21,3 +21,6 @@ a.bg-choco:focus,a.bg-choco:hover,button.bg-choco:focus,button.bg-choco:hover
 .form-control-mod::-webkit-input-placeholder{
     color:#66696d;opacity:1;text-align:center;
 }
+.bg-deGatas{
+    background-color: #FDEA93;
+}
