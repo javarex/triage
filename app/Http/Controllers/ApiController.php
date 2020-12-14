@@ -24,7 +24,10 @@ class ApiController extends Controller
     }
 
     public function download() {
-        $data = DB::table('users')->select('id','username', 'first_name', 'middle_name', 'last_name', 'qrcode', 'birthday')->limit(10000)->get()->toArray();
+        $data = DB::table('users')
+            ->leftJoin('municipals', 'users.municipal_id', '=', 'municipals.id')
+            ->select('users.id','username', 'first_name', 'middle_name', 'last_name', 'qrcode', 'birthday', 'sex', 'municipals.citymunDesc as municipal')
+            ->limit(10000)->get()->toArray();
 
         return response()->json($data);
     }
