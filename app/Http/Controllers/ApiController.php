@@ -15,7 +15,7 @@ class ApiController extends Controller
            
             DB::table('logs')->insert([
                 'barcode' => $r['barcode'],
-                'timeIn' => $r['timeIn'],
+                'time_in' => $r['time_in'],
             ]);
         }
 
