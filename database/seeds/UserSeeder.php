@@ -21,11 +21,15 @@ class UserSeeder extends Seeder
        for ($i = 0; $i < 1000000; $i++) {
 
            $rand = Str::random(10);
+           $token = Str::random(10);
 
             array_push($userData,[
                 'username' => $rand,
                 'email' => $rand . '@gmail.com',
                 'password' => $password,
+                'verified' => 0,
+                'role' => 0,
+                'remember_token' => $token,
             ]);
         }
 
