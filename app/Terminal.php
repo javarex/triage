@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Terminal extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'establishment_id',
         'number',
@@ -18,4 +22,5 @@ class Terminal extends Model
     {
         return $this->belongsTo('App\Establishment');
     }
+    
 }

@@ -15,40 +15,45 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-        
+<div class="container">
+    <div class="row d-flex justify-content-center">
+
             @if($message1 = Session::get('successful'))
             <div class="col-md-12 alert alert-success" role="alert" id="successAdd">
                 {{ $message1 }}
             </div>
             @endif
-
+            @if($message = Session::get('userAdded'))
+            <div class="col-md-9 alert alert-success" role="alert">
+                {{$message}}
+            </div>
+            @endif
+            
             <div class="col-md-9 bg-choco border text-warning">
                 @error('file')
                 <div class="alert alert-danger" role="alert">
                     {{ $message }}
                 </div>
                 @enderror
-                    @if($message1 = Session::get('success_update'))
-                    <div class="col-md-12 px-0">
-                        <div class="alert alert-success"  role="alert">
-                                {{ $message1 }}
-                        </div>
+                @if($message1 = Session::get('success_update'))
+                <div class="col-md-12 px-0">
+                    <div class="alert alert-success"  role="alert">
+                        {{ $message1 }}
                     </div>
-                    @endif
-                    @if($message2 = Session::get('success_import'))
-                    <div class="col-md-12 px-0">
-                        <div class="alert alert-success"  role="alert">
-                                {{ $message2 }}
-                        </div>
+                </div>
+                @endif
+                @if($message2 = Session::get('success_import'))
+                <div class="col-md-12 px-0">
+                    <div class="alert alert-success"  role="alert">
+                        {{ $message2 }}
                     </div>
-                    @endif
-                    
-                    <!-- Start modal for import -->
-
-                    <div class="modal fade" id="modal_import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                </div>
+                @endif
+                
+                <!-- Start modal for import -->
+                
+                <div class="modal fade" id="modal_import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
                             <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title text-primary" id="exampleModalLabel">Select File</h5>

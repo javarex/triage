@@ -18,9 +18,10 @@
         <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/signin.css') }}" rel="stylesheet">
+       
         @yield('styles')
     </head>
-    <body style="height:100vh">
+    <body >
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color:#442900;">
                 <div class="container-fluid">
@@ -36,13 +37,23 @@
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item "> 
+                                <a href="admin" class="nav-link text-warning">
+                                    <i class="fas fa-home    "></i> Home
+                                </a>
+                            </li>
+                            <li class="nav-item "> 
                                 <a href="userModule" class="nav-link text-warning">
                                     <i class="fa fa-user" aria-hidden="true"></i> Citizens
                                 </a>
                             </li>
                             <li class="nav-item "> 
-                                <a href="establishment" class="nav-link text-warning">
-                                    <i class="fa fa-building" aria-hidden="true"></i> Establishment
+                                <a href="adminEstab" class="nav-link text-warning">
+                                    <i class="fa fa-city" aria-hidden="true"></i> Establishment
+                                </a>
+                            </li>
+                            <li class="nav-item "> 
+                                <a href="ccts_reports" class="nav-link text-warning">
+                                    <i class="fa fa-file-alt" aria-hidden="true"></i> Reports
                                 </a>
                             </li>
                         </ul>
@@ -147,6 +158,9 @@
         </div>
 
         <script src="{{ asset('js/app.js') }}"></script>
+        @if (\Request::is('ccts_reports'))
+        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+        @endif
         <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('js/dataTables.responsive.min.js') }}"></script>

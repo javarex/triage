@@ -59,6 +59,10 @@ Route::post('/import', 'AdminController@import');
 Route::get('create/establishment', 'AdminController@create');
 Route::middleware(['admin'])->group(function () {
     Route::get('userModule','AdminController@userModule_index');
+    Route::get('adminEstab','AdminController@establishment_index');
+    Route::get('ccts_reports','AdminController@report');
+    Route::post('generateReport','AdminController@generateReport');
+    Route::post('/user/getUser/','AdminController@getUser')->name('user.getUser');
 });
 
 // Establishment routes
@@ -70,6 +74,8 @@ Route::middleware(['establishment'])->group(function () {
     Route::post('addTerminal', 'EstablishmentController@terminalStore');
     Route::patch('updateEstablishment/{user_id}', 'EstablishmentController@updateEstablishment');
     Route::get('/establishment', 'EstablishmentController@index');
+    Route::post('/editTerminal/{terminalId}', 'EstablishmentController@editTerminal');
+    Route::post('/deleteTerminal/{terminalId}', 'EstablishmentController@deleteTerminal');
 });
 
 

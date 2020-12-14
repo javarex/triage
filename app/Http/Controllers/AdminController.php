@@ -7,8 +7,11 @@ use App\Client;
 use App\Province;
 use App\Municipal;
 use App\Barangay;
+use App\Logs;
 use App\Establishment_type;
+use App\Establishment;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Exports\ActivitiesExport;
 use App\Imports\ActivitiesImport;
 use App\Imports\ActivityImport1;
@@ -32,6 +35,11 @@ class AdminController extends Controller
         $role = auth()->user()->role;
         $newJson = '';
         $user = auth()->user();
+        $estabLishment = Establishment::all();
+        $citizens = User::where('role',2)
+                        ->get();
+        
+
         $clients = User::where('role','<>',0)
                         ->get();
         $newArray = array();
@@ -44,7 +52,7 @@ class AdminController extends Controller
                  array_push($newArray, array('first_name' => $decrypted_firstname, 'last_name' => $decrypted_last_name, 'qrcode'=> $client->qrcode ));
             }
         }
-        return view('admin.index',compact('clients','newArray','user','role'));
+        return view('admin.index',compact('clients','newArray','user','role','citizens','estabLishment'));
     }
 
     public function create()
@@ -109,10 +117,9 @@ class AdminController extends Controller
         $role = auth()->user()->role;
         $newJson = '';
         $user = auth()->user();
-        $clients = User::with('barangay')
-                        ->where('role','<>',0)
+        $clients = User::with('barangays','municipals','provinces')
+                        ->where('role',2)
                         ->get();
-        dd($clients);
         $newArray = array();
         foreach ($clients as $client) {
             
@@ -126,12 +133,95 @@ class AdminController extends Controller
                      'qrcode'       => $client->qrcode,
                      'age'          =>  Carbon::parse($client->birthday)->age ,
                      'gender'       => $client->sex,
-                     'address'      =>  $client->barangay['brgyDesc'],
+                     'address'      =>  $client->barangays['brgyDesc'].', '.$client->municipals['citymunDesc'].', '.$client->provinces['provDesc'],
                 ));
             }
         }
         return view('admin.user.index',compact('clients','newArray','user','role'));
      }
+
+     public function establishment_index()
+     {
+         return view('admin.admin_establishment.index');
+     }
+
+     //report generate
+     public function report()
+     {
+         return view('admin.report');
+     }
+
+     //auto complete  user input in report view
+     public function getUser(Request $request){
+
+        $search = $request->search;
+        $searchType = $request->searchType;
+        if ($searchType == 'citizen_name') {
+            # code...
+            if($search == ''){
+               $users = User::orderby('first_name','asc')->select('id','first_name','last_name')->limit(5)->get();
+            }else{
+               $users = User::orderby('first_name','asc')
+                            ->select('id','first_name','last_name')
+                            ->where('first_name', 'like', '%' .$search . '%')
+                            ->orWhere('last_name', 'like', '%' .$search . '%')
+                            ->limit(5)->get();
+            }
+      
+            $response = array();
+            foreach($users as $user){
+               $response[] = array("value"=>$user->id,"label"=>$user->first_name.' '.$user->last_name);
+            }
+      
+        }else{
+            if($search == ''){
+                $users = User::orderby('qrcode','asc')->select('id','qrcode')->limit(5)->get();
+             }else{
+                $users = User::orderby('qrcode','asc')
+                             ->select('id','qrcode')
+                             ->where('qrcode', 'like', '%' .$search . '%')
+                             ->limit(5)->get();
+             }
+       
+             $response = array();
+             foreach($users as $user){
+                $response[] = array("value"=>$user->id,"label"=>$user->qrcode);
+             }
+        }
+        return response()->json($response);
+     }
+
+     //generate Report
+
+     public function generateReport(Request $request)
+     {
+        $logs = Logs::where('user_id', $request->user_id)
+                    ->get();
+
+        foreach ($logs as $log) {
+            $datetime = $log->created_at->format('Y-m-d H:i:s');
+            $timestamp = strtotime($datetime);
+            $timeBefore = $timestamp - ($request->before_arrival * 60 * 60);
+            $timeAfter = $timestamp + ($request->after_arrival * 60 * 60);
+            $datetimeBefore = date("Y-m-d H:i:s", $timeBefore);
+            $datetimeAfter = date("Y-m-d H:i:s", $timeAfter);
+            // dd($datetimeBefore.' & '.$datetimeAfter);
+            $count = DB::table('logs')
+                    ->whereBetween('created_at',[$datetimeBefore, $datetimeAfter])
+                    ->get();
+            
+            // Establishment Visit
+
+            $establishment_visit = DB::table('establishments')
+                                    ->join('terminals','establishments.id', '=', 'terminals.establishment_id')
+                                    ->select('establishments.*')
+                                    ->distinct()
+                                    ->get();
+            dd($establishment_visit);
+        }
+     }
+
+     //decrypt value
 
      protected function decryptValue($myString)
      {

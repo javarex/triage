@@ -165,6 +165,8 @@ class ClientController extends Controller
     public function validateInputs(Request $request)
     {
         $duplicatedName = true;
+        $date = Carbon::now(); 
+        $directory = date('m-d-Y', strtotime($date));
         
         $validator = $request->validate([
             'first_name'            => 'required|regex:/^[a-z0-9 .\-]+$/i',
@@ -196,6 +198,11 @@ class ClientController extends Controller
                 $file = $fileName->getClientOriginalName();
                 $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
         
+                Image::load($fileName)
+                ->optimize()
+                ->quality(50)
+                ->save();
+
                 $data['qrcode'] = $request->code;
                 $data['username'] = $request->username;
                 $data['sex'] = $request->sex;
@@ -216,10 +223,12 @@ class ClientController extends Controller
                 $data['valid_id'] = $file_name;
                 
                 $user = User::create($data);
-                auth()->login($user);
+                if (!auth()->check()) {
+                    auth()->login($user);
+                }
                 return response()->json(['success'=> 'Successfully added!']);
             }else{
-                return response()->json(['error'=>$validator->errors()->all()]);
+                return response()->json(['error'=>$validator->errors()->all() ]);
             }
         }else{
             return response()->json(['error'=> 'Record already exist']);

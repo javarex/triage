@@ -12,6 +12,7 @@
 
         <div id="printDiv" class="">
             <div class="row py-2 pl-3">
+              <div class="col-md-3"></div>
                 <div class="col-md-6 border border-1 border-dark mt-1">
                     <div class="row">
                         <div class="col-md-8 pt-2 pl-1 bg-light text-nowrap  ">
