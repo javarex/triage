@@ -9,6 +9,9 @@
             </div>
             <div class="col-md-8">
                 <div class="row">
+                @if($data = Session::get('data'))
+                    {{$data}}
+                @endif
                    <form action="/generateReport" method="post" autocomplete="off">
 
                         @csrf
