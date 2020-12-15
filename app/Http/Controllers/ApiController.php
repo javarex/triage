@@ -60,8 +60,8 @@ class ApiController extends Controller
         }
 
         $data = $data->count();
-
-        $pages = round($data / 10000);
+ 
+        $pages = round($data / 2500);
 
         return response()->json([
                 'total' => $data,
