@@ -29,7 +29,7 @@ class ApiController extends Controller
         $page = Input::get('page');
         $startPage = Input::get('startPage');
 
-        $limit = 10000;
+        $limit = 2500;
         $offset = (($limit) * $page) - ($limit);
         if ($page == 1) {
             $offset = 0;
