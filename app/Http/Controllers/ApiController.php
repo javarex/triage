@@ -51,8 +51,13 @@ class ApiController extends Controller
     public function total_records() {
         
         $data = DB::table('users')
-            ->select('users.id')
-            ->count();
+            ->select('users.id');
+
+        if ($startPage > 0) {
+            $data->where('users.id', '>', $startPage);
+        }
+
+            $data = $data->count();
 
         $pages = round($data / 10000);
 
