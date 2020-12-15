@@ -27,6 +27,8 @@ class ApiController extends Controller
     public function download() {
         
         $page = Input::get('page');
+        $startPage = Input::get('startPage');
+
         $limit = 10000;
         $offset = (($limit) * $page) - ($limit);
         if ($page == 1) {
@@ -35,8 +37,13 @@ class ApiController extends Controller
 
         $data = DB::table('users')
             ->leftJoin('municipals', 'users.municipal_id', '=', 'municipals.id')
-            ->select('users.id','username', 'first_name', 'middle_name', 'last_name', 'qrcode', 'birthday', 'sex', 'municipals.citymunDesc as municipal')
-            ->limit($limit)->offset($offset)->get()->toArray();
+            ->select('users.id','username', 'first_name', 'middle_name', 'last_name', 'qrcode', 'birthday', 'sex', 'municipals.citymunDesc as municipal');
+        
+        if ($startPage > 0) {
+            $data->where('users.id', '>', $startPage);
+        }
+
+        $data = $data->limit($limit)->offset($offset)->get()->toArray();
 
         return response()->json($data);
     }
