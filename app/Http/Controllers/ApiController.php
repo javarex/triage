@@ -40,4 +40,18 @@ class ApiController extends Controller
 
         return response()->json($data);
     }
+
+    public function total_records() {
+        
+        $data = DB::table('users')
+            ->select('users.id')
+            ->count();
+
+        $pages = $data / 10000;
+
+        return response()->json([
+                'total' => $data,
+                'pages' => $pages
+            ]);
+    }
 }
