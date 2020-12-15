@@ -130,8 +130,5 @@ class EstablishmentController extends Controller
         
     }
 
-    public function destroy($terminal_id)
-    {
-        
-    }
+    
 }

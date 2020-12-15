@@ -11,13 +11,14 @@ use App\Logs;
 use App\Establishment_type;
 use App\Establishment;
 use Carbon\Carbon;
+use Auth;
+use PDF;
 use Illuminate\Support\Facades\DB;
 use App\Exports\ActivitiesExport;
 use App\Imports\ActivitiesImport;
 use App\Imports\ActivityImport1;
 use App\Imports\EmployeesImport;
 use Maatwebsite\Excel\Facades\Excel;
-use Auth;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -117,7 +118,7 @@ class AdminController extends Controller
         $role = auth()->user()->role;
         $newJson = '';
         $user = auth()->user();
-        $clients = User::with('barangays','municipals','provinces')
+        $clients = User::with('barangay','municipal','province')
                         ->where('role',2)
                         ->get();
         $newArray = array();
@@ -133,7 +134,7 @@ class AdminController extends Controller
                      'qrcode'       => $client->qrcode,
                      'age'          =>  Carbon::parse($client->birthday)->age ,
                      'gender'       => $client->sex,
-                     'address'      =>  $client->barangays['brgyDesc'].', '.$client->municipals['citymunDesc'].', '.$client->provinces['provDesc'],
+                     'address'      =>  $client->barangay['brgyDesc'].', '.$client->municipal['citymunDesc'].', '.$client->province['provDesc'],
                 ));
             }
         }
@@ -164,6 +165,7 @@ class AdminController extends Controller
                $users = User::orderby('first_name','asc')
                             ->select('id','first_name','last_name')
                             ->where('first_name', 'like', '%' .$search . '%')
+                            ->where('role',2)
                             ->orWhere('last_name', 'like', '%' .$search . '%')
                             ->limit(5)->get();
             }
@@ -195,9 +197,11 @@ class AdminController extends Controller
 
      public function generateReport(Request $request)
      {
+         $data = [];
+        
         $logs = Logs::where('user_id', $request->user_id)
+                    ->whereBetween('created_at',[$request->from." 00:00:00", $request->to." 23:59:59"])
                     ->get();
-
         foreach ($logs as $log) {
             $datetime = $log->created_at->format('Y-m-d H:i:s');
             $timestamp = strtotime($datetime);
@@ -207,18 +211,35 @@ class AdminController extends Controller
             $datetimeAfter = date("Y-m-d H:i:s", $timeAfter);
             // dd($datetimeBefore.' & '.$datetimeAfter);
             $count = DB::table('logs')
+                    ->where('terminals_id', $log->terminals_id)
                     ->whereBetween('created_at',[$datetimeBefore, $datetimeAfter])
                     ->get();
+            $establishment_visit = DB::table('establishments')
+                                    ->join('terminals','establishments.id', '=', 'terminals.establishment_id')
+                                    ->join('barangays','establishments.brgyCode', '=', 'barangays.brgyCode')
+                                    ->join('municipals','establishments.citymunCode', '=', 'municipals.citymunCode')
+                                    ->select('establishments.*','municipals.citymunDesc','barangays.brgyDesc')
+                                    ->where('terminals.id',$log->terminals_id)
+                                    ->first();
+
+            array_push($data,[
+                'establishment' => $establishment_visit->establishment_name,
+                'date'          => $establishment_visit->created_at,
+                'visitorsCount' => $count->count(),
+                'municipal'     => $establishment_visit->citymunDesc,
+                'barangay'     => $establishment_visit->brgyDesc,
+              
+            ]);
             
             // Establishment Visit
 
-            $establishment_visit = DB::table('establishments')
-                                    ->join('terminals','establishments.id', '=', 'terminals.establishment_id')
-                                    ->select('establishments.*')
-                                    ->distinct()
-                                    ->get();
-            dd($establishment_visit);
+            
+            
         }
+        
+        $pdf = PDF::loadView('admin.pdf', $data);
+        $pdf->save(storage_path().'_filename.pdf');
+        return $pdf->download('customers.pdf');
      }
 
      //decrypt value
