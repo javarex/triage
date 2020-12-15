@@ -207,9 +207,9 @@ class ClientController extends Controller
                 $data['username'] = $request->username;
                 $data['sex'] = $request->sex;
                 $data['email'] = $request->email;
-                $data['provinces_id'] = $request->province;
-                $data['barangays_id'] = $request->barangay;
-                $data['municipals_id'] = $request->municipality;
+                $data['province_id'] = $request->province;
+                $data['barangay_id'] = $request->barangay;
+                $data['municipal_id'] = $request->municipality;
                 $data['role'] = $request->role;
                 $data['verified'] = 0;
                 $data['suffix'] = $request->suffix;
