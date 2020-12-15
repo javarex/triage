@@ -47,7 +47,7 @@ class ApiController extends Controller
             ->select('users.id')
             ->count();
 
-        $pages = $data / 10000;
+        $pages = round($data / 10000);
 
         return response()->json([
                 'total' => $data,
