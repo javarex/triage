@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <input type="text" name="search_input" id="search_input" class="form-control" placeholder="Please select first input type" disabled>
-                                    <input type="hidden" name="user_id" id="userId" class="form-control">
+                                    <input type="text" name="c" id="qrcode" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-12 pt-3">
                                     <label for="" class="text-warning font-weight-bolder">Period:</label>
@@ -122,7 +122,7 @@
         select: function (event, ui) {
            // Set selection
            $('#search_input').val(ui.item.label); // display the selected text
-           $('#userId').val(ui.item.value); // save selected id to input
+           $('#qrcode').val(ui.item.qrcode); // save selected id to input
            return false;
         }
       });
