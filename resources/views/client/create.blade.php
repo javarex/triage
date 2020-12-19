@@ -383,7 +383,6 @@
         $(document).ready(function() {
 
           
-            $.notify('value', 'error');
             //birthday script
             $( "#birthday" ).datepicker({
                 changeYear: true,
