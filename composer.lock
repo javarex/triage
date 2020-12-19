@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+    "hash": "d614e7b2aff8cb1b206cd74fc812a791",
     "content-hash": "dcac61d05d26faf60f6d1043ec5f8bad",
     "packages": [
         {
@@ -56,7 +57,7 @@
                 "cors",
                 "stack"
             ],
-            "time": "2020-10-29T16:03:21+00:00"
+            "time": "2020-10-29 16:03:21"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -102,7 +103,7 @@
             ],
             "description": "BaconQrCode is a QR code generator for PHP.",
             "homepage": "https://github.com/Bacon/BaconQrCode",
-            "time": "2017-10-17T09:59:25+00:00"
+            "time": "2017-10-17 09:59:25"
         },
         {
             "name": "barryvdh/laravel-cors",
@@ -172,7 +173,7 @@
                 "crossdomain",
                 "laravel"
             ],
-            "time": "2020-05-31T07:30:16+00:00"
+            "time": "2020-05-31 07:30:16"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -228,7 +229,7 @@
                 "laravel",
                 "pdf"
             ],
-            "time": "2020-09-07T11:50:18+00:00"
+            "time": "2020-09-07 11:50:18"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -261,7 +262,7 @@
                 "MIT"
             ],
             "description": "implementation of xdg base directory specification for php",
-            "time": "2019-12-04T15:06:13+00:00"
+            "time": "2019-12-04 15:06:13"
         },
         {
             "name": "doctrine/inflector",
@@ -339,7 +340,7 @@
                 "uppercase",
                 "words"
             ],
-            "time": "2020-05-29T07:19:59+00:00"
+            "time": "2020-05-29 07:19:59"
         },
         {
             "name": "doctrine/lexer",
@@ -401,7 +402,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-05-25T17:44:05+00:00"
+            "time": "2020-05-25 17:44:05"
         },
         {
             "name": "dompdf/dompdf",
@@ -469,7 +470,7 @@
             ],
             "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
             "homepage": "https://github.com/dompdf/dompdf",
-            "time": "2020-08-30T22:54:22+00:00"
+            "time": "2020-08-30 22:54:22"
         },
         {
             "name": "dragonmantank/cron-expression",
@@ -523,7 +524,7 @@
                 "cron",
                 "schedule"
             ],
-            "time": "2020-10-13T00:52:37+00:00"
+            "time": "2020-10-13 00:52:37"
         },
         {
             "name": "egulias/email-validator",
@@ -581,7 +582,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2020-11-14T15:56:27+00:00"
+            "time": "2020-11-14 15:56:27"
         },
         {
             "name": "erusev/parsedown",
@@ -627,7 +628,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2019-12-30T22:54:17+00:00"
+            "time": "2019-12-30 22:54:17"
         },
         {
             "name": "fideloper/proxy",
@@ -681,7 +682,7 @@
                 "proxy",
                 "trusted proxy"
             ],
-            "time": "2020-10-22T13:48:01+00:00"
+            "time": "2020-10-22 13:48:01"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -752,7 +753,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2020-09-30T07:37:11+00:00"
+            "time": "2020-09-30 07:37:11"
         },
         {
             "name": "intervention/image",
@@ -822,7 +823,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2019-11-02T09:15:47+00:00"
+            "time": "2019-11-02 09:15:47"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -865,7 +866,7 @@
                 }
             ],
             "abandoned": "php-parallel-lint/php-console-color",
-            "time": "2018-09-29T17:23:10+00:00"
+            "time": "2018-09-29 17:23:10"
         },
         {
             "name": "jakub-onderka/php-console-highlighter",
@@ -912,7 +913,7 @@
             ],
             "description": "Highlight PHP code in terminal",
             "abandoned": "php-parallel-lint/php-console-highlighter",
-            "time": "2018-09-29T18:48:56+00:00"
+            "time": "2018-09-29 18:48:56"
         },
         {
             "name": "laravel/framework",
@@ -1060,7 +1061,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-04-14T14:14:36+00:00"
+            "time": "2020-04-14 14:14:36"
         },
         {
             "name": "laravel/tinker",
@@ -1123,7 +1124,7 @@
                 "laravel",
                 "psysh"
             ],
-            "time": "2019-08-07T15:10:45+00:00"
+            "time": "2019-08-07 15:10:45"
         },
         {
             "name": "laravel/ui",
@@ -1173,7 +1174,7 @@
                 "laravel",
                 "ui"
             ],
-            "time": "2020-11-03T19:38:34+00:00"
+            "time": "2020-11-03 19:38:34"
         },
         {
             "name": "league/flysystem",
@@ -1258,7 +1259,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2020-08-23T07:39:11+00:00"
+            "time": "2020-08-23 07:39:11"
         },
         {
             "name": "league/glide",
@@ -1319,7 +1320,7 @@
                 "manipulation",
                 "processing"
             ],
-            "time": "2020-11-05T17:34:03+00:00"
+            "time": "2020-11-05 17:34:03"
         },
         {
             "name": "league/mime-type-detection",
@@ -1360,7 +1361,7 @@
                 }
             ],
             "description": "Mime-type detection for Flysystem",
-            "time": "2020-10-18T11:50:25+00:00"
+            "time": "2020-10-18 11:50:25"
         },
         {
             "name": "maatwebsite/excel",
@@ -1424,7 +1425,7 @@
                 "php",
                 "phpspreadsheet"
             ],
-            "time": "2020-11-27T16:17:38+00:00"
+            "time": "2020-11-27 16:17:38"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -1485,7 +1486,7 @@
                 "stream",
                 "zip"
             ],
-            "time": "2020-05-30T13:11:16+00:00"
+            "time": "2020-05-30 13:11:16"
         },
         {
             "name": "markbaker/complex",
@@ -1580,7 +1581,7 @@
                 "complex",
                 "mathematics"
             ],
-            "time": "2020-08-26T10:42:07+00:00"
+            "time": "2020-08-26 10:42:07"
         },
         {
             "name": "markbaker/matrix",
@@ -1650,7 +1651,7 @@
                 "matrix",
                 "vector"
             ],
-            "time": "2020-08-28T17:11:00+00:00"
+            "time": "2020-08-28 17:11:00"
         },
         {
             "name": "monolog/monolog",
@@ -1722,7 +1723,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2020-12-14T12:56:38+00:00"
+            "time": "2020-12-14 12:56:38"
         },
         {
             "name": "myclabs/php-enum",
@@ -1768,7 +1769,7 @@
             "keywords": [
                 "enum"
             ],
-            "time": "2020-11-14T18:14:52+00:00"
+            "time": "2020-11-14 18:14:52"
         },
         {
             "name": "nesbot/carbon",
@@ -1847,7 +1848,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2020-11-28T14:25:28+00:00"
+            "time": "2020-11-28 14:25:28"
         },
         {
             "name": "nikic/php-parser",
@@ -1899,7 +1900,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-12-03T17:45:45+00:00"
+            "time": "2020-12-03 17:45:45"
         },
         {
             "name": "opis/closure",
@@ -1960,7 +1961,7 @@
                 "serialization",
                 "serialize"
             ],
-            "time": "2020-11-07T02:01:34+00:00"
+            "time": "2020-11-07 02:01:34"
         },
         {
             "name": "paragonie/random_compat",
@@ -2005,7 +2006,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-07-02T15:55:56+00:00"
+            "time": "2018-07-02 15:55:56"
         },
         {
             "name": "phenx/php-font-lib",
@@ -2042,7 +2043,7 @@
             ],
             "description": "A library to read, parse, export and make subsets of different types of font files.",
             "homepage": "https://github.com/PhenX/php-font-lib",
-            "time": "2020-03-08T15:31:32+00:00"
+            "time": "2020-03-08 15:31:32"
         },
         {
             "name": "phenx/php-svg-lib",
@@ -2082,7 +2083,7 @@
             ],
             "description": "A library to read, parse and export to PDF SVG files.",
             "homepage": "https://github.com/PhenX/php-svg-lib",
-            "time": "2019-09-11T20:02:13+00:00"
+            "time": "2019-09-11 20:02:13"
         },
         {
             "name": "phpoffice/phpspreadsheet",
@@ -2178,7 +2179,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2020-10-11T13:20:59+00:00"
+            "time": "2020-10-11 13:20:59"
         },
         {
             "name": "phpoption/phpoption",
@@ -2233,7 +2234,7 @@
                 "php",
                 "type"
             ],
-            "time": "2020-07-20T17:29:33+00:00"
+            "time": "2020-07-20 17:29:33"
         },
         {
             "name": "psr/container",
@@ -2282,7 +2283,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-02-14T16:28:37+00:00"
+            "time": "2017-02-14 16:28:37"
         },
         {
             "name": "psr/http-client",
@@ -2331,7 +2332,7 @@
                 "psr",
                 "psr-18"
             ],
-            "time": "2020-06-29T06:28:15+00:00"
+            "time": "2020-06-29 06:28:15"
         },
         {
             "name": "psr/http-factory",
@@ -2383,7 +2384,7 @@
                 "request",
                 "response"
             ],
-            "time": "2019-04-30T12:38:16+00:00"
+            "time": "2019-04-30 12:38:16"
         },
         {
             "name": "psr/http-message",
@@ -2433,7 +2434,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "psr/log",
@@ -2480,7 +2481,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2020-03-23T09:12:05+00:00"
+            "time": "2020-03-23 09:12:05"
         },
         {
             "name": "psr/simple-cache",
@@ -2528,7 +2529,7 @@
                 "psr-16",
                 "simple-cache"
             ],
-            "time": "2017-10-23T01:57:42+00:00"
+            "time": "2017-10-23 01:57:42"
         },
         {
             "name": "psy/psysh",
@@ -2602,7 +2603,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2019-12-06T14:19:43+00:00"
+            "time": "2019-12-06 14:19:43"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -2642,7 +2643,7 @@
                 }
             ],
             "description": "A polyfill for getallheaders.",
-            "time": "2019-03-08T08:55:37+00:00"
+            "time": "2019-03-08 08:55:37"
         },
         {
             "name": "ramsey/uuid",
@@ -2729,7 +2730,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2020-02-21T04:36:14+00:00"
+            "time": "2020-02-21 04:36:14"
         },
         {
             "name": "sabberworm/php-css-parser",
@@ -2774,7 +2775,7 @@
                 "parser",
                 "stylesheet"
             ],
-            "time": "2020-06-01T09:10:00+00:00"
+            "time": "2020-06-01 09:10:00"
         },
         {
             "name": "simplesoftwareio/simple-qrcode",
@@ -2835,7 +2836,7 @@
                 "qrcode",
                 "wrapper"
             ],
-            "time": "2017-11-26T15:27:12+00:00"
+            "time": "2017-11-26 15:27:12"
         },
         {
             "name": "spatie/image",
@@ -2888,7 +2889,7 @@
                 "image",
                 "spatie"
             ],
-            "time": "2020-12-01T20:42:11+00:00"
+            "time": "2020-12-01 20:42:11"
         },
         {
             "name": "spatie/image-optimizer",
@@ -2938,7 +2939,7 @@
                 "image-optimizer",
                 "spatie"
             ],
-            "time": "2020-11-28T12:37:58+00:00"
+            "time": "2020-11-28 12:37:58"
         },
         {
             "name": "spatie/temporary-directory",
@@ -2985,7 +2986,7 @@
                 "spatie",
                 "temporary-directory"
             ],
-            "time": "2020-11-09T15:54:21+00:00"
+            "time": "2020-11-09 15:54:21"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3046,20 +3047,20 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2020-12-08T18:02:06+00:00"
+            "time": "2020-12-08 18:02:06"
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "c8e37f6928c19816437a4dd7bf16e3bd79941470"
+                "reference": "12e071278e396cc3e1c149857337e9e192deca0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/c8e37f6928c19816437a4dd7bf16e3bd79941470",
-                "reference": "c8e37f6928c19816437a4dd7bf16e3bd79941470",
+                "url": "https://api.github.com/repos/symfony/console/zipball/12e071278e396cc3e1c149857337e9e192deca0b",
+                "reference": "12e071278e396cc3e1c149857337e9e192deca0b",
                 "shasum": ""
             },
             "require": {
@@ -3118,20 +3119,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2020-11-28T10:15:42+00:00"
+            "time": "2020-12-18 07:41:31"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "b8d8eb06b0942e84a69e7acebc3e9c1e6e6e7256"
+                "reference": "f789e7ead4c79e04ca9a6d6162fc629c89bd8054"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/b8d8eb06b0942e84a69e7acebc3e9c1e6e6e7256",
-                "reference": "b8d8eb06b0942e84a69e7acebc3e9c1e6e6e7256",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/f789e7ead4c79e04ca9a6d6162fc629c89bd8054",
+                "reference": "f789e7ead4c79e04ca9a6d6162fc629c89bd8054",
                 "shasum": ""
             },
             "require": {
@@ -3166,20 +3167,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2020-10-28T21:31:18+00:00"
+            "time": "2020-12-08 17:02:38"
         },
         {
             "name": "symfony/debug",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "65fe7b49868378319b82da3035fb30801b931c47"
+                "reference": "5dfc7825f3bfe9bb74b23d8b8ce0e0894e32b544"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/65fe7b49868378319b82da3035fb30801b931c47",
-                "reference": "65fe7b49868378319b82da3035fb30801b931c47",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/5dfc7825f3bfe9bb74b23d8b8ce0e0894e32b544",
+                "reference": "5dfc7825f3bfe9bb74b23d8b8ce0e0894e32b544",
                 "shasum": ""
             },
             "require": {
@@ -3218,7 +3219,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2020-10-28T20:42:29+00:00"
+            "time": "2020-12-10 16:34:26"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -3268,20 +3269,20 @@
             ],
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
-            "time": "2020-09-07T11:33:47+00:00"
+            "time": "2020-09-07 11:33:47"
         },
         {
             "name": "symfony/error-handler",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/error-handler.git",
-                "reference": "b0887cf8fc692eef2a4cf11cee3c5f5eb93fcfdf"
+                "reference": "ef2f7ddd3b9177bbf8ff2ecd8d0e970ed48da0c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/error-handler/zipball/b0887cf8fc692eef2a4cf11cee3c5f5eb93fcfdf",
-                "reference": "b0887cf8fc692eef2a4cf11cee3c5f5eb93fcfdf",
+                "url": "https://api.github.com/repos/symfony/error-handler/zipball/ef2f7ddd3b9177bbf8ff2ecd8d0e970ed48da0c3",
+                "reference": "ef2f7ddd3b9177bbf8ff2ecd8d0e970ed48da0c3",
                 "shasum": ""
             },
             "require": {
@@ -3320,20 +3321,20 @@
             ],
             "description": "Symfony ErrorHandler Component",
             "homepage": "https://symfony.com",
-            "time": "2020-10-28T20:42:29+00:00"
+            "time": "2020-12-09 11:15:38"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "f029d6f21eac61ab23198e7aca40e7638e8c8924"
+                "reference": "5d4c874b0eb1c32d40328a09dbc37307a5a910b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/f029d6f21eac61ab23198e7aca40e7638e8c8924",
-                "reference": "f029d6f21eac61ab23198e7aca40e7638e8c8924",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/5d4c874b0eb1c32d40328a09dbc37307a5a910b0",
+                "reference": "5d4c874b0eb1c32d40328a09dbc37307a5a910b0",
                 "shasum": ""
             },
             "require": {
@@ -3386,7 +3387,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2020-10-31T22:44:29+00:00"
+            "time": "2020-12-18 07:41:31"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -3448,20 +3449,20 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2020-07-06T13:19:58+00:00"
+            "time": "2020-07-06 13:19:58"
         },
         {
             "name": "symfony/finder",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "9f1d1d883b79a91ef320c0c6e803494e042ef36e"
+                "reference": "ebd0965f2dc2d4e0f11487c16fbb041e50b5c09b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/9f1d1d883b79a91ef320c0c6e803494e042ef36e",
-                "reference": "9f1d1d883b79a91ef320c0c6e803494e042ef36e",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/ebd0965f2dc2d4e0f11487c16fbb041e50b5c09b",
+                "reference": "ebd0965f2dc2d4e0f11487c16fbb041e50b5c09b",
                 "shasum": ""
             },
             "require": {
@@ -3492,7 +3493,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2020-11-17T19:45:34+00:00"
+            "time": "2020-12-08 16:59:59"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -3554,26 +3555,27 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2020-10-14T17:08:19+00:00"
+            "time": "2020-10-14 17:08:19"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "9eeb37ec0ff3049c782ca67041648e28ddd75a94"
+                "reference": "5ebda66b51612516bf338d5f87da2f37ff74cf34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/9eeb37ec0ff3049c782ca67041648e28ddd75a94",
-                "reference": "9eeb37ec0ff3049c782ca67041648e28ddd75a94",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/5ebda66b51612516bf338d5f87da2f37ff74cf34",
+                "reference": "5ebda66b51612516bf338d5f87da2f37ff74cf34",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1.3",
                 "symfony/mime": "^4.3|^5.0",
-                "symfony/polyfill-mbstring": "~1.1"
+                "symfony/polyfill-mbstring": "~1.1",
+                "symfony/polyfill-php80": "^1.15"
             },
             "require-dev": {
                 "predis/predis": "~1.0",
@@ -3604,20 +3606,20 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2020-11-03T11:58:18+00:00"
+            "time": "2020-12-18 07:41:31"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "9f5605ee05406d8afa40dc4f2954c6a61de3a984"
+                "reference": "eaff9a43e74513508867ecfa66ef94fbb96ab128"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/9f5605ee05406d8afa40dc4f2954c6a61de3a984",
-                "reference": "9f5605ee05406d8afa40dc4f2954c6a61de3a984",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/eaff9a43e74513508867ecfa66ef94fbb96ab128",
+                "reference": "eaff9a43e74513508867ecfa66ef94fbb96ab128",
                 "shasum": ""
             },
             "require": {
@@ -3691,20 +3693,20 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2020-11-29T09:23:08+00:00"
+            "time": "2020-12-18 13:32:33"
         },
         {
             "name": "symfony/mime",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "05f667e8fa029568964fd3bec6bc17765b853cc5"
+                "reference": "de97005aef7426ba008c46ba840fc301df577ada"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/05f667e8fa029568964fd3bec6bc17765b853cc5",
-                "reference": "05f667e8fa029568964fd3bec6bc17765b853cc5",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/de97005aef7426ba008c46ba840fc301df577ada",
+                "reference": "de97005aef7426ba008c46ba840fc301df577ada",
                 "shasum": ""
             },
             "require": {
@@ -3754,7 +3756,7 @@
                 "mime",
                 "mime-type"
             ],
-            "time": "2020-10-30T14:55:39+00:00"
+            "time": "2020-12-09 18:54:12"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3816,7 +3818,7 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2020-10-23 14:02:19"
         },
         {
             "name": "symfony/polyfill-iconv",
@@ -3879,7 +3881,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2020-10-23 14:02:19"
         },
         {
             "name": "symfony/polyfill-intl-idn",
@@ -3949,7 +3951,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2020-10-23 14:02:19"
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
@@ -4016,7 +4018,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2020-10-23 14:02:19"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -4079,7 +4081,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2020-10-23 14:02:19"
         },
         {
             "name": "symfony/polyfill-php72",
@@ -4138,7 +4140,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2020-10-23 14:02:19"
         },
         {
             "name": "symfony/polyfill-php73",
@@ -4200,7 +4202,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2020-10-23 14:02:19"
         },
         {
             "name": "symfony/polyfill-php80",
@@ -4266,20 +4268,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2020-10-23 14:02:19"
         },
         {
             "name": "symfony/process",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "ec1482f13d53911a8a32e54ba6f9a3b43a57d943"
+                "reference": "075316ff72233ce3d04a9743414292e834f2cb4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/ec1482f13d53911a8a32e54ba6f9a3b43a57d943",
-                "reference": "ec1482f13d53911a8a32e54ba6f9a3b43a57d943",
+                "url": "https://api.github.com/repos/symfony/process/zipball/075316ff72233ce3d04a9743414292e834f2cb4a",
+                "reference": "075316ff72233ce3d04a9743414292e834f2cb4a",
                 "shasum": ""
             },
             "require": {
@@ -4310,20 +4312,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2020-11-02T15:10:16+00:00"
+            "time": "2020-12-08 16:59:59"
         },
         {
             "name": "symfony/routing",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "08712c5dd5041c03e997e13892f45884faccd868"
+                "reference": "80b042c20b035818daec844723e23b9825134ba0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/08712c5dd5041c03e997e13892f45884faccd868",
-                "reference": "08712c5dd5041c03e997e13892f45884faccd868",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/80b042c20b035818daec844723e23b9825134ba0",
+                "reference": "80b042c20b035818daec844723e23b9825134ba0",
                 "shasum": ""
             },
             "require": {
@@ -4381,7 +4383,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2020-11-24T13:31:32+00:00"
+            "time": "2020-12-08 16:59:59"
         },
         {
             "name": "symfony/service-contracts",
@@ -4443,20 +4445,20 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2020-09-07T11:33:47+00:00"
+            "time": "2020-09-07 11:33:47"
         },
         {
             "name": "symfony/translation",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "84821e6a14a637e817f25d11147388695b6f790a"
+                "reference": "c1001b7d75b3136648f94b245588209d881c6939"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/84821e6a14a637e817f25d11147388695b6f790a",
-                "reference": "84821e6a14a637e817f25d11147388695b6f790a",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/c1001b7d75b3136648f94b245588209d881c6939",
+                "reference": "c1001b7d75b3136648f94b245588209d881c6939",
                 "shasum": ""
             },
             "require": {
@@ -4514,7 +4516,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2020-11-27T06:35:49+00:00"
+            "time": "2020-12-08 16:59:59"
         },
         {
             "name": "symfony/translation-contracts",
@@ -4575,20 +4577,20 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2020-09-28T13:05:58+00:00"
+            "time": "2020-09-28 13:05:58"
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "65c6f1e848cda840ef7278686c8e30a7cc353c93"
+                "reference": "4f31364bbc8177f2a6dbc125ac3851634ebe2a03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/65c6f1e848cda840ef7278686c8e30a7cc353c93",
-                "reference": "65c6f1e848cda840ef7278686c8e30a7cc353c93",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/4f31364bbc8177f2a6dbc125ac3851634ebe2a03",
+                "reference": "4f31364bbc8177f2a6dbc125ac3851634ebe2a03",
                 "shasum": ""
             },
             "require": {
@@ -4647,7 +4649,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2020-11-24T09:55:37+00:00"
+            "time": "2020-12-08 16:59:59"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -4696,7 +4698,7 @@
             ],
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
-            "time": "2020-07-13T06:12:54+00:00"
+            "time": "2020-07-13 06:12:54"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -4759,7 +4761,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2020-07-14T19:04:52+00:00"
+            "time": "2020-07-14 19:04:52"
         }
     ],
     "packages-dev": [
@@ -4822,7 +4824,7 @@
                 "beyondcode",
                 "laravel-dump-server"
             ],
-            "time": "2019-08-11T13:17:40+00:00"
+            "time": "2019-08-11 13:17:40"
         },
         {
             "name": "doctrine/instantiator",
@@ -4873,7 +4875,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2020-11-10T18:47:58+00:00"
+            "time": "2020-11-10 18:47:58"
         },
         {
             "name": "filp/whoops",
@@ -4934,7 +4936,7 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2020-11-01T12:00:00+00:00"
+            "time": "2020-11-01 12:00:00"
         },
         {
             "name": "fzaninotto/faker",
@@ -4985,7 +4987,7 @@
                 "fixtures"
             ],
             "abandoned": true,
-            "time": "2020-12-11T09:56:16+00:00"
+            "time": "2020-12-11 09:56:16"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -5032,7 +5034,7 @@
             "keywords": [
                 "test"
             ],
-            "time": "2020-07-09T08:09:16+00:00"
+            "time": "2020-07-09 08:09:16"
         },
         {
             "name": "mockery/mockery",
@@ -5097,7 +5099,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2020-08-11T18:10:21+00:00"
+            "time": "2020-08-11 18:10:21"
         },
         {
             "name": "myclabs/deep-copy",
@@ -5145,7 +5147,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2020-11-13T09:40:50+00:00"
+            "time": "2020-11-13 09:40:50"
         },
         {
             "name": "nunomaduro/collision",
@@ -5207,7 +5209,7 @@
                 "php",
                 "symfony"
             ],
-            "time": "2020-10-29T16:05:21+00:00"
+            "time": "2020-10-29 16:05:21"
         },
         {
             "name": "phar-io/manifest",
@@ -5262,7 +5264,7 @@
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
-            "time": "2018-07-08T19:23:20+00:00"
+            "time": "2018-07-08 19:23:20"
         },
         {
             "name": "phar-io/version",
@@ -5309,7 +5311,7 @@
                 }
             ],
             "description": "Library for handling version information and constraints",
-            "time": "2018-07-08T19:19:57+00:00"
+            "time": "2018-07-08 19:19:57"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -5358,7 +5360,7 @@
                 "reflection",
                 "static analysis"
             ],
-            "time": "2020-06-27T09:03:43+00:00"
+            "time": "2020-06-27 09:03:43"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -5410,7 +5412,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2020-09-03T19:13:55+00:00"
+            "time": "2020-09-03 19:13:55"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -5455,7 +5457,7 @@
                 }
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
-            "time": "2020-09-17T18:55:26+00:00"
+            "time": "2020-09-17 18:55:26"
         },
         {
             "name": "phpspec/prophecy",
@@ -5518,7 +5520,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2020-09-29T09:10:42+00:00"
+            "time": "2020-09-29 09:10:42"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -5581,7 +5583,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-10-31T16:06:48+00:00"
+            "time": "2018-10-31 16:06:48"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -5631,7 +5633,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2020-11-30T08:25:21+00:00"
+            "time": "2020-11-30 08:25:21"
         },
         {
             "name": "phpunit/php-text-template",
@@ -5672,7 +5674,7 @@
             "keywords": [
                 "template"
             ],
-            "time": "2015-06-21T13:50:34+00:00"
+            "time": "2015-06-21 13:50:34"
         },
         {
             "name": "phpunit/php-timer",
@@ -5721,7 +5723,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2020-11-30T08:20:02+00:00"
+            "time": "2020-11-30 08:20:02"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -5771,7 +5773,7 @@
                 "tokenizer"
             ],
             "abandoned": true,
-            "time": "2020-11-30T08:38:46+00:00"
+            "time": "2020-11-30 08:38:46"
         },
         {
             "name": "phpunit/phpunit",
@@ -5855,7 +5857,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2020-01-08T08:45:45+00:00"
+            "time": "2020-01-08 08:45:45"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -5900,7 +5902,7 @@
             ],
             "description": "Looks up which function or method a line of code belongs to",
             "homepage": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
-            "time": "2020-11-30T08:15:22+00:00"
+            "time": "2020-11-30 08:15:22"
         },
         {
             "name": "sebastian/comparator",
@@ -5964,7 +5966,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2020-11-30T08:04:30+00:00"
+            "time": "2020-11-30 08:04:30"
         },
         {
             "name": "sebastian/diff",
@@ -6020,7 +6022,7 @@
                 "unidiff",
                 "unified diff"
             ],
-            "time": "2020-11-30T07:59:04+00:00"
+            "time": "2020-11-30 07:59:04"
         },
         {
             "name": "sebastian/environment",
@@ -6073,7 +6075,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2020-11-30T07:53:42+00:00"
+            "time": "2020-11-30 07:53:42"
         },
         {
             "name": "sebastian/exporter",
@@ -6140,7 +6142,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2020-11-30T07:47:53+00:00"
+            "time": "2020-11-30 07:47:53"
         },
         {
             "name": "sebastian/global-state",
@@ -6191,7 +6193,7 @@
             "keywords": [
                 "global state"
             ],
-            "time": "2017-04-27T15:39:26+00:00"
+            "time": "2017-04-27 15:39:26"
         },
         {
             "name": "sebastian/object-enumerator",
@@ -6238,7 +6240,7 @@
             ],
             "description": "Traverses array structures and object graphs to enumerate all referenced objects",
             "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
-            "time": "2020-11-30T07:40:27+00:00"
+            "time": "2020-11-30 07:40:27"
         },
         {
             "name": "sebastian/object-reflector",
@@ -6283,7 +6285,7 @@
             ],
             "description": "Allows reflection of object attributes, including inherited and non-public ones",
             "homepage": "https://github.com/sebastianbergmann/object-reflector/",
-            "time": "2020-11-30T07:37:18+00:00"
+            "time": "2020-11-30 07:37:18"
         },
         {
             "name": "sebastian/recursion-context",
@@ -6336,7 +6338,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "time": "2020-11-30T07:34:24+00:00"
+            "time": "2020-11-30 07:34:24"
         },
         {
             "name": "sebastian/resource-operations",
@@ -6378,7 +6380,7 @@
             ],
             "description": "Provides a list of PHP built-in functions that operate on resources",
             "homepage": "https://www.github.com/sebastianbergmann/resource-operations",
-            "time": "2020-11-30T07:30:19+00:00"
+            "time": "2020-11-30 07:30:19"
         },
         {
             "name": "sebastian/version",
@@ -6421,7 +6423,7 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "time": "2016-10-03T07:35:21+00:00"
+            "time": "2016-10-03 07:35:21"
         },
         {
             "name": "theseer/tokenizer",
@@ -6461,7 +6463,7 @@
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
-            "time": "2020-07-12T23:59:07+00:00"
+            "time": "2020-07-12 23:59:07"
         },
         {
             "name": "webmozart/assert",
@@ -6510,7 +6512,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2020-07-08T17:02:28+00:00"
+            "time": "2020-07-08 17:02:28"
         }
     ],
     "aliases": [],
