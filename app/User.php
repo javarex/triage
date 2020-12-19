@@ -36,7 +36,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'email_verified_at',
         'verified',
-        'remember_token'
     ];
     protected $dates = ['created_at', 'updated_at'];
     
