@@ -98,8 +98,19 @@
                                     </div>
                                 
                                     <div class="col-md-12">
-                                        <input id="suffix" type="text" class="form-control" name="suffix" value="{{ old('suffix') }}" placeholder="ex. Jr., Sr., I, II etc... (Optional)">
-                                        @error('extension_name')
+                                        <select name="suffix" id="suffix" class="form-control">
+                                            <option value="" {{ old('sex') == '' ? 'selected' : '' }}>Select Suffix</option>
+                                            <option value="Jr." {{ old('sex') == 'Jr.' ? 'selected' : '' }}>Jr.</option>
+                                            <option value="Sr." {{ old('sex') == 'Sr.' ? 'selected' : '' }}>Sr.</option>
+                                            <option value="I" {{ old('sex') == 'I' ? 'selected' : '' }}>I</option>
+                                            <option value="II" {{ old('sex') == 'II' ? 'selected' : '' }}>II</option>
+                                            <option value="III" {{ old('sex') == 'III' ? 'selected' : '' }}>III</option>
+                                            <option value="IV" {{ old('sex') == 'IV' ? 'selected' : '' }}>IV</option>
+                                            <option value="V" {{ old('sex') == 'V' ? 'selected' : '' }}>V</option>
+                                            <option value="VI" {{ old('sex') == 'VI' ? 'selected' : '' }}>VI</option>
+                                            <option value="VII" {{ old('sex') == 'VII' ? 'selected' : '' }}>VII</option>
+                                        </select>
+                                        @error('suffix')
                                             <small class="text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </small>
@@ -116,6 +127,7 @@
                                     <div class="col-md-12">
                                         <select name="sex" id="sex" class="form-control" name="sex" value="{{ old('sex') }}" autocomplete="sex" >
                                             <option value=""></option>
+                                            
                                             <option value="male" {{ old('sex') == 'male' ? 'selected' : '' }}>Male</option>
                                             <option value="female" {{ old('sex') == 'female' ? 'selected' : '' }}>Female</option>
                                         </select>
@@ -434,6 +446,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+
             $('#register').submit(function(e){
                
                 e.preventDefault();
@@ -447,6 +461,7 @@
                     processData : false,
                     success: function(result)
                     {
+                        
                         
                         if($.isEmptyObject(result.error)){
                             window.location.href = "/";

@@ -10,6 +10,7 @@ use App\Municipal;
 use App\Barangay;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -184,16 +185,23 @@ class ClientController extends Controller
         ]);
         $allUsers = User::all();
         
-        foreach ($allUsers as $value) {
-            $tempFirstName = $value->first_name;
-            $tempLastName = $value->last_name;
-            if(strcasecmp($request->first_name, $tempFirstName) == 0 && strcasecmp($request->last_name, $tempLastName) == 0 && strcasecmp($value->suffix, $request->suffix) == 0)
-            {
-                $duplicatedName = false;
-                break;
-            }
-        }
-        if($duplicatedName){
+        $duplicateUser = DB::table('users')
+                            ->where('first_name', ucfirst($request->first_name))
+                            ->where('last_name', ucfirst($request->last_name))
+                            ->where('suffix', $request->suffix)
+                            ->first();
+       
+
+        // foreach ($allUsers as $value) {
+        //     $tempFirstName = $value->first_name;
+        //     $tempLastName = $value->last_name;
+        //     if(strcasecmp($request->first_name, $tempFirstName) == 0 && strcasecmp($request->last_name, $tempLastName) == 0 && strcasecmp($value->suffix, $request->suffix) == 0)
+        //     {
+        //         $duplicatedName = false;
+        //         break;
+        //     }
+        // }
+        if(!$duplicateUser){
             if($validator ){
                 $fileName =  $request->file('valid_id');
                 $file = $fileName->getClientOriginalName();
