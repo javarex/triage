@@ -47,11 +47,11 @@
       <div class="modal-body bg-choco">
         <div class="row">
             <div class="col-md-6">
-                <a href="/establishment/create" class="text-choco">
-                    <div class="card card-body text-center shadow bg-light">
+                <a href="/establishment/create" class="text-choco" >
+                    <div class="card card-body text-center shadow bg-light" >
                         <div class="row">
                             <div class="col-md-12">
-                                <h3><i class="fas fa-building    "></i></h3>
+                                <h3><i class="fas fa-building"></i></h3>
                             </div>
                             <div class="col-md-12">
                                 <h3>Establishment</h3>
@@ -61,8 +61,8 @@
                 </a>
             </div>
             <div class="col-md-6">
-                <a href="/client/create" class="text-choco">
-                    <div class="card card-body text-center shadow bg-light">
+                <a href="/client/create" class="text-choco" >
+                    <div class="card card-body text-center shadow bg-light" >
                         <div class="row">
                             <div class="col-md-12">
                                 <h3><i class="fas fa-user    "></i></h3>
