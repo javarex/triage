@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <input type="text" name="search_input" id="search_input" class="form-control" placeholder="Please select first input type" disabled>
-                                    <input type="hidden" name="user_id" id="userId" class="form-control">
+                                    <input type="hidden" name="barcode" id="barcode" class="form-control">
                                 </div>
                                 <div class="col-md-12 pt-3">
                                     <label for="" class="text-warning font-weight-bolder">Period:</label>
@@ -62,7 +62,7 @@
                                     <input type="radio" name="report_type" value="possible_contact" id="possible_contact"> <label for="possible_contact">Possible Contacts</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <button class="btn btn-block login_btn">Generate PDF</button>
+                                    <button type="button" class="btn btn-block login_btn">Generate PDF</button>
                                 </div>
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-block login_btn">Generate Excel</button>
@@ -122,7 +122,7 @@
         select: function (event, ui) {
            // Set selection
            $('#search_input').val(ui.item.label); // display the selected text
-           $('#userId').val(ui.item.value); // save selected id to input
+           $('#barcode').val(ui.item.barcode); // save selected id to input
            return false;
         }
       });

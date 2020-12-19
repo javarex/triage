@@ -348,7 +348,11 @@
                                             <input id="password2" type="password"  class="form-control" name="password_confirmation" >
                                         </div>
                                     </div>
-
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-12">
+                                            <input type="checkbox"> I agree
+                                        </div>
+                                    </div>
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <button type="submit" id="submitForm" class="btn btn-choco btn-block">
@@ -374,12 +378,7 @@
 
 @section('scripts')
     <script>
-    
-       
-
-
-       
-
+        var agree = false;
         $(document).ready(function() {
 
           

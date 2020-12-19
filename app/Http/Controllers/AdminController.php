@@ -163,7 +163,7 @@ class AdminController extends Controller
                $users = User::orderby('first_name','asc')->select('id','first_name','last_name')->limit(5)->get();
             }else{
                $users = User::orderby('first_name','asc')
-                            ->select('id','first_name','last_name')
+                            ->select('id','first_name','last_name','qrcode')
                             ->where('first_name', 'like', '%' .$search . '%')
                             ->where('role',2)
                             ->orWhere('last_name', 'like', '%' .$search . '%')
@@ -172,7 +172,7 @@ class AdminController extends Controller
       
             $response = array();
             foreach($users as $user){
-               $response[] = array("value"=>$user->id,"label"=>$user->first_name.' '.$user->last_name);
+               $response[] = array("value"=>$user->id,"barcode" => $user->qrcode,"label"=>$user->first_name.' '.$user->last_name);
             }
       
         }else{
@@ -187,7 +187,7 @@ class AdminController extends Controller
        
              $response = array();
              foreach($users as $user){
-                $response[] = array("value"=>$user->id,"label"=>$user->qrcode);
+                $response[] = array("value"=>$user->id,"barcode" => $user->qrcode,"label"=>$user->qrcode);
              }
         }
         return response()->json($response);
@@ -197,9 +197,11 @@ class AdminController extends Controller
 
      public function generateReport(Request $request)
      {
-         $data = [];
+         $data = [
+             'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the'
+         ];
         
-        $logs = Logs::where('user_id', $request->user_id)
+        $logs = Logs::where('barcode', $request->barcode)
                     ->whereBetween('created_at',[$request->from." 00:00:00", $request->to." 23:59:59"])
                     ->get();
         foreach ($logs as $log) {
@@ -211,25 +213,26 @@ class AdminController extends Controller
             $datetimeAfter = date("Y-m-d H:i:s", $timeAfter);
             // dd($datetimeBefore.' & '.$datetimeAfter);
             $count = DB::table('logs')
-                    ->where('terminals_id', $log->terminals_id)
-                    ->whereBetween('created_at',[$datetimeBefore, $datetimeAfter])
+                    ->where('terminal_id', $log->terminal_id)
+                    ->whereBetween('time_in',[$datetimeBefore, $datetimeAfter])
                     ->get();
             $establishment_visit = DB::table('establishments')
                                     ->join('terminals','establishments.id', '=', 'terminals.establishment_id')
                                     ->join('barangays','establishments.brgyCode', '=', 'barangays.brgyCode')
                                     ->join('municipals','establishments.citymunCode', '=', 'municipals.citymunCode')
                                     ->select('establishments.*','municipals.citymunDesc','barangays.brgyDesc')
-                                    ->where('terminals.id',$log->terminals_id)
+                                    ->where('terminals.id',$log->terminal_id)
                                     ->first();
 
-            array_push($data,[
-                'establishment' => $establishment_visit->establishment_name,
-                'date'          => $establishment_visit->created_at,
-                'visitorsCount' => $count->count(),
-                'municipal'     => $establishment_visit->citymunDesc,
-                'barangay'     => $establishment_visit->brgyDesc,
+            // array_push($data,[
+                
+            //     'establishment' => $establishment_visit->establishment_name,
+            //     'date'          => $establishment_visit->created_at,
+            //     'visitorsCount' => $count->count(),
+            //     'municipal'     => $establishment_visit->citymunDesc,
+            //     'barangay'     => $establishment_visit->brgyDesc,
               
-            ]);
+            // ]);
             
             // Establishment Visit
 
@@ -237,8 +240,9 @@ class AdminController extends Controller
             
         }
         
+        // dd($data);
         $pdf = PDF::loadView('admin.pdf', $data);
-        $pdf->save(storage_path().'_filename.pdf');
+        // $pdf->save(storage_path().'_filename.pdf');
         return $pdf->download('customers.pdf');
      }
 

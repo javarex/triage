@@ -28,11 +28,7 @@
 
             <tbody>
                 <tr>
-                    @foreach($data as $newData)
-                        <td>{{$newData['establishment']}}</td>
-                        <td>{{$newData['date']}}</td>
-                        <td>{{$newData['visitorsCount']}}</td>
-                    @endforeach
+                   {{$content}}
                 </tr>
             </tbody>
        </table>
