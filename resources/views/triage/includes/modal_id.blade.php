@@ -15,13 +15,13 @@
               <div class="col-md-3"></div>
                 <div class="col-md-6 border border-1 border-dark mt-1">
                     <div class="row">
-                        <div class="col-md-8 pt-2 pl-1 bg-light text-nowrap  ">
+                        <div class="col-md-8 pt-2 pl-1 bg-light   ">
                            <div class="row">
                                 <div class="col-md-3">
                                     <img src="{{ asset('image/ddo.png') }}" width="75" height="75" alt="">
                                 </div>
                                 <div class="col-md-8 pt-3 pl-4" style="font-size:9pt">
-                                    <div class="d-flex justify-content-start">
+                                    <div class="d-flex justify-content-start text-nowrap">
                                         <strong class="">Republic of the Philippines</strong>
                                     </div>
                                     <div class="text-nowrap d-flex justify-content-start font-weight-bolder">
