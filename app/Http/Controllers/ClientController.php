@@ -101,6 +101,7 @@ class ClientController extends Controller
                 ->save();
 
             $request->valid_id->storeAs($directory, $file_name);
+            
             $data['qrcode'] = $request->code;
             $data['username'] = $request->username;
             $data['sex'] = $request->sex;
