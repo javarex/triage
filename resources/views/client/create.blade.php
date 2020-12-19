@@ -459,7 +459,7 @@
                     },
                     error: function(xhr, status, error)
                     {
-                        $.each(xhr.responseJSON.errors, function (key, item) 
+                        $.each(xhr.responseJSON.error, function (key, item) 
                         {
                            $.notify(item[0], 'error');
                            return false;
