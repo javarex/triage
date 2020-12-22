@@ -189,7 +189,6 @@ class ClientController extends Controller
        
         if(!$duplicateUser){
             if($validator ){
-
                 $request['qrcode'] = $request->code;
                 $request['province_id'] = $request->province;
                 $request['barangay_id'] = $request->barangay;
@@ -201,9 +200,8 @@ class ClientController extends Controller
                 $request['address'] = ucwords($request->address);
                 $request['password'] = bcrypt($request->password);
                 $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
-
-                
                 $user = User::create($request->all());
+
                 if (!auth()->check()) {
                     auth()->login($user);
                 }
