@@ -179,7 +179,7 @@ class ClientController extends Controller
             'province'              => 'required',
             'municipality'          => 'required',
             'barangay'              => 'required',
-            'valid_id'              => 'required|mimes:jpg,jpeg,png|max:2048', 
+            // 'valid_id'              => 'required|mimes:jpg,jpeg,png|max:2048', 
             'username'              => 'required|unique:users',
             'password'              => 'required|confirmed',
         ]);
@@ -191,26 +191,17 @@ class ClientController extends Controller
                             ->where('suffix', $request->suffix)
                             ->first();
        
-
-        // foreach ($allUsers as $value) {
-        //     $tempFirstName = $value->first_name;
-        //     $tempLastName = $value->last_name;
-        //     if(strcasecmp($request->first_name, $tempFirstName) == 0 && strcasecmp($request->last_name, $tempLastName) == 0 && strcasecmp($value->suffix, $request->suffix) == 0)
-        //     {
-        //         $duplicatedName = false;
-        //         break;
-        //     }
-        // }
         if(!$duplicateUser){
             if($validator ){
-                $fileName =  $request->file('valid_id');
-                $file = $fileName->getClientOriginalName();
-                $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
+                
+                // $fileName =  $request->file('valid_id');
+                // $file = $fileName->getClientOriginalName();
+                // $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
         
-                Image::load($fileName)
-                ->optimize()
-                ->quality(50)
-                ->save();
+                // Image::load($fileName)
+                // ->optimize()
+                // ->quality(50)
+                // ->save();
 
                 $data['qrcode'] = $request->code;
                 $data['username'] = $request->username;
@@ -229,7 +220,7 @@ class ClientController extends Controller
                 $data['address'] = ucwords($request->address);
                 $data['password'] = bcrypt($request->password);
                 $data['birthday'] = date('Y-m-d', strtotime($request->birthday));
-                $data['valid_id'] = $file_name;
+                // $data['valid_id'] = $file_name;
                 
                 $user = User::create($data);
                 if (!auth()->check()) {

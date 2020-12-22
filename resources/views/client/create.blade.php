@@ -287,7 +287,7 @@
                                     </div>
 
                                     <!-- valid id  -->
-                                    <div class="col-md-12 form-group">
+                                    <!-- <div class="col-md-12 form-group">
                         
                                         <div class="col-md-12">
                                             <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Valid Identification Card (IC)') }} <small class="text-danger font-weight-bold">(Max file size of 2MB)</small></span>
@@ -302,7 +302,7 @@
                                             @enderror
                                         </div>
                                     
-                                    </div> 
+                                    </div>  -->
                                 </div>
                             </div>
                             <div class="col-md-4 card-body">
