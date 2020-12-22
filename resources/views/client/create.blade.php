@@ -461,8 +461,6 @@
                     processData : false,
                     success: function(result)
                     {
-                        
-                        
                         if($.isEmptyObject(result.error)){
                             window.location.href = "/";
                         }else{
