@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 
 class ApiController extends Controller
@@ -67,5 +69,20 @@ class ApiController extends Controller
                 'total' => $data,
                 'pages' => $pages
             ]);
+    }
+
+    public function login(Request $request) {
+        $username = $request->username;
+        $password = $request->password;
+
+        $user = DB::table('users')
+            ->select('username', 'password', 'first_name', 'last_name')
+            ->where('username', $username)
+            ->first();
+
+        if (Hash::check($password, $user->password)) {
+            return response()->json($user);
+        }
+
     }
 }
