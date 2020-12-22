@@ -81,7 +81,7 @@ class ApiController extends Controller
             ->first();
 
         if (Hash::check($password, $user->password)) {
-            return $user;
+            return response()->json($user);
         }
 
     }
