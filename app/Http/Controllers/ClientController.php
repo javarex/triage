@@ -166,9 +166,7 @@ class ClientController extends Controller
 
     public function validateInputs(Request $request)
     {
-        $duplicatedName = true;
-        $date = Carbon::now(); 
-        $directory = date('m-d-Y', strtotime($date));
+
         
         $validator = $request->validate([
             'first_name'            => 'required|regex:/^[a-z0-9 .\-]+$/i',
@@ -182,7 +180,6 @@ class ClientController extends Controller
             'username'              => 'required|unique:users',
             'password'              => 'required|confirmed',
         ]);
-        $allUsers = User::all();
         
         $duplicateUser = DB::table('users')
                             ->where('first_name', ucfirst($request->first_name))
