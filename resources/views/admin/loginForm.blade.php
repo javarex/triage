@@ -47,7 +47,7 @@
       <div class="modal-body bg-choco">
         <div class="row">
             <div class="col-md-6">
-                <a href="/establishment/create" class="text-choco" >
+                <a href="#" id="establishment_btn" class="text-choco" onclick="chooseMenu()" data-dismiss="modal">
                     <div class="card card-body text-center shadow bg-light" >
                         <div class="row">
                             <div class="col-md-12">
@@ -61,7 +61,7 @@
                 </a>
             </div>
             <div class="col-md-6">
-                <a href="/client/create" class="text-choco" >
+                <a href="#" class="text-choco" onclick="chooseMenu()" data-dismiss="modal">
                     <div class="card card-body text-center shadow bg-light" >
                         <div class="row">
                             <div class="col-md-12">
@@ -81,3 +81,10 @@
 </div>
 @endsection
 
+@section('scripts')
+    <script>
+            function chooseMenu() {
+                window.location.href = "/establishment/create";
+            }
+    </script>
+@endsection
