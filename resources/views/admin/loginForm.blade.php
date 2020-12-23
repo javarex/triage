@@ -46,7 +46,7 @@
     <div class="modal-content">
       <div class="modal-body bg-choco">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 mb-2">
                 <a href="#" id="establishment_btn" class="text-choco" onclick="chooseMenu()" data-dismiss="modal">
                     <div class="card card-body text-center shadow bg-light" >
                         <div class="row">
