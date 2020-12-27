@@ -10,6 +10,7 @@ use App\Municipal;
 use App\Barangay;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -51,94 +52,6 @@ class ClientController extends Controller
         return view('client.create', compact('code','provinces'));
     }
    
-    
-
-    public function store(Request $request)
-    {
-        $duplicatedName = true;
-        
-        
-       
-        $date = Carbon::now(); 
-        $directory = date('m-d-Y', strtotime($date));
-        $this->validate($request, [
-            'first_name'        => 'required|regex:/^[a-z0-9 .\-]+$/i',
-            'last_name'         => 'required|regex:/^[a-z0-9 .\-]+$/i',
-            'birthday'          => 'required',
-            'address'           => 'required|string',
-            'username'          => 'required',
-            'sex'               => 'required',
-            'password'          => 'required|confirmed',
-            'valid_id'          => 'required|mimes:jpeg,bmp,png|max:2000', 
-            ]);
-            
-       
-        $code_generarated = $request->code;
-        $users = User::where('qrcode',$code_generarated)->first();
-        $username = User::where('username',$request->username)->first();
-        
-        $allUsers = User::all();
-        
-        foreach ($allUsers as $value) {
-            $tempFirstName = $value->first_name;
-            $tempLastName = $value->last_name;
-            if(strcasecmp($request->first_name, $tempFirstName) == 0 && strcasecmp($request->last_name, $tempLastName) == 0 && strcasecmp($value->suffix, $request->suffix) == 0)
-            {
-                $duplicatedName = false;
-                break;
-            }
-        }
-        if(is_null($users) && $duplicatedName && $username == null)
-        {
-            
-            $fileName =  $request->file('valid_id');
-            $file = $fileName->getClientOriginalName();
-            $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
-
-            Image::load($fileName)
-                ->optimize()
-                ->quality(50)
-                ->save();
-
-            $request->valid_id->storeAs($directory, $file_name);
-            $data['qrcode'] = $request->code;
-            $data['username'] = $request->username;
-            $data['sex'] = $request->sex;
-            $data['email'] = $request->email;
-            $data['provCode'] = $request->provCode;
-            $data['brgyCode'] = $request->brgyCode;
-            $data['citymunCode'] = $request->citymunCode;
-            $data['role'] = $request->role;
-            $data['verified'] = 0;
-            $data['suffix'] = $request->suffix;
-            $data['contact_number'] = $request->contact_number;
-            $data['first_name'] = ucwords($request->first_name);
-            $data['middle_name'] = ucwords($request->middle_name);
-            $data['last_name'] = ucwords($request->last_name);
-            $data['address'] = ucwords($request->address);
-            $data['password'] = bcrypt($request->password);
-            $data['birthday'] = date('Y-m-d', strtotime($request->birthday));
-            $data['valid_id'] = $file_name;
-            $user = User::create($data);
-
-            if(!auth()->check()){
-               auth()->login($user);
-                return redirect('/triage');
-            }else{
-                return redirect('/admin');
-            }
-       
-        }elseif ($duplicatedName == false ) {
-            return back()->with('delete','Information already exist!')
-                        ->withInput();
-        }elseif (!(is_null($users))) {
-            return back()->with('delete','This code is already used!')
-                        ->withInput();
-        }elseif (!(is_null($username))) {
-            return back()->with('delete','Username already used!')
-                        ->withInput();
-        }
-    }
 
     public function loadMunicipals($id){
         $municipals = Municipal::where('provCode', $id)
@@ -183,21 +96,30 @@ class ClientController extends Controller
         ]);
         $allUsers = User::all();
         
-        foreach ($allUsers as $value) {
-            $tempFirstName = $value->first_name;
-            $tempLastName = $value->last_name;
-            if(strcasecmp($request->first_name, $tempFirstName) == 0 && strcasecmp($request->last_name, $tempLastName) == 0 && strcasecmp($value->suffix, $request->suffix) == 0)
-            {
-                $duplicatedName = false;
-                break;
-            }
-        }
-        if($duplicatedName){
+        $duplicateUser = DB::table('users')
+                            ->where('first_name', ucfirst($request->first_name))
+                            ->where('last_name', ucfirst($request->last_name))
+                            ->where('suffix', $request->suffix)
+                            ->first();
+       
+
+        // foreach ($allUsers as $value) {
+        //     $tempFirstName = $value->first_name;
+        //     $tempLastName = $value->last_name;
+        //     if(strcasecmp($request->first_name, $tempFirstName) == 0 && strcasecmp($request->last_name, $tempLastName) == 0 && strcasecmp($value->suffix, $request->suffix) == 0)
+        //     {
+        //         $duplicatedName = false;
+        //         break;
+        //     }
+        // }
+        if(!$duplicateUser){
             if($validator ){
                 $fileName =  $request->file('valid_id');
                 $file = $fileName->getClientOriginalName();
+                $ext = $fileName->getClientOriginalExtension();
                 $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
         
+                // $fileName->storeAs($request->first_name.'_'.$request->last_name, $file_name.'.'.$ext);
                 Image::load($fileName)
                 ->optimize()
                 ->quality(50)

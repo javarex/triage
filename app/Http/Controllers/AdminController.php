@@ -172,7 +172,7 @@ class AdminController extends Controller
       
             $response = array();
             foreach($users as $user){
-               $response[] = array("value"=>$user->id,"barcode" => $user->qrcode,"label"=>$user->first_name.' '.$user->last_name);
+               $response[] = array("value"=>$user->id,"qrcode"=>$user->qrcode,"label"=>$user->first_name.' '.$user->last_name);
             }
       
         }else{
@@ -201,8 +201,10 @@ class AdminController extends Controller
              'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the'
          ];
         
-        $logs = Logs::where('barcode', $request->barcode)
-                    ->whereBetween('created_at',[$request->from." 00:00:00", $request->to." 23:59:59"])
+
+        $logs = Logs::where('barcode', $request->qrcode)
+                    ->whereBetween('time_in',[$request->from." 00:00:00", $request->to." 23:59:59"])
+
                     ->get();
         foreach ($logs as $log) {
             $datetime = $log->created_at->format('Y-m-d H:i:s');
@@ -224,26 +226,22 @@ class AdminController extends Controller
                                     ->where('terminals.id',$log->terminal_id)
                                     ->first();
 
-            // array_push($data,[
-                
-            //     'establishment' => $establishment_visit->establishment_name,
-            //     'date'          => $establishment_visit->created_at,
-            //     'visitorsCount' => $count->count(),
-            //     'municipal'     => $establishment_visit->citymunDesc,
-            //     'barangay'     => $establishment_visit->brgyDesc,
-              
-            // ]);
+            array_push($data,[
+                'establishment' => $establishment_visit->establishment_name,
+                'date'          => $establishment_visit->created_at,
+                'visitorsCount' => $count->count(),
+                'municipal'     => $establishment_visit->citymunDesc,
+                'barangay'      => $establishment_visit->brgyDesc,  
+                'before'        => $datetimeBefore,
+                'after'         => $datetimeAfter,
+            ]);
             
             // Establishment Visit
 
             
             
         }
-        
-        // dd($data);
-        $pdf = PDF::loadView('admin.pdf', $data);
-        // $pdf->save(storage_path().'_filename.pdf');
-        return $pdf->download('customers.pdf');
+
      }
 
      //decrypt value

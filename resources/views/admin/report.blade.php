@@ -24,7 +24,11 @@
                                 </div>
                                 <div class="col-md-12">
                                     <input type="text" name="search_input" id="search_input" class="form-control" placeholder="Please select first input type" disabled>
+<<<<<<< HEAD
                                     <input type="hidden" name="barcode" id="barcode" class="form-control">
+=======
+                                    <input type="text" name="c" id="qrcode" class="form-control" readonly>
+>>>>>>> f84e85efb0435291743d22f3dc8a0ab4586c77b9
                                 </div>
                                 <div class="col-md-12 pt-3">
                                     <label for="" class="text-warning font-weight-bolder">Period:</label>
@@ -122,7 +126,7 @@
         select: function (event, ui) {
            // Set selection
            $('#search_input').val(ui.item.label); // display the selected text
-           $('#barcode').val(ui.item.barcode); // save selected id to input
+           $('#qrcode').val(ui.item.qrcode); // save selected id to input
            return false;
         }
       });
