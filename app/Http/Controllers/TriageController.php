@@ -151,6 +151,15 @@ class TriageController extends Controller
         return view('triage.show', compact('triages', 'activity', 'client_logs','url_activity','client_id'));
     }
 
+    public function exportId()
+    {
+        $Users_name = "sample";
+        $address = "sample";
+        $user = "sample";
+        $qrcode = "sample";
+        return view('client.exportId', compact('user','Users_name','address','qrcode'));
+    }
+
     public function update(Request $request, $id)
     {
 

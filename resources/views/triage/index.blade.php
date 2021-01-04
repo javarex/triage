@@ -65,7 +65,8 @@
                                     <div class="col-md-8 px-1"> 
 
                                     <span class="badge badge-primary">
-                                        <a href="#" class="font-weight-bolder text-light" data-toggle="modal" data-target="#idPrint">
+                                        <!-- <a href="#" class="font-weight-bolder text-light" data-toggle="modal" data-target="#idPrint"> -->
+                                        <a href="exportId" class="font-weight-bolder text-light" target="_blank">
                                             Print ID
                                         </a>
                                     </span>
