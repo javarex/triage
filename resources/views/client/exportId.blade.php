@@ -7,7 +7,7 @@
 
     <style>
         .id-card{
-            width:370px;
+            width:361px;
             height:2in;
             border:solid black 1px;
             
@@ -54,10 +54,10 @@
             text-align:center;
             font-family: Tahoma, sans-serif;
         }
-        .qrcode{
-            position:fixed;
+        div{
+            margin: 0;
         }
-    
+       
     </style>
 </head>
 <body style="margin-left:30% ;font-family: 'Trebuchet MS', sans-serif;">
@@ -76,7 +76,16 @@
                 {{ $address }}
            </div>
         </div>
-        {!! QrCode::size('90')->color(68, 41, 0)->margin(0)->generate($user->qrcode) !!}
+
+        <div style="position:fixed; display:inline-block;text-align:center; ">
+            {!! QrCode::size('90')->color(68, 41, 0)->margin(0)->generate($user->qrcode) !!}
+            <div style="font-weight:normal; font-size:7pt; background-color:gold">{{$user->qrcode}}</div>
+            <hr>
+            <div style="color:grey;font-size:20pt; padding-top:10px">
+                1x1
+            </div>
+        </div>
+        
     </div>
 </body>
 </html>
