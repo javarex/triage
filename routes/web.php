@@ -94,6 +94,7 @@ Route::get('/load/province','ClientController@loadProvince');
 
 Route::post('/transmit', 'ApiController@transmit');
 Route::get('/download', 'ApiController@download');
+Route::post('/api/login', 'ApiController@login');
 Route::get('/total_records', 'ApiController@total_records');
 
 // edit qr code 

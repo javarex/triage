@@ -18,17 +18,22 @@
                         <div class="col-md-6 card card-body bg-choco">
                             <div class="row">
                                     
-                                <div class="col-md-12 text-warning">
+                                <!-- <div class="col-md-12 text-warning">
                                     <input type="radio" class="form-control-radio" name="search_type" id="c_name" value="citizen_name"> <label for="c_name">Citizen's name</label>
                                     <input type="radio" class="form-control-radio" name="search_type" id="c_number" value="citizen_num"> <label for="c_number">Citizen's number</label>
-                                </div>
+                                </div> -->
                                 <div class="col-md-12">
+<<<<<<< HEAD
                                     <input type="text" name="search_input" id="search_input" class="form-control" placeholder="Please select first input type" disabled>
 <<<<<<< HEAD
                                     <input type="hidden" name="barcode" id="barcode" class="form-control">
 =======
                                     <input type="text" name="c" id="qrcode" class="form-control" readonly>
 >>>>>>> f84e85efb0435291743d22f3dc8a0ab4586c77b9
+=======
+                                    <input type="text" name="search_input" id="search_input" class="form-control" placeholder="Citizen's Name">
+                                    <input type="hidden" name="barcode" id="barcode" class="form-control">
+>>>>>>> e2784962c5bcde15da6d1d7e599feed981d3ad7b
                                 </div>
                                 <div class="col-md-12 pt-3">
                                     <label for="" class="text-warning font-weight-bolder">Period:</label>
@@ -46,11 +51,11 @@
                                     <label for="" class="text-warning font-weight-bolder">Hours:</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" name="before_arrival" placeholder="number of hours">
+                                    <input type="number" min="1" class="form-control" name="before_arrival" placeholder="number of hours">
                                     <label for="" class="text-warning">Before Arrival</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" name="after_arrival" placeholder="number of hours">
+                                    <input type="number" min="1" class="form-control" name="after_arrival" placeholder="number of hours">
                                     <label for="" class="text-warning">After Arrival</label>
                                 </div>
                                 <div class="col-md-12 pt-2">
@@ -59,17 +64,21 @@
                                 <div class="col-md-12 text-warning">
                                     <input type="radio" name="report_type" value="estab_visit" id="establishment_visit"> <label for="establishment_visit">Establishment visit</label>
                                 </div>
-                                <div class="col-md-12 text-warning">
+                                <!-- <div class="col-md-12 text-warning">
                                     <input type="radio" name="report_type" value="terminal_visit" id="terminal_visit"> <label for="terminal_visit">Terminal visit</label>
                                 </div>
                                 <div class="col-md-12 text-warning">
                                     <input type="radio" name="report_type" value="possible_contact" id="possible_contact"> <label for="possible_contact">Possible Contacts</label>
-                                </div>
+                                </div> -->
                                 <div class="col-md-6">
+<<<<<<< HEAD
                                     <button type="button" class="btn btn-block login_btn">Generate PDF</button>
                                 </div>
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-block login_btn">Generate Excel</button>
+=======
+                                    <button class="btn btn-block login_btn">Generate Report</button>
+>>>>>>> e2784962c5bcde15da6d1d7e599feed981d3ad7b
                                 </div>
                             </div>
                         </div>
@@ -92,19 +101,19 @@
 @section('scripts')
 <script>
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    var searchType;
+    var searchType = 'citezen_name';
     $(document).ready(function() {
-        $('input[type=radio][name=search_type]').change(function() {
-            $('#search_input').removeAttr('disabled');
-            if (this.value == 'citizen_name') {
-                $('#search_input').attr('placeholder',"E.g Juan Dela Cruz");
-            }
-            else{
-                $('#search_input').attr('placeholder',"E.g DDOABC12");
-            }
-                searchType = $(this).val();
+        // $('input[type=radio][name=search_type]').change(function() {
+        //     $('#search_input').removeAttr('disabled');
+        //     if (this.value == 'citizen_name') {
+        //         $('#search_input').attr('placeholder',"E.g Juan Dela Cruz");
+        //     }
+        //     else{
+        //         $('#search_input').attr('placeholder',"E.g DDOABC12");
+        //     }
+        //         searchType = $(this).val();
                 
-        });
+        // });
 
         $( "#search_input" ).autocomplete({
         source: function( request, response ) {
@@ -126,7 +135,7 @@
         select: function (event, ui) {
            // Set selection
            $('#search_input').val(ui.item.label); // display the selected text
-           $('#qrcode').val(ui.item.qrcode); // save selected id to input
+           $('#barcode').val(ui.item.qrcode); // save selected id to input
            return false;
         }
       });

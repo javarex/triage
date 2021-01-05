@@ -24,3 +24,13 @@ a.bg-choco:focus,a.bg-choco:hover,button.bg-choco:focus,button.bg-choco:hover
 .bg-deGatas{
     background-color: #FDEA93;
 }
+.nav-link-mod{
+    color: #ffed4a;
+    display:block;
+    padding:.5rem 1rem
+}
+.nav-link-mod:hover{
+    background-color: #FDEA93;
+    border-radius: 5%;
+    color: #442900;
+}

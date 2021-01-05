@@ -37,22 +37,22 @@
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item "> 
-                                <a href="admin" class="nav-link text-warning">
+                                <a href="admin" class="nav-link-mod ">
                                     <i class="fas fa-home    "></i> Home
                                 </a>
                             </li>
                             <li class="nav-item "> 
-                                <a href="userModule" class="nav-link text-warning">
+                                <a href="userModule" class="nav-link-mod">
                                     <i class="fa fa-user" aria-hidden="true"></i> Citizens
                                 </a>
                             </li>
                             <li class="nav-item "> 
-                                <a href="adminEstab" class="nav-link text-warning">
+                                <a href="adminEstab" class="nav-link-mod">
                                     <i class="fa fa-city" aria-hidden="true"></i> Establishment
                                 </a>
                             </li>
                             <li class="nav-item "> 
-                                <a href="ccts_reports" class="nav-link text-warning">
+                                <a href="ccts_reports" class="nav-link-mod">
                                     <i class="fa fa-file-alt" aria-hidden="true"></i> Reports
                                 </a>
                             </li>
@@ -63,16 +63,16 @@
                             <!-- Authentication Links -->
                             @guest
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link-mod" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li> <i class="fas fa-pen-alt    "></i>
                                 @if (Route::has('register'))
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        <a class="nav-link-mod" href="{{ route('register') }}">{{ __('Register') }}</a>
                                     </li>
                                 @endif
                             @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color:#ECC633"> 
+                                <a id="navbarDropdown" class="nav-link-mod dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color:#ECC633"> 
                                     {{ Auth::user()->first_name }}<span class="caret"></span>
                                 </a>
 

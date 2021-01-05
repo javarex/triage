@@ -77,9 +77,7 @@ class ClientController extends Controller
 
     public function validateInputs(Request $request)
     {
-        $duplicatedName = true;
-        $date = Carbon::now(); 
-        $directory = date('m-d-Y', strtotime($date));
+
         
         $validator = $request->validate([
             'first_name'            => 'required|regex:/^[a-z0-9 .\-]+$/i',
@@ -90,11 +88,9 @@ class ClientController extends Controller
             'province'              => 'required',
             'municipality'          => 'required',
             'barangay'              => 'required',
-            'valid_id'              => 'required|mimes:jpg,jpeg,png|max:2048', 
             'username'              => 'required|unique:users',
             'password'              => 'required|confirmed',
         ]);
-        $allUsers = User::all();
         
         $duplicateUser = DB::table('users')
                             ->where('first_name', ucfirst($request->first_name))
@@ -102,18 +98,9 @@ class ClientController extends Controller
                             ->where('suffix', $request->suffix)
                             ->first();
        
-
-        // foreach ($allUsers as $value) {
-        //     $tempFirstName = $value->first_name;
-        //     $tempLastName = $value->last_name;
-        //     if(strcasecmp($request->first_name, $tempFirstName) == 0 && strcasecmp($request->last_name, $tempLastName) == 0 && strcasecmp($value->suffix, $request->suffix) == 0)
-        //     {
-        //         $duplicatedName = false;
-        //         break;
-        //     }
-        // }
         if(!$duplicateUser){
             if($validator ){
+
                 $fileName =  $request->file('valid_id');
                 $file = $fileName->getClientOriginalName();
                 $ext = $fileName->getClientOriginalExtension();
@@ -125,26 +112,20 @@ class ClientController extends Controller
                 ->quality(50)
                 ->save();
 
-                $data['qrcode'] = $request->code;
-                $data['username'] = $request->username;
-                $data['sex'] = $request->sex;
-                $data['email'] = $request->email;
-                $data['province_id'] = $request->province;
-                $data['barangay_id'] = $request->barangay;
-                $data['municipal_id'] = $request->municipality;
-                $data['role'] = $request->role;
-                $data['verified'] = 0;
-                $data['suffix'] = $request->suffix;
-                $data['contact_number'] = $request->contact_number;
-                $data['first_name'] = ucwords($request->first_name);
-                $data['middle_name'] = ucwords($request->middle_name);
-                $data['last_name'] = ucwords($request->last_name);
-                $data['address'] = ucwords($request->address);
-                $data['password'] = bcrypt($request->password);
-                $data['birthday'] = date('Y-m-d', strtotime($request->birthday));
-                $data['valid_id'] = $file_name;
-                
-                $user = User::create($data);
+                $request['qrcode'] = $request->code;
+                $request['province_id'] = $request->province;
+                $request['barangay_id'] = $request->barangay;
+                $request['municipal_id'] = $request->municipality;
+                $request['verified'] = 0;
+                $request['first_name'] = ucwords($request->first_name);
+                $request['middle_name'] = ucwords($request->middle_name);
+                $request['last_name'] = ucwords($request->last_name);
+                $request['address'] = ucwords($request->address);
+                $request['password'] = bcrypt($request->password);
+                $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
+                $user = User::create($request->all());
+
+
                 if (!auth()->check()) {
                     auth()->login($user);
                 }

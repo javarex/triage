@@ -157,25 +157,10 @@ class AdminController extends Controller
 
         $search = $request->search;
         $searchType = $request->searchType;
-        if ($searchType == 'citizen_name') {
-            # code...
-            if($search == ''){
-               $users = User::orderby('first_name','asc')->select('id','first_name','last_name')->limit(5)->get();
-            }else{
-               $users = User::orderby('first_name','asc')
-                            ->select('id','first_name','last_name','qrcode')
-                            ->where('first_name', 'like', '%' .$search . '%')
-                            ->where('role',2)
-                            ->orWhere('last_name', 'like', '%' .$search . '%')
-                            ->limit(5)->get();
-            }
-      
-            $response = array();
-            foreach($users as $user){
-               $response[] = array("value"=>$user->id,"qrcode"=>$user->qrcode,"label"=>$user->first_name.' '.$user->last_name);
-            }
-      
+        if($search == ''){
+           $users = User::orderby('first_name','asc')->select('id','first_name','last_name')->limit(5)->get();
         }else{
+
             if($search == ''){
                 $users = User::orderby('qrcode','asc')->select('id','qrcode')->limit(5)->get();
              }else{
@@ -189,6 +174,19 @@ class AdminController extends Controller
              foreach($users as $user){
                 $response[] = array("value"=>$user->id,"barcode" => $user->qrcode,"label"=>$user->qrcode);
              }
+
+           $users = User::orderby('first_name','asc')
+                        ->select('id','first_name','last_name','qrcode')
+                        ->where('first_name', 'like', '%' .$search . '%')
+                        ->where('role',2)
+                        ->orWhere('last_name', 'like', '%' .$search . '%')
+                        ->limit(5)->get();
+        }
+  
+        $response = array();
+        foreach($users as $user){
+           $response[] = array("value"=>$user->id,"qrcode"=>$user->qrcode,"label"=>$user->first_name.' '.$user->last_name);
+
         }
         return response()->json($response);
      }
