@@ -151,6 +151,33 @@ class TriageController extends Controller
         return view('triage.show', compact('triages', 'activity', 'client_logs','url_activity','client_id'));
     }
 
+    public function exportId()
+    {
+        $user = auth()->user();
+
+        $dateOfBirth = $user->birthday;
+        $years = Carbon::parse($dateOfBirth)->age;
+        $date = $user->created_at;
+        $userAdd = User::with('barangay','municipal','province')->where('id', $user->id)->first();
+        
+        $brgy = strtolower($userAdd->barangay->brgyDesc);
+        $province = strtolower($userAdd->province->provDesc);
+        $municipal = strtolower($userAdd->municipal->citymunDesc);
+        $address = ucwords($brgy.', '.$municipal.', '.$province);
+        $directory = date('m-d-Y', strtotime($date));
+        $first_name = $this->decryptValue($user->first_name);
+        $last_name = $this->decryptValue($user->last_name);
+        
+        $middle_name =$user->middle_name; 
+        if($user->suffix){
+            $Users_name = $first_name.' '.strtoupper($middle_name[0]).'. '.$last_name.' '.$user->suffix.'.'; 
+        }else{
+            $Users_name = $first_name.' '.$last_name;
+        }
+        
+        return view('client.exportId', compact('user','years','directory','address','Users_name','first_name'));
+    }
+
     public function update(Request $request, $id)
     {
 

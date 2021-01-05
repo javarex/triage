@@ -45,7 +45,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Triage Routes
 
 Route::resource('triage', 'TriageController')->middleware('client');
-
+Route::middleware(['client'])->group(function () {
+    Route::get('exportId', 'TriageController@exportId');
+});
 
 Route::post('/tag', 'TagController@store');
 Route::post('/untag', 'TagController@untagUser');
