@@ -73,7 +73,7 @@
                                     </span>
                                     |
                                     <span class="badge badge-success">
-                                        <a href="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(300)->color(68, 41, 0)->generate( Auth::user()->qrcode )) !!}" class="font-weight-bolder text-light" id="print_qr" download="DdO_QRCode"><i class="fa fa-fw fa-save" aria-hidden="true"></i>Save</a>
+                                        <a href="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(300)->color(68, 41, 0)->generate( Auth::user()->qrcode )) !!}" class="font-weight-bolder text-light" id="print_qr" download="DdO_QRCode"><i class="fa fa-fw fa-save" aria-hidden="true"></i>Save qrcode</a>
                                     </span>
                                         <!-- <a href="#" id="printme" class="link" onclick="javascript:printDiv('divID')" style="color: blue;">
                                             <span>
