@@ -101,16 +101,16 @@ class ClientController extends Controller
         if(!$duplicateUser){
             if($validator ){
 
-                $fileName =  $request->file('valid_id');
-                $file = $fileName->getClientOriginalName();
-                $ext = $fileName->getClientOriginalExtension();
-                $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
+                // $fileName =  $request->file('valid_id');
+                // $file = $fileName->getClientOriginalName();
+                // $ext = $fileName->getClientOriginalExtension();
+                // $file_name = $request->first_name.'-'.$request->last_name.'.'.$fileName->getClientOriginalExtension();
         
                 // $fileName->storeAs($request->first_name.'_'.$request->last_name, $file_name.'.'.$ext);
-                Image::load($fileName)
-                ->optimize()
-                ->quality(50)
-                ->save();
+                // Image::load($fileName)
+                // ->optimize()
+                // ->quality(50)
+                // ->save();
 
                 $request['qrcode'] = $request->code;
                 $request['province_id'] = $request->province;
