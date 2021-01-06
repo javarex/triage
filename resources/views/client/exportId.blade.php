@@ -108,7 +108,15 @@
             </div>
             <div class="col-md-12 d-flex justify-content-center" >
                 <div class="id-card" id="printDiv">
-                sass
+                    <div class="mt-1" style="margin-left:12px">
+                        {!! QrCode::size('76')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
+                    </div>
+                    <div style="font-weight:bolder; font-size:8pt; width:96px; text-align:center">
+                        {{$user->qrcode}}
+                    </div>
+                    <div style="margin-left:120px">
+                        ad
+                    </div>
                 </div>
                 <!-- <span style="margin-left:199px">names</span>
                 <img src="{{ asset('image/ccts_id.png') }}" height="192" width="384"  alt=""> -->
