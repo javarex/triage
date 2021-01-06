@@ -119,6 +119,7 @@ class AdminController extends Controller
         $role = auth()->user()->role;
         $newJson = '';
         $user = auth()->user();
+        $first_nameAdmin =  $this->decryptValue($user->first_name);
         $clients = User::with('barangay','municipal','province')
                         ->where('role',2)
                         ->get();
