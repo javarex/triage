@@ -10,7 +10,7 @@
     <style>
         .id-card{
             width:270px;
-            height:2in;
+            height:auto;
             border:solid black 1px;
             
         }
@@ -46,6 +46,7 @@
             white-space:nowrap;
             font-weight:bolder;
             text-align:center;
+            display:inline-block;
         }
 
         .info-client{
@@ -53,12 +54,14 @@
             white-space:nowrap;
             font-weight:bolder;
             text-align:center;
+            display:inline-block;
         }
         .info-client2{
-            font-size:11pt;
+            font-size:10pt;
             font-weight:bolder;
-            text-align:center;
+            /* text-align:center; */
             font-family: Tahoma, sans-serif;
+            display:inline-block;
         }
         div{
             margin: 0;
@@ -96,19 +99,25 @@
                 
                 <div class="id-card" >
                     <div class="id-body">
-                       <div class="row">
-                           <div class="logo col-md-4"><img src="{{ asset('image/ddo.png') }}" class="img-fluid" width="70" alt=""></div>
-                           <div class="header1 mt-4">
+                       <div class="">
+                           <div class="logo"><img src="{{ asset('image/ddo.png') }}" class="img-fluid" width="60" alt=""></div>
+                           <div class="header1">
                                 <div class="">Republic of the Philippines</div>
                                 <div>PROVINCE OF DAVAO DE ORO</div>
                            </div>
                        </div>
-                       <div class="header2">Covid-19 Contact Tracing System(CCTS Card)</div>
-                       <div class="info-client" style="margin-top:20px">
-                            {{ $Users_name }}
+                       <div class="col-md-12">
+                            <div class="header2 text-center">Covid-19 Contact Tracing System(CCTS Card)</div>
                        </div>
-                       <div class="info-client2" style="font-weight:normal">
-                            {{ $address }}
+                       <div class="col-md-12">
+                           <div class="info-client mt-4">
+                                {{ $Users_name }}
+                           </div>
+                       </div>
+                       <div class="col-md-12">
+                           <div class="info-client2" style="font-weight:normal">
+                                {{ $address }}
+                           </div>
                        </div>
 
                     
@@ -119,7 +128,7 @@
                         <div style=" display:inline-block;text-align:center; ">
                             {!! QrCode::size('94')->color(68, 41, 0)->margin(0)->generate($user->qrcode) !!}
                             <div class="qrcode_text">{{$user->qrcode}}</div>
-                            <div style="color:grey;font-size:20pt; padding-top:10px; border-top:solid black 1px;">
+                            <div style="color:grey;font-size:20pt; padding-top:20px; border-top:solid black 1px; height:1in;width:1in">
                                 1x1
                             </div>
                         </div>
