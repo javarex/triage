@@ -10,12 +10,12 @@
     <style>
         
         .id-card{
-            background-image:url("{{ asset('image/ccts_id.png') }}");
+            background-image:url("{{ asset('image/ccts_portrait.png') }}");
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: cover; /* Resize the background image to cover the entire container */
-            width:384px;
-            height:192px;
+            width:288px;
+            height:336px;
             border:solid black 1px;
             
         }
@@ -97,25 +97,31 @@
 <body>
     @include('client.navbar')
     <div class="container">
-        <div class=" ">
-        <div class=" "></div>
-            <div class=" ">
-                <a href="#" id="printme" class="link" onClick=printForm() style="color: blue;">
+        <div class="row">
+        <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <!-- <a href="#" id="printme" class="link" onClick=printForm() style="color: blue;">
                     <span>
                        <i class="fa fa-print" aria-hidden="true"></i> Print ID
                     </span>
-                </a>
+                </a> -->
             </div>
-            <div class="" >
+            <div class="col-md-12 mt-5 d-flex justify-content-center" >
                 <div class="id-card" id="printDiv">
-                    <div class="mt-1" style="margin-left:12px">
+                    <!-- <div class="mt-1" style="margin-left:12px">
                         {!! QrCode::size('76')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
-                    </div>
-                    <div style="font-weight:bolder; font-size:8pt; width:96px; text-align:center">
+                    </div> -->
+                    <!-- <div style="font-weight:bolder; font-size:8pt; width:96px; text-align:center">
                         {{$user->qrcode}}
-                    </div>
-                    <div style="margin-left:124px; margin-top:-2px;">
+                    </div> -->
+                    <div style="text-align:center; margin-top:202px; white-space: nowrap; font-size:11pt; font-weight:bolder; color:#442900">
                         {{ $Users_name }}
+                    </div>
+                    <div style="text-align:center; margin-top:-2px; white-space: nowrap; font-size:9pt; color:#442900">
+                    {{$address}}
+                    </div>
+                    <div style="margin-left:196px; margin-top:10px">
+                        {!! QrCode::size('80')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
                     </div>
                 </div>
                 <!-- <span style="margin-left:199px">names</span>
