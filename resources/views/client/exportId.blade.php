@@ -114,8 +114,8 @@
                     <div style="font-weight:bolder; font-size:8pt; width:96px; text-align:center">
                         {{$user->qrcode}}
                     </div>
-                    <div style="margin-left:120px">
-                        ad
+                    <div style="margin-left:124px; margin-top:-2px;">
+                        {{ $Users_name }}
                     </div>
                 </div>
                 <!-- <span style="margin-left:199px">names</span>

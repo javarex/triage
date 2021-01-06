@@ -171,7 +171,7 @@ class TriageController extends Controller
         
         $middle_name =$user->middle_name; 
         if($user->suffix){
-            $Users_name = $first_name.' '.$last_name.' '.$user->suffix.'.'; 
+            $Users_name = $first_name.' '.$last_name.' '.$user->suffix; 
         }else{
             $Users_name = $first_name.' '.$last_name;
         }
