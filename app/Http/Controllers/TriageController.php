@@ -155,6 +155,7 @@ class TriageController extends Controller
     {
         $user = auth()->user();
 
+        $first_name = Crypt::decryptString($user->first_name);
         $dateOfBirth = $user->birthday;
         $years = Carbon::parse($dateOfBirth)->age;
         $date = $user->created_at;
@@ -175,7 +176,7 @@ class TriageController extends Controller
             $Users_name = $first_name.' '.$last_name;
         }
         
-        return view('client.exportId', compact('user','years','directory','address','Users_name','first_name'));
+        return view('client.exportId', compact('user','first_name','years','directory','address','Users_name','first_name'));
     }
 
     public function update(Request $request, $id)
