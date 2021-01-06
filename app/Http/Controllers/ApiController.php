@@ -30,6 +30,18 @@ class ApiController extends Controller
         
         $page = Input::get('page');
         $startPage = Input::get('startPage');
+        $username = Input::get('username');
+        $password = Input::get('password');
+
+        $user = DB::table('users')
+            ->select('username', 'password', 'first_name', 'last_name')
+            ->where('username', $username)
+            ->first();
+
+        if (!Hash::check($password, $user->password)) {
+            return "You are not authorized";
+        }
+
 
         $limit = 2500;
         $offset = (($limit) * $page) - ($limit);
