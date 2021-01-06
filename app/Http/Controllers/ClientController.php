@@ -117,9 +117,9 @@ class ClientController extends Controller
                 $request['barangay_id'] = $request->barangay;
                 $request['municipal_id'] = $request->municipality;
                 $request['verified'] = 0;
-                $request['first_name'] = ucwords($request->first_name);
+                $request['first_name'] = Crypt::encryptString(ucwords($request->first_name)); //255
                 $request['middle_name'] = ucwords($request->middle_name);
-                $request['last_name'] = ucwords($request->last_name);
+                $request['last_name'] = Crypt::encryptString(ucwords($request->last_name)); //255 length
                 $request['address'] = ucwords($request->address);
                 $request['password'] = bcrypt($request->password);
                 $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
