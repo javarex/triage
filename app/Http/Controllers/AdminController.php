@@ -53,7 +53,7 @@ class AdminController extends Controller
                  array_push($newArray, array('first_name' => $decrypted_firstname, 'last_name' => $decrypted_last_name, 'qrcode'=> $client->qrcode ));
             }
         }
-        return view('admin.index',compact('clients','newArray','user','role','citizens','estabLishment'));
+        return view('admin.index',compact('clients','newArray','user','role','citizens','estabLishment','decrypted_firstname'));
     }
 
     public function create()
