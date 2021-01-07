@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Input;
 
 class ApiController extends Controller
 {
+     protected $encryptMethod = 'AES-256-CBC';
+
     public function transmit(Request $request) {
 
         $data = $request->all();
