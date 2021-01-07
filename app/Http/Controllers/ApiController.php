@@ -85,11 +85,17 @@ class ApiController extends Controller
     }
 
     public function login(Request $request) {
-        $username = $request->username;
-        $password = $request->password;
 
-        $user = DB::table('users')
-            ->select('username', 'password', 'first_name', 'last_name')
+
+            $username = 'never';
+            $password = '123456';
+
+            $user = User::with(['establishments' => function ($q) {
+                $q->with(['terminal' => function ($q) {
+                    $q->select('description', 'id', 'establishment_id')->get();
+                }])->select('establishment_name', 'id', 'user_id')->get();
+            }])
+            ->select('username', 'password', 'first_name', 'last_name', 'id')
             ->where('username', $username)
             ->first();
 
