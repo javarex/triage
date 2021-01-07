@@ -21,7 +21,7 @@
        */
       setTimeout(function() {
         deactivate();
-      }, 1000);
+      }, 100);
   
       function deactivate() {
         loader.style.opacity = 0;

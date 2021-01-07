@@ -12,12 +12,9 @@
     
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet"> 
     <link href="{{ asset('css/signin.css') }}" rel="stylesheet"> 
    
     <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
-
-    @yield('styles')
 </head>
 
 <body>
@@ -30,26 +27,10 @@
             </div>
         </div>
     </div>
-
-    @if(auth()->user())
-        @if(auth()->user()->role == 0)
-            @include('layouts.navbar.navbar_admin')
-        @elseif(auth()->user()->role == 1)
-            @include('layouts.navbar.navbar_establishment')
-        @endif
-    @endif
-
     <main class="container py-5">
         @yield('content')
     </main>
-    
-
     <script src="{{ asset('js/app.js') }}"></script>
-
     <script src="{{ asset('js/pageLoader.js') }}"></script>
-
-   
-    
-    @yield('scripts')
 </body>
 </html>

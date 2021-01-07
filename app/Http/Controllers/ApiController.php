@@ -6,7 +6,6 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 
 class ApiController extends Controller
@@ -20,6 +19,7 @@ class ApiController extends Controller
             DB::table('logs')->insert([
                 'barcode' => $r['barcode'],
                 'time_in' => $r['time_in'],
+                'terminal_id' => $r['terminal_id'],
             ]);
         }
 
