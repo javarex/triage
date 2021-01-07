@@ -367,7 +367,7 @@
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
-                                            <button type="submit" id="submitForm" class="btn btn-disabled btn-block" disabled>
+                                            <button type="submit" id="submitForm" class="btn btn-disabled btn-block" >
                                                 <i class="fa fa-check" aria-hidden="true"></i>
                                                 {{ __('Sign up') }}
                                             </button>
