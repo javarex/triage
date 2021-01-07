@@ -22,8 +22,7 @@ use Spatie\Image\Image;
 
 class ClientController extends Controller
 {
-    protected $encryptMethod = 'AES-256-CBC';
-    
+
     public function index()
     {
         
@@ -75,6 +74,7 @@ class ClientController extends Controller
 
     public function validateInputs(Request $request)
     {
+        $encrypt = new EncryptionController
 
         $validator = $request->validate([
             'first_name'            => 'required|regex:/^[a-z0-9 .\-]+$/i',
@@ -114,9 +114,9 @@ class ClientController extends Controller
                 $request['barangay_id'] = $request->barangay;
                 $request['municipal_id'] = $request->municipality;
                 $request['verified'] = 0;
-                $request['first_name'] = $this->encrypt(ucwords($request->first_name)); //255
+                $request['first_name'] = $encrypt->encrypt(ucwords($request->first_name)); //255
                 $request['middle_name'] = ucwords($request->middle_name);
-                $request['last_name'] = $this->encrypt(ucwords($request->last_name)); //255 length
+                $request['last_name'] = $encrypt->encrypt(ucwords($request->last_name)); //255 length
                 $request['address'] = ucwords($request->address);
                 $request['password'] = bcrypt($request->password);
                 $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
@@ -133,38 +133,6 @@ class ClientController extends Controller
         }else{
             return response()->json(['error'=> 'Record already exist']);
         }
-    }
-
-    public function encrypt($string, $key = 'kIsuwkCwoSeIX3mqIMkVySWGXpPD/LacO2FnXU3hzf8=')
-    {
-        $ivLength = openssl_cipher_iv_length($this->encryptMethod);
-        $iv = openssl_random_pseudo_bytes($ivLength);
- 
-        $salt = openssl_random_pseudo_bytes(256);
-        $iterations = 999;
-        $hashKey = hash_pbkdf2('sha512', $key, $salt, $iterations, ($this->encryptMethodLength() / 4));
-
-        $encryptedString = openssl_encrypt($string, $this->encryptMethod, hex2bin($hashKey), OPENSSL_RAW_DATA, $iv);
-
-        $encryptedString = base64_encode($encryptedString);
-        unset($hashKey);
-
-        $output = ['ciphertext' => $encryptedString, 'iv' => bin2hex($iv), 'salt' => bin2hex($salt), 'iterations' => $iterations];
-        unset($encryptedString, $iterations, $iv, $ivLength, $salt);
-
-        return base64_encode(json_encode($output));
-    }
-
-    protected function encryptMethodLength()
-    {
-        $number = filter_var($this->encryptMethod, FILTER_SANITIZE_NUMBER_INT);
-
-        return intval(abs($number));
-    }
-
-    public function setCipherMethod($cipherMethod)
-    {
-        $this->encryptMethod = $cipherMethod;
     }
 
 }
