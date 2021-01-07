@@ -100,20 +100,10 @@
         <div class="row">
         <div class="col-md-4"></div>
             <div class="col-md-4">
-                <!-- <a href="#" id="printme" class="link" onClick=printForm() style="color: blue;">
-                    <span>
-                       <i class="fa fa-print" aria-hidden="true"></i> Print ID
-                    </span>
-                </a> -->
             </div>
             <div class="col-md-12 mt-5 d-flex justify-content-center" >
                 <div class="id-card" id="printDiv">
-                    <!-- <div class="mt-1" style="margin-left:12px">
-                        {!! QrCode::size('76')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
-                    </div> -->
-                    <!-- <div style="font-weight:bolder; font-size:8pt; width:96px; text-align:center">
-                        {{$user->qrcode}}
-                    </div> -->
+                    
                     <div style="text-align:center; margin-top:202px; white-space: nowrap; font-size:11pt; font-weight:bolder; color:#442900">
                         {{ $Users_name }}
                     </div>
