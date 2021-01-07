@@ -362,12 +362,12 @@
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
-                                            <input type="checkbox"> I agree
+                                            <input type="checkbox" id="agree"> <label for="agree">I have read and agree the</label> <a href="#" data-toggle="modal" data-target="#privacyNotice">Privacy Notice.</a>
                                         </div>
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
-                                            <button type="submit" id="submitForm" class="btn btn-choco btn-block">
+                                            <button type="submit" id="submitForm" class="btn btn-choco btn-block" disabled>
                                                 <i class="fa fa-check" aria-hidden="true"></i>
                                                 {{ __('Sign up') }}
                                             </button>
@@ -386,6 +386,7 @@
         </div>
     </div>
 </div>
+@include('client.privacyNotice')
 @endsection
 
 @section('scripts')
@@ -393,7 +394,13 @@
         var agree = false;
         $(document).ready(function() {
 
-          
+            $(document).on('click','#agree', function(){
+                if($(this).prop('checked') == true){
+                    $('#submitForm').removeAttr('disabled');
+                }else{
+                    $('#submitForm').attr('disabled', true);
+                }
+            });
             //birthday script
             $( "#birthday" ).datepicker({
                 changeYear: true,
@@ -406,6 +413,8 @@
             //     $('#municipality').removeAttr('disabled');
             //     loadMunicipals($('#province').val());
             // }
+
+
 
             $(document).on('change','#province', function(){
                 var provCode = $(this).find(':selected').attr('data-provCode');
