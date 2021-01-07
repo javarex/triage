@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>Export ID</title>
@@ -14,11 +14,25 @@
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: cover; /* Resize the background image to cover the entire container */
-            width:288px;
-            height:336px;
+            width:415px;
+            height:500px;
             border:solid black 1px;
             
         }
+
+        /* @media only screen and (max-width: 767px)
+        {
+            .id-card{
+                background-image:url("{{ asset('image/ccts_portrait.png') }}");
+                background-position: center; /* Center the image */
+                background-repeat: no-repeat; /* Do not repeat the image */
+                background-size: cover; /* Resize the background image to cover the entire container */
+                width:315px;
+                height:380px;
+                border:solid black 1px;
+                
+            }
+        } */
 
         @media print{
             .id-card{
@@ -82,15 +96,8 @@
             font-size:7pt; 
             background-color:gold;
         }
-/* 
-        @media only screen and (max-width: 767px)
-        {
-            body{
-                margin:0;
-                padding:10px;
-                font-family: 'Trebuchet MS', sans-serif;
-            }
-        } */
+
+        
        
     </style>
 </head>
@@ -104,14 +111,14 @@
             <div class="col-md-12 mt-5 d-flex justify-content-center" >
                 <div class="id-card" id="printDiv">
                     
-                    <div style="text-align:center; margin-top:202px; white-space: nowrap; font-size:11pt; font-weight:bolder; color:#442900">
+                    <div style="text-align:center; margin-top:295px; white-space: nowrap; font-size:19pt; font-weight:bolder; color:#442900">
                         {{ $Users_name }}
                     </div>
-                    <div style="text-align:center; margin-top:-2px; white-space: nowrap; font-size:9pt; color:#442900">
+                    <div style="text-align:center; white-space: nowrap; font-size:12pt; color:#442900">
                     {{$address}}
                     </div>
-                    <div style="margin-left:196px; margin-top:10px">
-                        {!! QrCode::size('80')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
+                    <div style="margin-left:270px; margin-top:10px">
+                        {!! QrCode::size('120')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
                     </div>
                 </div>
                 <!-- <span style="margin-left:199px">names</span>
