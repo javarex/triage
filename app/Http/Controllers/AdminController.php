@@ -35,10 +35,10 @@ class AdminController extends Controller
     {
        
         $decrypt = new EncryptionController;
-        $role = auth()->user()->role;
-        $newJson = '';
         $user = auth()->user();
         $first_nameAdmin =  $decrypt->decrypt($user->first_name);
+        $role = auth()->user()->role;
+        $newJson = '';
         $estabLishment = Establishment::all();
         $citizens = User::where('role',2)
                         ->get();
@@ -119,10 +119,11 @@ class AdminController extends Controller
      public function userModule_index()
      {
         $decrypt = new EncryptionController;
+        $user = auth()->user();
+        $first_nameAdmin =  $decrypt->decrypt($user->first_name);
         $role = auth()->user()->role;
         $newJson = '';
-        $user = auth()->user();
-        $first_nameAdmin =  $this->decryptValue($user->first_name);
+
         $clients = User::with('barangay','municipal','province')
                         ->where('role',2)
                         ->get();
@@ -143,22 +144,30 @@ class AdminController extends Controller
                 ));
             }
         }
-        return view('admin.user.index',compact('clients','newArray','user','role'));
+        return view('admin.user.index',compact('clients','newArray','user','role','first_nameAdmin'));
      }
 
      public function establishment_index()
      {
-         return view('admin.admin_establishment.index');
+        $decrypt = new EncryptionController;
+        $user = auth()->user();
+        $first_nameAdmin =  $decrypt->decrypt($user->first_name);
+         return view('admin.admin_establishment.index',compact('first_nameAdmin'));
      }
 
      //report generate
      public function report()
      {
-         return view('admin.report');
+        $decrypt = new EncryptionController;
+        $user = auth()->user();
+        $first_nameAdmin =  $decrypt->decrypt($user->first_name); 
+
+        return view('admin.report',compact('first_nameAdmin'));
      }
 
      //auto complete  user input in report view
      public function getUser(Request $request){
+        $decrypt = new EncryptionController;
 
         $search = $request->search;
         $searchType = $request->searchType;
@@ -184,13 +193,13 @@ class AdminController extends Controller
                         ->select('id','first_name','last_name','qrcode')
                         ->where('first_name', 'like', '%' .$search . '%')
                         ->where('role',2)
-                        ->orWhere('last_name', 'like', '%' .$search . '%')
+                        ->where('last_name', 'like', '%' .$search . '%')
                         ->limit(5)->get();
         }
   
         $response = array();
         foreach($users as $user){
-           $response[] = array("value"=>$user->id,"qrcode"=>$user->qrcode,"label"=>$user->first_name.' '.$user->last_name);
+           $response[] = array("value"=>$user->id,"qrcode"=>$user->qrcode,"label"=>$decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name));
 
         }
         return response()->json($response);
@@ -200,6 +209,7 @@ class AdminController extends Controller
 
      public function generateReport(Request $request)
      {
+        
          $data = [
              'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the'
          ];
