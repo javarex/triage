@@ -36,6 +36,7 @@ class AdminController extends Controller
         $role = auth()->user()->role;
         $newJson = '';
         $user = auth()->user();
+        $first_nameAdmin =  $this->decryptValue($user->first_name);
         $estabLishment = Establishment::all();
         $citizens = User::where('role',2)
                         ->get();
@@ -53,7 +54,7 @@ class AdminController extends Controller
                  array_push($newArray, array('first_name' => $decrypted_firstname, 'last_name' => $decrypted_last_name, 'qrcode'=> $client->qrcode ));
             }
         }
-        return view('admin.index',compact('clients','newArray','user','role','citizens','estabLishment'));
+        return view('admin.index',compact('clients','newArray','user','role','citizens','estabLishment','first_nameAdmin'));
     }
 
     public function create()
@@ -118,6 +119,7 @@ class AdminController extends Controller
         $role = auth()->user()->role;
         $newJson = '';
         $user = auth()->user();
+        $first_nameAdmin =  $this->decryptValue($user->first_name);
         $clients = User::with('barangay','municipal','province')
                         ->where('role',2)
                         ->get();

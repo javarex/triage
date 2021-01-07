@@ -8,11 +8,22 @@
     <title>Export ID</title>
 
     <style>
+        
         .id-card{
-            width:270px;
-            height:auto;
+            background-image:url("{{ asset('image/ccts_portrait.png') }}");
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: cover; /* Resize the background image to cover the entire container */
+            width:288px;
+            height:336px;
             border:solid black 1px;
             
+        }
+
+        @media print{
+            .id-card{
+                -webkit-print-color-adjust: exact;
+            }
         }
         .id-body{
             width:270px;
@@ -89,50 +100,32 @@
         <div class="row">
         <div class="col-md-4"></div>
             <div class="col-md-4">
-                <a href="#" id="printme" class="link" onClick=printForm() style="color: blue;">
+                <!-- <a href="#" id="printme" class="link" onClick=printForm() style="color: blue;">
                     <span>
                        <i class="fa fa-print" aria-hidden="true"></i> Print ID
                     </span>
-                </a>
+                </a> -->
             </div>
-            <div class="col-md-12 d-flex justify-content-center" id="printDiv">
-                
-                <div class="id-card" >
-                    <div class="id-body">
-                       <div class="">
-                           <div class="logo"><img src="{{ asset('image/ddo.png') }}" class="img-fluid" width="60" alt=""></div>
-                           <div class="header1">
-                                <div class="">Republic of the Philippines</div>
-                                <div>PROVINCE OF DAVAO DE ORO</div>
-                           </div>
-                       </div>
-                       <div class="col-md-12">
-                            <div class="header2 text-center">Covid-19 Contact Tracing System(CCTS Card)</div>
-                       </div>
-                       <div class="col-md-12">
-                           <div class="info-client mt-4">
-                                {{ $Users_name }}
-                           </div>
-                       </div>
-                       <div class="col-md-12">
-                           <div class="info-client2" style="font-weight:normal">
-                                {{ $address }}
-                           </div>
-                       </div>
-
-                    
+            <div class="col-md-12 mt-5 d-flex justify-content-center" >
+                <div class="id-card" id="printDiv">
+                    <!-- <div class="mt-1" style="margin-left:12px">
+                        {!! QrCode::size('76')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
+                    </div> -->
+                    <!-- <div style="font-weight:bolder; font-size:8pt; width:96px; text-align:center">
+                        {{$user->qrcode}}
+                    </div> -->
+                    <div style="text-align:center; margin-top:202px; white-space: nowrap; font-size:11pt; font-weight:bolder; color:#442900">
+                        {{ $Users_name }}
                     </div>
-                
+                    <div style="text-align:center; margin-top:-2px; white-space: nowrap; font-size:9pt; color:#442900">
+                    {{$address}}
+                    </div>
+                    <div style="margin-left:196px; margin-top:10px">
+                        {!! QrCode::size('80')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
+                    </div>
                 </div>
-                    <div class="id-body-right">
-                        <div style=" display:inline-block;text-align:center; ">
-                            {!! QrCode::size('94')->color(68, 41, 0)->margin(0)->generate($user->qrcode) !!}
-                            <div class="qrcode_text">{{$user->qrcode}}</div>
-                            <div style="color:grey;font-size:20pt; padding-top:20px; border-top:solid black 1px; height:1in;width:1in">
-                                1x1
-                            </div>
-                        </div>
-                    </div>
+                <!-- <span style="margin-left:199px">names</span>
+                <img src="{{ asset('image/ccts_id.png') }}" height="192" width="384"  alt=""> -->
             </div>
         </div>
     </div>

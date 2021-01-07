@@ -42,7 +42,7 @@ class TriageController extends Controller
         
         $middle_name =$user->middle_name; 
         if($user->suffix){
-            $Users_name = $first_name.' '.strtoupper($middle_name[0]).'. '.$last_name.' '.$user->suffix.'.'; 
+            $Users_name = $first_name.' '.$last_name.' '.$user->suffix; 
         }else{
             $Users_name = $first_name.' '.$last_name;
         }
@@ -155,6 +155,7 @@ class TriageController extends Controller
     {
         $user = auth()->user();
 
+        $first_name = Crypt::decryptString($user->first_name);
         $dateOfBirth = $user->birthday;
         $years = Carbon::parse($dateOfBirth)->age;
         $date = $user->created_at;
@@ -170,12 +171,12 @@ class TriageController extends Controller
         
         $middle_name =$user->middle_name; 
         if($user->suffix){
-            $Users_name = $first_name.' '.strtoupper($middle_name[0]).'. '.$last_name.' '.$user->suffix.'.'; 
+            $Users_name = $first_name.' '.$last_name.' '.$user->suffix; 
         }else{
             $Users_name = $first_name.' '.$last_name;
         }
         
-        return view('client.exportId', compact('user','years','directory','address','Users_name','first_name'));
+        return view('client.exportId', compact('user','first_name','years','directory','address','Users_name','first_name'));
     }
 
     public function update(Request $request, $id)
