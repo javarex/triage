@@ -19,6 +19,15 @@
             border:solid black 1px;
             
         }
+        .btn-choco{
+            background-color:#442900;color:azure;border-color:azure;
+        }
+        .text-choco{
+            color:#442900;}.bg-choco{background-color:#442900;
+        }
+        .bg-choco{
+            background-color:#442900!important
+        }
 
         /* @media only screen and (max-width: 767px)
         {
@@ -105,11 +114,8 @@
     @include('client.navbar')
     <div class="container">
         <div class="row">
-        <div class="col-md-4"></div>
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-12 mt-5 d-flex justify-content-center" >
-                <div class="id-card" id="printDiv">
+            <div class="col-md-12 p-3 d-flex justify-content-center" id="capture">
+                <div class="id-card" >
                     
                     <div style="text-align:center; margin-top:295px; white-space: nowrap; font-size:19pt; font-weight:bolder; color:#442900">
                         {{ $Users_name }}
@@ -127,10 +133,23 @@
         </div>
     </div>
 
+    
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/print.js') }}"></script>
-
+    <!-- <script src="{{ asset('js/print.js') }}"></script> -->
+    <script src="{{ asset('js/html2Canvas.min.js') }}"></script>
     <script>
+
+        function captureScreen() {
+            html2canvas(document.querySelector("#capture")).then(canvas => {
+                canvas.scrollTo(0,0);
+                var a = document.createElement('a');
+                // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
+                a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+                a.download = 'DdO_CCTS_ID.jpg';
+                a.click();
+            });
+            
+        }
         function printForm() {
             printJS({
                 printable: 'printDiv',
@@ -139,6 +158,7 @@
                 
             })
         }
+        
     </script>
 </body>
 </html>
