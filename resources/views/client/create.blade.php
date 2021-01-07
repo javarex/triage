@@ -397,6 +397,8 @@
             $(document).on('click','#agree', function(){
                 if($(this).prop('checked') == true){
                     $('#submitForm').removeAttr('disabled');
+                    $('#submitForm').removeClass('btn-disabled');
+                    $('#submitForm').addClass('btn-choco');
                 }else{
                     $('#submitForm').attr('disabled', true);
                 }
