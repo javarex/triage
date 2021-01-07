@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-12 pt-5">
         <div class="row d-flex justify-content-center">
-            <div class="col-md-4" id="divID">
+            <div class="col-md-4 col-10" id="divID">
                 <!-- left side content                 -->
                 <div class=" px-0">
                     <div class="card-body shadow d-flex justify-content-center pb-3 text-light" style="background-color:#603C03;border-radius:15px">
