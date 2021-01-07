@@ -70,7 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo('App\Barangay');
     }   
     
-    public function establishments() {
-        return $this->hasMany('App\Establishment', 'user_id', 'id');
+    public function establishment() {
+        return $this->hasOne('App\Establishment', 'user_id', 'id');
     }
 }
