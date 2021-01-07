@@ -122,7 +122,11 @@
                                         <td width="20">{{$client['age']}}</td>
                                         <td width="30">{{$client['gender']}}</td>
                                         <td> {{ $client['address'] }} </td>
-                                        <td></td>
+                                        <td>
+                                            <a href="#" data-toggle="modal" data-target="#edit_user" data-id>
+                                                <i class="fas fa-edit    "></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 
@@ -138,7 +142,7 @@
         </div>
     </div>
 
-    
+    @include('admin.user.editUser')
 @endsection
 
 @section('scripts')
