@@ -367,7 +367,7 @@
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
-                                            <button type="submit" id="submitForm" class="btn btn-disabled btn-block" disabled>
+                                            <button type="submit" id="submitForm" class="btn btn-choco btn-block" disabled>
                                                 <i class="fa fa-check" aria-hidden="true"></i>
                                                 {{ __('Sign up') }}
                                             </button>
@@ -401,8 +401,6 @@
                     $('#submitForm').addClass('btn-choco');
                 }else{
                     $('#submitForm').attr('disabled', true);
-                    $('#submitForm').removeClass('btn-choco');
-                    $('#submitForm').addClass('btn-disabled');
                 }
             });
             //birthday script

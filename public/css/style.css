@@ -1,18 +1,18 @@
 .btn-choco{
     background-color:#442900;color:azure;border-color:azure;
 }
-.btn:hover{
+/* .btn:hover{
     color:rgb(235, 80, 45);background-color:rgb(223, 218, 70);font-weight:bolder;border-color:chocolate;
-}
-.btn-disabled{
+} */
+/* .btn-disabled{
     background-color:rgb(107, 107, 106);
     color: aliceblue;
-}
-.btn-disabled:hover{
+} */
+/* .btn-disabled:hover{
     background-color:rgb(143, 143, 137);
     color: aliceblue;
     font-weight: normal;
-}
+} */
 .text-choco{
     color:#442900;}.bg-choco{background-color:#442900;
 }
