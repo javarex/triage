@@ -30,13 +30,15 @@ use Illuminate\Support\Collection;
 class AdminController extends Controller 
 {
 
-   
+    
     public function index()
     {
+       
+        $decrypt = new EncryptionController;
         $role = auth()->user()->role;
         $newJson = '';
         $user = auth()->user();
-        $first_nameAdmin =  $this->decryptValue($user->first_name);
+        $first_nameAdmin =  $decrypt->decrypt($user->first_name);
         $estabLishment = Establishment::all();
         $citizens = User::where('role',2)
                         ->get();
@@ -116,6 +118,7 @@ class AdminController extends Controller
 
      public function userModule_index()
      {
+        $decrypt = new EncryptionController;
         $role = auth()->user()->role;
         $newJson = '';
         $user = auth()->user();
@@ -127,9 +130,9 @@ class AdminController extends Controller
         foreach ($clients as $client) {
             
             if($client->role != 0 && $client->role != 1){
-                $decrypted_firstname = $this->decryptValue($client->first_name);
+                $decrypted_firstname = $decrypt->decrypt($client->first_name);
                
-                $decrypted_last_name = $this->decryptValue($client->last_name);
+                $decrypted_last_name = $decrypt->decrypt($client->last_name);
                  array_push($newArray, array(
                      'first_name'   => $decrypted_firstname, 
                      'last_name'    => $decrypted_last_name, 

@@ -80,6 +80,11 @@ class EstablishmentController extends Controller
         $request['brgyCode'] = $request->barangay;
         
         $establishment = Establishment::create($request->all());
+
+        $request['establishment_id'] = $establishment->id;
+        $request['number'] = 1;
+        $request['description'] = 'Entrance gate';
+        $terminal = Terminal::create($request->all());
         auth()->login($user);
         return redirect('establishment')->with('successful', 'New record addedd successfully!');
     }

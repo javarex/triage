@@ -321,7 +321,15 @@
     <script>
         
         $(document).ready(function(){
-           
+            
+            $(document).on('keyup','#password2', function(){
+                if($(this).val() == $('#password').val() && $(this).val() !== '')
+                {
+                    $('#confirm_password').html('<i class="fa fa-check text-success"></i>')
+                }else{
+                    $('#confirm_password').html('<small class="text-danger font-weight-bold">*</small>')
+                }
+            })
 
             $('#establishment_type').select2();
             $('#province').select2({
