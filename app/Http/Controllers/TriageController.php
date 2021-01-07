@@ -39,8 +39,8 @@ class TriageController extends Controller
         $municipal = strtolower($userAdd->municipal->citymunDesc);
         $address = ucwords($brgy.', '.$municipal.', '.$province);
         $directory = date('m-d-Y', strtotime($date));
-        $first_name = $this->decryptValue($user->first_name);
-        $last_name = $this->decryptValue($user->last_name);
+        $first_name = $decrypt->decrypt($user->first_name);
+        $last_name = $decrypt->decrypt($user->last_name);
         
         $middle_name =$user->middle_name; 
         if($user->suffix){
