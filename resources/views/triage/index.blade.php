@@ -8,7 +8,7 @@
             <div class="col-md-4" id="divID">
                 <!-- left side content                 -->
                 <div class=" px-0">
-                    <div class="card-body shadow d-flex justify-content-center pb-3 text-light" style="background-color:#603C03;border-radius:30px">
+                    <div class="card-body shadow d-flex justify-content-center pb-3 text-light" style="background-color:#603C03;border-radius:15px">
                         <div class="row pl-3 text-center">
                             <div class="col-md-12 d-flex justify-content-center text-center">
                                 {!! QrCode::size('110')->color(68, 41, 0)->margin(1)->generate($user->qrcode) !!}
