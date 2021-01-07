@@ -22,7 +22,7 @@ use Spatie\Image\Image;
 
 class ClientController extends Controller
 {
-    
+    protected $encryptMethod = 'AES-256-CBC';
     
     public function index()
     {
@@ -30,8 +30,6 @@ class ClientController extends Controller
         return view('client.index');
     }
     
-   
-
     public function create()
     {
         
