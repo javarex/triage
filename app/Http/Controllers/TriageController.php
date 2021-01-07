@@ -44,9 +44,9 @@ class TriageController extends Controller
         
         $middle_name =$user->middle_name; 
         if($user->suffix){
-            $Users_name = $decrypt->decrypt($first_name).' '.$decrypt->decrypt($last_name).' '.$user->suffix; 
+            $Users_name = $first_name.' '.$last_name.' '.$user->suffix; 
         }else{
-            $Users_name = $decrypt->decrypt($first_name).' '.$decrypt->decrypt($last_name);
+            $Users_name = $first_name.' '.$last_name;
         }
         
         return view('triage.index',compact('user','years','directory','address','Users_name','first_name'));
