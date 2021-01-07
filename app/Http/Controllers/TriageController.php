@@ -6,19 +6,11 @@ use Carbon\Carbon;
 use App\Criteria;
 use App\Client;
 use App\User;
-use App\Barangay;
-use App\Municipal;
-use App\Province;
 use App\Triage_form;
 use App\Office;
 use App\Activity;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use BaconQrCode\Writer;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Crypt;
 
 class TriageController extends Controller
