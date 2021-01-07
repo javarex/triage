@@ -1,19 +1,6 @@
-@extends('triage.app')
-
+@extends('layouts.app')
 
 @section('content')
-<!-- for page loader -->
-<div class="o-page-loader">
-    <div class="o-page-loader--content">
-        <div class="o-page-loader--spinner"></div>
-        <div class="o-page-loader--message">
-            <span>Loading...</span>
-        </div>
-    </div>
-</div>
-
-<!-- end page loader -->
-
 
 <div class="row">
     <div class="col-md-12">
@@ -91,67 +78,6 @@
             </div>
         </div>
     </div>
-    
-   
-    <!-- right side -->
-    
-    <!-- <div class="col-md-12" style='background-image:url("../public/vendor/img/stop_covid.png")'></div> -->
 </div>
 
-<!-- Modal -->
-@include('triage.editQr')
-
-@endsection
-
-@section('scripts')
-<script>
-    
-   
-
-        function printDiv(divID) {
-            //Get the HTML of div
-            var divElements = document.getElementById(divID).innerHTML;
-            
-            //Get the HTML of whole page
-            var oldPage = document.body.innerHTML;
-
-            //Reset the page's HTML with div's HTML only
-            document.body.innerHTML = 
-              "<html><head><title></title></head><body><center></center>" + 
-              divElements + "</body></html>";
-
-            //Print Page
-            window.print();
-
-            //Restore orignal HTML
-            document.body.innerHTML = oldPage;
-
-             
-            
-
-          
-        }
-
-        function printForm() {
-            printJS({
-                printable: 'printDiv',
-                type: 'html',
-                targetStyles: ['*'],
-                
-            })
-        }
-    $(document).ready(function (){
-        $('#example').DataTable({
-            "bSort" : false
-        });
-
-        $(document).on('click','#print', function (){
-            printElement($('#printProfile'));
-        })
-
-       $('#editted_qr').click(function(){
-           $.notify('You already change your QR code.','error');
-       })
-    })
-</script>
 @endsection

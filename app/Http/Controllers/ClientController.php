@@ -2,23 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Office;
-use App\Client;
 use App\User;
 use App\Province;
 use App\Municipal;
 use App\Barangay;
-use Auth;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Crypt;
-use Spatie\Image\Image;
 
 class ClientController extends Controller
 {

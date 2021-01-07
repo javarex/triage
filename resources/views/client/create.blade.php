@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
     <style>
         .divider{
             border-right: solid #b8b5ab 1px;
@@ -18,8 +18,8 @@
             } 
         }
     </style>
-
 @endsection
+
 @section('content')
 <div class="">
     <div class="row justify-content-center ">
@@ -390,6 +390,9 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('js/notify.min.js') }}"></script> 
+    <script src="{{ asset('js/select2.min.js') }}"></script>
+    
     <script>
         var agree = false;
         $(document).ready(function() {
