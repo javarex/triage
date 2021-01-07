@@ -23,17 +23,11 @@
                                     <input type="radio" class="form-control-radio" name="search_type" id="c_number" value="citizen_num"> <label for="c_number">Citizen's number</label>
                                 </div> -->
                                 <div class="col-md-12">
-<<<<<<< HEAD
-                                    <input type="text" name="search_input" id="search_input" class="form-control" placeholder="Please select first input type" disabled>
-<<<<<<< HEAD
-                                    <input type="hidden" name="barcode" id="barcode" class="form-control">
-=======
-                                    <input type="text" name="c" id="qrcode" class="form-control" readonly>
->>>>>>> f84e85efb0435291743d22f3dc8a0ab4586c77b9
-=======
+                                    <!-- <input type="text" name="search_input" id="search_input" class="form-control" placeholder="Please select first input type" disabled> -->
+
                                     <input type="text" name="search_input" id="search_input" class="form-control" placeholder="Citizen's Name">
                                     <input type="hidden" name="barcode" id="barcode" class="form-control">
->>>>>>> e2784962c5bcde15da6d1d7e599feed981d3ad7b
+
                                 </div>
                                 <div class="col-md-12 pt-3">
                                     <label for="" class="text-warning font-weight-bolder">Period:</label>
@@ -71,14 +65,11 @@
                                     <input type="radio" name="report_type" value="possible_contact" id="possible_contact"> <label for="possible_contact">Possible Contacts</label>
                                 </div> -->
                                 <div class="col-md-6">
-<<<<<<< HEAD
                                     <button type="button" class="btn btn-block login_btn">Generate PDF</button>
                                 </div>
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-block login_btn">Generate Excel</button>
-=======
-                                    <button class="btn btn-block login_btn">Generate Report</button>
->>>>>>> e2784962c5bcde15da6d1d7e599feed981d3ad7b
+
                                 </div>
                             </div>
                         </div>
