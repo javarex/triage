@@ -367,7 +367,7 @@
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
-                                            <button type="submit" id="submitForm" class="btn btn-choco btn-block" disabled>
+                                            <button type="submit" id="submitForm" class="btn btn-disabled btn-block" disabled>
                                                 <i class="fa fa-check" aria-hidden="true"></i>
                                                 {{ __('Sign up') }}
                                             </button>
@@ -397,8 +397,12 @@
             $(document).on('click','#agree', function(){
                 if($(this).prop('checked') == true){
                     $('#submitForm').removeAttr('disabled');
+                    $('#submitForm').removeClass('btn-disabled');
+                    $('#submitForm').addClass('btn-choco');
                 }else{
                     $('#submitForm').attr('disabled', true);
+                    $('#submitForm').removeClass('btn-choco');
+                    $('#submitForm').addClass('btn-disabled');
                 }
             });
             //birthday script
