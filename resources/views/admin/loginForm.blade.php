@@ -83,12 +83,12 @@
 
 @section('scripts')
     <script>
-            function chooseMenu(menu) {
-                if(menu == 'establishment'){
-                    window.location.href = "/establishment/create";
-                }else if(menu == 'citizen'){
-                    window.location.href = "/client/create";
-                }
+        function chooseMenu(menu) {
+            if(menu == 'establishment'){
+                window.location.href = "/establishment/create";
+            }else if(menu == 'citizen'){
+                window.location.href = "/client/create";
             }
+        }
     </script>
 @endsection
