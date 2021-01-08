@@ -124,7 +124,8 @@
                     {{$address}}
                     </div>
                     <div style="margin-left:270px; margin-top:10px">
-                        {!! QrCode::size('120')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
+                        <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',5,5,array(1,1,1), true) }}"
+                            class="bg-light p-2" alt="barcode" />
                     </div>
                 </div>
                 <!-- <span style="margin-left:199px">names</span>
