@@ -44,7 +44,8 @@
                             <div class="row">
                                 <div class="col-md-12 p-0 d-flex justify-content-center" style="border-bottom: solid black 1px">
                                     <div class="row">
-                                        <div class="col-md-12 pt-1 d-flex justify-content-center">{!! QrCode::size('90')->color(68, 41, 0)->margin(0)->generate($user->qrcode) !!}</div>
+                                        <div class="col-md-12 pt-1 d-flex justify-content-center">{!!
+                                            DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1)) !!}</div>
                                         <div class="col-md-12 text-center font-weight-bolder" style="font-size:8pt">{{ $user->qrcode}}</div>
                                     </div>
                                 </div>

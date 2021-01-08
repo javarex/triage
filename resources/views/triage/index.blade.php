@@ -8,14 +8,15 @@
             <div class="col-md-4 col-10" id="divID">
                 <!-- left side content                 -->
                 <div class=" px-0">
-                    <div class="card-body shadow d-flex justify-content-center pb-3 text-light" style="background-color:#603C03;border-radius:15px">
-                        <div class="row pl-3 text-center">
-                            <div class="col-md-12 d-flex justify-content-center text-center">
-                                {!! QrCode::size('110')->color(68, 41, 0)->margin(1)->generate($user->qrcode) !!}
+                    <div class="card-body shadow d-flex justify-content-center pb-3 text-light" style="background-color:#603C03;border-radius:7px">
+                        <div class="row text-center">
+                            <div class="col-12 col-md-12 d-flex justify-content-center text-center">
+                                  <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1), true) }}" class="bg-light p-2"
+                                      alt="barcode" />
                             </div>
                             
                             <div class="col-md-12">
-                                <span style="font-size:10px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
+                                <span style="font-size:16px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
                                     <span class="font-weight-bold">{{$user->qrcode}}</span> 
                                 </span>
                             </div>
@@ -47,13 +48,15 @@
                                     </div>
                                 </div>   
                                 <div class="row pt-1  ">
-                                    <div class="col-1 col-md-1 px-1"><i class=""></i></div>
-                                    
-                                    <div class="col-11 col-md-11 px-1"> 
+                                    <div class="col-12 col-md-12 px-1 text-center"> 
                                         <a href="exportId" class=" btn btn-sm btn-primary font-weight-bolder text-light" target="_blank">
                                             <i class="fa fa-print" aria-hidden="true"></i> Print ID
                                         </a> 
-                                        <a href="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(300)->color(68, 41, 0)->generate( Auth::user()->qrcode )) !!}" class="btn btn-sm btn-primary text-light" id="print_qr" download="DdO_QRCode"><i class="fa fa-fw fa-save" aria-hidden="true"></i>Save qrcode</a>
+                                        <a href="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1)) }}"
+                                            alt="barcode"
+                                            class="btn btn-sm btn-primary text-light" id="print_qr"
+                                            download="DdO_QRCode"><i class="fa fa-fw fa-save"
+                                                aria-hidden="true"></i>Save QR</a>
                                     </div>
                                 </div>   
                             </div>
