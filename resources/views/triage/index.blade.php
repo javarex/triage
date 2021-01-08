@@ -22,10 +22,12 @@
                             </div>
 
                             <div class="col-md-12 container pt-4 text-left">
-                                <div class="row border border-left-0 border-right-0 border-top-0 border-bottom-1">
-                                    <label class="col-md-2 text-md-right font-weight-bold px-1"><i class="fa fa-user" aria-hidden="true"></i></label>
-                                    
-                                    <div class="col-md-8 px-1"> 
+                                <div class="row">
+                                    <label class="col-md-2 col-2 text-md-right font-weight-bold px-1">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </label>
+                                
+                                    <div class="col-md-8 col-8 px-1"> 
                                         {{$Users_name}}
                                     </div>
                                 </div>  

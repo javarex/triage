@@ -3,8 +3,8 @@
     html {
         margin: 0;
         padding: 0;
-        height: auto;
-        background-image: linear-gradient(#442900,#F39C12) !important;
+        height: 100%;
+        background-image: radial-gradient(#ffd900 1%, #101010 200%) !important;
     }
     .user_card {
         height: 400px;
