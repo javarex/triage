@@ -79,8 +79,8 @@ class ClientController extends Controller
         ]);
         
         $duplicateUser = DB::table('users')
-                            ->where('first_name', ucfirst($request->first_name))
-                            ->where('last_name', ucfirst($request->last_name))
+                            ->where('first_name', $encrypt->encrypt(ucwords($request->first_name)))
+                            ->where('last_name', $encrypt->encrypt(ucwords($request->last_name)))
                             ->where('suffix', $request->suffix)
                             ->first();
        

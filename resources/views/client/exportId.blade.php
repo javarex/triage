@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>Export ID</title>
@@ -14,11 +14,34 @@
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: cover; /* Resize the background image to cover the entire container */
-            width:288px;
-            height:336px;
+            width:415px;
+            height:500px;
             border:solid black 1px;
             
         }
+        .btn-choco{
+            background-color:#442900;color:azure;border-color:azure;
+        }
+        .text-choco{
+            color:#442900;}.bg-choco{background-color:#442900;
+        }
+        .bg-choco{
+            background-color:#442900!important
+        }
+
+        /* @media only screen and (max-width: 767px)
+        {
+            .id-card{
+                background-image:url("{{ asset('image/ccts_portrait.png') }}");
+                background-position: center; /* Center the image */
+                background-repeat: no-repeat; /* Do not repeat the image */
+                background-size: cover; /* Resize the background image to cover the entire container */
+                width:315px;
+                height:380px;
+                border:solid black 1px;
+                
+            }
+        } */
 
         @media print{
             .id-card{
@@ -82,15 +105,8 @@
             font-size:7pt; 
             background-color:gold;
         }
-/* 
-        @media only screen and (max-width: 767px)
-        {
-            body{
-                margin:0;
-                padding:10px;
-                font-family: 'Trebuchet MS', sans-serif;
-            }
-        } */
+
+        
        
     </style>
 </head>
@@ -98,30 +114,17 @@
     @include('client.navbar')
     <div class="container">
         <div class="row">
-        <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <!-- <a href="#" id="printme" class="link" onClick=printForm() style="color: blue;">
-                    <span>
-                       <i class="fa fa-print" aria-hidden="true"></i> Print ID
-                    </span>
-                </a> -->
-            </div>
-            <div class="col-md-12 mt-5 d-flex justify-content-center" >
-                <div class="id-card" id="printDiv">
-                    <!-- <div class="mt-1" style="margin-left:12px">
-                        {!! QrCode::size('76')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
-                    </div> -->
-                    <!-- <div style="font-weight:bolder; font-size:8pt; width:96px; text-align:center">
-                        {{$user->qrcode}}
-                    </div> -->
-                    <div style="text-align:center; margin-top:202px; white-space: nowrap; font-size:11pt; font-weight:bolder; color:#442900">
+            <div class="col-md-12 p-3 d-flex justify-content-center" id="capture">
+                <div class="id-card" >
+                    
+                    <div style="text-align:center; margin-top:295px; white-space: nowrap; font-size:19pt; font-weight:bolder; color:#442900">
                         {{ $Users_name }}
                     </div>
-                    <div style="text-align:center; margin-top:-2px; white-space: nowrap; font-size:9pt; color:#442900">
+                    <div style="text-align:center; white-space: nowrap; font-size:12pt; color:#442900">
                     {{$address}}
                     </div>
-                    <div style="margin-left:196px; margin-top:10px">
-                        {!! QrCode::size('80')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
+                    <div style="margin-left:270px; margin-top:10px">
+                        {!! QrCode::size('120')->color(68, 41, 0, 0)->margin(0)->generate($user->qrcode) !!}
                     </div>
                 </div>
                 <!-- <span style="margin-left:199px">names</span>
@@ -130,10 +133,23 @@
         </div>
     </div>
 
+    
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/print.js') }}"></script>
-
+    <!-- <script src="{{ asset('js/print.js') }}"></script> -->
+    <script src="{{ asset('js/html2Canvas.min.js') }}"></script>
     <script>
+
+        function captureScreen() {
+            html2canvas(document.querySelector("#capture")).then(canvas => {
+                canvas.scrollTo(0,0);
+                var a = document.createElement('a');
+                // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
+                a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+                a.download = 'DdO_CCTS_ID.jpg';
+                a.click();
+            });
+            
+        }
         function printForm() {
             printJS({
                 printable: 'printDiv',
@@ -142,6 +158,7 @@
                 
             })
         }
+        
     </script>
 </body>
 </html>
