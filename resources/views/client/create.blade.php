@@ -23,7 +23,7 @@
 @section('content')
 <div class="">
     <div class="row justify-content-center ">
-        <div class="col-12 col-md-12 d-flex justify-content-center">
+        <div class="img-responsive col-xs-12 col-12 col-md-12 d-flex justify-content-center ">
             <img src="{{ asset('image/triage_h.png') }}" class="pb-2" width="200" >
         </div>
 
