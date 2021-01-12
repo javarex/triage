@@ -68,3 +68,18 @@
     .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
         background-color: #c0392b !important;
     }
+
+    .btn-choco{
+        background-color:#442900;color:azure;border-color:azure;
+    }
+    .text-choco{
+        color:#442900;}.bg-choco{background-color:#442900;
+    }
+    .bg-choco{
+        background-color:#442900!important
+    }
+    
+    a.bg-choco:focus,a.bg-choco:hover,button.bg-choco:focus,button.bg-choco:hover
+    {
+        background-color:#311e00!important
+    }
