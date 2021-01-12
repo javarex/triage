@@ -17,23 +17,15 @@
                 width: 100%;
             } 
         }
-        @media screen and (max-width: 960px) {
-            .imageheader {
-                float: none;
-            }
-
-            .imageheader1 {
-                width: 100%;
-            }
-        }
+        
     </style>
 @endsection
 
 @section('content')
 <div class="">
     <div class="row justify-content-center ">
-        <div class=" col-12 col-md-12 d-flex justify-content-center imageheader" style="max-width: 100%;height: auto;">
-            <img src="{{ asset('image/triage_h.png') }}" class="img-fluid pb-2 imageheader1" width="200">
+        <div class=" col-12 col-md-12 d-flex justify-content-center " style="max-width: 100%;height: auto;">
+            <img src="{{ asset('image/triage_h.png') }}" class="img-fluid pb-2 d-block" width="200">
         </div>
 
         <div class="col-md-10">
