@@ -8,7 +8,7 @@
             border-bottom:none;
             width: 100%;
         }
-        @media only screen and (max-width: 767px)
+        @media only screen and (max-width: 960px)
         {
             .divider{
                 border-right:none;

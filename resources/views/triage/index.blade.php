@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-12 pt-5">
         <div class="row d-flex justify-content-center">
-            <div class="col-md-4 col-10" id="divID">
+            <div class="col-10 col-md-4"  id="divID">
                 <!-- left side content                 -->
                 <div class=" px-0">
                     <div class="card-body shadow d-flex justify-content-center pb-3 text-light" style="background-color:#603C03;border-radius:7px">
@@ -17,7 +17,7 @@
                             
                             <div class="col-md-12">
                                 <span style="font-size:16px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
-                                    <span class="font-weight-bold">{{$user->qrcode}}</span> 
+                                    <span class="font-weight-bold" id="qrcode_value" style="cursor:pointer">{{$user->qrcode}}</span> 
                                 </span>
                             </div>
 
