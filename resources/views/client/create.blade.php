@@ -24,8 +24,8 @@
 @section('content')
 <div class="">
     <div class="row justify-content-center ">
-        <div class=" col-12 col-md-12 d-flex justify-content-center " style="max-width: 100%;height: auto;">
-            <img src="{{ asset('image/triage_h.png') }}" class="img-fluid pb-2 d-block" width="200">
+        <div class=" col-12 col-md-12 d-flex justify-content-center " >
+            <img src="{{ asset('image/triage_h.png') }}" class="img-fluid pb-2 d-block" width="200" style="max-width: 100%;height: auto;">
         </div>
 
         <div class="col-md-10">
