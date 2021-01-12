@@ -19,10 +19,10 @@
                 This notice applies to individual persons who are residents and non residents of Davao de Oro. This notice does not form part of any contract. This notice can be updated at any time.
             </p>
             <p>
-                Personal data is any information that can be used to identify a living individual, either on its own, or in combination with other pieces of data. Examples of personal data includes your name, address, email address, phone numbers .... Data Processing includes the collection, use, and storage of data.
+                Personal data is any information that can be used to identify a living individual, either on its own, or in combination with other pieces of data. Examples of personal data includes your name, address, email address, phone numbers, date/time entry and establisment. visited  Data Processing includes the collection, use, and storage of data.
             </p>
             <p>
-                This notice is to inform individual who wishes to travel to or within  Davao de Oro 
+                This notice is to inform individual who wishes to travel to or within  Davao de Oro  
             </p>
             <p>
                 The data controller and data processor is Provincial Health Office of Davao de Oro.  Data from the Contact Tracing may be provided to local or regional governmental health departments for their official use in tracing potential exposures in the case of viral pandemics.
@@ -31,9 +31,9 @@
                 The Data Protection Officer for Davao de Oro can be contacted using the contact details below:
             </p>
             <p>
-                <strong>Anne  Villariel</strong> <br>
-                Bayabas St, Poblacion <br>
-                Compostela, Davao de Oro <br>
+                Abbygail Amores <br>
+                Provincial Health Office <br>
+                Nabunturan, Davao de Oro <br>
                 <strong>Email:</strong> DPO@pho.gov.ph <br>
                 <strong>Phone:</strong>  09335461777
             </p>
@@ -64,12 +64,12 @@
                     If you wish to exercise your rights, please contact the Data Protection Office above.
                 </li>
                 <li><strong>Failure to provide your personal data:</strong> If you do not provide all the requested personal data then Davao de Oro may prevent access to its offices/establishments.</li>
-                <li><strong>Data Transfers:</strong> Data may be provided to local or regional governmental health departments for their official use in tracing potential exposures in the case of viral pandemics</li>
+                <li><strong>Data Transfers/Sharing: </strong> Data may be provided to local or regional governmental health departments for their official use in tracing potential exposures in the case of viral pandemics. Data may also be provided to other local government units for contact tracing systems interoperability and exposure tracing purposes.  Data transfers and sharing will be covered by data sharing agreements.</li>
                 <li><strong>How long we keep your personal data:</strong> Personal data collected via the Contact Tracing system will be retained for 2 months past the last day of visit, or such longer period as may be reasonable given the developing nature of the novel coronavirus outbreak.</li>
                 <li><strong>The use of automated decision making:</strong> Your personal data is not used in any automated decision making (making a decision solely by automated means without any human involvement) or profiling (automated processing of personal data to evaluate certain conditions about an individual).</li>
                 <li><strong>Change of purpose:</strong> We will only process your personal data for the purpose for which we collected it.</li>
                 <li><strong>Changes to this privacy notice:</strong> We reserve the right to update this privacy notice at any time and we will provide you with a new privacy notice when we make any substantial changes.</li>
-                <li><strong>How to lodge a complaint:</strong> If you have a complaint regarding the processing of your personal data then please contact the Data Protection Officer listed above.  A complaint can also be lodged with your local/regional Data Protection Authority.</li>
+                <li><strong>How do we protect your data:</strong> Your data will be encrypted and stored in a cloud server. Only authorized personnel can access your data.  Our cloud service provider has also employed security measures to protect your data.</li>
             </ol>           
       </div>
       <div class="modal-footer">
