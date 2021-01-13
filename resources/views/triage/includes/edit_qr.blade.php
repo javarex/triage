@@ -32,9 +32,9 @@
         </div>
         <div class="col-12 col-md-12">
             <div class="alert alert-danger" role="alert">
-              <p>NOTE: If you have an existing  QRCode  from other provinces, you may use the same.  Just edit   your assigned QRCode.  This is just a one time edit.  For  concerns with your QRCode just email
+              <p>NOTE: If you have an existing  QRCode  from other provinces, you may use the same.  Just edit   your assigned QRCode.  This is just a one time edit.  For  concerns with your QRCode just email...
                 <br>
-                <strong>ddoqr@davaodeoro.gov.ph </strong>
+                <strong> ddoqr@davaodeoro.gov.ph </strong>
               </p>
             </div>
         </div>
