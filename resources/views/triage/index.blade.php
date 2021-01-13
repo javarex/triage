@@ -59,6 +59,16 @@
                                                 aria-hidden="true"></i>Save QR</a>
                                     </div>
                                 </div>   
+                                @if(is_null($user->qredit))
+                                <div class="row pt-1  ">
+                                    <div class="col-12 col-md-12 px-1 text-center"> 
+                                       OR
+                                    </div>
+                                    <div class="col-12 col-md-12 px-1 text-center"> 
+                                       <a href="" class="btn btn-sm btn-success" data-toggle="modal" data-target="#qr_edit"><i class="fas fa-edit    "></i> Edit QRcode</a>
+                                    </div>
+                                </div>
+                                @endif   
                             </div>
                         </div>
                     </div>
@@ -67,5 +77,16 @@
         </div>
     </div>
 </div>
+@include('triage.includes.edit_qr')
 
 @endsection
+
+<!-- @section('scripts')
+    <script>
+        $(document).ready(function(){
+            $('#saveEdit').click(function(){
+                
+            })
+        })
+    </script>
+@endsection -->

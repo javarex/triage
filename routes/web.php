@@ -47,6 +47,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('triage', 'TriageController')->middleware('client');
 Route::middleware(['client'])->group(function () {
     Route::get('exportId', 'TriageController@exportId');
+    Route::post('qredit', 'TriageController@qrEdit');
 });
 
 Route::post('/tag', 'TagController@store');

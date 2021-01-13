@@ -185,8 +185,9 @@ class TriageController extends Controller
     }
 
     public function qrEdit(Request $request)
-    {
+    { 
         $user = User::findOrFail(auth()->user()->id);
+        $request['qrcode'] = $request->new_qrcode;
         $user->update($request->all());
        return redirect('/triage')->with('success','QR code successfully change!');
     }
