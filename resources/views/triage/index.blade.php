@@ -105,11 +105,7 @@
 <script src="{{ asset('js/html2canvas.min.js') }}"></script>
 <script>
     function downloadqr() {
-
-        if(screen.width < 1024) { 
-            document.getElementById("viewport").setAttribute("content", "width=1200px" );
-         }
-
+        alert('a')
         html2canvas(document.querySelector("#qrcode")).then(canvas => {
             canvas.scrollTo(0, 0);
             var a = document.createElement('a');
