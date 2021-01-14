@@ -58,6 +58,7 @@ class ClientController extends Controller
         $province = Province::orderBy('provDesc', 'asc')->get();
         return $province;
     }
+    
 
     //validate input
 
