@@ -110,12 +110,17 @@
 <script>
     //saving the qr code
     $(async function () {
+var vp = document.getElementById("viewport").getAttribute("content");
+
+document.getElementById("viewport").setAttribute("content", "width=800");
 
         await html2canvas($("#qrcode")[0], {
         windowWidth: '1280px'
         } ).then(canvas => {
             $('#print_qr').attr( 'href', canvas.toDataURL("image/jpeg")).attr('download','qrcode.jpeg')
              $('.appe').append(canvas)
+        }).then(function () {
+        document.getElementById("viewport").setAttribute("content", vp);
         });
     })
 
