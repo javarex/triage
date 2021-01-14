@@ -113,7 +113,9 @@
 
         await html2canvas($("#qrcode")[0], {
             windowWidth: '900px',
-            windowHeight: '900px'
+            windowHeight: '900px',
+            allowTaint: true,
+            foreignObjectRendering: true
         } ).then(canvas => {
             $('#print_qr').attr( 'href', canvas.toDataURL("image/jpeg")).attr('download','qrcode.jpeg')
              $('.appe').append(canvas)
