@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('styles')
+<style>
+#qrcontainer{
+    background: #fff;
+    color: #000;
+}
+</style>
+@endsection
+
 @section('content')
 
 <div class="row">
@@ -9,12 +18,12 @@
                 <!-- left side content                 -->
                 <div class=" px-0">
                     <div class="card-body shadow d-flex justify-content-center pb-3 text-light" style="background-color:#603C03;border-radius:7px">
-                        <div class="row text-center">
+                        <div class="row text-center justify-content-center">
                             
-                            <div class="row" id="test">
-                                <div class="col-12 col-md-12 d-flex justify-content-center text-center">
+                            <div id="qrcontainer">
+                                <div class="col-12 text-center">
                                     <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1), true) }}" class="bg-light p-2"
-                                        id="qr" alt="barcode" />
+                                        id="qr" class="img-fluid" alt="barcode" />
                                 </div>
                                 
                                 <div class="col-md-12">
@@ -23,6 +32,7 @@
                                     </span>
                                 </div>
                             </div>
+
                             <div class="col-md-12 container pt-4 text-left">
                                 <div class="row">
                                     <div class="col-1 col-md-1 px-1"><i class="fa fa-user" aria-hidden="true"></i></div>
@@ -92,7 +102,7 @@
     <script>
         $(document).ready(function(){
            
-                html2canvas(document.querySelector("#test")).then(canvas => {
+                html2canvas(document.querySelector("#qrcontainer")).then(canvas => {
                     var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                     $('#print_qr').attr('href', href)
                 });
