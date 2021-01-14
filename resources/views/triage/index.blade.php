@@ -105,14 +105,18 @@
 <script src="{{ asset('js/html2canvas.min.js') }}"></script>
 <script>
     function downloadqr() {
+        if(screen.width < 1024) { document.getElementById("viewport").setAttribute("content", "" ); }
+        
         html2canvas(document.querySelector("#qrcode")).then(canvas => {
-            var link = document.createElement("a");
-            document.body.appendChild(link);
-            link.download = "html_image.png";
-            link.href = canvas.toDataURL("image/png");
-            link.target = '_blank';
-            link.click();
+            canvas.scrollTo(0, 0);
+            var a = document.createElement('a');
+            a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg",
+                "image/octet-stream");
+            a.download = 'qrcode.jpg';
+            a.click();
         });
+        if(screen.width < 1024) {
+            document.getElementById("viewport").setAttribute("content", "width=device-width, initial-scale=1" ); }
     }
 
 </script>
