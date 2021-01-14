@@ -97,6 +97,7 @@
         </div>
     </div>
 </div>
+<div class="appe"></div>
 @include('triage.includes.edit_qr')
 
 @endsection
@@ -106,13 +107,16 @@
 <script>
     //saving the qr code
     $(document).ready(function () {
+
         $("#print_qr").click(function () {
             html2canvas($("#qrcode")[0], {scale: 100}).then(canvas => {
                 canvas.scrollTo(0, 0);
                 var a = document.createElement('a');
                 a.href = canvas.toDataURL("image/jpeg")
                 a.download = 'qrcode.jpg';
-                a.click();
+                setTimeout(function() {
+                    a.click()
+                }, 500);
             });
         });
 
