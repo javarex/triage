@@ -10,17 +10,19 @@
                 <div class=" px-0">
                     <div class="card-body shadow d-flex justify-content-center pb-3 text-light" style="background-color:#603C03;border-radius:7px">
                         <div class="row text-center">
-                            <div class="col-12 col-md-12 d-flex justify-content-center text-center">
-                                  <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1), true) }}" class="bg-light p-2"
-                                      id="qr" alt="barcode" />
-                            </div>
                             
-                            <div class="col-md-12">
-                                <span style="font-size:16px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
-                                    <span class="font-weight-bold" id="qrcode_value" style="cursor:pointer">{{$user->qrcode}}</span> 
-                                </span>
+                            <div class="row" id="test">
+                                <div class="col-12 col-md-12 d-flex justify-content-center text-center">
+                                    <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1), true) }}" class="bg-light p-2"
+                                        id="qr" alt="barcode" />
+                                </div>
+                                
+                                <div class="col-md-12">
+                                    <span style="font-size:16px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
+                                        <span class="font-weight-bold" id="qrcode_value" style="cursor:pointer">{{$user->qrcode}}</span> 
+                                    </span>
+                                </div>
                             </div>
-
                             <div class="col-md-12 container pt-4 text-left">
                                 <div class="row">
                                     <div class="col-1 col-md-1 px-1"><i class="fa fa-user" aria-hidden="true"></i></div>
@@ -90,7 +92,7 @@
     <script>
         $(document).ready(function(){
            
-                html2canvas(document.querySelector("#qr")).then(canvas => {
+                html2canvas(document.querySelector("#test")).then(canvas => {
                     var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                     $('#print_qr').attr('href', href)
                 });
