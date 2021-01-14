@@ -106,19 +106,22 @@
 <script>
     //saving the qr code
     $(document).ready(function () {
-        $("#print_qr").click(function () {
 
-            html2canvas($("#qrcode")[0]).then(canvas => {
-                canvas.scrollTo(0, 0);
-                var a = document.createElement('a');
-                a.href = canvas.toDataURL("image/jpeg")
-                a.download = 'qrcode.jpg';
-                a.click();
-            });
+
+            $('#print_qr').click(function(){
+            html2canvas($('#qrcode'),
+            {
+            onrendered: function (canvas) {
+            var a = $("<a>").attr("href", canvas.toDataURL('image/png'))
+                .attr("download", "output.png")
+                .appendTo("body");
+                a[0].click();
+                a.remove();
+                }
+                });
+                });
         });
 
-
-    })
 
 </script>
 @endsection
