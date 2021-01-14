@@ -108,24 +108,16 @@
     $(document).ready(function () {
         $("#print_qr").click(function () {
             html2canvas(document.querySelector("#qrcode")).then(canvas => {
-                saveAs(canvas.toDataURL(), 'qrcode.png');
+                canvas.scrollTo(0, 0);
+                var a = document.createElement('a');
+                a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg",
+                    "image/octet-stream");
+                a.download = 'qrcode.jpg';
+                a.click();
             });
         });
 
-        function saveAs(uri, filename) {
-            var link = document.createElement('a');
-            if (typeof link.download === 'string') {
-                link.href = uri;
-                link.download = filename;
 
-                document.body.appendChild(link);
-
-                link.click();
-                document.body.removeChild(link);
-            } else {
-                window.open(uri);
-            }
-        }
     })
 
 </script>
