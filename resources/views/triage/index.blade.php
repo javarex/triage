@@ -107,6 +107,7 @@
     //saving the qr code
     $(document).ready(function () {
         $("#print_qr").click(function () {
+            
             html2canvas($("#qrcode")[0]).then(canvas => {
                 canvas.scrollTo(0, 0);
                 var a = document.createElement('a');
