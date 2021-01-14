@@ -109,8 +109,9 @@
 <script src="{{ asset('js/html2canvas.min.js') }}"></script>
 <script>
     //saving the qr code
-    $(document).ready(function () {
-        html2canvas($("#qrcode")[0]).then(canvas => {
+    $(async function () {
+
+        await html2canvas($("#qrcode")[0]).then(canvas => {
             $('#print_qr').attr( 'href', canvas.toDataURL("image/jpeg")).attr('download','qrcode.jpeg')
         });
     })
