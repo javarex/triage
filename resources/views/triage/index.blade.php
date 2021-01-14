@@ -111,7 +111,9 @@
     //saving the qr code
     $(async function () {
 
-        await html2canvas($("#qrcode")[0]).then(canvas => {
+        await html2canvas($("#qrcode")[0], {
+        windowWidth: '1280px'
+        } ).then(canvas => {
             $('#print_qr').attr( 'href', canvas.toDataURL("image/jpeg")).attr('download','qrcode.jpeg')
              $('.appe').append(canvas)
         });
