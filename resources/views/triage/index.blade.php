@@ -74,8 +74,8 @@
                                             target="_blank">
                                             <i class="fa fa-print" aria-hidden="true"></i> Print ID
                                         </a>
-                                        <button class="btn btn-sm btn-primary text-light" id="print_qr"><i
-                                                class="fa fa-fw fa-save" aria-hidden="true"></i>Save QR</button>
+                                        <a href="#" class="btn btn-sm btn-primary text-light" id="print_qr"><i
+                                                class="fa fa-fw fa-save" aria-hidden="true"></i>Save QR</a>
                                     </div>
                                 </div>
                                 @if(is_null($user->qredit))
@@ -108,17 +108,13 @@
     //saving the qr code
     $(document).ready(function () {
 
-        $("#print_qr").click(function () {
-            html2canvas($("#qrcode")[0], {scale: 100}).then(canvas => {
-                canvas.scrollTo(0, 0);
-                var a = document.createElement('a');
-                a.href = canvas.toDataURL("image/jpeg")
-                a.download = 'qrcode.jpg';
-                setTimeout(function() {
-                    a.click()
-                }, 500);
+ 
+            html2canvas($("#qrcode")[0]).then(canvas => {
+                $('#print_qr').attr( 'href', canvas.toDataURL("image/jpeg")).attr('download','qrcode.jpeg')
+
+
             });
-        });
+
 
 
     })
