@@ -74,8 +74,8 @@
                                             target="_blank">
                                             <i class="fa fa-print" aria-hidden="true"></i> Print ID
                                         </a>
-                                        <button class="btn btn-sm btn-primary text-light" onclick="downloadqr()"><i
-                                                class="fa fa-fw fa-save" aria-hidden="true"></i>Save QR</button>
+                                        <a href="#" class="btn btn-sm btn-primary text-light" onclick="downloadqr()"><i
+                                                class="fa fa-fw fa-save" aria-hidden="true"></i>Save QR</a>
                                     </div>
                                 </div>
                                 @if(is_null($user->qredit))
