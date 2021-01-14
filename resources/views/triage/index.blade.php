@@ -105,14 +105,13 @@
 <script src="{{ asset('js/html2canvas.min.js') }}"></script>
 <script>
     function downloadqr() {
-        alert('a')
         html2canvas(document.querySelector("#qrcode")).then(canvas => {
-            canvas.scrollTo(0, 0);
-            var a = document.createElement('a');
-            a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg",
-                "image/octet-stream");
-            a.download = 'qrcode.jpg';
-            a.click();
+            var link = document.createElement("a");
+            document.body.appendChild(link);
+            link.download = "html_image.png";
+            link.href = canvas.toDataURL("image/png");
+            link.target = '_blank';
+            link.click();
         });
     }
 
