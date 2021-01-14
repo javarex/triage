@@ -74,11 +74,6 @@
                                             target="_blank">
                                             <i class="fa fa-print" aria-hidden="true"></i> Print ID
                                         </a>
-                                        {{-- <a href="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1)) }}"
-                                        alt="barcode"
-                                        class="btn btn-sm btn-primary text-light" id="print_qr"
-                                        download="DdO_QRCode"><i class="fa fa-fw fa-save" aria-hidden="true"></i>Save
-                                        QR</a> --}}
                                         <button class="btn btn-sm btn-primary text-light" id="print_qr"><i
                                                 class="fa fa-fw fa-save" aria-hidden="true"></i>Save QR</button>
                                     </div>
