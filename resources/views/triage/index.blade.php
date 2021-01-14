@@ -74,8 +74,8 @@
                                             target="_blank">
                                             <i class="fa fa-print" aria-hidden="true"></i> Print ID
                                         </a>
-                                        <a href="#" class="btn btn-sm btn-primary text-light" onclick="downloadqr()"><i
-                                                class="fa fa-fw fa-save" aria-hidden="true"></i>Save QR</a>
+                                        <button class="btn btn-sm btn-primary text-light" id="print_qr"><i
+                                                class="fa fa-fw fa-save" aria-hidden="true"></i>Save QR</button>
                                     </div>
                                 </div>
                                 @if(is_null($user->qredit))
@@ -104,20 +104,21 @@
 @section('scripts')
 <script src="{{ asset('js/html2canvas.min.js') }}"></script>
 <script>
-    function downloadqr() {
-        if(screen.width < 1024) { document.getElementById("viewport").setAttribute("content", "" ); }
-        
-        html2canvas(document.querySelector("#qrcode")).then(canvas => {
-            canvas.scrollTo(0, 0);
-            var a = document.createElement('a');
-            a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg",
-                "image/octet-stream");
-            a.download = 'qrcode.jpg';
-            a.click();
+    //saving the qr code
+    $(document).ready(function () {
+        $("#print_qr").click(function () {
+            html2canvas($("#qrcode")[0]).then(canvas => {
+                canvas.scrollTo(0, 0);
+                var a = document.createElement('a');
+                a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg",
+                    "image/octet-stream");
+                a.download = 'qrcode.jpg';
+                a.click();
+            });
         });
-        if(screen.width < 1024) {
-            document.getElementById("viewport").setAttribute("content", "width=device-width, initial-scale=1" ); }
-    }
+
+
+    })
 
 </script>
 @endsection
