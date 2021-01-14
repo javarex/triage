@@ -108,13 +108,10 @@
     $(document).ready(function () {
         $("#print_qr").click(function () {
 
-            alert('a')
-            
             html2canvas($("#qrcode")[0]).then(canvas => {
                 canvas.scrollTo(0, 0);
                 var a = document.createElement('a');
-                a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg",
-                    "image/octet-stream");
+                a.href = canvas.toDataURL("image/jpeg")
                 a.download = 'qrcode.jpg';
                 a.click();
             });
