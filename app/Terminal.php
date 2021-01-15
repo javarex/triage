@@ -11,6 +11,7 @@ class Terminal extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'qrcode',
         'establishment_id',
         'number',
         'description'

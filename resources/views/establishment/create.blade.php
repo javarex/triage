@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('styles')
+<link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
     <style>
         .divider{
             border-right: solid #b8b5ab 1px;
@@ -33,6 +34,8 @@
                 <div class="card font-weight-bold text-choco shadow " style="background-color:#ffe56c">
                     <form method="POST" action="/establishment" autocomplete="off" id="register">
                         @csrf
+
+                        <input type="hidden" name="terminal_qr" value="{{ $code }}">
 
                         @if($message = Session::get('delete'))
                                                 
@@ -318,6 +321,8 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('js/notify.min.js') }}"></script> 
+    <script src="{{ asset('js/select2.min.js') }}"></script>
     <script>
         
         $(document).ready(function(){

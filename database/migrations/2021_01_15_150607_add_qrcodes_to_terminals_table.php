@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTestToUsers extends Migration
+class AddQrcodesToTerminalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddTestToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('test')->nullable();
+        Schema::table('terminals', function (Blueprint $table) {
+            $table->string('qrcode')->nullable()->after('id');
         });
     }
 
@@ -25,8 +25,8 @@ class AddTestToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('test');
+        Schema::table('terminals', function (Blueprint $table) {
+            $table->dropColumn('qrcode');
         });
     }
 }

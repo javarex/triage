@@ -32,13 +32,26 @@ class EstablishmentController extends Controller
 
     public function create()
     {
+        for (;;) { 
+            $code = $this->random_stringGenerate();
+            $findTerminal = Terminal::where('qrcode',$code)
+                                    ->first();
+            if($findTerminal)
+            {
+                continue;
+            }
+            else{
+                break;
+            }
+    
+        }
         $user = auth()->user();
         $establishment_type = Establishment_type::orderBy('type', 'asc')->get();
         $provinces = Province::orderBy('provDesc', 'asc')->get();
         $municipals = Municipal::orderBy('citymunDesc', 'asc')->get();
         $barangays = Barangay::orderBy('brgyDesc', 'asc')->get();
 
-        return view('establishment.create', compact('provinces','establishment_type','municipals','barangays','user'));
+        return view('establishment.create', compact('provinces','establishment_type','municipals','barangays','user','code'));
     }
 
     public function establishmentValidate(Request $request)
@@ -84,6 +97,7 @@ class EstablishmentController extends Controller
         $request['establishment_id'] = $establishment->id;
         $request['number'] = 1;
         $request['description'] = 'Entrance gate';
+        $request['qrcode'] = $request->terminal_qr;
         $terminal = Terminal::create($request->all());
         auth()->login($user);
         return redirect('establishment')->with('successful', 'New record addedd successfully!');
@@ -133,6 +147,19 @@ class EstablishmentController extends Controller
              return response()->json(['success' => 'Update successfully' ]);
         }
         
+    }
+
+    //generate terminal qrcode
+
+    public function random_stringGenerate()
+    {
+        $alphaList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        
+        $digits = sprintf('%02d',mt_rand(01, 99));
+        $leters = substr(str_shuffle($alphaList),0,3);
+        $code = 'TM'.$leters.$digits;
+        
+        return $code;
     }
 
     
