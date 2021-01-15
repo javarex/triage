@@ -101,12 +101,10 @@
  <script src="{{ asset('js/html2Canvas.min.js') }}"></script>
     <script>
         $(document).ready(function(){
-           
-                html2canvas(document.querySelector("#qrcontainer")).then(canvas => {
-                    var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-                    $('#print_qr').attr('href', href)
-                });
-
+            html2canvas(document.querySelector("#qrcontainer")).then(canvas => {
+                var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                $('#print_qr').attr('href', href)
+            });
         })
     </script>
 @endsection 

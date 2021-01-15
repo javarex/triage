@@ -35,10 +35,6 @@ Auth::routes(['verify' => true], function (){
 });
 
 
-Route::get('/admin/login', function(){
-    return view('admin.loginForm');
-});
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 

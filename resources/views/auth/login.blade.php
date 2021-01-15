@@ -1,66 +1,94 @@
 @extends('layouts.appLogin')
 
 @section('content')
-<div class="container">
-    <div class="row pt-5">
-        <div class="col-md-6 d-flex justify-content-center">
-            <img src="{{ asset('image/triage.png')}}" class="img-fluid" width="250" alt="">
-        </div>
-        <div class="col-md-6 p-5">
-            <div class="">
-                <div class="font-weight-bold">
-                    <!-- <form method="POST" action="{{ route('login') }}">
-                        @csrf
+<!-- end page loader -->
+<div class="container pt-5">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+						<img src="{{ asset('image/triage.png')}}" class="image-fluid" width="160" alt="Logo">
+					</div>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+					<form action="{{route('login')}}" method="post" autocomplete="off">
+                    @csrf 
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" name="username" class="form-control input_user @error('username') is-invalid @enderror" value="{{ old('username') }}" placeholder="username">
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
+							<input type="password" name="password" class="form-control input_pass" placeholder="password">
+						</div>
+						
+							<div class="d-flex justify-content-center mt-3 login_container">
+				 	<button name="button" class="btn login_btn">Login</button>
+				   </div>
+					</form>
+				</div>
+		
+				<div class="mt-4">
+					<div class="d-flex justify-content-center links text-light">
+						Don't have an account? <a href="#" class="ml-2" data-toggle="modal" data-target="#modal_signUp">Sign Up</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-                        <div class="form-group row pt-3 d-flex justify-content-center text-center">
-                            <div class="col-md-8">
-                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="off" placeholder="Triage code" autofocus>
-                                <input type="hidden" value="admin" name="password">
-                                @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+    <div class="modal fade" id="modal_signUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body bg-choco">
+        <div class="row">
+            <div class="col-md-6 mb-2">
+                <a href="javascript:void(0)" id="establishment_btn" class="text-choco" onclick="chooseMenu('establishment')" data-dismiss="modal">
+                    <div class="card card-body text-center shadow bg-light" >
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3><i class="fas fa-building"></i></h3>
+                            </div>
+                            <div class="col-md-12">
+                                <h3>Establishment</h3>
                             </div>
                         </div>
-
-                        <div class="form-group row d-flex justify-content-center text-center">
-                            <div class="col-md-8">
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    {{ __('Login') }}
-                                </button>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a  class="text-choco" onclick="chooseMenu('citizen')" data-dismiss="modal" href="javascript:void(0)">
+                    <div class="card card-body text-center shadow bg-light" >
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3><i class="fas fa-user    "></i></h3>
+                            </div>
+                            <div class="col-md-12">
+                                <h3>Citizen</h3>
                             </div>
                         </div>
-
-                       
-                        
-                    </form> -->
-                        
-                        <div class="col-md-8 mt-5 row d-flex justify-content-center">
-                            @if (Route::has('password.request'))
-                           <div class="col-md-12">
-                                <a class="btn btn-choco btn-block" href="/admin/login">
-                                    {{ __('Sign in') }}
-                                </a>
-                           </div>
-                           <div class="col-md-12">
-                                    <div class="dropdown">
-                                        <a class="btn btn-choco btn-block dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Sign Up
-                                        </a>
-                                    <div class="dropdown-menu" style="width:100%" aria-labelledby="dropdownMenuLink">
-                                        <a href="{{ route('client.create') }}" class="dropdown-item text-choco"> <i class="fa fa-user" aria-hidden="true"></i> Register as citizen</a>
-                                        <a href="/establishment/create" class="dropdown-item text-choco"> <i class="fa fa-user" aria-hidden="true"></i> Register as establishment</a>
-                                    </div>
-                                </div>
-                           </div>
-                            @endif
-                        </div>
-                </div>
+                    </div>
+                </a>
             </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
+@endsection
 
-
+@section('scripts')
+    <script>
+        function chooseMenu(menu) {
+            if(menu == 'establishment'){
+                window.location.href = "/establishment/create";
+            }else if(menu == 'citizen'){
+                window.location.href = "/client/create";
+            }
+        }
+    </script>
 @endsection
