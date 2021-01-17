@@ -98,7 +98,8 @@ class AdminController extends Controller
 
     public function export() 
     {
-        return Excel::download(new ActivitiesExport, 'Credentials.csv');
+        $now = date('Y-m-d');
+        return Excel::download(new ActivitiesExport, 'citizens_'.$now.'.xlsx');
     }
 
     public function import(Request $request) 

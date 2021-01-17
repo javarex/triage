@@ -79,12 +79,12 @@
                     <div class="header pt-2">
                         <div class="row">
                             <div class="col-md-4">
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal_import"><i class="fas fa-file-import    "></i> Import</button>
-                                <a class="btn btn-warning btn-sm" href="{{ route('export') }}"><i class="fas fa-file-export    "></i> Export</a>
+                                <!-- <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal_import"><i class="fas fa-file-import    "></i> Import</button> -->
+                                <a class="btn btn-warning btn-sm" href="{{ route('export') }}"><i class="fas fa-file-export    "></i> Export Data</a>
                             </div>
                             
                             <div class="col-md-8 d-flex justify-content-end">
-                                <a href="" class="btn btn-warning btn-sm"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Temporary verify</a>
+                                <!-- <a href="" class="btn btn-warning btn-sm"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Temporary verify</a> -->
                             </div>
                         </div>
 
