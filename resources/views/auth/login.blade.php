@@ -7,7 +7,7 @@
 			<div class="user_card">
 				<div class="d-flex justify-content-center">
 					<div class="brand_logo_container">
-						<img src="{{ asset('image/triage.png')}}" class="image-fluid" width="160" alt="Logo">
+						<img src="{{ asset('image/triage1.png')}}" class="image-fluid" width="160" alt="Logo">
 					</div>
 				</div>
 				<div class="d-flex justify-content-center form_container">

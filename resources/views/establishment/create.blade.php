@@ -27,7 +27,7 @@
 <div class="">
     <div class="row justify-content-center ">
         <div class="col-md-12 d-flex justify-content-center">
-            <img src="{{ asset('image/triage_h.png') }}" class="img-fluid pb-2" width="200" >
+            <img src="{{ asset('image/triage_g.png') }}" class="img-fluid pb-2" width="200" >
         </div>
         <div class="col-md-10">
             <div class="bg-primary">

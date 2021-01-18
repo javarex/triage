@@ -36,12 +36,13 @@
         @elseif(auth()->user()->role == 1)
             @include('layouts.navbar.navbar_establishment')
         @else
+        
         {{--  client nav --}}
         <nav class="navbar navbar-expand-md navbar-light shadow-sm py-0" style="background-color:#442900;">
             <div class="container-fluid ml-0 p-0">
                 <a class="navbar-brand" href="{{ url('/triage') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
-                    <img src="{{ asset('image/triage_h.png') }}" class="img-fluid pb-1" title="PLGU - DAVAO DE ORO"
+                    <img src="{{ asset('image/triage_g.png') }}" class="img-fluid pb-1" title="PLGU - DAVAO DE ORO"
                         width="80">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" style="background-color:white;"

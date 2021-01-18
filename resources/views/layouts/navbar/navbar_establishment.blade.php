@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <a class="navbar-brand pr-5" href="{{ url('/triage') }}">
             <!-- {{ config('app.name', 'Laravel') }} -->
-            <img src="{{ asset('image/triagez.png') }}" title="PLGU - DAVAO DE ORO" width="120" height="61" >
+            <img src="{{ asset('image/triage_g.png') }}" title="PLGU - DAVAO DE ORO" class="img-fluid pb-1" title="PLGU - DAVAO DE ORO"
+                        width="80" >
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" style="background-color:white;" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
