@@ -36,6 +36,9 @@
 					<div class="d-flex justify-content-center links text-light">
 						Don't have an account? <a href="#" class="ml-2" data-toggle="modal" data-target="#modal_signUp">Sign Up</a>
 					</div>
+					<div class="d-flex justify-content-center links text-light">
+						How to register? <a href="{{asset('files/citizenReg.pdf')}}" class="ml-2" target="_blank">Click here</a>
+					</div>
 				</div>
 			</div>
 		</div>
