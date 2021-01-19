@@ -76,70 +76,72 @@
                 </div>
 
                     <!-- End modal for import -->
-                    <div class="header pt-2">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <!-- <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal_import"><i class="fas fa-file-import    "></i> Import</button> -->
-                                <a class="btn btn-warning btn-sm" href="{{ route('export') }}"><i class="fas fa-file-export    "></i> Export Data</a>
-                            </div>
-                            
-                            <div class="col-md-8 d-flex justify-content-end">
-                                <!-- <a href="" class="btn btn-warning btn-sm"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Temporary verify</a> -->
-                            </div>
+                <div class="header pt-2">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <!-- <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal_import"><i class="fas fa-file-import    "></i> Import</button> -->
+                            <a class="btn btn-warning btn-sm" href="{{ route('export') }}"><i class="fas fa-file-export    "></i> Export Data</a>
                         </div>
+                        
+                        <div class="col-md-8 d-flex justify-content-end">
+                            <!-- <a href="" class="btn btn-warning btn-sm"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Temporary verify</a> -->
+                        </div>
+                    </div>
 
-                        <h1>REGISTERED CITIZENS</h1>
-                    </div>
-                    <div class="alert alert-success" id="untag_alert">
-                    </div>
-                    <div class=""> 
-                        <div class="row">
-                            <div class="col-md-1">
-                                <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
-                            </div>
+                    <h1>REGISTERED CITIZENS</h1>
+                </div>
+
+                <!-- <div class="alert alert-success" id="untag_alert">
+                </div> -->
+                
+                <div class=""> 
+                    <div class="row">
+                        <div class="col-md-1">
+                            <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                         </div>
-                        <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
-                            <thead class="">
-                                <tr>
-                                    <th>QR Code</th>
-                                    <th>Name</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Barangay</th>
-                                    <th>Municipal</th>
-                                    <th>Province</th>
-                                    <th><i class="fa fa-cog" aria-hidden="true"></i></th>
-                                    <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($newArray as $client)
-                                <tr>
-                                    <td>{{$client['qrcode']}}</td>
-                                    <td>{{$client['first_name'].' '.$client['last_name']}}</td>
-                                    <td width="20">{{$client['age']}}</td>
-                                    <td width="30">{{$client['gender']}}</td>
-                                    <td> {{ $client['barangay'] }} </td>
-                                    <td> {{ $client['municipal'] }} </td>
-                                    <td> {{ $client['province'] }} </td>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target="#edit_user" data-id>
-                                            <i class="fas fa-edit    "></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            
-                            </tbody>
-                        </table>
                     </div>
+                    <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
+                        <thead class="">
+                            <tr>
+                                <th>QR Code</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Barangay</th>
+                                <th>Municipal</th>
+                                <th>Province</th>
+                                <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                                <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($newArray as $client)
+                            <tr>
+                                <td>{{$client['qrcode']}}</td>
+                                <td>{{$client['first_name'].' '.$client['last_name']}}</td>
+                                <td width="20">{{$client['age']}}</td>
+                                <td width="30">{{$client['gender']}}</td>
+                                <td> {{ $client['barangay'] }} </td>
+                                <td> {{ $client['municipal'] }} </td>
+                                <td> {{ $client['province'] }} </td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#edit_user" data-id>
+                                        <i class="fas fa-edit    "></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             
         </div>
     </div>
 
-    @include('admin.user.editUser')
+    <!-- @include('admin.user.editUser') -->
 @endsection
 
 @section('scripts')

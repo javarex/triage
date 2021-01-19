@@ -28,6 +28,7 @@
                             <td>{{ $user->brgyDesc }}</td>
                             <td>{{ $user->citymunDesc }}</td>
                             <td>{{ $user->provDesc }}</td>
+                            <td></td>
                         </tr>
                         @endforeach
                     </tbody>
