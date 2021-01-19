@@ -141,7 +141,9 @@ class AdminController extends Controller
                      'qrcode'       => $client->qrcode,
                      'age'          =>  Carbon::parse($client->birthday)->age ,
                      'gender'       => $client->sex,
-                     'address'      =>  $client->barangay['brgyDesc'].', '.$client->municipal['citymunDesc'].', '.$client->province['provDesc'],
+                     'barangay'      =>  $client->barangay['brgyDesc'],
+                     'municipal'      =>  $client->municipal['citymunDesc'],
+                     'province'      =>  $client->province['provDesc'],
                 ));
             }
         }
@@ -153,7 +155,12 @@ class AdminController extends Controller
         $decrypt = new EncryptionController;
         $user = auth()->user();
         $first_nameAdmin =  $decrypt->decrypt($user->first_name);
-         return view('admin.admin_establishment.index',compact('first_nameAdmin'));
+        $users = DB::table('establishments')
+                        ->join('barangays','establishments.brgyCode','=','barangays.brgyCode')
+                        ->join('municipals','establishments.citymunCode','=','municipals.citymunCode')
+                        ->join('provinces','establishments.provCode','=','provinces.provCode')
+                        ->get();
+         return view('admin.admin_establishment.index',compact('first_nameAdmin','users'));
      }
 
      //report generate

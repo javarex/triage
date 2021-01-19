@@ -29,7 +29,7 @@
             </div>
             @endif
             
-            <div class="col-md-9 bg-choco border text-warning">
+            <div class="col-12 col-md-10 bg-choco border text-warning">
                 @error('file')
                 <div class="alert alert-danger" role="alert">
                     {{ $message }}
@@ -54,13 +54,13 @@
                 
                 <div class="modal fade" id="modal_import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title text-primary" id="exampleModalLabel">Select File</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                        <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-primary" id="exampleModalLabel">Select File</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                             <form enctype="multipart/form-data" method="post" action="{{ url('/import') }}">
                                 {{ csrf_field() }}
                                 <div class="modal-body">
@@ -71,9 +71,9 @@
                                     <input type="submit" class="btn btn-primary" value="Upload">
                                 </div>
                             </form>
-                            </div>
                         </div>
                     </div>
+                </div>
 
                     <!-- End modal for import -->
                     <div class="header pt-2">
@@ -94,47 +94,44 @@
                     </div>
                     <div class=""> 
                         <div class="row">
-
                             <div class="col-md-1">
                                 <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                             </div>
-                        
                         </div>
-                    <div class="">
-                            <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
-                                <thead class="">
-                                    <tr>
-                                        <th>QR Code</th>
-                                        <th>Name</th>
-                                        <th>Age</th>
-                                        <th>Gender</th>
-                                        <th>Address</th>
-                                        <th><i class="fa fa-cog" aria-hidden="true"></i></th>
-                                        <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
-                                    </tr>
-                                </thead>
-                        
-                                <tbody>
-                                @foreach($newArray as $client)
-                                    <tr>
-                                        <td>{{$client['qrcode']}}</td>
-                                        <td>{{$client['first_name'].' '.$client['last_name']}}</td>
-                                        <td width="20">{{$client['age']}}</td>
-                                        <td width="30">{{$client['gender']}}</td>
-                                        <td> {{ $client['address'] }} </td>
-                                        <td>
-                                            <a href="#" data-toggle="modal" data-target="#edit_user" data-id>
-                                                <i class="fas fa-edit    "></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                
-                                </tbody>
-                            </table>
-                        
+                        <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
+                            <thead class="">
+                                <tr>
+                                    <th>QR Code</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>Barangay</th>
+                                    <th>Municipal</th>
+                                    <th>Province</th>
+                                    <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                                    <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($newArray as $client)
+                                <tr>
+                                    <td>{{$client['qrcode']}}</td>
+                                    <td>{{$client['first_name'].' '.$client['last_name']}}</td>
+                                    <td width="20">{{$client['age']}}</td>
+                                    <td width="30">{{$client['gender']}}</td>
+                                    <td> {{ $client['barangay'] }} </td>
+                                    <td> {{ $client['municipal'] }} </td>
+                                    <td> {{ $client['province'] }} </td>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target="#edit_user" data-id>
+                                            <i class="fas fa-edit    "></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             
-                    </div>
+                            </tbody>
+                        </table>
                     </div>
             </div>
 

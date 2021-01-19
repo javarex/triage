@@ -26,4 +26,7 @@ class Establishment extends Model
     public function terminal(){
         return $this->hasMany('App\Terminal');
     }
+    // public function user(){
+    //     return $this->belongsTo('App\User');
+    // }
 }
