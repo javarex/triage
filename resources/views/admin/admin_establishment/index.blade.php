@@ -9,8 +9,6 @@
                     <thead class="">
                         <tr>
                             <th>Establishment Name</th>
-                            <th>Age</th>
-                            <th>Gender</th>
                             <th>Barangay</th>
                             <th>Municipal</th>
                             <th>Province</th>
@@ -23,8 +21,6 @@
                         @foreach($users as $user)
                         <tr>
                             <td>{{ $user->establishment_name }}</td>
-                            <td></td>
-                            <td></td>
                             <td>{{ $user->brgyDesc }}</td>
                             <td>{{ $user->citymunDesc }}</td>
                             <td>{{ $user->provDesc }}</td>
