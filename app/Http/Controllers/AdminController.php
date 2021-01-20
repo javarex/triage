@@ -78,9 +78,15 @@ class AdminController extends Controller
 
     public function updateClient(Request $request)
     {
+        $encrypt = new EncryptionController;
+        
         $user = User::findOrFail($request->client_id);
+        $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
+        $request['first_name'] = $encrypt->encrypt(ucwords($request->first_name)); //255
+        $request['middle_name'] = ucwords($request->middle_name);
+        $request['last_name'] = $encrypt->encrypt(ucwords($request->last_name)); //255 length
         $user->update($request->all());
-        return redirect('admin')->with('success_update',$user->first_name.' '.$user->last_name.' information successfully changed!');
+        return redirect('userModule')->with('success_update',$encrypt->decrypt($request->first_name).' '.$encrypt->decrypt($user->last_name).' information successfully changed!');
     }
 
     public function update(Request $request, $id)
@@ -136,9 +142,12 @@ class AdminController extends Controller
                
                 $decrypted_last_name = $decrypt->decrypt($client->last_name);
                  array_push($newArray, array(
+                     'id'           => $client->id, 
                      'first_name'   => $decrypted_firstname, 
                      'last_name'    => $decrypted_last_name, 
+                     'middle_name'  => $client->middle_name, 
                      'qrcode'       => $client->qrcode,
+                     'birthday'     => $client->birthday,
                      'age'          =>  Carbon::parse($client->birthday)->age ,
                      'gender'       => $client->sex,
                      'barangay'      =>  $client->barangay['brgyDesc'],
@@ -211,6 +220,13 @@ class AdminController extends Controller
 
         }
         return response()->json($response);
+     }
+
+     //edit user
+
+     public function edit_user(Request $request)
+     {
+        
      }
 
      //generate Report

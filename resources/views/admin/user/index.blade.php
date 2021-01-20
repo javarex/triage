@@ -125,7 +125,13 @@
                                 <td> {{ $client['municipal'] }} </td>
                                 <td> {{ $client['province'] }} </td>
                                 <td>
-                                    <a href="#" data-toggle="modal" data-target="#edit_user" data-id>
+                                    <a href="#" id="client_view" data-toggle="modal" data-target="#edit_user" 
+                                    data-client_id="{{ $client['id'] }}"
+                                    data-firstName="{{ $client['first_name'] }}"
+                                    data-middleName="{{ $client['middle_name'] }}"
+                                    data-lastName="{{ $client['last_name'] }}"
+                                    data-birthday="{{ $client['birthday'] }}"
+                                    >
                                         <i class="fas fa-edit    "></i>
                                     </a>
                                 </td>
@@ -141,7 +147,7 @@
         </div>
     </div>
 
-    <!-- @include('admin.user.editUser') -->
+    @include('admin.user.editUser')
 @endsection
 
 @section('scripts')
@@ -184,17 +190,17 @@
             var middleName = $(this).attr('data-middleName');
             var lastName = $(this).attr('data-lastName');
             var contactNumber = $(this).attr('data-contactNumber');
-            var age = $(this).attr('data-age');
+            var birthday = $(this).attr('data-birthday');
             var sex = $(this).attr('data-sex');
             var address = $(this).attr('data-address');
             var client_id = $(this).attr('data-client_id');
 
             $('#client_id').val(client_id);
             $('#firstName').val(firstName);
-            $('#middle_name').val(middleName);
-            $('#last_name').val(lastName);
+            $('#middleName').val(middleName);
+            $('#lastName').val(lastName);
             $('#address').val(address);
-            $('#age').val(age);
+            $('#birthday').val(birthday);
             $('#sex').val(sex);
             $('#contact_number').val(contactNumber);
             // $('#firstNameModal').html(firstName+' '+middleName+' '+lastName+' '+contactNumber);

@@ -51,7 +51,6 @@ Route::post('/untag', 'TagController@untagUser');
 
 //admin routes and controllers
 
-Route::post('/admin/client', 'AdminController@updateClient');
 Route::resource('/admin', 'AdminController')->middleware('admin');
 Route::get('export', 'AdminController@export')->name('export');
 Route::post('/import', 'AdminController@import');
@@ -61,9 +60,11 @@ Route::middleware(['admin'])->group(function () {
     Route::get('adminEstab','AdminController@establishment_index');
     Route::get('ccts_reports','AdminController@report');
     Route::post('generateReport','AdminController@generateReport');
+    Route::post('/admin/client', 'AdminController@updateClient');
     Route::post('/user/getUser/','AdminController@getUser')->name('user.getUser');
 });
-
+    
+    
 // Establishment routes
 Route::get('/establishment/create', 'EstablishmentController@create');
 // Route::get('/establishment', 'EstablishmentController@index');
