@@ -34,12 +34,15 @@
 		
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links text-light">
-						Don't have an account? <a href="client/create" class="ml-2" >Sign Up</a>
+						Don't have an account? <a href="client/create" class="ml-2">Sign Up</a>
 					</div>
 					<div class="d-flex justify-content-center links text-light">
 						How to register? <a href="{{asset('files/citizenReg.pdf')}}" class="ml-2" target="_blank">Click here</a>
 					</div>
 				</div>
+                <div class="alert alert-info" role="alert">
+                    <strong>NOTE:</strong> Test run for capitol employees only.
+                </div>
 			</div>
 		</div>
 	</div>
