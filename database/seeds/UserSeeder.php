@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         $userData = [];
         $password = bcrypt('password');
 
-       for ($i = 0; $i < 1000000; $i++) {
+       for ($i = 0; $i < 1000; $i++) {
 
            $rand = Str::random(10);
            $token = Str::random(10);
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
                 'email' => $rand . '@gmail.com',
                 'password' => $password,
                 'verified' => 0,
-                'role' => 0,
+                'role' => 2,
                 'remember_token' => $token,
             ]);
         }

@@ -139,9 +139,9 @@
                         @endforeach
 
                         
-                        {{ $clients->links() }}
                         </tbody>
                     </table>
+                        {{ $clients->links() }}
                 </div>
             </div>
 
@@ -181,7 +181,8 @@
         }
 
         $('#clientTable').DataTable({
-            order:[[1,'asc']]
+            order:[[1,'asc']],
+            "bPaginate": false,
         });
         $('#example1').DataTable();
         
