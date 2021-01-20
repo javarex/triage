@@ -47,7 +47,8 @@ class ActivitiesExport implements FromCollection,WithHeadings,WithMapping
             $user->middle_name,
             $decrypt->decrypt($user->last_name),
             $user->sex,
-            Carbon::parse($user->birthday)->age,
+            $user->birthday,
+            // Carbon::parse($user->birthday)->age,
             $user->barangay->brgyDesc.', '.$user->municipal->citymunDesc.', '.$user->province->provDesc,
           
         ];
