@@ -35,6 +35,7 @@ class EmployeesImport implements ToCollection, WithHeadingRow
                 'username'          =>  $row['username'],
                 'password'          =>  $row['password'],
                 'role'              =>  2,
+                'verified'          =>  0,
                
             ]);
   
