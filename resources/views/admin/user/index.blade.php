@@ -141,7 +141,8 @@
                         
                         </tbody>
                     </table>
-                        {{ $clients->links() }}
+                    {{ $clients->links() }}
+                    <p class="d-flex justify-content-end">Showing {{ $clients->firstItem() }} to {{ $clients->lastItem() }}of total {{$clients->total()}} entries</p>
                 </div>
             </div>
 
@@ -183,6 +184,7 @@
         $('#clientTable').DataTable({
             order:[[1,'asc']],
             "bPaginate": false,
+            "bInfo": false,
         });
         $('#example1').DataTable();
         
