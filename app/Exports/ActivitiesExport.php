@@ -36,6 +36,11 @@ class ActivitiesExport implements FromCollection,WithHeadings,WithMapping
             'sex',
             'birthday',
             'address',
+            'barangay',
+            'municipal',
+            'province',
+            'username',
+            'password',
         ];
     }
     public function map($user): array
@@ -48,8 +53,14 @@ class ActivitiesExport implements FromCollection,WithHeadings,WithMapping
             $decrypt->decrypt($user->last_name),
             $user->sex,
             $user->birthday,
+            $user->address,
+            $user->barangay_id,
+            $user->municipal_id,
+            $user->province_id,
+            $user->username,
+            $user->password,
             // Carbon::parse($user->birthday)->age,
-            $user->barangay->brgyDesc.', '.$user->municipal->citymunDesc.', '.$user->province->provDesc,
+            // $user->barangay->brgyDesc.', '.$user->municipal->citymunDesc.', '.$user->province->provDesc,
           
         ];
     }

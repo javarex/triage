@@ -31,7 +31,7 @@ class EmployeesImport implements ToCollection, WithHeadingRow
                 //create new record 
 
                 $newUser = User::create([
-                    'username'          =>  $row['fempidno'],
+                    'username'          =>  $row['username'],
                     'password'          =>  bcrypt('admin'),
                     'first_name'        =>  $row['ffirst'],
                     'middle_name'       =>  $row['fmi'],
