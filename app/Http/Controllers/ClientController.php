@@ -6,6 +6,7 @@ use App\User;
 use App\Province;
 use App\Municipal;
 use App\Barangay;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -64,6 +65,8 @@ class ClientController extends Controller
 
     public function validateInputs(Request $request)
     {
+        $bday = date('Y-m-d', strtotime($request->birthday));
+        $age = Carbon::parse($bday)->age;
         $encrypt = new EncryptionController;
 
         $validator = $request->validate([
@@ -86,7 +89,7 @@ class ClientController extends Controller
                             ->first();
        
         if(!$duplicateUser){
-            if($validator ){
+            if($validator && $age > 15){
 
                 // $fileName =  $request->file('valid_id');
                 // $file = $fileName->getClientOriginalName();
@@ -111,14 +114,17 @@ class ClientController extends Controller
                 $request['password'] = bcrypt($request->password);
                 $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
                 $user = User::create($request->all());
-
-
                 if (!auth()->check()) {
                     auth()->login($user);
                 }
                 return response()->json(['success'=> 'Successfully added!']);
             }else{
-                return response()->json(['error'=>$validator->errors()->all() ]);
+                if($age < 15){
+                    
+                    return response()->json(['error'=> 'Invalid birthday']);
+                }else{
+                    return response()->json(['error'=>$validator->errors()->all() ]);
+                }
             }
         }else{
             return response()->json(['error'=> 'Record already exist']);
