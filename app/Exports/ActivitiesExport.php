@@ -34,7 +34,7 @@ class ActivitiesExport implements FromCollection,WithHeadings,WithMapping
             'middle_name',
             'last_name',
             'sex',
-            'age',
+            'birthday',
             'address',
         ];
     }
