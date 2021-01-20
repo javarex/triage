@@ -14,7 +14,9 @@ class Terminal extends Model
         'qrcode',
         'establishment_id',
         'number',
-        'description'
+        'description',
+        'coordinate_long',
+        'coordinate_lat',
     ];
 
     protected $dates = ['created_at','updated_at'];

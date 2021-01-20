@@ -1,7 +1,7 @@
 <div class="modal fade" id="add_establishmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <form action="/addTerminal" method="post" autocomplete="off" id="form_addTerminal">
         @csrf
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-xs" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add New Terminal</h5>
@@ -10,17 +10,38 @@
                     </button>
                 </div>
                 <div class="modal-body" id="printProfile">
-                    <div class="row container">
-                        <div class="col-md-12">
+                    <div class="row container d-flex justify-content-center">
+                        <div class="col-md-5">
+                            <label for="" class="form-label">Terminal number</label>
+                        </div>
+                        <div class="col-md-7">
                             <div class="form-group">
-                                <input type="number" class="form-control-mod" name="number" placeholder="Terminal Number" required>
+                                <input type="number" class="form-control" name="number" required>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-5">
+                            <label for="" class="form-label">Terminal Description</label>
+                        </div>
+                        <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control-mod" name="description" placeholder="Terminal Description" required>
+                                <input type="text" class="form-control" name="description" required>
                             </div>
-                            
+                        </div>
+                        <div class="col-md-5">
+                            <label for="" class="form-label">Coordinate Longitude</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="coordinate_long">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="" class="form-label">Coordinate Longitude</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="coordinate_lat">
+                            </div>
                         </div>
                     </div>
                 </div>
