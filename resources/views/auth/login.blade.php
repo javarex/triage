@@ -33,20 +33,20 @@
                         </form>
                     </div>
                 
-                    <div class="mt-4">
+                    <!-- <div class="mt-4">
                         <div class="d-flex justify-content-center links text-light">
                             Don't have an account? <a href="client/create" class="ml-2">Sign Up</a>
                         </div>
                         <div class="d-flex justify-content-center links text-light">
                             How to register? <a href="{{asset('files/citizenReg.pdf')}}" class="ml-2" target="_blank">Click here</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-md-12 d-flex justify-content-center">
                 <div class="col-md-4 p-0">
                     <div class="alert alert-info" role="alert">
-                        <strong>NOTE:</strong> Test run for capitol employees only.
+                        <strong>NOTE:</strong> Registration for Test Run already completed!
                     </div>
                 </div>
             </div>
