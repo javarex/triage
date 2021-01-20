@@ -48,9 +48,9 @@ class ActivitiesExport implements FromCollection,WithHeadings,WithMapping
         $decrypt = new EncryptionController;
         return [
             $user->qrcode,
-            $decrypt->decrypt($user->first_name),
+            $user->first_name,
             $user->middle_name,
-            $decrypt->decrypt($user->last_name),
+            $user->last_name,
             $user->sex,
             $user->birthday,
             $user->address,
