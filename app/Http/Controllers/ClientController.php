@@ -89,7 +89,7 @@ class ClientController extends Controller
                             ->first();
        
         if(!$duplicateUser){
-            if($validator && $age > 15){
+            if($validator && $age > 0){
 
                 // $fileName =  $request->file('valid_id');
                 // $file = $fileName->getClientOriginalName();
@@ -119,8 +119,7 @@ class ClientController extends Controller
                 }
                 return response()->json(['success'=> 'Successfully added!']);
             }else{
-                if($age < 15){
-                    
+                if($age < 1){
                     return response()->json(['error'=> 'Invalid birthday']);
                 }else{
                     return response()->json(['error'=>$validator->errors()->all() ]);
