@@ -137,7 +137,9 @@
                                 </td>
                             </tr>
                         @endforeach
+
                         
+                        {{ $clients->links() }}
                         </tbody>
                     </table>
                 </div>
