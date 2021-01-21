@@ -8,9 +8,6 @@
         height: 300px;
         overflow: scroll;
         }
-
-        
-        
     </style>
 @endsection
 
@@ -137,16 +134,12 @@
                                 </td>
                             </tr>
                         @endforeach
-
-                        
                         </tbody>
                     </table>
                     {{ $clients->links() }}
                     <p class="d-flex justify-content-end">Showing {{ $clients->firstItem() }} to {{ $clients->lastItem() }}of total {{$clients->total()}} entries</p>
                 </div>
             </div>
-
-            
         </div>
     </div>
 
