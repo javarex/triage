@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 
@@ -103,5 +104,44 @@ class ApiController extends Controller
             return response()->json($user);
         }
 
+    }
+
+    public function terminal_scan() {
+
+        $terminal_qr = Input::get('qr');
+
+        Auth::logout();
+
+        return view('terminal.login', compact('terminal_qr'));
+    }
+
+    public function terminal_scan_login(Request $request) {
+        $username = $request->username;
+        $password = $request->password;
+        $terminal_qr = $request->qr;
+
+        $decrypt = new EncryptionController;
+
+        $terminal = DB::table('terminals')->where('qrcode', $terminal_qr)->first();
+
+        $terminal_qrcode = $terminal->description;
+
+        $user = User::select('username', 'password', 'first_name', 'last_name','middle_name', 'id', 'qrcode')
+            ->where('username', $username)
+            ->first();
+        
+        if (Hash::check($password, $user->password)) {
+
+            $fullname = $decrypt->decrypt($user->first_name). ' '. $user->middle_name. ' '.$decrypt->decrypt($user->last_name);
+            $date = now();
+
+            DB::table('logs')->insert([
+                'barcode' => $user->qrcode,
+                'time_in' => now(),
+                'terminal_id' => $terminal->id,
+            ]);
+
+            return view('terminal.confirmation', compact('user', 'terminal_qrcode', 'fullname', 'date'));
+        }       
     }
 }

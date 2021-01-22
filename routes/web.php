@@ -100,3 +100,8 @@ Route::get('/total_records', 'ApiController@total_records');
 // edit qr code 
 Route::post('/qrEdit','TriageController@qrEdit');
 
+//terminal scanning
+Route::get('/terminal_scan', 'ApiController@terminal_scan')->name('terminal_scan');
+Route::post('/terminal_scan_login', 'ApiController@terminal_scan_login')->name('terminal_scan_login');
+
+

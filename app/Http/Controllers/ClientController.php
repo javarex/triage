@@ -21,7 +21,12 @@ class ClientController extends Controller
     
     public function create()
     {
-        
+        // $decrypt = new EncryptionController;
+        // $users = User::all();
+        // // dd($decrypt->encrypt('george'));
+        // foreach ($users as $u) {
+        //     DB::table('users')->where('id', $u->id)->update(['first_name' => $decrypt->encrypt($u->first_name)]);
+        // }
 
         //generate code
         $alphaList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

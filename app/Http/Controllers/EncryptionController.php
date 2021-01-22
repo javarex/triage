@@ -62,7 +62,7 @@ class EncryptionController extends Controller
         $ivLength = openssl_cipher_iv_length($this->encryptMethod);
         $iv = openssl_random_pseudo_bytes($ivLength);
  
-        $salt = openssl_random_pseudo_bytes(10);
+        $salt = openssl_random_pseudo_bytes(10); //default 256
         $iterations = 999;
         $hashKey = hash_pbkdf2('sha512', $key, $salt, $iterations, ($this->encryptMethodLength() / 4));
 
