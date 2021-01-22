@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
                 'email' => $rand . '@gmail.com',
                 'password' => $password,
                 'verified' => 0,
-                'role' => 0,
+                'role' => 2,
                 'remember_token' => $token,
             ]);
         }

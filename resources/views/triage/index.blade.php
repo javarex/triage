@@ -62,13 +62,13 @@
                                 <div class="row pt-1  ">
                                     <div class="col-12 col-md-12 px-1 text-center"> 
                                         <a href="exportId" class=" btn btn-sm btn-primary font-weight-bolder text-light" target="_blank">
-                                            <i class="fa fa-print" aria-hidden="true"></i> Print ID
+                                            <i class="fa fa-id-card" aria-hidden="true"></i> Export ID
                                         </a> 
-                                        {{-- <a href="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1)) }}"
+                                        <!-- <a href="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1)) }}"
                                             alt="barcode"
                                             class="btn btn-sm btn-primary text-light" id="print_qr"
                                             download="DdO_QRCode"><i class="fa fa-fw fa-save"
-                                                aria-hidden="true"></i>Save QR</a> --}}
+                                                aria-hidden="true"></i>Save QR</a>  -->
                                                  <a href="#"
                                                      alt="barcode" class="btn btn-sm btn-primary text-light"
                                                      id="print_qr" download="DdO_QRCode.png"><i class="fa fa-fw fa-save"

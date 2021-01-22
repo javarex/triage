@@ -35,6 +35,7 @@
                         <td>{{$terminal->number}}</td>
                         <td>{{$terminal->description}}</td>
                         <td  class="text-center w-25">
+                            <a href="#" class="btn btn-primary btn-sm" data-terminal_id="{{$terminal->id}}" title="View logs"><i class="fa fa-fw fa-eye"></i></a>
                             <a href="#" class="btn btn-success btn-sm" data-terminal_id="{{$terminal->id}}" id="terminalEdit_btn" title="View or Edit this terminal" data-toggle="modal" data-target="#editTerminal"><i class="fa fa-fw fa-edit"></i></a>
                             <a href="#" class="btn btn-danger btn-sm" data-terminal_id="{{$terminal->id}}" title="Delete this terminal"><i class="fa fa-fw fa-trash"></i></a>
                         </td>

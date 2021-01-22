@@ -24,7 +24,7 @@
                         <label for=""><strong>New QRCode</strong></label>
                     </div>
                     <div class="col-12 col-md-10">
-                        <input type="text" name="new_qrcode" id="new_qrcode" class="form-control" placeholder="(e.g) DDO1234">
+                        <input type="text" name="new_qrcode" id="new_qrcode" class="form-control" required placeholder="(e.g) DDO1234">
                         <input type="hidden" name="qredit" value="{{$user->qrcode }}">
                     </div>
                 </div>

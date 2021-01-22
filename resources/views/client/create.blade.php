@@ -25,7 +25,7 @@
 <div class="">
     <div class="row justify-content-center ">
         <div class=" col-12 col-md-12 d-flex justify-content-center " >
-            <img src="{{ asset('image/triage_h.png') }}" class="img-fluid pb-2" style="width:200px; height:auto !important;">
+            <img src="{{ asset('image/triage_g.png') }}" class="img-fluid pb-2" style="width:200px; height:auto !important;">
         </div>
 
         <div class="col-md-10">

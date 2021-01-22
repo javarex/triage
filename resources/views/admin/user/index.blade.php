@@ -8,9 +8,6 @@
         height: 300px;
         overflow: scroll;
         }
-
-        
-        
     </style>
 @endsection
 
@@ -29,7 +26,7 @@
             </div>
             @endif
             
-            <div class="col-md-9 bg-choco border text-warning">
+            <div class="col-12 col-md-10 bg-choco border text-warning">
                 @error('file')
                 <div class="alert alert-danger" role="alert">
                     {{ $message }}
@@ -54,13 +51,13 @@
                 
                 <div class="modal fade" id="modal_import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title text-primary" id="exampleModalLabel">Select File</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                        <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-primary" id="exampleModalLabel">Select File</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                             <form enctype="multipart/form-data" method="post" action="{{ url('/import') }}">
                                 {{ csrf_field() }}
                                 <div class="modal-body">
@@ -71,74 +68,78 @@
                                     <input type="submit" class="btn btn-primary" value="Upload">
                                 </div>
                             </form>
-                            </div>
                         </div>
                     </div>
+                </div>
 
                     <!-- End modal for import -->
-                    <div class="header pt-2">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal_import"><i class="fas fa-file-import    "></i> Import</button>
-                                <a class="btn btn-warning btn-sm" href="{{ route('export') }}"><i class="fas fa-file-export    "></i> Export</a>
-                            </div>
-                            
-                            <div class="col-md-8 d-flex justify-content-end">
-                                <a href="" class="btn btn-warning btn-sm"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Temporary verify</a>
-                            </div>
+                <div class="header pt-2">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal_import"><i class="fas fa-file-import    "></i> Import</button>
+                            <a class="btn btn-warning btn-sm" href="{{ route('export') }}"><i class="fas fa-file-export    "></i> Export Data</a>
                         </div>
-
-                        <h1>REGISTERED CITIZENS</h1>
-                    </div>
-                    <div class="alert alert-success" id="untag_alert">
-                    </div>
-                    <div class=""> 
-                        <div class="row">
-
-                            <div class="col-md-1">
-                                <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
-                            </div>
                         
+                        <div class="col-md-8 d-flex justify-content-end">
+                            <!-- <a href="" class="btn btn-warning btn-sm"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Temporary verify</a> -->
                         </div>
-                    <div class="">
-                            <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
-                                <thead class="">
-                                    <tr>
-                                        <th>QR Code</th>
-                                        <th>Name</th>
-                                        <th>Age</th>
-                                        <th>Gender</th>
-                                        <th>Address</th>
-                                        <th><i class="fa fa-cog" aria-hidden="true"></i></th>
-                                        <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
-                                    </tr>
-                                </thead>
-                        
-                                <tbody>
-                                @foreach($newArray as $client)
-                                    <tr>
-                                        <td>{{$client['qrcode']}}</td>
-                                        <td>{{$client['first_name'].' '.$client['last_name']}}</td>
-                                        <td width="20">{{$client['age']}}</td>
-                                        <td width="30">{{$client['gender']}}</td>
-                                        <td> {{ $client['address'] }} </td>
-                                        <td>
-                                            <a href="#" data-toggle="modal" data-target="#edit_user" data-id>
-                                                <i class="fas fa-edit    "></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                
-                                </tbody>
-                            </table>
-                        
-                            
                     </div>
+
+                    <h1>REGISTERED CITIZENS</h1>
+                </div>
+
+                <!-- <div class="alert alert-success" id="untag_alert">
+                </div> -->
+                
+                <div class=""> 
+                    <div class="row">
+                        <div class="col-md-1">
+                            <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                        </div>
                     </div>
+                    <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
+                        <thead class="">
+                            <tr>
+                                <th>QR Code</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Barangay</th>
+                                <th>Municipal</th>
+                                <th>Province</th>
+                                <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                                <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($newArray as $client)
+                            <tr>
+                                <td>{{$client['qrcode']}}</td>
+                                <td>{{$client['first_name'].' '.$client['last_name']}}</td>
+                                <td width="20">{{$client['age']}}</td>
+                                <td width="30">{{$client['gender']}}</td>
+                                <td> {{ $client['barangay'] }} </td>
+                                <td> {{ $client['municipal'] }} </td>
+                                <td> {{ $client['province'] }} </td>
+                                <td>
+                                    <a href="#" id="client_view" data-toggle="modal" data-target="#edit_user" 
+                                    data-client_id="{{ $client['id'] }}"
+                                    data-firstName="{{ $client['first_name'] }}"
+                                    data-middleName="{{ $client['middle_name'] }}"
+                                    data-lastName="{{ $client['last_name'] }}"
+                                    data-birthday="{{ $client['birthday'] }}"
+                                    >
+                                        <i class="fas fa-edit    "></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    {{ $clients->links() }}
+                    <p class="d-flex justify-content-end">Showing {{ $clients->firstItem() }} to {{ $clients->lastItem() }}of total {{$clients->total()}} entries</p>
+                </div>
             </div>
-
-            
         </div>
     </div>
 
@@ -174,7 +175,9 @@
         }
 
         $('#clientTable').DataTable({
-            order:[[1,'asc']]
+            order:[[1,'asc']],
+            "bPaginate": false,
+            "bInfo": false,
         });
         $('#example1').DataTable();
         
@@ -185,17 +188,17 @@
             var middleName = $(this).attr('data-middleName');
             var lastName = $(this).attr('data-lastName');
             var contactNumber = $(this).attr('data-contactNumber');
-            var age = $(this).attr('data-age');
+            var birthday = $(this).attr('data-birthday');
             var sex = $(this).attr('data-sex');
             var address = $(this).attr('data-address');
             var client_id = $(this).attr('data-client_id');
 
             $('#client_id').val(client_id);
             $('#firstName').val(firstName);
-            $('#middle_name').val(middleName);
-            $('#last_name').val(lastName);
+            $('#middleName').val(middleName);
+            $('#lastName').val(lastName);
             $('#address').val(address);
-            $('#age').val(age);
+            $('#birthday').val(birthday);
             $('#sex').val(sex);
             $('#contact_number').val(contactNumber);
             // $('#firstNameModal').html(firstName+' '+middleName+' '+lastName+' '+contactNumber);

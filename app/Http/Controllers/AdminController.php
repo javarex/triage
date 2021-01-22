@@ -78,9 +78,15 @@ class AdminController extends Controller
 
     public function updateClient(Request $request)
     {
+        $encrypt = new EncryptionController;
+        
         $user = User::findOrFail($request->client_id);
+        $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
+        $request['first_name'] = $encrypt->encrypt(ucwords($request->first_name)); //255
+        $request['middle_name'] = ucwords($request->middle_name);
+        $request['last_name'] = $encrypt->encrypt(ucwords($request->last_name)); //255 length
         $user->update($request->all());
-        return redirect('admin')->with('success_update',$user->first_name.' '.$user->last_name.' information successfully changed!');
+        return redirect('userModule')->with('success_update',$encrypt->decrypt($request->first_name).' '.$encrypt->decrypt($user->last_name).' information successfully changed!');
     }
 
     public function update(Request $request, $id)
@@ -98,7 +104,8 @@ class AdminController extends Controller
 
     public function export() 
     {
-        return Excel::download(new ActivitiesExport, 'Credentials.csv');
+        $now = date('Y-m-d');
+        return Excel::download(new ActivitiesExport, 'citizens_'.$now.'.xlsx');
     }
 
     public function import(Request $request) 
@@ -126,7 +133,7 @@ class AdminController extends Controller
 
         $clients = User::with('barangay','municipal','province')
                         ->where('role',2)
-                        ->get();
+                        ->paginate(10);
         $newArray = array();
         foreach ($clients as $client) {
             
@@ -135,12 +142,17 @@ class AdminController extends Controller
                
                 $decrypted_last_name = $decrypt->decrypt($client->last_name);
                  array_push($newArray, array(
+                     'id'           => $client->id, 
                      'first_name'   => $decrypted_firstname, 
                      'last_name'    => $decrypted_last_name, 
+                     'middle_name'  => $client->middle_name, 
                      'qrcode'       => $client->qrcode,
+                     'birthday'     => $client->birthday,
                      'age'          =>  Carbon::parse($client->birthday)->age ,
                      'gender'       => $client->sex,
-                     'address'      =>  $client->barangay['brgyDesc'].', '.$client->municipal['citymunDesc'].', '.$client->province['provDesc'],
+                     'barangay'      =>  $client->barangay['brgyDesc'],
+                     'municipal'      =>  $client->municipal['citymunDesc'],
+                     'province'      =>  $client->province['provDesc'],
                 ));
             }
         }
@@ -152,7 +164,13 @@ class AdminController extends Controller
         $decrypt = new EncryptionController;
         $user = auth()->user();
         $first_nameAdmin =  $decrypt->decrypt($user->first_name);
-         return view('admin.admin_establishment.index',compact('first_nameAdmin'));
+        $users = DB::table('establishments')
+                        ->join('barangays','establishments.brgyCode','=','barangays.brgyCode')
+                        ->join('municipals','
+                        establishments.citymunCode','=','municipals.citymunCode')
+                        ->join('provinces','establishments.provCode','=','provinces.provCode')
+                        ->get();
+         return view('admin.admin_establishment.index',compact('first_nameAdmin','users'));
      }
 
      //report generate
@@ -203,6 +221,13 @@ class AdminController extends Controller
 
         }
         return response()->json($response);
+     }
+
+     //edit user
+
+     public function edit_user(Request $request)
+     {
+        
      }
 
      //generate Report
