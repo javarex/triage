@@ -105,7 +105,8 @@
                     <div class="row container">
                         <div class="col-md-12">
                             <span style="font-size:16px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
-                            <img src="" class="bg-light p-2"
+                            <img src="{!! DNS2D::getBarcodeSVG('https://ddoqr.dvodeoro.ph/terminal_scan?qr='.$terminal->qrcode,'QRCODE',10,10) !!}"
+                                class="bg-light p-2"
                                         id="qr" class="img-fluid" alt="barcode" />
                             </span>
                         </div>

@@ -42,7 +42,7 @@
                             {{$terminal->qrcode }}
                         </td>
                         <td>
-                            <img src="data:image/png;base64, {{ DNS2D::getBarcodePNG("http://ddoqr.dvodeoro.ph/".$terminal->qrcode,'QRCODE',10,10,array(1,1,1), true) }}"
+                            <img src="{!! DNS2D::getBarcodeSVG('https://ddoqr.dvodeoro.ph/terminal_scan?qr='.$terminal->qrcode,'QRCODE',10,10) !!}"
                                 alt="">
                         </td>
                         <td>{{$terminal->number}}</td>
@@ -70,8 +70,8 @@
         $(document).ready(function() {
 
             $(document).on('click', '.terminal', function() {
-                var terminal_qr = "http://ddoqr.dvodeoro.ph/" + $(this).attr('data-qr');
-                $("#qr").attr('src',"data:image/png;base64," + "{{ DNS2D::getBarcodePNG(" + terminal_qr + ",'QRCODE',10,10,array(1,1,1), true) }}")
+                // var terminal_qr = "http://ddoqr.dvodeoro.ph/" + $(this).attr('data-qr');
+                // $("#qr").attr('src',"data:image/png;base64," + "{!! DNS2D::getBarcodePNG(" + terminal_qr + ",'QRCODE',10,10,array(1,1,1), true) !!}")
             })
 
 
