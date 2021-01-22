@@ -105,12 +105,13 @@
                     <div class="row container">
                         <div class="col-md-12">
                             <span style="font-size:16px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
-                            <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG(}}'aas'{{, 'QRCODE',10,10,array(1,1,1), true) }}" class="bg-light p-2"
+                            <img src="" class="bg-light p-2"
                                         id="qr" class="img-fluid" alt="barcode" />
                             </span>
                         </div>
                     </div>
                 </div>
+                {{-- <input type="hidden" id="{{ $terminal->qrcode }}"> --}}
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a href="#" class="btn btn-choco" id="print_terminal_qr" download="DdO_QRCode.png">Save</a>                
