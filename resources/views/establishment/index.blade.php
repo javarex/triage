@@ -63,8 +63,7 @@
 
             $(document).on('click', '.terminal', function() {
                 var terminal_qr = $(this).attr('data-qr');
-                $("#qr").attr('src',"data:image/png;base64," +
-                "{{ DNS2D::getBarcodePNG(" + "http://ddoqr.dvodeoro.ph/terminal_scan?qr=" + terminal_qr +",'QRCODE',10,10,array(1,1,1), true) }}")
+                $("#qr").attr('src',"data:image/png;base64," + "{{ DNS2D::getBarcodePNG(" + terminal_qr + ",'QRCODE',10,10,array(1,1,1), true) }}")
             })
 
 
