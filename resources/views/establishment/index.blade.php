@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -37,6 +41,10 @@
                             <a href="#"  alt="qrcode" data-toggle="modal" data-target="#terminal_info" class="terminal" data-qr="{{ $terminal->qrcode }}"><i class="fa fa-fw fa-download" aria-hidden="true"></i></a>
                             {{$terminal->qrcode }}
                         </td>
+                        <td>
+                            <img src="data:image/png;base64, {{ DNS2D::getBarcodePNG("http://ddoqr.dvodeoro.ph/".$terminal->qrcode,'QRCODE',10,10,array(1,1,1), true) }}"
+                                alt="">
+                        </td>
                         <td>{{$terminal->number}}</td>
                         <td>{{$terminal->description}}</td>
                         <td  class="text-center w-25">
@@ -62,7 +70,7 @@
         $(document).ready(function() {
 
             $(document).on('click', '.terminal', function() {
-                var terminal_qr = $(this).attr('data-qr');
+                var terminal_qr = "http://ddoqr.dvodeoro.ph/" + $(this).attr('data-qr');
                 $("#qr").attr('src',"data:image/png;base64," + "{{ DNS2D::getBarcodePNG(" + terminal_qr + ",'QRCODE',10,10,array(1,1,1), true) }}")
             })
 
