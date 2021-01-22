@@ -81,7 +81,7 @@
                                        OR
                                     </div>
                                     <div class="col-12 col-md-12 px-1 text-center"> 
-                                       <a href="" class="btn btn-sm btn-success" data-toggle="modal" data-target="#qr_edit"><i class="fas fa-edit    "></i> Edit QRcode</a>
+                                       <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#qr_edit"><i class="fas fa-edit    "></i> Edit QRcode</a>
                                     </div>
                                 </div>
                                 @endif   
