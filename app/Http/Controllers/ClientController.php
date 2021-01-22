@@ -67,8 +67,8 @@ class ClientController extends Controller
         $encrypt = new EncryptionController;
 
         $validator = $request->validate([
-            'first_name'            => 'required|regex:/^[a-z0-9 .\-]+$/i',
-            'last_name'             => 'required|regex:/^[a-z0-9 .\-]+$/i',
+            'first_name'            => 'required|regex:/^[a-z .\-]+$/i',
+            'last_name'             => 'required|regex:/^[a-z .\-]+$/i',
             'sex'                   => 'required',
             'birthday'              => 'required',
             'address'               => 'required',
