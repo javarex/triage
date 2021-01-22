@@ -89,4 +89,35 @@
     </form>
 </div>
 
+<!-- Modals View details -->
+<div class="modal fade" id="terminal_info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="/addTerminal" method="post" autocomplete="off" id="form_editTerminal">
+        @csrf
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-qrcode    "></i>Terminal QR Code</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="printProfile">
+                    <div class="row container">
+                        <div class="col-md-12">
+                            <span style="font-size:16px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
+                            <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG(}}'aas'{{, 'QRCODE',10,10,array(1,1,1), true) }}" class="bg-light p-2"
+                                        id="qr" class="img-fluid" alt="barcode" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-choco" id="print_terminal_qr" download="DdO_QRCode.png">Save</a>                
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 

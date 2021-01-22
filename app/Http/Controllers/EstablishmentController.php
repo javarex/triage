@@ -123,9 +123,24 @@ class EstablishmentController extends Controller
 
     public function terminalStore(Request $request)
     {
+        for (;;) { 
+            $code = $this->random_stringGenerate();
+            $findTerminal = Terminal::where('qrcode',$code)
+                                    ->first();
+            if($findTerminal)
+            {
+                continue;
+            }
+            else{
+                break;
+            }
+    
+        }
+        
         $establishment = Establishment::where('user_id', auth()->user()->id)->first();
         $establishment_id = $establishment->id;
         $request['establishment_id'] = $establishment_id;
+        $request['qrcode'] = $code;
         $terminal = Terminal::create($request->all());
 
         return redirect('/establishment')->with('addedTerminal','Terminal: '.$terminal->description.' successfully added!');

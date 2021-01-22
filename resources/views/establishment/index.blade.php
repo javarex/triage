@@ -24,6 +24,7 @@
             <table class="table bg-choco text-warning table-striped table-bordered dt-responsive nowrap">
                 <thead>
                     <tr>
+                        <th>QR Code</th>
                         <th>Terminal Number</th>
                         <th>Terminal Discription</th>
                         <th class="text-center"><i class="fa fa-fw fa-cogs"></i></th>
@@ -32,6 +33,10 @@
                 <tbody>
                     @foreach($terminals as $terminal)
                     <tr>
+                        <td>
+                            <a href="#"  alt="qrcode" data-toggle="modal" data-target="#terminal_info" ><i class="fa fa-fw fa-download" aria-hidden="true"></i></a>
+                            {{$terminal->qrcode }}
+                        </td>
                         <td>{{$terminal->number}}</td>
                         <td>{{$terminal->description}}</td>
                         <td  class="text-center w-25">
@@ -68,6 +73,15 @@
                var terminal_Description = $('#terminal_id').val();
                editTerminal(form_editTerminal,formEdit_id);
            })
+
+            // for qr code terminal 
+
+           html2canvas(document.querySelector("#qrcontainer")).then(canvas => {
+                var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                $('#print_terminal_qr').attr('href', href)
+            });
+
+            // end qrcode terminal
         })
 
         function deleteTerminal(){
