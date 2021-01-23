@@ -30,7 +30,7 @@ class EstablishmentController extends Controller
                             'description',
                             'number',
                             'id')
-                        ->where('establishment_id',auth()->user()->id)
+                        ->where('establishment_id',$establishment_id)
                         ->get();
         
         return view('establishment.index',compact('role','terminals'));
