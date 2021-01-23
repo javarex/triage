@@ -166,8 +166,7 @@ class AdminController extends Controller
         $first_nameAdmin =  $decrypt->decrypt($user->first_name);
         $users = DB::table('establishments')
                         ->join('barangays','establishments.brgyCode','=','barangays.brgyCode')
-                        ->join('municipals','
-                        establishments.citymunCode','=','municipals.citymunCode')
+                        ->join('municipals','establishments.citymunCode','=','municipals.citymunCode')
                         ->join('provinces','establishments.provCode','=','provinces.provCode')
                         ->get();
          return view('admin.admin_establishment.index',compact('first_nameAdmin','users'));
