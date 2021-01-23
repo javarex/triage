@@ -90,7 +90,7 @@
         background-color: transparent;
         width: 260px;
         height: 260px;
-        border: 1px solid #f1f1f1;
+        border: 1px solid #1f1809;
         perspective: 1000px; /* Remove this if you don't want the 3D effect */
     }
     .flip-card-inner {
