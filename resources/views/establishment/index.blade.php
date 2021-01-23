@@ -29,18 +29,18 @@
         <div class="col-md-12">
            <div class="row">
             @foreach($terminals as $terminal)
-                <div id="qrcontainer">
+                <div id="">
                     <div class="col-md-3" id="">
-                        <div class="flip-card bg-light ">
-                            <div class="flip-card-inner mt-1">
-                                <div class="flip-card-front">
+                        <div class="flip-card ">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front bg-light p-2" id="qrcontainer_{{$terminal->id}}">
                                     <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($terminal->qrcode, 'QRCODE',8,8,array(1,1,1), true) }}">
                                     {{ ucwords($terminal->description ) }}
                                 </div>
                                 <div class="flip-card-back">
                                     <h1>{{ ucwords($terminal->description ) }}</h1>
                                     <p>
-                                        <a href="#" alt="barcode" class="btn btn-sm btn-primary text-light" id="print_qr" download="{{$terminal->description}}.png"><i class="fa fa-fw fa-save"aria-hidden="true"></i>Save QR</a>
+                                        <a href="#" alt="barcode" class="btn btn-sm btn-primary text-light" data-filename="{{$terminal->description}}" data-terminal_id="{{$terminal->id}}" id="print_terminal_qr"><i class="fa fa-fw fa-save"aria-hidden="true"></i>Save QR</a>
                                     </p>
                                 </div>
                             </div>
@@ -58,10 +58,26 @@
 @section('scripts')
     <script src="{{ asset('js/html2Canvas.min.js') }}"></script>    
     <script>
+        
+        function captureQR(element_id,filename) {
+            html2canvas(document.querySelector("#"+element_id)).then(canvas => {
+                canvas.scrollTo(0,0);
+                var a = document.createElement('a');
+                // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
+                a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+                a.download = filename+'.jpg';
+                a.click();
+            });
+            
+        }
 
         var formEdit_id = '';
         $(document).ready(function() {
-
+            $(document).on('click', '#print_terminal_qr', function() {
+                var containerQR = "qrcontainer_"+$(this).attr('data-terminal_id');
+                var file_name = $(this).attr('data-filename');
+                captureQR(containerQR,file_name);
+            })
             $(document).on('click', '.terminal', function() {
                 // var terminal_qr = "http://ddoqr.dvodeoro.ph/" + $(this).attr('data-qr');
                 // $("#qr").attr('src',"data:image/png;base64," + "{!! DNS2D::getBarcodePNG(" + terminal_qr + ",'QRCODE',10,10,array(1,1,1), true) !!}")
@@ -90,10 +106,10 @@
 
             // for qr code terminal 
 
-           html2canvas(document.querySelector("#qrcontainer")).then(canvas => {
-                var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-                $('#print_terminal_qr').attr('href', href)
-            });
+        //    html2canvas(document.querySelector("#qrcontainer")).then(canvas => {
+        //         var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        //         $('#print_terminal_qr').attr('href', href)
+        //     });
 
             // end qrcode terminal
         })
