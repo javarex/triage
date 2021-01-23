@@ -37,13 +37,8 @@
                 <tbody>
                     @foreach($terminals as $terminal)
                     <tr>
-                        <td>
-                            <a href="#"  alt="qrcode" data-toggle="modal" data-target="#terminal_info" class="terminal" data-qr="{{ $terminal->qrcode }}"><i class="fa fa-fw fa-download" aria-hidden="true"></i></a>
-                            {{$terminal->qrcode }}
-                        </td>
-                        <td>
-                            <img src="{!! DNS2D::getBarcodeSVG('https://ddoqr.dvodeoro.ph/terminal_scan?qr='.$terminal->qrcode,'QRCODE',10,10) !!}"
-                                alt="">
+                        <td class="bg-light">
+                            <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($terminal->qrcode, 'QRCODE',10,10,array(1,1,1), true) }}">
                         </td>
                         <td>{{$terminal->number}}</td>
                         <td>{{$terminal->description}}</td>

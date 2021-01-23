@@ -10,6 +10,7 @@ use App\Barangay;
 use App\Establishment;
 use App\Terminal;
 use Auth;
+use DB;
 use Validator;
 use Illuminate\Support\Facades\Response;
 use App\Establishment_type;
@@ -21,12 +22,16 @@ class EstablishmentController extends Controller
     {
         $establishment = Establishment::where('user_id', auth()->user()->id)->first();
         $establishment_id = $establishment->id;
-        
+        $arrayTerminals = array();
         $role = auth()->user()->role;
-        $terminals = Terminal::with('establishment')
-                                ->where('establishment_id',$establishment_id)
-                                ->orderBy('number','asc')
-                                ->get();
+        $terminals = DB::table('terminals')
+                        ->select(
+                            DB::raw("CONCAT('https://ddoqr.dvodeoro.ph/terminal_scan?qr=',terminals.qrcode) AS qrcode"),
+                            'description',
+                            'number',
+                            'id')
+                        ->get();
+        
         return view('establishment.index',compact('role','terminals'));
     }
 
