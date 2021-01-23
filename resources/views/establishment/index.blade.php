@@ -6,9 +6,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
-            
-        </div>
+        
         <div class="col-md-8">
             @if($addedTerminal = Session::get('addedTerminal'))     
                 <div class="alert alert-success">
@@ -16,41 +14,41 @@
                 </div>
             @endif
             <div class="row">
-                <div class="col-md-5">
-                    <h1 class="text-light">
+                <div class="col-md-4 text-nowrap">
+                    <h1 class="text-light font-weight-bolder">
                         <i class="fa fa-fw fa-home"></i>TERMINALS
                     </h1>
                 </div>
-                <div class="col-md-7 d-flex justify-content-end mb-1">
+                <div class="col-md-12 d-flex justify-content-start mb-1 ml-2">
                     <button type="button" class="btn btn-choco" data-toggle="modal" data-target="#add_establishmentModal"><i class="fa fa-fw fa-plus"></i> Add Terminal</button>
                 </div>
             </div>
-            <table class="table bg-choco text-warning table-striped table-bordered dt-responsive nowrap">
-                <thead>
-                    <tr>
-                        <th>QR Code</th>
-                        <th>Terminal Number</th>
-                        <th>Terminal Discription</th>
-                        <th class="text-center"><i class="fa fa-fw fa-cogs"></i></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($terminals as $terminal)
-                    <tr>
-                        <td class="bg-light">
-                            <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($terminal->qrcode, 'QRCODE',10,10,array(1,1,1), true) }}">
-                        </td>
-                        <td>{{$terminal->number}}</td>
-                        <td>{{$terminal->description}}</td>
-                        <td  class="text-center w-25">
-                            <a href="#" class="btn btn-primary btn-sm" data-terminal_id="{{$terminal->id}}" title="View logs"><i class="fa fa-fw fa-eye"></i></a>
-                            <a href="#" class="btn btn-success btn-sm" data-terminal_id="{{$terminal->id}}" id="terminalEdit_btn" title="View or Edit this terminal" data-toggle="modal" data-target="#editTerminal"><i class="fa fa-fw fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm" data-terminal_id="{{$terminal->id}}" title="Delete this terminal"><i class="fa fa-fw fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            
+            
+        </div>
+        <div class="col-md-12">
+           <div class="row">
+            @foreach($terminals as $terminal)
+                <div id="qrcontainer">
+                    <div class="col-md-3" id="">
+                        <div class="flip-card bg-light ">
+                            <div class="flip-card-inner mt-1">
+                                <div class="flip-card-front">
+                                    <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($terminal->qrcode, 'QRCODE',8,8,array(1,1,1), true) }}">
+                                    {{ ucwords($terminal->description ) }}
+                                </div>
+                                <div class="flip-card-back">
+                                    <h1>{{ ucwords($terminal->description ) }}</h1>
+                                    <p>
+                                        <a href="#" alt="barcode" class="btn btn-sm btn-primary text-light" id="print_qr" download="{{$terminal->description}}.png"><i class="fa fa-fw fa-save"aria-hidden="true"></i>Save QR</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+           </div>
         </div>
     </div>
 
@@ -92,10 +90,10 @@
 
             // for qr code terminal 
 
-        //    html2canvas(document.querySelector("#qrcontainer")).then(canvas => {
-        //         var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        //         $('#print_terminal_qr').attr('href', href)
-        //     });
+           html2canvas(document.querySelector("#qrcontainer")).then(canvas => {
+                var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                $('#print_terminal_qr').attr('href', href)
+            });
 
             // end qrcode terminal
         })
