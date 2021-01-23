@@ -22,6 +22,7 @@ class EstablishmentController extends Controller
     {
         $establishment = Establishment::where('user_id', auth()->user()->id)->first();
         $establishment_id = $establishment->id;
+        $establishment_name = $establishment->establishment_name;
         $arrayTerminals = array();
         $role = auth()->user()->role;
         $terminals = DB::table('terminals')
@@ -33,7 +34,7 @@ class EstablishmentController extends Controller
                         ->where('establishment_id',$establishment_id)
                         ->get();
         
-        return view('establishment.index',compact('role','terminals'));
+        return view('establishment.index',compact('role','terminals','establishment_name'));
     }
 
     public function create()
