@@ -21,6 +21,7 @@ class ApiController extends Controller
                 'barcode' => $r['barcode'],
                 'time_in' => $r['time_in'],
                 'terminal_id' => $r['terminal_id'],
+                'type' => $r['type']
             ]);
         }
 
