@@ -15,6 +15,7 @@
     <link href="{{ asset('css/signin.css') }}" rel="stylesheet"> 
    
     <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
+     @yield('styles')
 </head>
 
 <body>
