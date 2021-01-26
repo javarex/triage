@@ -3,12 +3,35 @@
 
 @section('styless')
 
+
     <style>
         div.ex1 {
         height: 300px;
         overflow: scroll;
         }
+        #loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+            margin-left:250px;
+            margin-top:250px;
+        }   
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+       
     </style>
+    
 @endsection
 
 @section('content')
@@ -93,51 +116,29 @@
                 
                 <div class=""> 
                     <div class="row">
-                        <div class="col-md-1">
+                        <!-- <div class=" col-md-1">
                             <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
-                        </div>
+                        </div> -->
+                        <!-- <div class="col-12 col-md-12 d-flex justify-content-end">
+                            <input type="text" class="form-control" style="width:200px" name="search" id="search" autocomplete="off">
+                        </div> -->
                     </div>
                     <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
-                        <thead class="">
+                        <thead class="" >
                             <tr>
-                                <th>QR Code</th>
+                                <th>id</th>
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Gender</th>
-                                <th>Barangay</th>
+                                <!-- <th>Barangay</th>
                                 <th>Municipal</th>
                                 <th>Province</th>
-                                <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                                <th><i class="fa fa-cog" aria-hidden="true"></i></th> -->
                                 <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
                             </tr>
                         </thead>
-                        <tbody>
-                        @foreach($newArray as $client)
-                            <tr>
-                                <td>{{$client['qrcode']}}</td>
-                                <td>{{$client['first_name'].' '.$client['last_name']}}</td>
-                                <td width="20">{{$client['age']}}</td>
-                                <td width="30">{{$client['gender']}}</td>
-                                <td> {{ $client['barangay'] }} </td>
-                                <td> {{ $client['municipal'] }} </td>
-                                <td> {{ $client['province'] }} </td>
-                                <td>
-                                    <a href="#" id="client_view" data-toggle="modal" data-target="#edit_user" 
-                                    data-client_id="{{ $client['id'] }}"
-                                    data-firstName="{{ $client['first_name'] }}"
-                                    data-middleName="{{ $client['middle_name'] }}"
-                                    data-lastName="{{ $client['last_name'] }}"
-                                    data-birthday="{{ $client['birthday'] }}"
-                                    >
-                                        <i class="fas fa-edit    "></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
+                      
                     </table>
-                    {{ $clients->links() }}
-                    <p class="d-flex justify-content-end">Showing {{ $clients->firstItem() }} to {{ $clients->lastItem() }}of total {{$clients->total()}} entries</p>
                 </div>
             </div>
         </div>
@@ -175,10 +176,23 @@
         }
 
         $('#clientTable').DataTable({
-            order:[[1,'asc']],
-            "bPaginate": false,
-            "bInfo": false,
+            processing: true,
+                'language': {
+                'loadingRecords': '&nbsp;',
+                'processing': '<div class="spinner-border text-choco "></div>'
+            }, 
+            serverSide: true,
+            ajax: "{{route('employees.getEmployees')}}",
+            columns: [
+                { data: 'qrcode' },
+                { data: 'name' },
+                { data: 'age' },
+                { data: 'gender' },
+            ],
         });
+      
+
+
         $('#example1').DataTable();
         
         $(document).on('click','#client_view', function(){            
@@ -219,6 +233,32 @@
                 untag(userId);
             }
         })
+
+        $(document).on('keyup', '#search', function(){
+            var query = $('#search').val();
+            var column_name = $('#hidden_column_name').val();
+            var sort_type = $('#hidden_sort_type').val();
+            var page = $('#hidden_page').val();
+            console.log(column_name)
+            fetch_data(page, sort_type, column_name, query);
+        });
     })
+
+//functions 
+
+//search data 
+
+    function fetch_data(page, sort_type, sort_by, query)
+    {
+        $.ajax({
+            url:"/pagination/fetch_data?page="+page+"&sortby="+sort_by+"&sorttype="+sort_type+"&query="+query,
+            success:function(data)
+            {
+                $('#clientTable').html('');
+                $('tbody').html(data);
+            }
+        })
+    }
+
 </script>
 @endsection

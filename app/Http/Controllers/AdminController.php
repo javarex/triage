@@ -125,38 +125,8 @@ class AdminController extends Controller
 
      public function userModule_index()
      {
-        $decrypt = new EncryptionController;
-        $user = auth()->user();
-        $first_nameAdmin =  $decrypt->decrypt($user->first_name);
-        $role = auth()->user()->role;
-        $newJson = '';
-
-        $clients = User::with('barangay','municipal','province')
-                        ->where('role',2)
-                        ->paginate(10);
-        $newArray = array();
-        foreach ($clients as $client) {
-            
-            if($client->role != 0 && $client->role != 1){
-                $decrypted_firstname = $decrypt->decrypt($client->first_name);
-               
-                $decrypted_last_name = $decrypt->decrypt($client->last_name);
-                 array_push($newArray, array(
-                     'id'           => $client->id, 
-                     'first_name'   => $decrypted_firstname, 
-                     'last_name'    => $decrypted_last_name, 
-                     'middle_name'  => $client->middle_name, 
-                     'qrcode'       => $client->qrcode,
-                     'birthday'     => $client->birthday,
-                     'age'          =>  Carbon::parse($client->birthday)->age ,
-                     'gender'       => $client->sex,
-                     'barangay'      =>  $client->barangay['brgyDesc'],
-                     'municipal'      =>  $client->municipal['citymunDesc'],
-                     'province'      =>  $client->province['provDesc'],
-                ));
-            }
-        }
-        return view('admin.user.index',compact('clients','newArray','user','role','first_nameAdmin'));
+       
+        return view('admin.user.index');
      }
 
      public function establishment_index()
@@ -301,5 +271,65 @@ class AdminController extends Controller
          }
      }
 
+
+    // DataTables search
+
+    public function getEmployees(Request $request){
+
+        $decrypt = new EncryptionController;;
+        ## Read value
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
+   
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+        
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+   
+        // Total records
+        $totalRecords = User::select('count(*) as allcount')->count();
+        $totalRecordswithFilter = User::select('count(*) as allcount')->where('first_name', 'like', '%' .$searchValue . '%')->count();
+   
+        // Fetch records
+        $records = User::orderBy($columnName,$columnSortOrder)
+                ->where('role',2)
+                ->where('users.first_name', 'like', '%' .$searchValue . '%')
+                ->orWhere('users.last_name', 'like', '%' .$searchValue . '%')
+                ->select('users.*')
+                ->skip($start)
+                ->take($rowperpage)
+                ->get();
+   
+        $data_arr = array();
+        
+        foreach($records as $record){
+           $qrcode = $record->qrcode;
+           $name = $decrypt->decrypt($record->first_name).' '.$decrypt->decrypt($record->last_name);
+           $email = $record->email;
+   
+           $data_arr[] = array(
+            "qrcode"    => $qrcode,
+            "name"      => $name,
+            "age"       =>  Carbon::parse($record->birthday)->age ,
+            "gender"    => $record->sex,
+           );
+        }
+     
+        $response = array(
+           "draw" => intval($draw),
+           "iTotalRecords" => $totalRecords,
+           "iTotalDisplayRecords" => $totalRecordswithFilter,
+           "aaData" => $data_arr
+        );
+   
+        echo json_encode($response);
+        exit;
+      }
      
 }

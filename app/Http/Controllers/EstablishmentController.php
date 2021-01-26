@@ -10,7 +10,7 @@ use App\Barangay;
 use App\Establishment;
 use App\Terminal;
 use Auth;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use Illuminate\Support\Facades\Response;
 use App\Establishment_type;

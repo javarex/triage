@@ -62,6 +62,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('generateReport','AdminController@generateReport');
     Route::post('/admin/client', 'AdminController@updateClient');
     Route::post('/user/getUser/','AdminController@getUser')->name('user.getUser');
+    Route::get('/employees/getEmployees/','AdminController@getEmployees')->name('employees.getEmployees');
 });
     
     
