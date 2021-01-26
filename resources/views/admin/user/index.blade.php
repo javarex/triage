@@ -134,7 +134,7 @@
                                 <th>Municipal</th>
                                 <th>Province</th>
                                 <th><i class="fa fa-cog" aria-hidden="true"></i></th> -->
-                                <!-- <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
+                                <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
                       
@@ -148,6 +148,7 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('js/swal.min.js') }}"></script>
 <script>
     $(document).ready(function()
     {
@@ -188,12 +189,9 @@
                 { data: 'name' },
                 { data: 'age' },
                 { data: 'gender' },
+                { data: 'option' },
             ],
         });
-      
-
-
-        $('#example1').DataTable();
         
         $(document).on('click','#client_view', function(){            
             
@@ -217,7 +215,6 @@
             $('#contact_number').val(contactNumber);
             // $('#firstNameModal').html(firstName+' '+middleName+' '+lastName+' '+contactNumber);
             
-
         })
         $(document).on('click','#tags', function(){
             $('#office_name').html('<b>'+$(this).attr('data-officeName')+'</b>');
@@ -242,6 +239,32 @@
             console.log(column_name)
             fetch_data(page, sort_type, column_name, query);
         });
+
+        // deletescript
+
+        $(document).on('click','.deleteUser',function () {
+            var name = $(this).attr('data-name');
+            var id = $(this).attr('data-id');
+            Swal.fire({
+            title: 'Are you sure to delete '+name+'?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) 
+            {
+                deleteData(id);
+                Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+            }
+            })
+        })
     })
 
 //functions 
@@ -259,6 +282,19 @@
             }
         })
     }
-
+// delete data
+function deleteData(id)
+{
+    $.ajax({
+        url:"/deleteUser",
+        type:"get",
+        data:{
+            id:id
+        },
+        success:function(data){
+            table.ajax.reload();
+        }
+    })
+}
 </script>
 @endsection

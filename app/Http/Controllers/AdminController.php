@@ -276,7 +276,7 @@ class AdminController extends Controller
 
     public function getEmployees(Request $request){
 
-        $decrypt = new EncryptionController;;
+        $decrypt = new EncryptionController;
         ## Read value
         $draw = $request->get('draw');
         $start = $request->get("start");
@@ -297,10 +297,11 @@ class AdminController extends Controller
         $totalRecordswithFilter = User::select('count(*) as allcount')->where('first_name', 'like', '%' .$searchValue . '%')->count();
    
         // Fetch records
-        $records = User::orderBy($columnName,$columnSortOrder)
+        $records = User::orderBy('first_name','asc')
                 ->where('role',2)
                 ->where('users.first_name', 'like', '%' .$searchValue . '%')
                 ->orWhere('users.last_name', 'like', '%' .$searchValue . '%')
+                ->orWhere('users.qrcode', 'like', '%' .$searchValue . '%')
                 ->select('users.*')
                 ->skip($start)
                 ->take($rowperpage)
@@ -318,6 +319,16 @@ class AdminController extends Controller
             "name"      => $name,
             "age"       =>  Carbon::parse($record->birthday)->age ,
             "gender"    => $record->sex,
+            "option"    => "<a href='#' data-id='".$record->id."' data-name='".$name."' class='deleteUser'><i class='fa fa-fw fa-trash'></i></a>
+            <a href='#' id='client_view' data-toggle='modal' data-target='#edit_user' 
+                            data-client_id='".$record->id."'
+                            data-firstName='".$decrypt->decrypt($record->first_name)."'
+                            data-middleName='".$record->middle_name."'
+                            data-lastName='".$decrypt->decrypt($record->last_name)."'
+                            data-birthday='".$record->birthday."'
+                            >
+                                <i class='fas fa-edit' ></i>
+                            </a>",
            );
         }
      
@@ -332,4 +343,10 @@ class AdminController extends Controller
         exit;
       }
      
+
+      public function deleteUser(Request $request)
+      {
+        $user = User::find($request->id);
+        $user->delete();
+      }
 }
