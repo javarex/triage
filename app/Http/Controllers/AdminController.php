@@ -298,7 +298,7 @@ class AdminController extends Controller
    
         // Fetch records
         $records = User::orderBy('first_name','asc')
-                ->where('role',2)
+                ->where('users.role',2)
                 ->where('users.first_name', 'like', '%' .$searchValue . '%')
                 ->orWhere('users.last_name', 'like', '%' .$searchValue . '%')
                 ->orWhere('users.qrcode', 'like', '%' .$searchValue . '%')
