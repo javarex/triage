@@ -123,7 +123,7 @@
                             <input type="text" class="form-control" style="width:200px" name="search" id="search" autocomplete="off">
                         </div> -->
                     </div>
-                    <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
+                    <table id="clientList" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
                         <thead class="" >
                             <tr>
                                 <th>id</th>
@@ -132,13 +132,17 @@
                                 <th>Gender</th>
                                 <!-- <th>Barangay</th>
                                 <th>Municipal</th>
-                                <th>Province</th>
-                                <th><i class="fa fa-cog" aria-hidden="true"></i></th> -->
+                                <th>Province</th> -->
+                                <!-- <th><i class="fa fa-cog" aria-hidden="true"></i></th> -->
                                 <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @include('admin.user.pagination_data')
+                        </tbody>
                       
                     </table>
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>
@@ -158,7 +162,10 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
+        $('#clientList').DataTable({
+            responsive:true,
+            'paging':false
+        });
         // untag person
 
         function untag(id)
@@ -183,7 +190,7 @@
                 'processing': '<div class="spinner-border text-choco "></div>'
             }, 
             serverSide: true,
-            ajax: "{{route('employees.getEmployees')}}",
+            ajax: "{{route('adminUsers.searchUser')}}",
             columns: [
                 { data: 'qrcode' },
                 { data: 'name' },

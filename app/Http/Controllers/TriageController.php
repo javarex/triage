@@ -11,6 +11,7 @@ use App\Office;
 use App\Activity;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 
 class TriageController extends Controller

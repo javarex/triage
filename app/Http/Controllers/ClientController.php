@@ -9,6 +9,8 @@ use App\Barangay;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class ClientController extends Controller
 {
@@ -87,11 +89,9 @@ class ClientController extends Controller
             'password'              => 'required|confirmed',
         ]);
         
-        $duplicateUser = DB::table('users')
-                            ->where('first_name', $encrypt->encrypt(ucwords($request->first_name)))
-                            ->where('last_name', $encrypt->encrypt(ucwords($request->last_name)))
-                            ->where('suffix', $request->suffix)
-                            ->first();
+        $hashed_fullname = crypt($request->first_name.' '.$request->last_name.' '.$request->suffix,'$1$hNoLa02$');
+        $duplicateUser = User::where('hash',$encrpted_hash)
+                        ->first();
        
         if(!$duplicateUser){
             if($validator && $age > 0){
@@ -110,14 +110,15 @@ class ClientController extends Controller
                 $request['qrcode'] = $request->code;
                 $request['province_id'] = $request->province;
                 $request['barangay_id'] = $request->barangay;
-                $request['municipal_id'] = $request->municipality;
-                $request['verified'] = 0;
-                $request['first_name'] = $encrypt->encrypt(ucwords($request->first_name)); //255
+                $request['municipal_id']= $request->municipality;
+                $request['verified']    = 0;
+                $request['hash']        = $hashed_fullname;
+                $request['first_name']  = $encrypt->encrypt(ucwords($request->first_name)); //255
                 $request['middle_name'] = ucwords($request->middle_name);
-                $request['last_name'] = $encrypt->encrypt(ucwords($request->last_name)); //255 length
-                $request['address'] = ucwords($request->address);
-                $request['password'] = bcrypt($request->password);
-                $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
+                $request['last_name']   = $encrypt->encrypt(ucwords($request->last_name)); //255 length
+                $request['address']     = ucwords($request->address);
+                $request['password']    = bcrypt($request->password);
+                $request['birthday']    = date('Y-m-d', strtotime($request->birthday));
                 $user = User::create($request->all());
                 if (!auth()->check()) {
                     auth()->login($user);

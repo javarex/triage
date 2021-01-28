@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 
 
 class AdminController extends Controller 
@@ -125,8 +126,25 @@ class AdminController extends Controller
 
      public function userModule_index()
      {
-       
-        return view('admin.user.index');
+         $decrypt = new EncryptionController;
+         $clients = [];
+         $data = User::where('role', 2)
+                    ->paginate(10); 
+        foreach ($data as $value) {
+            array_push($clients,[
+                "id"        => $value->id,
+                "name"      => $decrypt->decrypt($value->first_name).' '.$decrypt->decrypt($value->last_name),
+                "first_name"=> $decrypt->decrypt($value->first_name),
+                "last_name" => $decrypt->decrypt($value->last_name),
+                "middle_name"=> $value->middle_name,
+                "qrcode"    => $value->qrcode,
+                "birthday"    => $value->birthday,
+                "age"       => Carbon::parse($value->birthday)->age,
+                "gender"    =>  $value->sex, 
+            ]);
+        }
+        json_encode($clients);
+        return view('admin.user.index',compact('clients','data'));
      }
 
      public function establishment_index()
@@ -274,7 +292,7 @@ class AdminController extends Controller
 
     // DataTables search
 
-    public function getEmployees(Request $request){
+    public function searchUser(Request $request){
 
         $decrypt = new EncryptionController;
         ## Read value
@@ -298,7 +316,6 @@ class AdminController extends Controller
    
         // Fetch records
         $records = User::orderBy('first_name','asc')
-                ->where('users.role',2)
                 ->where('users.first_name', 'like', '%' .$searchValue . '%')
                 ->orWhere('users.last_name', 'like', '%' .$searchValue . '%')
                 ->orWhere('users.qrcode', 'like', '%' .$searchValue . '%')
@@ -317,7 +334,7 @@ class AdminController extends Controller
            $data_arr[] = array(
             "qrcode"    => $qrcode,
             "name"      => $name,
-            "age"       =>  Carbon::parse($record->birthday)->age ,
+            "age"       => Carbon::parse($record->birthday)->age ,
             "gender"    => $record->sex,
             "option"    => "<a href='#' data-id='".$record->id."' data-name='".$name."' class='deleteUser'><i class='fa fa-fw fa-trash'></i></a>
             <a href='#' id='client_view' data-toggle='modal' data-target='#edit_user' 
@@ -344,9 +361,26 @@ class AdminController extends Controller
       }
      
 
+      // delete user record
       public function deleteUser(Request $request)
       {
         $user = User::find($request->id);
         $user->delete();
+      }
+
+      // update user 
+      public function userHash()
+      {
+        $users = User::where('role',2)
+                    ->get();
+
+        foreach($users as $user)
+        {
+            $hashed_fullname = crypt($user->first_name.' '.$user->last_name.' '.$user->suffix,'$1$hNoLa02$');
+            $fetch_user = User::findOrFail($user->id);
+            $fetch_user->update([
+                'hash' => $hashed_fullname
+            ]);
+        }
       }
 }

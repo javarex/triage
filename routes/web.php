@@ -12,7 +12,6 @@
 */
 
 Route::get('/', function () {
-   
     if(!(is_null(auth()->user()))){
         if (auth()->user()->role == 0) {
             return redirect('/admin');
@@ -37,6 +36,8 @@ Auth::routes(['verify' => true], function (){
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//hash user route
+Route::get('/userHash','AdminController@userHash');
 
 //Triage Routes
 
@@ -62,7 +63,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('generateReport','AdminController@generateReport');
     Route::post('/admin/client', 'AdminController@updateClient');
     Route::post('/user/getUser/','AdminController@getUser')->name('user.getUser');
-    Route::get('/employees/getEmployees/','AdminController@getEmployees')->name('employees.getEmployees');
+    Route::get('/adminUsers/searchUser/','AdminController@searchUser')->name('adminUsers.searchUser');
     Route::get('/deleteUser','AdminController@deleteUser');
 });
     
