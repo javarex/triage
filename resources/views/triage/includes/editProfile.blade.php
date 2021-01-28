@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
-    <form action="qredit" method="post">
+    <form  method="post" id="profile_edit">
     @csrf
     <div class="modal-content">
     <div class="modal-header">
@@ -17,10 +17,11 @@
             </div>
             <!-- Province -->
             <div class="col-md-12">
-                <select name="province" class="form-control" id="province"  style="width:100%">
+                <select name="province_id" class="form-control" id="province"  style="width:100%">
                     <option value=""></option>
+                    
                     @foreach($provinces as $province => $key)
-                    <option value="{{$key->id}}" data-provCode="{{$key->provCode}}" {{ old('provCode') == $key->provCode ? 'selected' : '' }}>{{$key->provDesc}}</option>
+                    <option value="{{$key->id}}" data-provCode="{{$key->provCode}}" {{ $key->id == old('province_id',auth()->user()->province_id) ? 'selected' : ''}}>{{$key->provDesc}}</option>
                     @endforeach
                 </select>
                 @error('province')
@@ -38,8 +39,9 @@
             </div>
 
             <div class="col-md-12">
-                <select name="municipality" class="form-control" disabled id="municipality"  style="width:100%">
+                <select name="municipal" class="form-control" disabled id="municipal"  style="width:100%">
                     <option value="" ></option>
+                    <option  value="{{$userAdd->municipal->id}}" data-provCode="{{$userAdd->municipal->citymunCode}}" {{ $userAdd->municipal->id == old('municipal',$userAdd->municipal->id) ? 'selected' : ''}}>{{$userAdd->municipal->citymunDesc}}</option>
                 </select>
                 @error('municipality')
                     <small class="text-danger" role="alert">
@@ -60,6 +62,7 @@
             <div class="col-md-12">
                 <select name="barangay" class="form-control"  disabled id="barangay"  style="width:100%">
                     <option value=""></option>
+                    <option value="{{$userAdd->barangay->id}}" data-provCode="{{$userAdd->barangay->brgyCode}}" {{ $userAdd->barangay->id == old('barangay',$userAdd->barangay->id) ? 'selected' : ''}}>{{$userAdd->barangay->brgyDesc}}</option>
                 </select>
                 @error('barangay')
                     <small class="text-danger" role="alert">
@@ -72,7 +75,7 @@
     </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" id="saveProfileEdit" >Save</button>
+        <button type="button" class="btn btn-primary" id="saveProfileEdit" >Save</button>
       </div>
     </div>
     </form>
@@ -140,7 +143,7 @@
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="saveSecurity" >Save</button>
+        <button type="button" class="btn btn-primary" id="saveSecurity" >Save</button>
       </div>
     </div>
     </form>

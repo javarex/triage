@@ -7,6 +7,8 @@ use App\Criteria;
 use App\Client;
 use App\User;
 use App\Province;
+use App\Municipal;
+use App\Barangay;
 use App\Triage_form;
 use App\Office;
 use App\Activity;
@@ -22,6 +24,7 @@ class TriageController extends Controller
         // $tempname = "RAYMART ITANONG";
         // dd(crypt($tempname,'$1$hNoLa02$'));
         $provinces = Province::all();
+        $barangays = Barangay::all();
         $decrypt = new EncryptionController;
 
         $user = auth()->user();
@@ -46,7 +49,7 @@ class TriageController extends Controller
             $Users_name = $first_name.' '.$last_name;
         }
         
-        return view('triage.index',compact('user','provinces','years','directory','address','Users_name','first_name'));
+        return view('triage.index',compact('userAdd','user','provinces','years','directory','address','Users_name','first_name','municipals','barangays'));
     }
 
     public function create()
@@ -219,6 +222,16 @@ class TriageController extends Controller
         }else{
             return response()->json(['error'=>$validator->errors()->all() ]);
         }
+    }
+
+    public function profile_edit(Request $request)
+    {
+        $user = User::findOrFail(auth()->user()->id);
+        $user->update([
+            'province_id' => $request->province_id,
+            'municipal_id' => $request->municipal,
+            'barangay_id' => $request->barangay,
+        ]);
     }
 
     protected function decryptValue($myString)
