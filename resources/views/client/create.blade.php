@@ -31,7 +31,7 @@
         <div class="col-md-10">
             <div class="bg-primary">
                 <div class="card font-weight-bold text-choco shadow" style="background-color:#ffe56c">
-                    <form method="POST" action="{{ route('client.store') }}" role="form" autocomplete="off" enctype="multipart/form-data" id="register">
+                    <form method="POST"  role="form" autocomplete="off" enctype="multipart/form-data" id="register">
                        @include('client.form')
                     </form>
                 </div>

@@ -98,13 +98,64 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('js/notify.min.js') }}"></script> 
+<script src="{{ asset('js/select2.min.js') }}"></script>
  <script src="{{ asset('js/html2Canvas.min.js') }}"></script>
     <script>
+    var flag = false;
         $(document).ready(function(){
             html2canvas(document.querySelector("#qrcontainer")).then(canvas => {
                 var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                 $('#print_qr').attr('href', href)
             });
+            
+            $('#securitySetup').on('shown.bs.modal',function(){
+                $('#username').val($('.userData').attr('data-username'));
+            })
+            $(document).on('keyup','#password,#password2', function(){
+                $('#match').removeClass().html('');
+                if($('#password').val() === $('#password2').val())
+                {
+                    flag=true;
+                    $('#match').addClass('badge badge-success').html('Password match');
+                }else{
+                    flag=false;
+                }
+            })
+
+            $('#saveSecurityForm').submit(function(e){
+               
+               e.preventDefault();
+               var formData = new FormData(this);
+               $.ajax({
+                   url:  '/updateSecurity',
+                   type: 'POST',              
+                   data: formData,
+                   cache       : false,
+                   contentType : false,
+                   processData : false,
+                   success: function(result)
+                   {
+                       if($.isEmptyObject(result.error)){
+                           window.location.href = "/";
+                       }else{
+                           $.each(result, function(key, value) {
+                               $.notify(value, 'error');
+                           })
+                       }
+                   },
+                   error: function(xhr, status, error)
+                   {
+                       $.each(xhr.responseJSON.errors, function (key, item) 
+                       {
+                          $.notify(item[0], 'error');
+                          return false;
+                       });
+                   },
+               });
+
+           });
         })
+
     </script>
 @endsection 

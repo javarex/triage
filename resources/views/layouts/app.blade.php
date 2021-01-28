@@ -78,9 +78,23 @@
                             </a>
 
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#profile"><i
-                                        class="fa fa-user" aria-hidden="true"></i> Profile</a>
+                            <div class="dropdown-menu dropdown-menu-right" id="dropdowns" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-toggle dropdown-item" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                                    Account Setting
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-left " style="width:100%" role="menu" aria-labelledby="dropdownMenu1">
+                                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#profile">
+                                    <i class="fa fa-user-edit" aria-hidden="true"></i>Update Profile
+                                            </a>
+                                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#securitySetup"><i
+                                    class="fa fa-lock" aria-hidden="true"></i>Security Setup</a>
+                                    <span class="userData"
+                                        data-username="{{ auth()->user()->username }}"
+                                    ></span>
+                                </ul>
+                               
 
                                 <!-- <a class="dropdown-item" href="{{ route('client.edit', Auth::user()->id ) }}">
                                     <i class="fas fa-pen-alt    "></i> {{ __('Edit')}}
@@ -90,13 +104,14 @@
 
                                     <i class="fa fa-power-off" aria-hidden="true"></i> {{ __('Logout') }}
                                 </a>
+                                    
                             </div>
                         </li>
                         @endguest
                     </ul>
                 </div>
             </div>
-            @include('triage.includes.modal_id')
+            @include('triage.includes.editProfile')
         </nav>
         {{-- end client nav --}}
         @endif

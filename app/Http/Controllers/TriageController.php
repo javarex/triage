@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Criteria;
 use App\Client;
 use App\User;
+use App\Province;
 use App\Triage_form;
 use App\Office;
 use App\Activity;
@@ -20,6 +21,7 @@ class TriageController extends Controller
     {
         // $tempname = "RAYMART ITANONG";
         // dd(crypt($tempname,'$1$hNoLa02$'));
+        $provinces = Province::all();
         $decrypt = new EncryptionController;
 
         $user = auth()->user();
@@ -44,7 +46,7 @@ class TriageController extends Controller
             $Users_name = $first_name.' '.$last_name;
         }
         
-        return view('triage.index',compact('user','years','directory','address','Users_name','first_name'));
+        return view('triage.index',compact('user','provinces','years','directory','address','Users_name','first_name'));
     }
 
     public function create()
@@ -195,6 +197,30 @@ class TriageController extends Controller
        return redirect('/triage')->with('success','QR code successfully change!');
     }
 
+    public function updateSecurity(Request $request)
+    {
+        if ($request->username == auth()->user()->username) {
+            $validator = $request->validate([
+                'password'  => 'required|confirmed',
+            ]);
+        }else{
+            $validator = $request->validate([
+                'username'  => 'required|unique:users',
+                'password'  => 'required|confirmed',
+            ]);
+        }
+
+        if($validator){
+            $user = User::findOrFail(auth()->user()->id);
+            $user->update([
+                'username'  => $request->username,
+                'password'  => bcrypt($request->password)
+            ]);
+        }else{
+            return response()->json(['error'=>$validator->errors()->all() ]);
+        }
+    }
+
     protected function decryptValue($myString)
     {
         try {
@@ -206,4 +232,5 @@ class TriageController extends Controller
         }
         return $result;
     }
+
 }

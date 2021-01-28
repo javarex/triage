@@ -77,8 +77,8 @@ class ClientController extends Controller
         $encrypt = new EncryptionController;
 
         $validator = $request->validate([
-            'first_name'            => 'required|regex:/^[a-z .\-]+$/i',
-            'last_name'             => 'required|regex:/^[a-z .\-]+$/i',
+            'first_name'            => 'required|regex:/^[a-zA-ZÑñ .\-]+$/i',
+            'last_name'             => 'required|regex:/^[a-zA-ZÑñ .\-]+$/i',
             'sex'                   => 'required',
             'birthday'              => 'required',
             'address'               => 'required',
@@ -90,7 +90,7 @@ class ClientController extends Controller
         ]);
         
         $hashed_fullname = crypt(strtoupper($request->first_name.' '.$request->last_name.' '.$request->suffix),'$1$hNoLa02$');
-        $duplicateUser = User::where('hash',$encrpted_hash)
+        $duplicateUser = User::where('hash',$hashed_fullname)
                         ->first();
        
         if(!$duplicateUser){
