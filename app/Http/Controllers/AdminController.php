@@ -114,7 +114,7 @@ class AdminController extends Controller
         $this->validate($request,[
             'file'  =>  'required|mimes:xlsx,csv,txt'
         ]);
-        set_time_limit(0);
+        set_time_limit(300);
         Excel::import(new EmployeesImport, $request->file('file'));
         return back()->with('success_import','All is well!');
     }
@@ -376,11 +376,15 @@ class AdminController extends Controller
 
         foreach($users as $user)
         {
-            $hashed_fullname = crypt($user->first_name.' '.$user->last_name.' '.$user->suffix,'$1$hNoLa02$');
+            $decrypt = new EncryptionController;
+            $fullname = strtoupper($decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name));
+            
+            $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
             $fetch_user = User::findOrFail($user->id);
             $fetch_user->update([
                 'hash' => $hashed_fullname
             ]);
         }
+        set_time_limit(300);
       }
 }

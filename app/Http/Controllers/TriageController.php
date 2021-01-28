@@ -18,6 +18,8 @@ class TriageController extends Controller
 {
     public function index()
     {
+        // $tempname = "RAYMART ITANONG";
+        // dd(crypt($tempname,'$1$hNoLa02$'));
         $decrypt = new EncryptionController;
 
         $user = auth()->user();

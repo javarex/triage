@@ -89,7 +89,7 @@ class ClientController extends Controller
             'password'              => 'required|confirmed',
         ]);
         
-        $hashed_fullname = crypt($request->first_name.' '.$request->last_name.' '.$request->suffix,'$1$hNoLa02$');
+        $hashed_fullname = crypt(strtoupper($request->first_name.' '.$request->last_name.' '.$request->suffix),'$1$hNoLa02$');
         $duplicateUser = User::where('hash',$encrpted_hash)
                         ->first();
        

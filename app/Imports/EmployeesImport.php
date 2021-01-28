@@ -35,30 +35,32 @@ class EmployeesImport implements ToCollection, WithHeadingRow
         $encrypt = new EncryptionController;
         foreach ($collection as $key => $row) 
         {
-            $hashed_fullname = crypt($row['first_name'].' '.$row['last_name'],'$1$hNoLa02$');
+            $fullname = strtoupper($row['first_name'].' '.$row['last_name']);
+            $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
             $duplicate = User::where('hash',$hashed_fullname)->first();
             
             if (is_null($row['province_code']) || is_null($row['barangay_code']) || is_null($row['municipality_code'])) {
                 continue;
             }else{
                 $address = DB::table('barangays')
-                                    ->join('provinces','barangays.provCode','=','provinces.provCode')
-                                    ->join('municipals','barangays.citymunCode','=','municipals.citymunCode')
-                                    ->select(
-                                        'provinces.id AS province_id',
-                                        'provinces.provCode',
-                                        'provinces.provDesc',
-                                        'municipals.id AS municipal_id',
-                                        'municipals.citymunCode',
-                                        'municipals.citymunDesc',
-                                        'barangays.id AS barangay_id',
-                                        'barangays.brgyDesc',
-                                        'barangays.brgyCode'
-                                        )
-                                    ->where('provinces.provDesc','like','%'.$row['province_name'].'%')
-                                    ->where('municipals.citymunDesc','%'.$row['municipality_name'].'%')
-                                    ->where('barangays.brgyDesc','%'.$row['barangay_name'].'%')
-                                    ->first();           
+                            ->join('provinces','barangays.provCode','=','provinces.provCode')
+                            ->join('municipals','barangays.citymunCode','=','municipals.citymunCode')
+                            ->select(
+                                'provinces.id AS province_id',
+                                'provinces.provCode',
+                                'provinces.provDesc',
+                                'municipals.id AS municipal_id',
+                                'municipals.citymunCode',
+                                'municipals.citymunDesc',
+                                'barangays.id AS barangay_id',
+                                'barangays.brgyDesc',
+                                'barangays.brgyCode'
+                                )
+                            ->where('provinces.provDesc','like','%'.$row['province_name'].'%')
+                            ->where('municipals.citymunDesc','like','%'.$row['municipality_name'].'%')
+                            ->where('barangays.brgyDesc','like','%'.$row['barangay_name'].'%')
+                            ->first();
+
                 if (!$duplicate) {
                     $first_name = ucwords(strtolower($row['first_name']));
                     $middle_name = ucwords(strtolower($row['middle_name']));
