@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
+<link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
 <style>
 #qrcontainer{
     background: #fff;
@@ -100,7 +101,8 @@
 @section('scripts')
 <script src="{{ asset('js/notify.min.js') }}"></script> 
 <script src="{{ asset('js/select2.min.js') }}"></script>
- <script src="{{ asset('js/html2Canvas.min.js') }}"></script>
+<script src="{{ asset('js/html2Canvas.min.js') }}"></script>
+<script src="{{ asset('js/swal.min.js') }}"></script>
     <script>
     var flag = false;
         $(document).ready(function(){
@@ -108,6 +110,7 @@
                 var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                 $('#print_qr').attr('href', href)
             });
+
             $(document).on('keyup','#password,#password2', function(){
                 $('#match').removeClass().html('');
                 if($('#password').val() === $('#password2').val())
@@ -119,12 +122,111 @@
                 }
             })
 
+            $(document).on('change','#province', function(){
+                var provCode = $(this).find(':selected').attr('data-provCode');
+                if($(this).val() != ''){
+                    $('#municipal').removeAttr('disabled');
+                    
+                    loadMunicipals(provCode);
+                }else{
+                    loadMunicipals(0);
+                    $('#municipal').attr('disabled', true);
+                }
+            });
+
+            //on change municipal 
+
+            $(document).on('change','#municipal', function (){
+                var munCode = $(this).find(':selected').attr('data-munCode');
+                if($(this).val() != ''){
+                    $('#barangay').removeAttr('disabled');
+                    loadBarangays(munCode);
+                }else{
+                    $('#barangay').attr('disabled', true);
+                    loadBarangays(0);
+                }
+            });
+
+            $('#saveProfileEdit').click(function(){
+                Swal.fire({
+                    title: 'Do you want to save the changes?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: `Save`,
+                    denyButtonText: `Don't save`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        Swal.fire('Saved!', '', 'success')
+                        $('#profile').modal('hide');
+                        $('#profile_edit').submit();
+                    } else if (result.isDenied) {
+                        $('#profile').modal('hide');
+                        Swal.fire('Changes are not saved', '', 'info')
+                    }
+                })
+            })
+            $('#saveSecurity').click(function(){
+                Swal.fire({
+                    title: 'Do you want to save the changes?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: `Save`,
+                    denyButtonText: `Don't save`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        Swal.fire('Saved!', '', 'success')
+                        $('#securitySetup').modal('hide');
+                        $('#saveSecurityForm').submit();
+                    } else if (result.isDenied) {
+                        $('#securitySetup').modal('hide');
+                        Swal.fire('Changes are not saved', '', 'info')
+                    }
+                })
+            })
+            
+
             $('#saveSecurityForm').submit(function(e){
+            
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url:  '/updateSecurity',
+                type: 'POST',              
+                data: formData,
+                cache       : false,
+                contentType : false,
+                processData : false,
+                success: function(result)
+                {
+                    if($.isEmptyObject(result.error)){
+                        window.location.href = "/";
+                    }else{
+                        $.each(result, function(key, value) {
+                            $.notify(value, 'error');
+                        })
+                    }
+                },
+                error: function(xhr, status, error)
+                {
+                    $.each(xhr.responseJSON.errors, function (key, item) 
+                    {
+                        $.notify(item[0], 'error');
+                        return false;
+                    });
+                },
+            });
+
+        });
+        
+
+            $('#profile_edit').submit(function(e){
                
                e.preventDefault();
                var formData = new FormData(this);
                $.ajax({
-                   url:  '/updateSecurity',
+                   url:  '/profile_edit',
                    type: 'POST',              
                    data: formData,
                    cache       : false,
@@ -151,7 +253,67 @@
                });
 
            });
+
+           $('#province').select2();
+            $('#municipal').select2();
+            $('#barangay').select2();
         })
+
+        // functions goes here
+
+        function loadProvince()
+        {
+            var output = '<option></option>';
+            $.ajax({
+                url: '/load/province',
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $.each( data, function( key, value ) {
+                        output += '<option value="'+value.id+'"  data-provCode="'+value.provCode+'">'+value.provDesc+'</option>';
+                       
+                    });
+
+                    $('#province').html(output);
+                }
+            })
+        }
+
+         // function to load municipality
+
+         function loadMunicipals(id)
+        {
+            var output = '<option></option>';
+            $.ajax({
+                url: '/load/municipal/'+id,
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $.each( data, function( key, value ) {
+                        output += '<option value="'+value.id+'"  data-munCode="'+value.citymunCode+'">'+value.citymunDesc+'</option>';
+                       
+                    });
+                    $('#municipal').html(output);
+                }
+            })
+        }
+        // function to load Barangay
+
+        function loadBarangays(id)
+        {
+            var output = '<option></option>';
+            $.ajax({
+                url: '/load/barangay/'+id,
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $.each( data, function( key, value ) {
+                        output += '<option value="'+value.id+'">'+value.brgyDesc+'</option>';
+                    });
+                    $('#barangay').html(output);
+                }
+            })
+        }
 
     </script>
 @endsection 

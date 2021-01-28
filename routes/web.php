@@ -46,6 +46,7 @@ Route::middleware(['client'])->group(function () {
     Route::get('exportId', 'TriageController@exportId');
     Route::post('qredit', 'TriageController@qrEdit');
     Route::post('updateSecurity', 'TriageController@updateSecurity');
+    Route::post('profile_edit', 'TriageController@profile_edit');
 });
 
 Route::post('/tag', 'TagController@store');
