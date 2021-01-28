@@ -108,10 +108,6 @@
                 var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                 $('#print_qr').attr('href', href)
             });
-            
-            $('#securitySetup').on('shown.bs.modal',function(){
-                $('#username').val($('.userData').attr('data-username'));
-            })
             $(document).on('keyup','#password,#password2', function(){
                 $('#match').removeClass().html('');
                 if($('#password').val() === $('#password2').val())

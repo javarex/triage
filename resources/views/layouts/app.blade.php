@@ -90,9 +90,6 @@
                                             </a>
                                     <a href="#" class="dropdown-item" data-toggle="modal" data-target="#securitySetup"><i
                                     class="fa fa-lock" aria-hidden="true"></i>Security Setup</a>
-                                    <span class="userData"
-                                        data-username="{{ auth()->user()->username }}"
-                                    ></span>
                                 </ul>
                                
 

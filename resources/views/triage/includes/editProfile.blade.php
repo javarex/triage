@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="col-md-12">
-                    <input type="text" class="form-control" name="username" id="username" required>
+                    <input type="text" class="form-control" name="username" value="{{old('username') ?? auth()->user()->username }}" required>
                     @error('username')
                         <small class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
