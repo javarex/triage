@@ -55,9 +55,9 @@ class EmployeesImport implements ToCollection, WithHeadingRow
                                         'barangays.brgyDesc',
                                         'barangays.brgyCode'
                                         )
-                                    ->where('provinces.provDesc',$row['province_name'])
-                                    ->where('municipals.citymunDesc',$row['municipality_name'])
-                                    ->where('barangays.brgyDesc',$row['barangay_name'])
+                                    ->where('provinces.provDesc','like','%'.$row['province_name'].'%')
+                                    ->where('municipals.citymunDesc','%'.$row['municipality_name'].'%')
+                                    ->where('barangays.brgyDesc','%'.$row['barangay_name'].'%')
                                     ->first();           
                 if (!$duplicate) {
                     $first_name = ucwords(strtolower($row['first_name']));
