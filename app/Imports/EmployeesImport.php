@@ -62,14 +62,14 @@ class EmployeesImport implements ToCollection, WithHeadingRow
                             ->first();
 
                 if (!$duplicate) {
-                    $first_name = ucwords(strtolower($row['first_name']));
-                    $middle_name = ucwords(strtolower($row['middle_name']));
-                    $last_name = ucwords(strtolower($row['last_name']));
+                    $first_name = ucwords(mb_strtolower($row['first_name']));
+                    $middle_name = ucwords(mb_strtolower($row['middle_name']));
+                    $last_name = ucwords(mb_strtolower($row['last_name']));
                     if($address){
                         $newUser = User::create([
                             'qrcode'            =>  $code,
                             'first_name'        =>  $encrypt->encrypt($first_name),
-                            'middle_name'       =>  utf8_decode($middle_name),
+                            'middle_name'       =>  $middle_name,
                             'last_name'         =>  $encrypt->encrypt($last_name),
                             'hash'              =>  $hashed_fullname,
                             'sex'               =>  $row['sex'],
@@ -77,7 +77,7 @@ class EmployeesImport implements ToCollection, WithHeadingRow
                             'province_id'       =>  $address->province_id,
                             'municipal_id'      =>  $address->municipal_id,
                             'barangay_id'       =>  $address->barangay_id,
-                            'username'          =>  utf8_decode($last_name).$row['empl_id'],
+                            'username'          =>  $last_name.$row['empl_id'],
                             'password'          =>  bcrypt("temppass".$row['empl_id']),
                             'role'              =>  2,
                             'verified'          =>  0,
