@@ -32,11 +32,12 @@ class TriageController extends Controller
         $years = Carbon::parse($dateOfBirth)->age;
         $date = $user->created_at;
         $userAdd = User::with('barangay','municipal','province')->where('id', $user->id)->first();
-
         $brgy = strtolower($userAdd->barangay->brgyDesc);
         $province = strtolower($userAdd->province->provDesc);
         $municipals = strtolower($userAdd->municipal->citymunDesc);
         $address = ucwords($brgy.', '.$municipals.', '.$province);
+        
+    
         $directory = date('m-d-Y', strtotime($date));
         $first_name = $decrypt->decrypt($user->first_name);
         $last_name = $decrypt->decrypt($user->last_name);
@@ -226,11 +227,25 @@ class TriageController extends Controller
     public function profile_edit(Request $request)
     {
         $user = User::findOrFail(auth()->user()->id);
-        $user->update([
-            'province_id' => $request->province_id,
-            'municipal_id' => $request->municipal,
-            'barangay_id' => $request->barangay,
+        $validator = $request->validate([
+            'province_id'       => 'required',
+            'municipal'         => 'required',
+            'barangay'          => 'required',
+            'birthday'          => 'required|date_format:Y-d-m',
         ]);
+        if ($validator) {
+            # code...
+            $user->update([
+                'province_id'       => $request->province_id,
+                'municipal_id'      => $request->municipal,
+                'barangay_id'       => $request->barangay,
+                'contact_number'    => $request->contact_number,
+                'email'             => $request->email,
+                'birthday'          => $request->birthday,
+            ]);
+        }else{
+            return response()->json(['error'=>$validator->errors()->all() ]);
+        }
     }
 
     protected function decryptValue($myString)
