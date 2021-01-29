@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-lg">
     <form  method="post" id="profile_edit">
     @csrf
     <div class="modal-content">
@@ -11,64 +11,74 @@
         </button>
     </div>
     <div class="modal-body ">
-        <div class="col-md-12 form-group">                          
-            <div class="col-md-12">
-                <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Province') }}</span>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-body">
+                    </div>
+                </div>
             </div>
-            <!-- Province -->
-            <div class="col-md-12">
-                <select name="province_id" class="form-control" id="province"  style="width:100%">
-                    <option value=""></option>
-                    
-                    @foreach($provinces as $province => $key)
-                    <option value="{{$key->id}}" data-provCode="{{$key->provCode}}" {{ $key->id == old('province_id',auth()->user()->province_id) ? 'selected' : ''}}>{{$key->provDesc}}</option>
-                    @endforeach
-                </select>
-                @error('province')
-                    <small class="text-danger" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </small>
-                @enderror
-            </div>
-        </div>
-        <!-- Municipality -->
-        <div class="col-md-12 form-group">
+            <div class="col-md-5">
+                <div class="col-md-12 form-group">                          
+                    <div class="col-md-12">
+                        <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Province') }}</span>
+                    </div>
+                    <!-- Province -->
+                    <div class="col-md-12">
+                        <select name="province_id" class="form-control" id="province"  style="width:100%">
+                            <option value=""></option>
+                            
+                            @foreach($provinces as $province => $key)
+                            <option value="{{$key->id}}" data-provCode="{{$key->provCode}}" {{ $key->id == old('province_id',auth()->user()->province_id) ? 'selected' : ''}}>{{$key->provDesc}}</option>
+                            @endforeach
+                        </select>
+                        @error('province')
+                            <small class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </small>
+                        @enderror
+                    </div>
+                </div>
+                <!-- Municipality -->
+                <div class="col-md-12 form-group">
+                        
+                    <div class="col-md-12">
+                        <span class="font-weight-normal "><small class="text-danger font-weight-bold">*</small>{{ __('Municipality') }}</span>
+                    </div>
                 
-            <div class="col-md-12">
-                <span class="font-weight-normal "><small class="text-danger font-weight-bold">*</small>{{ __('Municipality') }}</span>
-            </div>
-
-            <div class="col-md-12">
-                <select name="municipal" class="form-control municipal_class" id="municipal" onchange="filterData()"  style="width:100%">
-                    <option value="" ></option>
-                    <option  value="{{$userAdd->municipal->id}}" data-provCode="{{$userAdd->municipal->citymunCode}}" {{ $userAdd->municipal->id == old('municipal',$userAdd->municipal->id) ? 'selected' : ''}}>{{$userAdd->municipal->citymunDesc}}</option>
-                </select>
-                @error('municipality')
-                    <small class="text-danger" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </small>
-                @enderror
-            </div>
-
-        </div>
-
-        <!-- Barangay -->
-        <div class="col-md-12 form-group">
+                    <div class="col-md-12">
+                        <select name="municipal" class="form-control municipal_class" id="municipal" onchange="filterData()"  style="width:100%">
+                            <option value="" ></option>
+                            <option  value="{{$userAdd->municipal->id}}" data-provCode="{{$userAdd->municipal->citymunCode}}" {{ $userAdd->municipal->id == old('municipal',$userAdd->municipal->id) ? 'selected' : ''}}>{{$userAdd->municipal->citymunDesc}}</option>
+                        </select>
+                        @error('municipality')
+                            <small class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </small>
+                        @enderror
+                    </div>
                 
-            <div class="col-md-12">
-                <span class="font-weight-normal "><small class="text-danger font-weight-bold">*</small>{{ __('Barangay') }}</span>
-            </div>
-
-            <div class="col-md-12">
-                <select name="barangay" class="form-control"  id="barangay"  style="width:100%">
-                    <option value=""></option>
-                    <option value="{{$userAdd->barangay->id}}" data-provCode="{{$userAdd->barangay->brgyCode}}" {{ $userAdd->barangay->id == old('barangay',$userAdd->barangay->id) ? 'selected' : ''}}>{{$userAdd->barangay->brgyDesc}}</option>
-                </select>
-                @error('barangay')
-                    <small class="text-danger" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </small>
-                @enderror
+                </div>
+                
+                <!-- Barangay -->
+                <div class="col-md-12 form-group">
+                        
+                    <div class="col-md-12">
+                        <span class="font-weight-normal "><small class="text-danger font-weight-bold">*</small>{{ __('Barangay') }}</span>
+                    </div>
+                
+                    <div class="col-md-12">
+                        <select name="barangay" class="form-control"  id="barangay"  style="width:100%">
+                            <option value=""></option>
+                            <option value="{{$userAdd->barangay->id}}" data-provCode="{{$userAdd->barangay->brgyCode}}" {{ $userAdd->barangay->id == old('barangay',$userAdd->barangay->id) ? 'selected' : ''}}>{{$userAdd->barangay->brgyDesc}}</option>
+                        </select>
+                        @error('barangay')
+                            <small class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </small>
+                        @enderror
+                    </div>
+                </div>
             </div>
         </div>
         <hr>

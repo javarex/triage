@@ -17,7 +17,7 @@ class CheckClient
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            if (Auth::user()->role === 0 || Auth::user()->role === 3) {
+            if (Auth::user()->role === 0 || Auth::user()->role === 1) {
                 return redirect('/');
             } 
         }else{
