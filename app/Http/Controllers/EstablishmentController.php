@@ -88,6 +88,7 @@ class EstablishmentController extends Controller
         $data_user['password'] = bcrypt($request->password);
         $data_user['role'] = 1;
         $data_user['verified'] = 0;
+        $data_user['hash']     = "000";
         $data_user['first_name'] = $request->establishment_name;
         $user = User::create($data_user);
 
