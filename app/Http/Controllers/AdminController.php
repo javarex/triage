@@ -378,6 +378,7 @@ class AdminController extends Controller
 
         foreach($users as $user)
         {
+            
             $decrypt = new EncryptionController;
             $fullname = strtoupper($decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name));
             
@@ -389,4 +390,42 @@ class AdminController extends Controller
         }
         set_time_limit(300);
       }
+
+      public function updateQRuser()
+      {
+          $newUser = User::whereBetween('id',[1002083,1004220])
+                    ->whereNull('qredit')    
+                    ->get();
+
+        foreach ($newUser as $user) {
+            for(;;){
+                $code = $this->random_stringGenerate();
+                $findTerminal = User::where('qrcode',$code)
+                                ->first();
+                
+                if($findTerminal)
+                {
+                    continue;
+                }
+                else{
+                    break;
+                }
+            }
+            $userUpdate = User::findOrFail($user->id);
+            $user->update([
+                'qrcode' => $code
+            ]);
+        }
+      }
+
+      public function random_stringGenerate()
+    {
+        $alphaList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        
+        $digits = sprintf('%02d',mt_rand(01, 99));
+        $leters = substr(str_shuffle($alphaList),0,3);
+        $code = 'DDO'.$leters.$digits;
+        
+        return $code;
+    }
 }
