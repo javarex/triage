@@ -116,12 +116,6 @@
                 
                 <div class=""> 
                     <div class="row">
-                        <!-- <div class=" col-md-1">
-                            <a href="{{route('client.create')}}" title="Add new user"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
-                        </div> -->
-                        <!-- <div class="col-12 col-md-12 d-flex justify-content-end">
-                            <input type="text" class="form-control" style="width:200px" name="search" id="search" autocomplete="off">
-                        </div> -->
                     </div>
                     <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
                         <thead class="" >
