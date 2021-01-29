@@ -123,7 +123,7 @@
                             <input type="text" class="form-control" style="width:200px" name="search" id="search" autocomplete="off">
                         </div> -->
                     </div>
-                    <table id="clientList" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
+                    <table id="clientTable" class="table bg-choco table-striped table-bordered dt-responsive nowrap text-warning" style="width:100%">
                         <thead class="" >
                             <tr>
                                 <th>id</th>
@@ -137,12 +137,12 @@
                                 <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <!-- <tbody>
                             @include('admin.user.pagination_data')
-                        </tbody>
+                        </tbody> -->
                       
                     </table>
-                    {{ $data->links() }}
+                    <!-- {{ $data->links() }} -->
                 </div>
             </div>
         </div>
