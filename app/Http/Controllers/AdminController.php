@@ -126,6 +126,7 @@ class AdminController extends Controller
 
      public function userModule_index()
      {
+         
          $decrypt = new EncryptionController;
          $clients = [];
          $data = User::where('role', 2)
@@ -293,7 +294,7 @@ class AdminController extends Controller
     // DataTables search
 
     public function searchUser(Request $request){
-
+    
         $decrypt = new EncryptionController;
         ## Read value
         $draw = $request->get('draw');
@@ -309,13 +310,12 @@ class AdminController extends Controller
         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
         $searchValue = $search_arr['value']; // Search value
-   
         // Total records
         $totalRecords = User::select('count(*) as allcount')->count();
         $totalRecordswithFilter = User::select('count(*) as allcount')->where('first_name', 'like', '%' .$searchValue . '%')->count();
    
         // Fetch records
-        $records = User::orderBy('first_name','asc')
+        $records = User::orderBy('id','asc')
                 ->where('users.first_name', 'like', '%' .$searchValue . '%')
                 ->orWhere('users.last_name', 'like', '%' .$searchValue . '%')
                 ->orWhere('users.qrcode', 'like', '%' .$searchValue . '%')

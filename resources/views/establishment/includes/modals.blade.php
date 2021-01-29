@@ -11,14 +11,14 @@
                 </div>
                 <div class="modal-body" id="printProfile">
                     <div class="row container d-flex justify-content-center">
-                        <div class="col-md-5">
+                        <!-- <div class="col-md-5">
                             <label for="" class="form-label">Terminal number</label>
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="number" class="form-control" name="number" required>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-5">
                             <label for="" class="form-label">Terminal Description</label>
                         </div>

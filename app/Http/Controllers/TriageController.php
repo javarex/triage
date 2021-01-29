@@ -24,7 +24,6 @@ class TriageController extends Controller
         // $tempname = "RAYMART ITANONG";
         // dd(crypt($tempname,'$1$hNoLa02$'));
         $provinces = Province::all();
-        $barangays = Barangay::all();
         $decrypt = new EncryptionController;
 
         $user = auth()->user();
@@ -33,27 +32,27 @@ class TriageController extends Controller
         $years = Carbon::parse($dateOfBirth)->age;
         $date = $user->created_at;
         $userAdd = User::with('barangay','municipal','province')->where('id', $user->id)->first();
-
+        
         $brgy = strtolower($userAdd->barangay->brgyDesc);
         $province = strtolower($userAdd->province->provDesc);
-        $municipals = strtolower($userAdd->municipal->citymunDesc);
-        $address = ucwords($brgy.', '.$municipals.', '.$province);
+        $municipal = strtolower($userAdd->municipal->citymunDesc);
+        $address = ucwords($brgy.', '.$municipal.', '.$province);
         $directory = date('m-d-Y', strtotime($date));
         $first_name = $decrypt->decrypt($user->first_name);
         $last_name = $decrypt->decrypt($user->last_name);
-
-        $middle_name =$user->middle_name;
+        
+        $middle_name =$user->middle_name; 
         if($user->suffix){
-            $Users_name = $first_name.' '.$last_name.' '.$user->suffix;
+            $Users_name = $first_name.' '.$last_name.' '.$user->suffix; 
         }else{
             $Users_name = $first_name.' '.$last_name;
         }
-
+        
         return view('triage.index',compact('userAdd','user','provinces','years','directory','address','Users_name','first_name','municipals','barangays'));
     }
 
     public function create()
-    {
+    {  
         $user_id = auth()->user()->id;
         $client_id = User::where('id',$user_id)
                             ->first();
@@ -62,12 +61,12 @@ class TriageController extends Controller
         $offices = Office::orderBy('name', 'asc')
                             ->get();
 
-
+        
         return view('triage.create', compact('questions','triage','offices','client_id'));
     }
 
     public function store(Request $request)
-    {
+    {   
         $this->Validate($request, [
             'activity'  => 'required|regex:/^[a-z0-9 .\-]+$/i',
             'answer1' => 'required',
@@ -85,7 +84,7 @@ class TriageController extends Controller
             'answer13' => 'required',
             'answer14' => 'required',
         ]);
-
+        
         if(is_null($request->venue)){
             $request['venue'] = NULL;
         }
@@ -93,16 +92,16 @@ class TriageController extends Controller
             $request['office_id'] = $request->venue_inside;
         }
         $request['client_id'] = $request->client_id;
-
+        
         $request['venue'] = $request->venue;
         $data = Activity::create($request->all());
-
-
-        // $data = $request->input();
+        
+        
+        // $data = $request->input(); 
         $triage = new Triage_form;
         $array_answer = array();
         $current_date = Carbon::now();
-        for ($i=0; $i < 13; $i++) {
+        for ($i=0; $i < 13; $i++) { 
             $location = $request->default_value;
             $answer_name = $request['answer'.strval($i+1)];
             if($i == 5 && $answer_name == "yes"){
@@ -127,7 +126,7 @@ class TriageController extends Controller
 
     public function show($activity_id)
     {
-
+        
         $user_id = auth()->user()->id;
         $client_id = Client::where('user_id',$user_id)
                     ->first();
@@ -140,8 +139,8 @@ class TriageController extends Controller
         $activity = Activity::with('client')
                             ->where('id',$activity_id)
                             ->first();
-
-
+        
+        
         $date_of_activity = $activity->created_at;
         $triages = Triage_form::with('client','criteria')
                             ->whereDate('created_at',$date_of_activity->format('Y-m-d'))
@@ -149,7 +148,7 @@ class TriageController extends Controller
                             ->get();
         $url_activity = $activity_id;
         // dd($clients);
-
+       
         return view('triage.show', compact('triages', 'activity', 'client_logs','url_activity','client_id'));
     }
 
@@ -162,7 +161,7 @@ class TriageController extends Controller
         $years = Carbon::parse($dateOfBirth)->age;
         $date = $user->created_at;
         $userAdd = User::with('barangay','municipal','province')->where('id', $user->id)->first();
-
+        
         $brgy = strtolower($userAdd->barangay->brgyDesc);
         $province = strtolower($userAdd->province->provDesc);
         $municipal = strtolower($userAdd->municipal->citymunDesc);
@@ -170,14 +169,14 @@ class TriageController extends Controller
         $directory = date('m-d-Y', strtotime($date));
         $first_name = $decrypt->decrypt($user->first_name);
         $last_name = $decrypt->decrypt($user->last_name);
-
-        $middle_name =$user->middle_name;
+        
+        $middle_name =$user->middle_name; 
         if($user->suffix){
-            $Users_name = $first_name.' '.$last_name.' '.$user->suffix;
+            $Users_name = $first_name.' '.$last_name.' '.$user->suffix; 
         }else{
             $Users_name = $first_name.' '.$last_name;
         }
-
+        
         return view('client.exportId', compact('user','first_name','years','directory','address','Users_name','first_name'));
     }
 
@@ -189,11 +188,11 @@ class TriageController extends Controller
             $triage->update(['answer' => $request->input('answer'.$triage_id)]);
         }
         return redirect()->back();
-
+        
     }
 
     public function qrEdit(Request $request)
-    {
+    { 
         $user = User::findOrFail(auth()->user()->id);
         $request['qrcode'] = $request->new_qrcode;
         $user->update($request->all());
@@ -239,7 +238,7 @@ class TriageController extends Controller
         try {
             //code...
             $result = Crypt::decryptString($myString);
-
+           
         } catch (DecryptException $e) {
             $result = $myString;
         }
