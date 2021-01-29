@@ -340,6 +340,7 @@ class AdminController extends Controller
             "option"    => "<a href='#' data-id='".$record->id."' data-name='".$name."' class='deleteUser'><i class='fa fa-fw fa-trash'></i></a>
             <a href='#' id='client_view' data-toggle='modal' data-target='#edit_user' 
                             data-client_id='".$record->id."'
+                            data-username='".$record->username."'
                             data-firstName='".$decrypt->decrypt($record->first_name)."'
                             data-middleName='".$record->middle_name."'
                             data-lastName='".$decrypt->decrypt($record->last_name)."'

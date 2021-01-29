@@ -211,12 +211,14 @@
             var sex = $(this).attr('data-sex');
             var address = $(this).attr('data-address');
             var client_id = $(this).attr('data-client_id');
+            var userName = $(this).attr('data-username');
 
             $('#client_id').val(client_id);
             $('#firstName').val(firstName);
             $('#middleName').val(middleName);
             $('#lastName').val(lastName);
             $('#address').val(address);
+            $('#username').val(userName);
             $('#birthday').val(birthday);
             $('#sex').val(sex);
             $('#contact_number').val(contactNumber);
