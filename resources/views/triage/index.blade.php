@@ -258,6 +258,7 @@
                });
 
            });
+           
 
            $('#province').select2();
             $('#municipal').select2();
@@ -265,6 +266,10 @@
         })
 
         // functions goes here
+        function filterData()
+        {
+            alert('hehehe')
+        }
 
         function loadProvince()
         {

@@ -86,6 +86,7 @@ class AdminController extends Controller
         $request['first_name'] = $encrypt->encrypt(ucwords($request->first_name)); //255
         $request['middle_name'] = ucwords($request->middle_name);
         $request['last_name'] = $encrypt->encrypt(ucwords($request->last_name)); //255 length
+        $request['password']    = bcrypt($request->password);
         $user->update($request->all());
         return redirect('userModule')->with('success_update',$encrypt->decrypt($request->first_name).' '.$encrypt->decrypt($user->last_name).' information successfully changed!');
     }
