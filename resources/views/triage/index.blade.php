@@ -121,7 +121,7 @@
                     flag=false;
                 }
             })
-
+            
             $(document).on('change','#province', function(){
                 var provCode = $(this).find(':selected').attr('data-provCode');
                 if($(this).val() != ''){
@@ -135,8 +135,13 @@
             });
 
             //on change municipal 
-
+            $(document).on('click','#municipal',function(){
+                var provinceCode = provCode = $('#province').find(':selected').attr('data-provCode');
+                loadMunicipals(provinceCode);
+            })
             $(document).on('change','#municipal', function (){
+                var provinceCode = provCode = $('#province').find(':selected').attr('data-provCode');
+                loadMunicipals(provinceCode);
                 var munCode = $(this).find(':selected').attr('data-munCode');
                 if($(this).val() != ''){
                     $('#barangay').removeAttr('disabled');

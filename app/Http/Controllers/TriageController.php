@@ -24,7 +24,6 @@ class TriageController extends Controller
         // $tempname = "RAYMART ITANONG";
         // dd(crypt($tempname,'$1$hNoLa02$'));
         $provinces = Province::all();
-        $barangays = Barangay::all();
         $decrypt = new EncryptionController;
 
         $user = auth()->user();

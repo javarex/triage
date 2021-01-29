@@ -39,7 +39,7 @@
             </div>
 
             <div class="col-md-12">
-                <select name="municipal" class="form-control" disabled id="municipal"  style="width:100%">
+                <select name="municipal" class="form-control" id="municipal"  style="width:100%">
                     <option value="" ></option>
                     <option  value="{{$userAdd->municipal->id}}" data-provCode="{{$userAdd->municipal->citymunCode}}" {{ $userAdd->municipal->id == old('municipal',$userAdd->municipal->id) ? 'selected' : ''}}>{{$userAdd->municipal->citymunDesc}}</option>
                 </select>
@@ -60,7 +60,7 @@
             </div>
 
             <div class="col-md-12">
-                <select name="barangay" class="form-control"  disabled id="barangay"  style="width:100%">
+                <select name="barangay" class="form-control"  id="barangay"  style="width:100%">
                     <option value=""></option>
                     <option value="{{$userAdd->barangay->id}}" data-provCode="{{$userAdd->barangay->brgyCode}}" {{ $userAdd->barangay->id == old('barangay',$userAdd->barangay->id) ? 'selected' : ''}}>{{$userAdd->barangay->brgyDesc}}</option>
                 </select>
