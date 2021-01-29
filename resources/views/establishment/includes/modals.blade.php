@@ -54,8 +54,8 @@
     </form>
 </div>
 
-<div class="modal fade" id="editTerminal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form action="/addTerminal" method="post" autocomplete="off" id="form_editTerminal">
+<div class="modal fade" id="editTerminalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="/editTerminal" method="post" autocomplete="off" id="form_editTerminal">
         @csrf
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -66,18 +66,41 @@
                     </button>
                 </div>
                 <div class="modal-body" id="printProfile">
-                    <div class="row container">
+                    <div class="row container d-flex justify-content-center">
+                    
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="number" class="form-control-mod" id="terminalNumber" name="number" placeholder="Terminal Number" required>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        Description
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control text-dark" name="description" id="terminal_Description" placeholder="Terminal Description" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        Coordinate Long
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="coordinate_long" name="coordinate_long" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        Coordinate Lat
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="coordinate_lat" name="coordinate_lat" >
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control-mod" name="description" id="terminal_Description" placeholder="Terminal Description" required>
-                            </div>
-                            
-                        </div>
+                       
                     </div>
                 </div>
                 <div class="modal-footer">

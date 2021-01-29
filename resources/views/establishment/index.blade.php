@@ -42,6 +42,9 @@
                                     <p>
                                         <a href="#" alt="barcode" class="btn btn-sm btn-primary text-light" data-filename="{{$terminal->description}}" data-terminal_id="{{$terminal->id}}" id="print_terminal_qr"><i class="fa fa-fw fa-save"aria-hidden="true"></i>Save QR</a>
                                     </p>
+                                    <p>
+                                        <a href="#" class="btn btn-sm btn-dark text-light" data-terminal="{{ $terminal->description }}" data-terminal_id="{{$terminal->id}}" id="editTerminal" data-toggle="modal" data-target="#editTerminalModal"><i class="fa fa-fw fa-save"aria-hidden="true"></i>Edit terminal</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -94,8 +97,10 @@
                 }
             });
             
-            $(document).on('click','#terminalEdit_btn', function () {
+            $(document).on('click','#editTerminal', function () {
                 formEdit_id = $(this).attr('data-terminal_id');
+                var terminal = $(this).attr('data-terminal');
+                $('#terminal_Description').val(terminal.toUpperCase())
             });
            $(document).on('click','#submit_editTerminal', function (){
                var terminalNumber = $('#terminalNumber').val();
