@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Auth;
-use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class LogoutController extends Controller
 {
@@ -24,6 +24,6 @@ class LogoutController extends Controller
         //     Auth::logout();
         //     return redirect('/');
         // }
-        
+
     }
 }
