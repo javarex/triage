@@ -32,19 +32,13 @@ class TriageController extends Controller
         $years = Carbon::parse($dateOfBirth)->age;
         $date = $user->created_at;
         $userAdd = User::with('barangay','municipal','province')->where('id', $user->id)->first();
-<<<<<<< HEAD
+
         $brgy = strtolower($userAdd->barangay->brgyDesc);
         $province = strtolower($userAdd->province->provDesc);
         $municipals = strtolower($userAdd->municipal->citymunDesc);
         $address = ucwords($brgy.', '.$municipals.', '.$province);
-        
-    
-=======
-        $municipal = strtolower($userAdd->municipal->citymunDesc);
-        $brgy = strtolower($userAdd->barangay->brgyDesc);
-        $province = strtolower($userAdd->province->provDesc);
-        $address = ucwords($brgy.', '.$municipal.', '.$province);
->>>>>>> b2b9dc34e4f7d55b24223701660767f8c2c3514e
+       
+
         $directory = date('m-d-Y', strtotime($date));
         $first_name = $decrypt->decrypt($user->first_name);
         $last_name = $decrypt->decrypt($user->last_name);
