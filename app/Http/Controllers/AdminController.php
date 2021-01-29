@@ -393,7 +393,8 @@ class AdminController extends Controller
 
       public function updateQRuser()
       {
-          $newUser = User::whereBetween('id',[1002083,1004220])
+          $newUser = User::where('id','>=',1002083)
+                    ->where('id','<=',1004220)
                     ->whereNull('qredit')    
                     ->get();
 
@@ -416,6 +417,7 @@ class AdminController extends Controller
                 'qrcode' => $code
             ]);
         }
+        return redirect('/');
       }
 
       public function random_stringGenerate()
