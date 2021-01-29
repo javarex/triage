@@ -312,8 +312,8 @@ class AdminController extends Controller
         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
         $searchValue = $search_arr['value']; // Search value
         // Total records
-        $totalRecords = User::select('count(*) as allcount')->count();
-        $totalRecordswithFilter = User::select('count(*) as allcount')->where('first_name', 'like', '%' .$searchValue . '%')->count();
+        $totalRecords = User::select('count(*) as allcount')->where('role', 2)->count();
+        $totalRecordswithFilter = User::select('count(*) as allcount')->where('role', 2)->where('first_name', 'like', '%' .$searchValue . '%')->count();
    
         // Fetch records
         $records = User::orderBy('id','asc')
@@ -321,6 +321,7 @@ class AdminController extends Controller
                 ->orWhere('users.last_name', 'like', '%' .$searchValue . '%')
                 ->orWhere('users.qrcode', 'like', '%' .$searchValue . '%')
                 ->select('users.*')
+                ->where('role', 2)
                 ->skip($start)
                 ->take($rowperpage)
                 ->get();
