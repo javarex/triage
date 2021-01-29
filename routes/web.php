@@ -12,14 +12,14 @@
 */
 
 Route::get('/', function () {
-    if(!(is_null(auth()->user()))){
+    if (!(is_null(auth()->user()))) {
         if (auth()->user()->role == 0) {
             return redirect('/admin');
-        }elseif (auth()->user()->role == 1) {
+        } elseif (auth()->user()->role == 1) {
             return redirect('/establishment');
-        }else{
+        } else {
             return redirect('/triage');
-        }   
+        }
     }
     return view('auth.login');
 });
@@ -27,7 +27,7 @@ Route::get('/', function () {
 
 Route::get('/logout', 'LogoutController@logout_user');
 
-Auth::routes(['verify' => true], function (){
+Auth::routes(['verify' => true], function () {
     if (is_null(Auth::user()->email)) {
         return redirect('/triage');
     }
@@ -37,7 +37,7 @@ Auth::routes(['verify' => true], function (){
 Route::get('/home', 'HomeController@index')->name('home');
 
 //hash user route
-Route::get('/userHash','AdminController@userHash');
+Route::get('/userHash', 'AdminController@userHash');
 
 //Triage Routes
 
@@ -59,17 +59,17 @@ Route::get('export', 'AdminController@export')->name('export');
 Route::post('/import', 'AdminController@import');
 Route::get('create/establishment', 'AdminController@create');
 Route::middleware(['admin'])->group(function () {
-    Route::get('userModule','AdminController@userModule_index');
-    Route::get('adminEstab','AdminController@establishment_index');
-    Route::get('ccts_reports','AdminController@report');
-    Route::post('generateReport','AdminController@generateReport');
+    Route::get('userModule', 'AdminController@userModule_index');
+    Route::get('adminEstab', 'AdminController@establishment_index');
+    Route::get('ccts_reports', 'AdminController@report');
+    Route::post('generateReport', 'AdminController@generateReport');
     Route::post('/admin/client', 'AdminController@updateClient');
-    Route::post('/user/getUser/','AdminController@getUser')->name('user.getUser');
-    Route::get('/adminUsers/searchUser/','AdminController@searchUser')->name('adminUsers.searchUser');
-    Route::get('/deleteUser','AdminController@deleteUser');
+    Route::post('/user/getUser/', 'AdminController@getUser')->name('user.getUser');
+    Route::get('/adminUsers/searchUser/', 'AdminController@searchUser')->name('adminUsers.searchUser');
+    Route::get('/deleteUser', 'AdminController@deleteUser');
 });
-    
-    
+
+
 // Establishment routes
 Route::get('/establishment/create', 'EstablishmentController@create');
 // Route::get('/establishment', 'EstablishmentController@index');
@@ -88,11 +88,11 @@ Route::middleware(['establishment'])->group(function () {
 
 // Client routes/controllers
 
-Route::resource('client','ClientController');
+Route::resource('client', 'ClientController');
 Route::post('/validateInputs', 'ClientController@validateInputs');
-Route::get('/load/municipal/{id}','ClientController@loadMunicipals');
-Route::get('/load/barangay/{bid}','ClientController@loadBarangays');
-Route::get('/load/province','ClientController@loadProvince');
+Route::get('/load/municipal/{id}', 'ClientController@loadMunicipals');
+Route::get('/load/barangay/{bid}', 'ClientController@loadBarangays');
+Route::get('/load/province', 'ClientController@loadProvince');
 
 
 // Scanner routes
@@ -102,11 +102,9 @@ Route::get('/download', 'ApiController@download');
 Route::post('/api/login', 'ApiController@login');
 Route::get('/total_records', 'ApiController@total_records');
 
-// edit qr code 
-Route::post('/qrEdit','TriageController@qrEdit');
+// edit qr code
+Route::post('/qrEdit', 'TriageController@qrEdit');
 
 //terminal scanning
 Route::get('/terminal_scan', 'ApiController@terminal_scan')->name('terminal_scan');
 Route::post('/terminal_scan_login', 'ApiController@terminal_scan_login')->name('terminal_scan_login');
-
-
