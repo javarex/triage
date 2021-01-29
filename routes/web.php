@@ -67,6 +67,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/user/getUser/', 'AdminController@getUser')->name('user.getUser');
     Route::get('/adminUsers/searchUser/', 'AdminController@searchUser')->name('adminUsers.searchUser');
     Route::get('/deleteUser', 'AdminController@deleteUser');
+    Route::get('/updateQRUser', 'AdminController@updateQRuser');
 });
 
 
@@ -88,7 +89,8 @@ Route::middleware(['establishment'])->group(function () {
 
 // Client routes/controllers
 
-Route::resource('client', 'ClientController');
+// Route::resource('client', 'ClientController');
+Route::get('/userDdo/create', 'ClientController@create');
 Route::post('/validateInputs', 'ClientController@validateInputs');
 Route::get('/load/municipal/{id}', 'ClientController@loadMunicipals');
 Route::get('/load/barangay/{bid}', 'ClientController@loadBarangays');
