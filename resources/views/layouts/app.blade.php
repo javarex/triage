@@ -93,9 +93,6 @@
                                 </ul>
                                
 
-                                <!-- <a class="dropdown-item" href="{{ route('client.edit', Auth::user()->id ) }}">
-                                    <i class="fas fa-pen-alt    "></i> {{ __('Edit')}}
-                                </a> -->
 
                                 <a class="dropdown-item" href="/logout">
 
