@@ -39,7 +39,7 @@
             </div>
 
             <div class="col-md-12">
-                <select name="municipal" class="form-control" id="municipal"  style="width:100%">
+                <select name="municipal" class="form-control municipal_class" id="municipal" onclick="filterData()"  style="width:100%">
                     <option value="" ></option>
                     <option  value="{{$userAdd->municipal->id}}" data-provCode="{{$userAdd->municipal->citymunCode}}" {{ $userAdd->municipal->id == old('municipal',$userAdd->municipal->id) ? 'selected' : ''}}>{{$userAdd->municipal->citymunDesc}}</option>
                 </select>
