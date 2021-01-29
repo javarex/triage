@@ -15,10 +15,60 @@
             <div class="col-md-7">
                 <div class="card">
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h1>
+                                    <i class="fa fa-user-circle fa-3x" aria-hidden="true"></i>
+                                </h1>
+                            </div>
+                            <div class="col-md-8 m-auto">
+                                <div class="row">
+                                    <div class="col-1 col-md-1 px-1"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                    <div class="col-11 col-md-11">
+                                        <h3>{{$Users_name}}</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1 col-md-1 px-1"><i class="fas fa-map-marker-alt    "></i></div>
+                                    <div class="col-11 col-md-11">
+                                        {{$address}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1 col-md-1 px-1"><i class="fas fa-birthday-cake    "></i></div>
+                                    <div class="col-11 col-md-11">
+                                        {{date('F d, Y', strtotime($user->birthday))}}
+                                    </div>
+                                </div>
+                                @if(auth()->user()->contact_number)
+                                <div class="row">
+                                    <div class="col-1 col-md-1 px-1"><i class="fas fa-mobile-alt    "></i></div>
+                                    <div class="col-11 col-md-11">
+                                        {{ auth()->user()->contact_number }}
+                                    </div>
+                                </div>
+                                @endif
+
+                                @if(auth()->user()->email)
+                                <div class="row">
+                                    <div class="col-1 col-md-1 px-1">@</div>
+                                    <div class="col-11 col-md-11">
+                                        {{ auth()->user()->email }}
+                                    </div>
+                                </div>
+                                @endif
+                                <div class="row">
+                                    <div class="col-1 col-md-1 px-1"></div>
+                                    <div class="col-11 col-md-11 d-flex justify-content-start">
+                                        <button type="button" id="button_editInfo" class="btn btn-success"><i class="fas fa-edit    "></i> Edit Profile</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5" id="profile_form">
                 <div class="col-md-12 form-group">                          
                     <div class="col-md-12">
                         <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Province') }}</span>
@@ -29,7 +79,7 @@
                             <option value=""></option>
                             
                             @foreach($provinces as $province => $key)
-                            <option value="{{$key->id}}" data-provCode="{{$key->provCode}}" {{ $key->id == old('province_id',auth()->user()->province_id) ? 'selected' : ''}}>{{$key->provDesc}}</option>
+                            <option value="{{$key->id}}" data-provCode="{{$key->provCode}}">{{$key->provDesc}}</option>
                             @endforeach
                         </select>
                         @error('province')
@@ -47,11 +97,10 @@
                     </div>
                 
                     <div class="col-md-12">
-                        <select name="municipal" class="form-control municipal_class" id="municipal" onchange="filterData()"  style="width:100%">
+                        <select name="municipal" class="form-control municipal_class" id="municipal"  style="width:100%">
                             <option value="" ></option>
-                            <option  value="{{$userAdd->municipal->id}}" data-provCode="{{$userAdd->municipal->citymunCode}}" {{ $userAdd->municipal->id == old('municipal',$userAdd->municipal->id) ? 'selected' : ''}}>{{$userAdd->municipal->citymunDesc}}</option>
                         </select>
-                        @error('municipality')
+                        @error('municipal')
                             <small class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
                             </small>
@@ -70,7 +119,6 @@
                     <div class="col-md-12">
                         <select name="barangay" class="form-control"  id="barangay"  style="width:100%">
                             <option value=""></option>
-                            <option value="{{$userAdd->barangay->id}}" data-provCode="{{$userAdd->barangay->brgyCode}}" {{ $userAdd->barangay->id == old('barangay',$userAdd->barangay->id) ? 'selected' : ''}}>{{$userAdd->barangay->brgyDesc}}</option>
                         </select>
                         @error('barangay')
                             <small class="text-danger" role="alert">
@@ -78,6 +126,55 @@
                             </small>
                         @enderror
                     </div>
+                </div>
+
+                <div class="col-md-12 form-group">
+                        
+                    <div class="col-md-12">
+                        <span class="font-weight-normal "><small class="text-danger font-weight-bold">*</small>{{ __('Birthday') }}</span>
+                    </div>
+                
+                    <div class="col-md-12">
+                        <input type="text" name="birthday" class="form-control" id="birthday"  style="width:100%" value="{{ old('birthday', auth()->user()->birthday) }}">
+                        @error('birthday')
+                            <small class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </small>
+                        @enderror
+                    </div>
+                
+                </div>
+                <div class="col-md-12 form-group">
+                        
+                    <div class="col-md-12">
+                        <span class="font-weight-normal "><small class="text-danger font-weight-bold">*</small>{{ __('Contact Number') }}</span>
+                    </div>
+                
+                    <div class="col-md-12">
+                        <input type="text" name="contact_number" class="form-control" id="contact_number"  style="width:100%" value="{{ old('contact_number', auth()->user()->contact_number) }}">
+                        @error('contact_number')
+                            <small class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </small>
+                        @enderror
+                    </div>
+                
+                </div>
+                <div class="col-md-12 form-group">
+                        
+                    <div class="col-md-12">
+                        <span class="font-weight-normal "><small class="text-danger font-weight-bold">*</small>{{ __('Email Address') }}</span>
+                    </div>
+                
+                    <div class="col-md-12">
+                        <input type="email" name="email" class="form-control" id="email"  style="width:100%" value="{{ old('email', auth()->user()->email) }}">
+                        @error('email')
+                            <small class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </small>
+                        @enderror
+                    </div>
+                
                 </div>
             </div>
         </div>

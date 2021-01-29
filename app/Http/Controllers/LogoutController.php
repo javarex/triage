@@ -11,7 +11,9 @@ class LogoutController extends Controller
 {
     public function logout_user()
     {
-        Auth::logout();
+        if (Auth::check()) {
+            Auth::logout();
+        }
         return redirect('/');
         // if (Auth::user()->type != 0 && !(is_null(Auth::user()->email))) {
         //     DB::table('users')

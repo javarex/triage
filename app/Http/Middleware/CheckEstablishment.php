@@ -21,7 +21,7 @@ class CheckEstablishment
             if (Auth::user()->role !== 1) {
                 return redirect('/');
             }
-        }else{
+            }else{
             return redirect('/');
         }
         return $next($request);

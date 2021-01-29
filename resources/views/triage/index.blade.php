@@ -105,6 +105,7 @@
 <script src="{{ asset('js/swal.min.js') }}"></script>
     <script>
     var flag = false;
+    var flag1 = false;
         $(document).ready(function(){
             html2canvas(document.querySelector("#qrcontainer")).then(canvas => {
                 var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
@@ -135,13 +136,8 @@
             });
 
             //on change municipal 
-            $(document).on('click','#municipal',function(){
-                var provinceCode = provCode = $('#province').find(':selected').attr('data-provCode');
-                loadMunicipals(provinceCode);
-            })
+
             $(document).on('change','#municipal', function (){
-                var provinceCode = provCode = $('#province').find(':selected').attr('data-provCode');
-                loadMunicipals(provinceCode);
                 var munCode = $(this).find(':selected').attr('data-munCode');
                 if($(this).val() != ''){
                     $('#barangay').removeAttr('disabled');
@@ -155,75 +151,83 @@
             $('#saveProfileEdit').click(function(){
                 Swal.fire({
                     title: 'Do you want to save the changes?',
-                    showDenyButton: true,
+                    icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: `Save`,
-                    denyButtonText: `Don't save`,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ok'
                     }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
-                        Swal.fire('Saved!', '', 'success')
-                        $('#profile').modal('hide');
-                        $('#profile_edit').submit();
-                    } else if (result.isDenied) {
-                        $('#profile').modal('hide');
-                        Swal.fire('Changes are not saved', '', 'info')
-                    }
+                        if(flag1){
+                            Swal.fire('Saved!', '', 'success')
+                            $('#profile').modal('hide');
+                            $('#profile_edit').submit();
+                        }else{
+                            $('#profile_edit').submit();
+                        }
+                    } 
                 })
             })
             $('#saveSecurity').click(function(){
+                
                 Swal.fire({
                     title: 'Do you want to save the changes?',
-                    showDenyButton: true,
+                    icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: `Save`,
-                    denyButtonText: `Don't save`,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ok'
                     }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
-                        Swal.fire('Saved!', '', 'success')
-                        $('#securitySetup').modal('hide');
-                        $('#saveSecurityForm').submit();
-                    } else if (result.isDenied) {
-                        $('#securitySetup').modal('hide');
-                        Swal.fire('Changes are not saved', '', 'info')
-                    }
+                        if(flag){
+                            Swal.fire('Saved!', '', 'success')
+                            $('#securitySetup').modal('hide');
+                            $('#saveSecurityForm').submit();
+                        }else{
+                            
+                            $('#saveSecurityForm').submit();
+
+                        }
+                    } 
                 })
             })
             
-
+            
             $('#saveSecurityForm').submit(function(e){
             
-            e.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                url:  '/updateSecurity',
-                type: 'POST',              
-                data: formData,
-                cache       : false,
-                contentType : false,
-                processData : false,
-                success: function(result)
-                {
-                    if($.isEmptyObject(result.error)){
-                        window.location.href = "/";
-                    }else{
-                        $.each(result, function(key, value) {
-                            $.notify(value, 'error');
-                        })
-                    }
-                },
-                error: function(xhr, status, error)
-                {
-                    $.each(xhr.responseJSON.errors, function (key, item) 
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url:  '/updateSecurity',
+                    type: 'POST',              
+                    data: formData,
+                    cache       : false,
+                    contentType : false,
+                    processData : false,
+                    success: function(result)
                     {
-                        $.notify(item[0], 'error');
-                        return false;
-                    });
-                },
-            });
+                        if($.isEmptyObject(result.error)){
+                            flag = true;
+                            window.location.href = "/";
+                        }else{
+                            $.each(result, function(key, value) {
+                                $.notify(value, 'error');
+                            })
+                        }
+                    },
+                    error: function(xhr, status, error)
+                    {
+                        $.each(xhr.responseJSON.errors, function (key, item) 
+                        {
+                            $.notify(item[0], 'error');
+                            return false;
+                        });
+                    },
+                });
 
-        });
+            });
         
 
             $('#profile_edit').submit(function(e){
@@ -239,7 +243,9 @@
                    processData : false,
                    success: function(result)
                    {
+                       
                        if($.isEmptyObject(result.error)){
+                           flag1=true
                            window.location.href = "/";
                        }else{
                            $.each(result, function(key, value) {
@@ -258,6 +264,25 @@
                });
 
            });
+
+           $('#birthday').datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1900:2020',
+            minDate: new Date(1900, 10 - 1, 25),
+            maxDate: '+30Y',
+            inline: true
+           })
+            
+        
+            $('#profile_form').hide();
+            $('#profile').on('hidden.bs.modal',function(){
+                $('#profile_form').hide();
+            })
+            $('#button_editInfo').click(function() {
+               $('#profile_form').fadeIn();
+            })
            
 
            $('#province').select2();
@@ -266,10 +291,7 @@
         })
 
         // functions goes here
-        function filterData()
-        {
-            alert('hehehe')
-        }
+       
 
         function loadProvince()
         {
@@ -324,6 +346,7 @@
                 }
             })
         }
+        
 
     </script>
 @endsection 

@@ -33,9 +33,22 @@ class TriageController extends Controller
         $date = $user->created_at;
         $userAdd = User::with('barangay','municipal','province')->where('id', $user->id)->first();
         
-        $brgy = strtolower($userAdd->barangay->brgyDesc);
-        $province = strtolower($userAdd->province->provDesc);
-        $municipal = strtolower($userAdd->municipal->citymunDesc);
+        try {
+            //code...
+            $municipal = strtolower($userAdd->municipal->citymunDesc);
+        } catch (\Throwable $th) {
+            //throw $th;
+            $municipal = "";
+        }
+        try {
+            //code...
+            $brgy = strtolower($userAdd->barangay->brgyDesc);
+            $province = strtolower($userAdd->province->provDesc);
+        } catch (\Throwable $th) {
+            //throw $th;
+            $brgy = "";
+            $province = "";
+        }
         $address = ucwords($brgy.', '.$municipal.', '.$province);
         $directory = date('m-d-Y', strtotime($date));
         $first_name = $decrypt->decrypt($user->first_name);
@@ -226,11 +239,25 @@ class TriageController extends Controller
     public function profile_edit(Request $request)
     {
         $user = User::findOrFail(auth()->user()->id);
-        $user->update([
-            'province_id' => $request->province_id,
-            'municipal_id' => $request->municipal,
-            'barangay_id' => $request->barangay,
+        $validator = $request->validate([
+            'province_id'       => 'required',
+            'municipal'         => 'required',
+            'barangay'          => 'required',
+            'birthday'          => 'required|date_format:Y-d-m',
         ]);
+        if ($validator) {
+            # code...
+            $user->update([
+                'province_id'       => $request->province_id,
+                'municipal_id'      => $request->municipal,
+                'barangay_id'       => $request->barangay,
+                'contact_number'    => $request->contact_number,
+                'email'             => $request->email,
+                'birthday'          => $request->birthday,
+            ]);
+        }else{
+            return response()->json(['error'=>$validator->errors()->all() ]);
+        }
     }
 
     protected function decryptValue($myString)
