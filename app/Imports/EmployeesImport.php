@@ -18,23 +18,26 @@ class EmployeesImport implements ToCollection, WithHeadingRow
     */
     public function collection(Collection $collection)
     {
-        for (;;) { 
-            $code = $this->random_stringGenerate();
-            $findTerminal = User::where('qrcode',$code)
-                                    ->first();
-            if($findTerminal)
-            {
-                continue;
-            }
-            else{
-                break;
-            }
-    
-        }
+        
 
         $encrypt = new EncryptionController;
         foreach ($collection as $key => $row) 
         {
+            for (;;) { 
+                $code = $this->random_stringGenerate();
+                $findTerminal = User::where('qrcode',$code)
+                                        ->first();
+                if($findTerminal)
+                {
+                    dd('same');
+                    continue;
+                }
+                else{
+                    break;
+                }
+               
+        
+            }
             $fullname = strtoupper($row['first_name'].' '.$row['last_name']);
             $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
             $duplicate = User::where('hash',$hashed_fullname)->first();
