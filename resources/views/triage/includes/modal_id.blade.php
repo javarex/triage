@@ -9,7 +9,6 @@
         </button>
       </div> -->
       <div class="modal-body ">
-
         <div id="printDiv" class="">
             <div class="row py-2 pl-3">
               <div class="col-md-3"></div>
@@ -59,8 +58,8 @@
                 </div>
                 <div class="col-md-2 ml-1"></div>
             </diav>
-        </div>
-      </div>
+        <!-- </div> -->
+      </divs>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="printme" class="link" onClick=printForm()>Print</button>

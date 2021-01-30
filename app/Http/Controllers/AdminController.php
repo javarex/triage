@@ -98,9 +98,6 @@ class AdminController extends Controller
         $user->username = $request->username;
         $user->first_name = $request->first_name;
         $user->update();
-        
-        $client = Client::where('user_id', $id)->first();
-        $client->update(['first_name' => $request['first_name']]);
         return redirect('/');
     }
 
