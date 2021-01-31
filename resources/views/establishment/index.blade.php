@@ -117,6 +117,12 @@
         //     });
 
             // end qrcode terminal
+
+            $(document).on('click','#show_estab_info', function() {
+                $('#estab_profile').modal({
+                    backdrop:'static'
+                })
+            })
         })
 
         function deleteTerminal(){

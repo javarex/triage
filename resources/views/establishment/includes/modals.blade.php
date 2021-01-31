@@ -112,4 +112,20 @@
     </form>
 </div>
 
-<!-- Modals View details -->
+<!-- Modals View profile -->
+
+<div class="modal fade" tab-index="1" id="estab_profile">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Establishment information</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                form here...
+            </div>
+        </div>
+    </div>
+</div>

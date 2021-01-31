@@ -79,9 +79,10 @@
                             <option value=""></option>
                             
                             @foreach($provinces as $province => $key)
-                            <option value="{{$key->id}}" data-provCode="{{$key->provCode}}">{{$key->provDesc}}</option>
+                            <option value="{{$key->id}}" data-provCode="{{$key->provCode}}" {{ old('province_id', $key->id) == auth()->user()->province_id ? "selected" : "" }}>{{$key->provDesc}}</option>
                             @endforeach
                         </select>
+                        
                         @error('province')
                             <small class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -97,8 +98,8 @@
                     </div>
                 
                     <div class="col-md-12">
-                        <select name="municipal" class="form-control municipal_class" id="municipal"  style="width:100%">
-                            <option value="" ></option>
+                        <select name="municipal" class="form-control municipal_class" id="municipal"  style="width:100%" >
+                            <option id="old_muni_selected" value="{{auth()->user()->municipal_id}}" data-munCode="$userAdd->municipal->citymunCode" {{ old('municipal', $userAdd->municipal->id) == auth()->user()->municipal_id ? "selected" : "" }}>{{$userAdd->municipal->citymunDesc}}</option>
                         </select>
                         @error('municipal')
                             <small class="text-danger" role="alert">
@@ -118,7 +119,7 @@
                 
                     <div class="col-md-12">
                         <select name="barangay" class="form-control"  id="barangay"  style="width:100%">
-                            <option value=""></option>
+                            <option value="{{auth()->user()->barangay_id}}" {{ old('barangay', $userAdd->barangay->id) == auth()->user()->barangay_id ? "selected" : "" }}>{{$userAdd->barangay->brgyDesc}}</option>
                         </select>
                         @error('barangay')
                             <small class="text-danger" role="alert">

@@ -106,12 +106,13 @@
     <script>
     var flag = false;
     var flag1 = false;
-        $(document).ready(function(){
+        $(document).ready(function(event){
             html2canvas(document.querySelector("#qrcontainer")).then(canvas => {
                 var href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                 $('#print_qr').attr('href', href)
             });
 
+            
             $(document).on('keyup','#password,#password2', function(){
                 $('#match').removeClass().html('');
                 if($('#password').val() === $('#password2').val())
@@ -123,30 +124,7 @@
                 }
             })
             
-            $(document).on('change','#province', function(){
-                var provCode = $(this).find(':selected').attr('data-provCode');
-                if($(this).val() != ''){
-                    $('#municipal').removeAttr('disabled');
-                    
-                    loadMunicipals(provCode);
-                }else{
-                    loadMunicipals(0);
-                    $('#municipal').attr('disabled', true);
-                }
-            });
-
-            //on change municipal 
-
-            $(document).on('change','#municipal', function (){
-                var munCode = $(this).find(':selected').attr('data-munCode');
-                if($(this).val() != ''){
-                    $('#barangay').removeAttr('disabled');
-                    loadBarangays(munCode);
-                }else{
-                    $('#barangay').attr('disabled', true);
-                    loadBarangays(0);
-                }
-            });
+          
 
             $('#saveProfileEdit').click(function(){
                 Swal.fire({
@@ -170,7 +148,6 @@
                 })
             })
             $('#saveSecurity').click(function(){
-                
                 Swal.fire({
                     title: 'Do you want to save the changes?',
                     icon: 'warning',
@@ -196,7 +173,6 @@
             
             
             $('#saveSecurityForm').submit(function(e){
-            
                 e.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
@@ -275,19 +251,42 @@
             inline: true
            })
             
-        
-            $('#profile_form').hide();
-            $('#profile').on('hidden.bs.modal',function(){
-                $('#profile_form').hide();
-            })
-            $('#button_editInfo').click(function() {
-               $('#profile_form').fadeIn();
-            })
-           
+           $(document).on('change','#province', function(){
+                var provCode = $(this).find(':selected').attr('data-provCode');
+                if($(this).val() != ''){
+                    $('#municipal').removeAttr('disabled');
+                    loadMunicipals(provCode);
+                    $('#municipal').html('<option></option>');
+                    $('#barangay').html('<option></option>');
+                }
+                console.log(provCode)
+            });
 
-           $('#province').select2();
-            $('#municipal').select2();
-            $('#barangay').select2();
+            //on change municipal 
+
+            $(document).on('change','#municipal', function (){
+                
+                var munCode = $(this).find(':selected').attr('data-munCode');
+                if($(this).val() != ''){
+                    loadBarangays(munCode);
+                    $('#barangay').html('<option></option>');
+                }
+                
+            });
+            
+           $('#municipal').select2({}).on("select2:open  ", function(e) {
+                var provCode = $('#province').find(':selected').attr('data-provCode');
+                loadMunicipals(provCode);
+            });
+         
+           $('#barangay').select2({}).on("select2:open  ", function(e) {
+                var municipalCode = $('#municipal').find(':selected').attr('data-citymunCode');
+                loadBarangays(municipalCode);
+            });
+
+            $('#province').select2();
+
+            
         })
 
         // functions goes here
@@ -315,17 +314,23 @@
 
          function loadMunicipals(id)
         {
-            var output = '<option></option>';
+            var output;
             $.ajax({
                 url: '/load/municipal/'+id,
                 type: 'get',
                 dataType: 'json',
                 success: function(data){
                     $.each( data, function( key, value ) {
-                        output += '<option value="'+value.id+'"  data-munCode="'+value.citymunCode+'">'+value.citymunDesc+'</option>';
-                       
+                        if($('#municipal option').length < data.length && $('#municipal option').length >= 1 ){
+                            if(value.id != $('#municipal').val()){
+                                output += '<option value="'+value.id+'"  data-munCode="'+value.citymunCode+'">'+value.citymunDesc+'</option>';
+                            }
+                        }
                     });
-                    $('#municipal').html(output);
+                    
+                    $('#municipal').append(output);
+
+                    
                 }
             })
         }
@@ -333,20 +338,28 @@
 
         function loadBarangays(id)
         {
-            var output = '<option></option>';
+            var output;
             $.ajax({
                 url: '/load/barangay/'+id,
                 type: 'get',
                 dataType: 'json',
                 success: function(data){
                     $.each( data, function( key, value ) {
-                        output += '<option value="'+value.id+'">'+value.brgyDesc+'</option>';
+                        if ($('#barangay option').length < data.length && $('#barangay option').length >= 1 ) {
+                            if(value.id != $('#barangay').val()){
+                                output += '<option value="'+value.id+'" data-brgyCode="'+value.brgyCode+'">'+value.brgyDesc+'</option>';
+                            }
+                        }
                     });
-                    $('#barangay').html(output);
+                    $('#barangay').append(output);
                 }
             })
         }
-        
+
+        function testing()
+        {
+            console.log('1123')
+        }  
 
     </script>
 @endsection 

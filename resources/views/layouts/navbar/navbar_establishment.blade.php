@@ -31,8 +31,8 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#adminEdit">
-                            <i class="fas fa-user-edit    "></i> Edit Profile
+                        <a class="dropdown-item" href="#" id="show_estab_info">
+                            <i class="fas fa-user"></i> Profile
                         </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
