@@ -273,7 +273,7 @@
                 }
                 
             });
-            
+                
            $('#municipal').select2({}).on("select2:open  ", function(e) {
                 var provCode = $('#province').find(':selected').attr('data-provCode');
                 loadMunicipals(provCode);
@@ -285,8 +285,8 @@
             });
 
             $('#province').select2();
-
-            
+            loadMunicipals($('#province').find(':selected').attr('data-provCode'));
+            loadBarangays($('#municipal').find(':selected').attr('data-citymunCode'));
         })
 
         // functions goes here
