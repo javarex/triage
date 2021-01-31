@@ -99,7 +99,7 @@
                 
                     <div class="col-md-12">
                         <select name="municipal" class="form-control municipal_class" id="municipal"  style="width:100%" >
-                            <option value="{{auth()->user()->municipal_id}}" data-munCode="{{$userAdd->municipal->citymunCode}}" {{ old('municipal', $userAdd->municipal->id) == auth()->user()->municipal_id ? "selected" : "" }}>{{$userAdd->municipal->citymunDesc}}</option>
+                            <option value="{{auth()->user()->municipal_id}}" data-citymunCode="{{$userAdd->municipal->citymunCode}}" {{ old('municipal', $userAdd->municipal->id) == auth()->user()->municipal_id ? "selected" : "" }}>{{$userAdd->municipal->citymunDesc}}</option>
                         </select>
                         @error('municipal')
                             <small class="text-danger" role="alert">
