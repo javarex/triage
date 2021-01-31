@@ -269,7 +269,7 @@
                 var munCode = $(this).find(':selected').attr('data-munCode');
                 if($(this).val() != ''){
                     loadBarangays(munCode);
-                    $('#barangay').html('<option></option>');
+                     $('#barangay').html('<option></option>');
                 }
                 
             });
