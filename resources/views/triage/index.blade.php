@@ -287,6 +287,11 @@
             $('#province').select2();
             loadMunicipals($('#province').find(':selected').attr('data-provCode'));
             loadBarangays($('#municipal').find(':selected').attr('data-citymunCode'));
+
+            $('#profile_form').hide();
+            $(document).on('click','#button_editInfo', function(){
+                $('#profile_form').fadeIn();
+            })
         })
 
         // functions goes here

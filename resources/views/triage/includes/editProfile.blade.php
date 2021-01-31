@@ -148,11 +148,14 @@
                 <div class="col-md-12 form-group">
                         
                     <div class="col-md-12">
-                        <span class="font-weight-normal "><small class="text-danger font-weight-bold">*</small>{{ __('Contact Number') }}</span>
+                        <span class="font-weight-normal ">
+                            <!-- <small class="text-danger font-weight-bold">*</small> -->
+                            {{ __('Contact Number') }}
+                        </span>
                     </div>
                 
                     <div class="col-md-12">
-                        <input type="text" name="contact_number" class="form-control" id="contact_number"  style="width:100%" value="{{ old('contact_number', auth()->user()->contact_number) }}">
+                        <input type="text" name="contact_number" class="form-control" id="contact_number"  style="width:100%" value="{{ old('contact_number', auth()->user()->contact_number) }}" placeholder="eg. (0912XXXXXXX)">
                         @error('contact_number')
                             <small class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -164,11 +167,14 @@
                 <div class="col-md-12 form-group">
                         
                     <div class="col-md-12">
-                        <span class="font-weight-normal "><small class="text-danger font-weight-bold">*</small>{{ __('Email Address') }}</span>
+                        <span class="font-weight-normal ">
+                            <!-- <small class="text-danger font-weight-bold">*</small> -->
+                            {{ __('Email Address') }}
+                        </span>
                     </div>
                 
                     <div class="col-md-12">
-                        <input type="email" name="email" class="form-control" id="email"  style="width:100%" value="{{ old('email', auth()->user()->email) }}">
+                        <input type="email" name="email" class="form-control" id="email"  style="width:100%" value="{{ old('email', auth()->user()->email) }}" placeholder="example@email.com">
                         @error('email')
                             <small class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
