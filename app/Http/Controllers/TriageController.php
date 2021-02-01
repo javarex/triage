@@ -240,7 +240,7 @@ class TriageController extends Controller
             'province_id'       => 'required',
             'municipal'         => 'required',
             'barangay'          => 'required',
-            'birthday'          => 'required|date_format:Y-d-m',
+            'birthday'          => 'required',
         ]);
         if ($validator) {
             # code...
@@ -250,7 +250,7 @@ class TriageController extends Controller
                 'barangay_id'       => $request->barangay,
                 'contact_number'    => $request->contact_number,
                 'email'             => $request->email,
-                'birthday'          => $request->birthday,
+                'birthday'          => date('Y-m-d', strtotime($request->birthday)),
             ]);
         }else{
             return response()->json(['error'=>$validator->errors()->all() ]);
