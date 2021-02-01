@@ -76,7 +76,11 @@
                     <!-- Province -->
                     <div class="col-md-12">
                         <select name="province_id" class="form-control" id="province"  style="width:100%">
+                            @if(auth()->user()->province_id == 0)
+                            <option value="">Please select province</option>
+                            @else
                             <option value=""></option>
+                            @endif
                             
                             @foreach($provinces as $province => $key)
                             <option value="{{$key->id}}" data-provCode="{{$key->provCode}}" {{ old('province_id', $key->id) == auth()->user()->province_id ? "selected" : "" }}>{{$key->provDesc}}</option>
@@ -92,7 +96,6 @@
                 </div>
                 <!-- Municipality -->
                 <div class="col-md-12 form-group">
-                        
                     <div class="col-md-12">
                         <span class="font-weight-normal "><small class="text-danger font-weight-bold">*</small>{{ __('Municipality') }}</span>
                     </div>

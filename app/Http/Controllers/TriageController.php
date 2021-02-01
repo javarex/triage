@@ -23,7 +23,9 @@ class TriageController extends Controller
     {
         // $tempname = "RAYMART ITANONG";
         // dd(crypt($tempname,'$1$hNoLa02$'));
-        $provinces = Province::all();
+        $provinces =   $province = Province::where('id','<>',0)
+                        ->orderBy('provDesc', 'asc')
+                        ->get();
         $decrypt = new EncryptionController;
 
         $user = auth()->user();
@@ -31,13 +33,19 @@ class TriageController extends Controller
         $dateOfBirth = $user->birthday;
         $years = Carbon::parse($dateOfBirth)->age;
         $date = $user->created_at;
-        $userAdd = User::with('barangay','municipal','province')->where('id', $user->id)->first();
 
+    
+        $userAdd = User::with('barangay','municipal','province')->where('id', $user->id)->first();
         $brgy = strtolower($userAdd->barangay->brgyDesc);
         $province = strtolower($userAdd->province->provDesc);
         $municipals = strtolower($userAdd->municipal->citymunDesc);
         $address = ucwords($brgy.', '.$municipals.', '.$province);
-       
+    
+        if (auth()->user()->province_id != 0 || auth()->user()->municipal_id != 0 || auth()->user()->barangay_id != 0) {
+            $flag = true;
+        }else{
+            $flag = false;
+        }
 
         $directory = date('m-d-Y', strtotime($date));
         $first_name = $decrypt->decrypt($user->first_name);
@@ -50,7 +58,7 @@ class TriageController extends Controller
             $Users_name = $first_name.' '.$last_name;
         }
 
-        return view('triage.index',compact('userAdd','user','provinces','years','directory','address','Users_name','first_name','municipals','barangays'));
+        return view('triage.index',compact('flag','userAdd','user','provinces','years','directory','address','Users_name','first_name','municipals','barangays'));
     }
 
     public function create()

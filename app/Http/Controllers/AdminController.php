@@ -112,7 +112,7 @@ class AdminController extends Controller
         $this->validate($request,[
             'file'  =>  'required|mimes:xlsx,csv,txt'
         ]);
-        set_time_limit(300);
+        set_time_limit(0);
         Excel::import(new EmployeesImport, $request->file('file'));
         return back()->with('success_import','All is well!');
     }

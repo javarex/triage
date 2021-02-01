@@ -21,6 +21,7 @@
                     <div class="card-body shadow d-flex justify-content-center pb-3 text-light" style="background-color:#603C03;border-radius:7px">
                         <div class="row text-center justify-content-center">
                             
+                            @if($flag)
                             <div id="qrcontainer">
                                 <div class="col-12 text-center">
                                     <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1), true) }}" class="bg-light p-2"
@@ -33,7 +34,18 @@
                                     </span>
                                 </div>
                             </div>
-
+                            @else
+                            <div class="alert alert-info" role="alert">
+                                <strong>Please complete your profile. </strong>
+                                <br>
+                               <div class="text-left">
+                                    1. Click account name on upper right. <br>
+                                    2. Account setting->Update profile. <br>
+                                    3. Click edit profile button. <br>
+                                    4. Fill in form and save. <br>
+                               </div>
+                            </div>
+                            @endif
                             <div class="col-md-12 container pt-4 text-left">
                                 <div class="row">
                                     <div class="col-1 col-md-1 px-1"><i class="fa fa-user" aria-hidden="true"></i></div>
@@ -60,32 +72,34 @@
                                         {{ $address }}
                                     </div>
                                 </div>   
-                                <div class="row pt-1  ">
-                                    <div class="col-12 col-md-12 px-1 text-center"> 
-                                        <a href="exportId" class=" btn btn-sm btn-primary font-weight-bolder text-light" target="_blank">
-                                            <i class="fa fa-id-card" aria-hidden="true"></i> Export ID
-                                        </a> 
-                                        <!-- <a href="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1)) }}"
-                                            alt="barcode"
-                                            class="btn btn-sm btn-primary text-light" id="print_qr"
-                                            download="DdO_QRCode"><i class="fa fa-fw fa-save"
-                                                aria-hidden="true"></i>Save QR</a>  -->
-                                                 <a href="#"
-                                                     alt="barcode" class="btn btn-sm btn-primary text-light"
-                                                     id="print_qr" download="DdO_QRCode.png"><i class="fa fa-fw fa-save"
-                                                         aria-hidden="true"></i>Save QR</a>
+                                @if($flag)
+                                    <div class="row pt-1  ">
+                                        <div class="col-12 col-md-12 px-1 text-center"> 
+                                            <a href="exportId" class=" btn btn-sm btn-primary font-weight-bolder text-light" target="_blank">
+                                                <i class="fa fa-id-card" aria-hidden="true"></i> Export ID
+                                            </a> 
+                                            <!-- <a href="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1)) }}"
+                                                alt="barcode"
+                                                class="btn btn-sm btn-primary text-light" id="print_qr"
+                                                download="DdO_QRCode"><i class="fa fa-fw fa-save"
+                                                    aria-hidden="true"></i>Save QR</a>  -->
+                                                    <a href="#"
+                                                        alt="barcode" class="btn btn-sm btn-primary text-light"
+                                                        id="print_qr" download="DdO_QRCode.png"><i class="fa fa-fw fa-save"
+                                                            aria-hidden="true"></i>Save QR</a>
+                                        </div>
+                                    </div>   
+                                    @if(is_null($user->qredit))
+                                    <div class="row pt-1  ">
+                                        <div class="col-12 col-md-12 px-1 text-center"> 
+                                        OR
+                                        </div>
+                                        <div class="col-12 col-md-12 px-1 text-center"> 
+                                        <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#qr_edit"><i class="fas fa-edit    "></i> Edit QRcode</a>
+                                        </div>
                                     </div>
-                                </div>   
-                                @if(is_null($user->qredit))
-                                <div class="row pt-1  ">
-                                    <div class="col-12 col-md-12 px-1 text-center"> 
-                                       OR
-                                    </div>
-                                    <div class="col-12 col-md-12 px-1 text-center"> 
-                                       <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#qr_edit"><i class="fas fa-edit    "></i> Edit QRcode</a>
-                                    </div>
-                                </div>
-                                @endif   
+                                    @endif   
+                                @endif
                             </div>
                         </div>
                     </div>

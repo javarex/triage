@@ -63,7 +63,8 @@ class ClientController extends Controller
     
     public function loadProvince()
     {
-        $province = Province::orderBy('provDesc', 'asc')->get();
+        $province = Province::where('id','<>',0)
+                    ->orderBy('provDesc', 'asc')->get();
         return $province;
     }
     
