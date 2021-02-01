@@ -115,7 +115,7 @@
 <!-- Modals View profile -->
 
 <div class="modal fade" tab-index="1" id="estab_profile">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Establishment information</h4>
@@ -124,7 +124,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                form here...
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="col-md-12">
+                            <h3>
+                                <i class="fa fa-building" aria-hidden="true"></i>
+                                {{ $establishment->establishment_name}}
+                            </h3>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

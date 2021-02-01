@@ -81,15 +81,6 @@
                 var file_name = $(this).attr('data-filename');
                 captureQR(containerQR,file_name);
             })
-            $(document).on('click', '.terminal', function() {
-                // var terminal_qr = "http://ddoqr.dvodeoro.ph/" + $(this).attr('data-qr');
-                // $("#qr").attr('src',"data:image/png;base64," + "{!! DNS2D::getBarcodePNG(" + terminal_qr + ",'QRCODE',10,10,array(1,1,1), true) !!}")
-            })
-
-
-            $('#terminal_info').on('hidden.bs.modal', function () {
-                 location.reload();
-            });
 
             $.ajaxSetup({
                 headers: {
@@ -102,6 +93,7 @@
                 var terminal = $(this).attr('data-terminal');
                 $('#terminal_Description').val(terminal.toUpperCase())
             });
+
            $(document).on('click','#submit_editTerminal', function (){
                var terminalNumber = $('#terminalNumber').val();
                var terminal_Description = $('#terminal_Description').val();
@@ -119,11 +111,22 @@
             // end qrcode terminal
 
             $(document).on('click','#show_estab_info', function() {
+                getData();
                 $('#estab_profile').modal({
-                    backdrop:'static'
                 })
             })
         })
+
+        function getData()
+        {
+            $.ajax({
+                type:'GET',
+                url:'/establishment/getData',
+                success:function(data){
+                    console.log(data.establishment.establishment_name)
+                }
+            })
+        }
 
         function deleteTerminal(){
             $.ajax({

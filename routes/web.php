@@ -82,6 +82,7 @@ Route::middleware(['establishment'])->group(function () {
     Route::get('/establishment', 'EstablishmentController@index');
     Route::post('/editTerminal/{terminalId}', 'EstablishmentController@editTerminal');
     Route::post('/deleteTerminal/{terminalId}', 'EstablishmentController@deleteTerminal');
+    Route::get('/establishment/getData', 'EstablishmentController@getData');
 });
 
 

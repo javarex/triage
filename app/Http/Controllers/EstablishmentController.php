@@ -34,7 +34,7 @@ class EstablishmentController extends Controller
                         ->where('establishment_id',$establishment_id)
                         ->get();
         
-        return view('establishment.index',compact('role','terminals','establishment_name'));
+        return view('establishment.index',compact('role','terminals','establishment_name','establishment'));
     }
 
     public function create()
@@ -127,6 +127,13 @@ class EstablishmentController extends Controller
             'establishment_name' => $request->name,
         ]);
         return redirect('establishment')->with('successUpdate','Record updated successfully');
+    }
+
+    public function getData()
+    {
+        return User::with('establishment')
+                ->where('id',auth()->user()->id)
+                ->first();
     }
 
     public function terminalStore(Request $request)
