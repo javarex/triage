@@ -21,8 +21,8 @@
                     <div class="card-body shadow d-flex justify-content-center pb-3 text-light" style="background-color:#603C03;border-radius:7px">
                         <div class="row text-center justify-content-center">
                             
-                            @if($flag)
                             <div id="qrcontainer">
+                            @if($flag)
                                 <div class="col-12 text-center">
                                     <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',10,10,array(1,1,1), true) }}" class="bg-light p-2"
                                         id="qr" class="img-fluid" alt="barcode" />
@@ -33,7 +33,6 @@
                                         <span class="font-weight-bold" id="qrcode_value" style="cursor:pointer">{{$user->qrcode}}</span> 
                                     </span>
                                 </div>
-                            </div>
                             @else
                             <div class="alert alert-info" role="alert">
                                 <strong>Please complete your profile to get your qr code. </strong>
@@ -46,6 +45,8 @@
                                </div>
                             </div>
                             @endif
+                            </div>
+                            
                             <div class="col-md-12 container pt-4 text-left">
                                 <div class="row">
                                     <div class="col-1 col-md-1 px-1"><i class="fa fa-user" aria-hidden="true"></i></div>
