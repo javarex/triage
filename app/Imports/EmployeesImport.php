@@ -41,53 +41,57 @@ class EmployeesImport implements ToCollection, WithHeadingRow
             $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
             $duplicate = User::where('hash',$hashed_fullname)->first();
             
-            if (is_null($row['province_code']) || is_null($row['barangay_code']) || is_null($row['municipality_code'])) {
-                continue;
-            }else{
-                $address = DB::table('barangays')
-                            ->join('provinces','barangays.provCode','=','provinces.provCode')
-                            ->join('municipals','barangays.citymunCode','=','municipals.citymunCode')
-                            ->select(
-                                'provinces.id AS province_id',
-                                'provinces.provCode',
-                                'provinces.provDesc',
-                                'municipals.id AS municipal_id',
-                                'municipals.citymunCode',
-                                'municipals.citymunDesc',
-                                'barangays.id AS barangay_id',
-                                'barangays.brgyDesc',
-                                'barangays.brgyCode'
-                                )
-                            ->where('provinces.provDesc','like','%'.$row['province_name'].'%')
-                            ->where('municipals.citymunDesc','like','%'.$row['municipality_name'].'%')
-                            ->where('barangays.brgyDesc','like','%'.$row['barangay_name'].'%')
-                            ->first();
+           
+            $address = DB::table('barangays')
+                        ->join('provinces','barangays.provCode','=','provinces.provCode')
+                        ->join('municipals','barangays.citymunCode','=','municipals.citymunCode')
+                        ->select(
+                            'provinces.id AS province_id',
+                            'provinces.provCode',
+                            'provinces.provDesc',
+                            'municipals.id AS municipal_id',
+                            'municipals.citymunCode',
+                            'municipals.citymunDesc',
+                            'barangays.id AS barangay_id',
+                            'barangays.brgyDesc',
+                            'barangays.brgyCode'
+                            )
+                        ->where('provinces.provDesc','like','%'.$row['province_name'].'%')
+                        ->where('municipals.citymunDesc','like','%'.$row['municipality_name'].'%')
+                        ->where('barangays.brgyDesc','like','%'.$row['barangay_name'].'%')
+                        ->first();
 
-                if (!$duplicate) {
-                    $first_name = ucwords(mb_strtolower($row['first_name']));
-                    $middle_name = ucwords(mb_strtolower($row['middle_name']));
-                    $last_name = ucwords(mb_strtolower($row['last_name']));
-                    if($address){
-                        $newUser = User::create([
-                            'qrcode'            =>  $code,
-                            'first_name'        =>  $encrypt->encrypt($first_name),
-                            'middle_name'       =>  $middle_name,
-                            'last_name'         =>  $encrypt->encrypt($last_name),
-                            'hash'              =>  $hashed_fullname,
-                            'sex'               =>  $row['sex'],
-                            'birthday'          =>  $row['birthday'],
-                            'province_id'       =>  $address->province_id,
-                            'municipal_id'      =>  $address->municipal_id,
-                            'barangay_id'       =>  $address->barangay_id,
-                            'username'          =>  $last_name.$row['empl_id'],
-                            'password'          =>  bcrypt("temppass".$row['empl_id']),
-                            'role'              =>  2,
-                            'verified'          =>  0,
-                           
-                        ]);
-                    }
+            if (!$duplicate) {
+                $first_name = ucwords(mb_strtolower($row['first_name']));
+                $middle_name = ucwords(mb_strtolower($row['middle_name']));
+                $last_name = ucwords(mb_strtolower($row['last_name']));
+                if($address){
+                    $barangay = $address->barangay_id;
+                    $municipal = $address->municipal_id;
+                    $province = $address->province_id;
+                }else{
+                    $barangay = 0;
+                    $municipal = 0;
+                    $province = 0;
                 }
+                $newUser = User::create([
+                    'qrcode'            =>  $code,
+                    'first_name'        =>  $encrypt->encrypt($first_name),
+                    'middle_name'       =>  $middle_name,
+                    'last_name'         =>  $encrypt->encrypt($last_name),
+                    'hash'              =>  $hashed_fullname,
+                    'sex'               =>  $row['sex'],
+                    'birthday'          =>  $row['birthday'],
+                    'province_id'       =>  $province,
+                    'municipal_id'      =>  $municipal,
+                    'barangay_id'       =>  $barangay,
+                    'username'          =>  $last_name.$row['empl_id'],
+                    'password'          =>  bcrypt("temppass".$row['empl_id']),
+                    'role'              =>  2,
+                    'verified'          =>  0,
+                ]);
             }
+        
   
         //     $users = User::where('first_name', $row['ffirst'])
         //                 ->where('last_name', $row['flast'])
