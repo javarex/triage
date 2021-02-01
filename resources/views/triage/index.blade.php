@@ -36,7 +36,7 @@
                             </div>
                             @else
                             <div class="alert alert-info" role="alert">
-                                <strong>Please complete your profile. </strong>
+                                <strong>Please complete your profile to get your qr code. </strong>
                                 <br>
                                <div class="text-left">
                                     1. Click account name on upper right. <br>
