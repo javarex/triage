@@ -14,14 +14,25 @@
     <div class="row ">
         <div class="col-md-12 d-flex justify-content-center">
             <div class="user_card">
+
                 <div class="d-flex justify-content-center">
                     <div class="brand_logo_container">
                         <img src="{{ asset('image/triage1.png')}}" class="image-fluid" width="160" alt="Logo">
                     </div>
                 </div>
+               
                 <div class="d-flex justify-content-center form_container">
                     <form action="{{route('terminal_scan_login')}}" method="post" autocomplete="off">
                         @csrf
+                           @if (session('status'))
+                           <div class="row text-center">
+                               <div class="col-12">
+                                    <div class="alert alert-danger">
+                                        {{ session('status') }}
+                                    </div>
+                               </div>
+                           </div>
+                           @endif
                         <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -88,8 +99,10 @@
 
             if (switch_value) {
                  $(".switch_label").text('IN')
+                 $(".login_btn").text('Login')
             } else {
                   $(".switch_label").text('OUT')
+                  $(".login_btn").text('Logout')
             }
 
             // alert($(this).val())
