@@ -74,7 +74,7 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre
                                 style="color:#ECC633">
-                                {{ $first_name }}<span class="caret"></span>
+                                {{ $data->first_name }}<span class="caret"></span>
                             </a>
 
 
@@ -91,7 +91,7 @@
                                     <a href="#" class="dropdown-item" data-toggle="modal" data-target="#securitySetup"><i
                                     class="fa fa-lock" aria-hidden="true"></i>Security Setup</a>
                                 </ul>
-                                <a href="#" class=" dropdown-item" type="button" id="dropdown_trav_history">
+                                <a href="/history?key=<?php echo base64_encode('travel_history') ?>" class=" dropdown-item" type="button" id="dropdown_trav_history">
                                     <i class="fa fa-history" aria-hidden="true"></i> History Logs
                                 </a>
                                

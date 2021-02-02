@@ -314,10 +314,10 @@ class AdminController extends Controller
    
         // Fetch records
         $records = User::orderBy('id','asc')
-                ->where('users.qrcode', 'like', '%' .$searchValue . '%')
-                ->orWhere('users.username', 'like', '%' .$searchValue . '%')
-                ->select('users.*')
+                ->where('users.qrcode', 'like', $searchValue . '%')
+                ->orWhere('users.username', 'like', $searchValue . '%')
                 ->where('role', 2)
+                ->select('users.*')
                 ->skip($start)
                 ->take($rowperpage)
                 ->get();

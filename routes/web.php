@@ -47,6 +47,7 @@ Route::middleware(['client'])->group(function () {
     Route::post('qredit', 'TriageController@qrEdit');
     Route::post('updateSecurity', 'TriageController@updateSecurity');
     Route::post('profile_edit', 'TriageController@profile_edit');
+    Route::get('/history', 'TriageController@view_history');
 });
 
 Route::post('/tag', 'TagController@store');

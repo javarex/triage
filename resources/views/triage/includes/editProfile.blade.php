@@ -25,19 +25,19 @@
                                 <div class="row">
                                     <div class="col-1 col-md-1 px-1"><i class="fa fa-user" aria-hidden="true"></i></div>
                                     <div class="col-11 col-md-11">
-                                        <h3>{{$Users_name}}</h3>
+                                        <h3>{{$data->first_name.' '.$data->last_name}}</h3>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-1 col-md-1 px-1"><i class="fas fa-map-marker-alt    "></i></div>
                                     <div class="col-11 col-md-11">
-                                        {{$address}}
+                                        {{$data->barangay}}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-1 col-md-1 px-1"><i class="fas fa-birthday-cake    "></i></div>
                                     <div class="col-11 col-md-11">
-                                        {{date('F d, Y', strtotime($user->birthday))}}
+                                        {{date('F d, Y', strtotime($data->birthday))}}
                                     </div>
                                 </div>
                                 @if(auth()->user()->contact_number)

@@ -47,18 +47,18 @@ class TriageController extends Controller
             $flag = false;
         }
 
-        $directory = date('m-d-Y', strtotime($date));
+        // $directory = date('m-d-Y', strtotime($date));
         $first_name = $decrypt->decrypt($user->first_name);
         $last_name = $decrypt->decrypt($user->last_name);
-
         $middle_name =$user->middle_name;
         if($user->suffix){
             $Users_name = $first_name.' '.$last_name.' '.$user->suffix;
         }else{
             $Users_name = $first_name.' '.$last_name;
         }
+        $data = $this->data();
 
-        return view('triage.index',compact('flag','userAdd','user','provinces','years','directory','address','Users_name','first_name','municipals','barangays'));
+        return view('triage.index',compact('flag','userAdd','user','provinces','years','address','Users_name','data','first_name','municipals','barangays'));
     }
 
     public function create()
@@ -257,6 +257,15 @@ class TriageController extends Controller
         }
     }
 
+    //history controller group
+
+    public function view_history()
+    {
+       $data = $this->data();
+       return view('triage.history',compact('data'));
+    }
+
+
     protected function decryptValue($myString)
     {
         try {
@@ -267,6 +276,29 @@ class TriageController extends Controller
             $result = $myString;
         }
         return $result;
+    }
+
+    protected function data()
+    {
+        $user =  User::with('barangay','municipal','province')
+                    ->where('id',auth()->user()->id)
+                    ->first();
+        $decrypt = new EncryptionController;
+        $first_name = $decrypt->decrypt($user->first_name);
+        $last_name = $decrypt->decrypt($user->last_name);
+        $middle_name =$user->middle_name;
+        
+       $data_array = array(
+           'first_name' => $first_name,
+           'middle_name'  => $middle_name,
+           'last_name'  => $last_name,
+           'barangay'   => $user->barangay->brgyDesc,
+           'municipal'   => $user->municipal->citimunDesc,
+           'province'   => $user->province->provDesc,
+           'birthday'   => $user->birthday,
+       ); 
+
+       return $data_array = (Object)$data_array;
     }
 
 }
