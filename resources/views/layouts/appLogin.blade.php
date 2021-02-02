@@ -15,6 +15,7 @@
     <link href="{{ asset('css/signin.css') }}" rel="stylesheet"> 
    
     <link href="{{ asset('css/pageLoader.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/toggle-switchy.css') }}" rel="stylesheet">
      @yield('styles')
 </head>
 

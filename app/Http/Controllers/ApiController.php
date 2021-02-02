@@ -120,6 +120,11 @@ class ApiController extends Controller
         $username = $request->username;
         $password = $request->password;
         $terminal_qr = $request->qr;
+        $type = "in";
+
+        if (is_null($request->type)) {
+            $type = "out";
+        }
 
         $decrypt = new EncryptionController;
 
@@ -140,9 +145,10 @@ class ApiController extends Controller
                 'barcode' => $user->qrcode,
                 'time_in' => now(),
                 'terminal_id' => $terminal->id,
+                'type' => $type
             ]);
 
-            return view('terminal.confirmation', compact('user', 'terminal_qrcode', 'fullname', 'date'));
+            return view('terminal.confirmation', compact('user', 'terminal_qrcode', 'fullname', 'date', 'type'));
         }       
     }
 }

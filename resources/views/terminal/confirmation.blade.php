@@ -21,7 +21,7 @@
                 </div>
                 <div class="form_container text-center content">
                     <div class="alert alert-success" role="alert">
-                        Successfully Logged in the terminal
+                        Successfully Logged {{ $type }} the terminal
                     </div>
                     <div class="row">
                         <div class="col-md-12">

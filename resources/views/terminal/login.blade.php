@@ -1,5 +1,13 @@
 @extends('layouts.appLogin')
 
+@section('styles')
+<style>
+    .switch_label {
+        margin: unset !important;
+    }
+</style>
+@endsection
+
 @section('content')
 <!-- end page loader -->
 <div class="container pt-5">
@@ -29,6 +37,14 @@
                             <input type="password" name="password" class="form-control input_pass"
                                 placeholder="password">
                         </div>
+
+                        <label class="toggle-switchy" for="switch" data-size="sm" data-text="false">
+                            <input checked type="checkbox" name="type" id="switch">
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                            <p class="switch_label pl-3 font-weight-bold">IN</p>
+                        </label> 
 
                         <input type="hidden" name="qr" value="{{ $terminal_qr }}">
 
@@ -61,5 +77,23 @@
             window.location.href = "/client/create";
         }
     }
+
+      $(function(){
+        var switch_value = true
+
+        $("#switch").val('in') //init value
+
+        $("#switch").on('change', function() {
+            switch_value = !switch_value
+
+            if (switch_value) {
+                 $(".switch_label").text('IN')
+            } else {
+                  $(".switch_label").text('OUT')
+            }
+
+            // alert($(this).val())
+        })
+      })
 </script>
 @endsection
