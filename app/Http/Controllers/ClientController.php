@@ -89,8 +89,11 @@ class ClientController extends Controller
             'username'              => 'required|unique:users',
             'password'              => 'required|confirmed',
         ]);
-        
-        $hashed_fullname = crypt(strtoupper($request->first_name.' '.$request->last_name.' '.$request->suffix),'$1$hNoLa02$');
+        if ($request->suffix) {
+            $hashed_fullname = crypt(ucwords($request->first_name.' '.$request->last_name.' '.$request->suffix),'$1$hNoLa02$');
+        }else{
+            $hashed_fullname = crypt(ucwords($request->first_name.' '.$request->last_name),'$1$hNoLa02$');
+        }
         $duplicateUser = User::where('hash',$hashed_fullname)
                         ->first();
        
@@ -117,6 +120,7 @@ class ClientController extends Controller
                 $request['first_name']  = $encrypt->encrypt(ucwords($request->first_name)); //255
                 $request['middle_name'] = ucwords($request->middle_name);
                 $request['last_name']   = $encrypt->encrypt(ucwords($request->last_name)); //255 length
+                $request['suffix']      = $request->suffix;
                 $request['address']     = ucwords($request->address);
                 $request['password']    = bcrypt($request->password);
                 $request['birthday']    = date('Y-m-d', strtotime($request->birthday));
