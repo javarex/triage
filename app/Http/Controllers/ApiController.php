@@ -136,19 +136,24 @@ class ApiController extends Controller
             ->where('username', $username)
             ->first();
         
-        if (Hash::check($password, $user->password)) {
+        if (!is_null($user)) {
+            if (Hash::check($password, $user->password)) {
 
-            $fullname = $decrypt->decrypt($user->first_name). ' '. $user->middle_name. ' '.$decrypt->decrypt($user->last_name);
-            $date = now();
+                $fullname = $decrypt->decrypt($user->first_name). ' '. $user->middle_name. ' '.$decrypt->decrypt($user->last_name);
+                $date = now();
 
-            DB::table('logs')->insert([
-                'barcode' => $user->qrcode,
-                'time_in' => now(),
-                'terminal_id' => $terminal->id,
-                'type' => $type
-            ]);
+                DB::table('logs')->insert([
+                    'barcode' => $user->qrcode,
+                    'time_in' => now(),
+                    'terminal_id' => $terminal->id,
+                    'type' => $type
+                ]);
 
-            return view('terminal.confirmation', compact('user', 'terminal_qrcode', 'fullname', 'date', 'type'));
-        }       
+                return view('terminal.confirmation', compact('user', 'terminal_qrcode', 'fullname', 'date', 'type'));
+            }       
+        } else {
+            return back()->with('status', 'Incorrect username/password.');
+
+        }
     }
 }
