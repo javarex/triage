@@ -264,12 +264,20 @@ class TriageController extends Controller
 
     public function view_history()
     {
-       $data = $this->data();
-       $provinces = $this->getProvinces();
-       $userAdd =  User::with('barangay','municipal','province')
-                    ->where('id',auth()->user()->id)
-                    ->first();
-       return view('triage.history',compact('data','provinces','userAdd'));
+        $data = $this->data();
+        $user = auth()->user();
+        $provinces = $this->getProvinces();
+        $userAdd =  User::with('barangay','municipal','province')
+                        ->where('id',auth()->user()->id)
+                        ->first();
+
+        $years = Carbon::parse($user->birthday)->age;
+    if (auth()->user()->province_id != 0 || auth()->user()->municipal_id != 0 || auth()->user()->barangay_id != 0) {
+        $flag = true;
+    }else{
+        $flag = false;
+    }
+       return view('triage.history',compact('data','provinces','userAdd','flag','user','years'));
     }
 
 

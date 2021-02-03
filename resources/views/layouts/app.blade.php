@@ -91,9 +91,9 @@
                                     <a href="#" class="dropdown-item" data-toggle="modal" data-target="#securitySetup"><i
                                     class="fa fa-lock" aria-hidden="true"></i>Security Setup</a>
                                 </ul>
-                                <a href="/history?key=<?php echo base64_encode('travel_history') ?>" class=" dropdown-item" type="button" id="dropdown_trav_history">
+                                <!-- <a href="/history?key=<?php echo base64_encode('travel_history') ?>" class=" dropdown-item" type="button" id="dropdown_trav_history">
                                     <i class="fa fa-history" aria-hidden="true"></i> History Logs
-                                </a>
+                                </a> -->
                                
 
 
@@ -113,16 +113,24 @@
         {{-- end client nav --}}
         @endif
     @endif
-
-
+    @if (\Request::is('history'))
+    <main class="container-fluid py-3">
+        @yield('content')
+    </main>
+    @else
     <main class="container py-3">
         @yield('content')
     </main>
+    @endif
+
     
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/pageLoader.js') }}"></script>
-    
+    <script src="{{ asset('js/notify.min.js') }}"></script> 
+    <script src="{{ asset('js/select2.min.js') }}"></script>
+    <script src="{{ asset('js/html2Canvas.min.js') }}"></script>
+    <script src="{{ asset('js/swal.min.js') }}"></script>
     @yield('scripts')
 </body>
 </html>
