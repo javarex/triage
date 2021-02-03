@@ -175,32 +175,19 @@ class AdminController extends Controller
 
         $search = $request->search;
         $searchType = $request->searchType;
+
         if($search == ''){
-           $users = User::orderby('first_name','asc')->select('id','first_name','last_name')->limit(5)->get();
-        }else{
-
-            if($search == ''){
-                $users = User::orderby('qrcode','asc')->select('id','qrcode')->limit(5)->get();
-             }else{
-                $users = User::orderby('qrcode','asc')
-                             ->select('id','qrcode')
-                             ->where('qrcode', 'like', '%' .$search . '%')
-                             ->limit(5)->get();
-             }
-       
-             $response = array();
-             foreach($users as $user){
-                $response[] = array("value"=>$user->id,"barcode" => $user->qrcode,"label"=>$user->qrcode);
-             }
-
-           $users = User::orderby('first_name','asc')
+            $users = User::orderby('qrcode','asc')->select('id','qrcode')->limit(5)->get();
+         }else{
+           
+            $users = User::orderby('first_name','asc')
                         ->select('id','first_name','last_name','qrcode')
-                        ->where('first_name', 'like', '%' .$search . '%')
                         ->where('role',2)
-                        ->where('last_name', 'like', '%' .$search . '%')
+                        ->where('qrcode', 'like', '%' .$search . '%')
                         ->limit(5)->get();
-        }
-  
+         }
+   
+      
         $response = array();
         foreach($users as $user){
            $response[] = array("value"=>$user->id,"qrcode"=>$user->qrcode,"label"=>$decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name));
@@ -386,6 +373,11 @@ class AdminController extends Controller
             ]);
         }
         set_time_limit(300);
+      }
+
+      protected function hash_input($stringInput)
+      {
+
       }
 
       public function updateQRuser()
