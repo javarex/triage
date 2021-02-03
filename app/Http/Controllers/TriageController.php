@@ -33,9 +33,12 @@ class TriageController extends Controller
         $dateOfBirth = $user->birthday;
         $years = Carbon::parse($dateOfBirth)->age;
         $date = $user->created_at;
+        $data = $this->data();
 
     
-        $userAdd = User::with('barangay','municipal','province')->where('id', $user->id)->first();
+        $userAdd =  User::with('barangay','municipal','province')
+                    ->where('id',auth()->user()->id)
+                    ->first();
         $brgy = strtolower($userAdd->barangay->brgyDesc);
         $province = strtolower($userAdd->province->provDesc);
         $municipals = strtolower($userAdd->municipal->citymunDesc);
@@ -58,7 +61,7 @@ class TriageController extends Controller
         }
         $data = $this->data();
 
-        return view('triage.index',compact('flag','userAdd','user','provinces','years','address','Users_name','data','first_name','municipals','barangays'));
+        return view('triage.index',compact('flag','userAdd','data','user','provinces','years','address','Users_name','first_name','municipals','barangays'));
     }
 
     public function create()
@@ -262,7 +265,11 @@ class TriageController extends Controller
     public function view_history()
     {
        $data = $this->data();
-       return view('triage.history',compact('data'));
+       $provinces = $this->getProvinces();
+       $userAdd =  User::with('barangay','municipal','province')
+                    ->where('id',auth()->user()->id)
+                    ->first();
+       return view('triage.history',compact('data','provinces','userAdd'));
     }
 
 
@@ -299,6 +306,13 @@ class TriageController extends Controller
        ); 
 
        return $data_array = (Object)$data_array;
+    }
+
+    public function getProvinces()
+    {
+        return Province::where('id','<>',0)
+                ->orderBy('provDesc', 'asc')
+                ->get();
     }
 
 }
