@@ -34,7 +34,6 @@ class AdminController extends Controller
     
     public function index()
     {
-       
         $decrypt = new EncryptionController;
         $user = auth()->user();
         $first_nameAdmin =  $decrypt->decrypt($user->first_name);
@@ -175,15 +174,15 @@ class AdminController extends Controller
 
         $search = $request->search;
         $searchType = $request->searchType;
-
+        $full_name = crypt(strtoupper($search),'$1$hNoLa02$');
         if($search == ''){
-            $users = User::orderby('qrcode','asc')->select('id','qrcode')->limit(5)->get();
-         }else{
+            $users = User::orderby('id','asc')->select('id','qrcode')->limit(5)->get();
+        }else{
            
             $users = User::orderby('first_name','asc')
                         ->select('id','first_name','last_name','qrcode')
                         ->where('role',2)
-                        ->where('qrcode', 'like', '%' .$search . '%')
+                        ->where('hash', 'like', '%' .$full_name . '%')
                         ->limit(5)->get();
          }
    
@@ -207,7 +206,9 @@ class AdminController extends Controller
 
      public function generateReport(Request $request)
      {
-        
+        $fullname = strtoupper($request->search_input);
+        $hashed_fullname = crypt($fullname.' ','$1$hNoLa02$');
+        dd($hashed_fullname);
          $data = [
              'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the'
          ];
@@ -302,7 +303,7 @@ class AdminController extends Controller
         // Fetch records
         $records = User::orderBy('id','asc')
                 ->where('users.qrcode', 'like', $searchValue . '%')
-                ->orWhere('users.username', 'like', $searchValue . '%')
+                ->orWhere('users.username', 'like', '%' . $searchValue . '%')
                 ->where('role', 2)
                 ->select('users.*')
                 ->skip($start)
@@ -364,20 +365,20 @@ class AdminController extends Controller
         {
             
             $decrypt = new EncryptionController;
-            $fullname = strtoupper($decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name));
-            
+            $fullname = strtoupper($decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name).' '.$user->suffix);
             $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
             $fetch_user = User::findOrFail($user->id);
             $fetch_user->update([
                 'hash' => $hashed_fullname
             ]);
         }
-        set_time_limit(300);
+        set_time_limit(0);
       }
 
+      // search hashed user
       protected function hash_input($stringInput)
       {
-
+        
       }
 
       public function updateQRuser()

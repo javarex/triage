@@ -65,7 +65,7 @@
                                     <input type="radio" name="report_type" value="possible_contact" id="possible_contact"> <label for="possible_contact">Possible Contacts</label>
                                 </div> -->
                                 <div class="col-md-6">
-                                    <button type="button" class="btn btn-block login_btn">Generate PDF</button>
+                                    <button type="" class="btn btn-block login_btn">Generate PDF</button>
                                 </div>
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-block login_btn">Generate Excel</button>
