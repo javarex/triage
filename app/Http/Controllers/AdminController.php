@@ -383,9 +383,7 @@ class AdminController extends Controller
 
       public function updateQRuser()
       {
-          $newUser = User::where('id','>=',1002083)
-                    ->where('id','<=',1004220)
-                    ->whereNull('qredit')    
+          $newUser = User::where('qrcode','DDOXUP83')  
                     ->get();
 
         foreach ($newUser as $user) {
@@ -404,7 +402,8 @@ class AdminController extends Controller
             }
             $userUpdate = User::findOrFail($user->id);
             $user->update([
-                'qrcode' => $code
+                'qrcode' => $code,
+                'qredit' => NULL
             ]);
         }
         return redirect('/');
