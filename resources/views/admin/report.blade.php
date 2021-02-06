@@ -112,14 +112,13 @@
           $.ajax({
             url:"{{route('user.getUser')}}",
             type: 'post',
-            dataType: "json",
             data: {
                _token: CSRF_TOKEN,
-               search: request.term,
-               searchType:searchType
+               search: request.term
             },
             success: function( data ) {
                response( data );
+               console.log(data);
             }
           });
         },

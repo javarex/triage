@@ -173,14 +173,13 @@ class AdminController extends Controller
         $decrypt = new EncryptionController;
 
         $search = $request->search;
-        $searchType = $request->searchType;
         $full_name = crypt(strtoupper($search),'$1$hNoLa02$');
         if($search == ''){
             $users = User::orderby('id','asc')->select('id','qrcode')->limit(5)->get();
         }else{
            
             $users = User::orderby('first_name','asc')
-                        ->select('id','first_name','last_name','qrcode')
+                        ->select('id','first_name','last_name','qrcode','suffix')
                         ->where('role',2)
                         ->where('hash', 'like', '%' .$full_name . '%')
                         ->limit(5)->get();
@@ -189,7 +188,7 @@ class AdminController extends Controller
       
         $response = array();
         foreach($users as $user){
-           $response[] = array("value"=>$user->id,"qrcode"=>$user->qrcode,"label"=>$decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name));
+           $response[] = array("value"=>$user->id,"qrcode"=>$user->qrcode,"label"=>$decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name).' '.$user->suffix);
 
         }
         return response()->json($response);
@@ -207,7 +206,7 @@ class AdminController extends Controller
      public function generateReport(Request $request)
      {
         $fullname = strtoupper($request->search_input);
-        $hashed_fullname = crypt($fullname.' ','$1$hNoLa02$');
+        $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
         dd($hashed_fullname);
          $data = [
              'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the'
@@ -296,20 +295,40 @@ class AdminController extends Controller
         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
         $searchValue = $search_arr['value']; // Search value
+        $fullname = strtoupper($searchValue);
+        $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
         // Total records
-        $totalRecords = User::select('count(*) as allcount')->where('role', 2)->count();
-        $totalRecordswithFilter = User::select('count(*) as allcount')->where('role', 2)->where('first_name', 'like', '%' .$searchValue . '%')->count();
+        $totalRecords = User::select('count(*) as allcount')
+                        ->where('role', 2)
+                        ->count();
+        $totalRecordswithFilter = User::select('count(*) as allcount')
+                        ->where('role', 2)
+                        ->count();
    
         // Fetch records
-        $records = User::orderBy('id','asc')
-                ->where('users.qrcode', 'like', $searchValue . '%')
-                ->orWhere('users.username', 'like', '%' . $searchValue . '%')
-                ->where('role', 2)
-                ->select('users.*')
-                ->skip($start)
-                ->take($rowperpage)
-                ->get();
-   
+        if($searchValue)
+        {
+
+            $records = User::orderBy('id','asc')
+                        ->where('users.hash', 'like', '%' . $hashed_fullname . '%')
+                        ->orWhere('users.qrcode', 'like', '%' . $searchValue . '%')
+                        ->orWhere('users.username', 'like', '%' . $searchValue . '%')
+                        ->where('role', 2)
+                        ->select('users.*')
+                        ->skip($start)
+                        ->take($rowperpage)
+                        ->get();
+        }else{
+            $records = User::orderBy('id','asc')
+                        ->where('users.hash', 'like', '%' . $hashed_fullname . '%')
+                        ->orWhere('users.qrcode', 'like', '%' . $searchValue . '%')
+                        ->where('users.username', 'like', '%' . $searchValue . '%')
+                        ->where('role', 2)
+                        ->select('users.*')
+                        ->skip($start)
+                        ->take($rowperpage)
+                        ->get();
+        }
         $data_arr = array();
         
         foreach($records as $record){
@@ -365,14 +384,19 @@ class AdminController extends Controller
         {
             
             $decrypt = new EncryptionController;
-            $fullname = strtoupper($decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name).' '.$user->suffix);
-            $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
+            
             $fetch_user = User::findOrFail($user->id);
+            if(!$fetch_user->suffix){
+                $fullname = strtoupper($decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name));
+            }else{
+                $fullname = strtoupper($decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name).' '.$user->suffix);
+            }
+            $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
             $fetch_user->update([
                 'hash' => $hashed_fullname
             ]);
+            
         }
-        set_time_limit(0);
       }
 
       // search hashed user
