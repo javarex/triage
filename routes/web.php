@@ -63,7 +63,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('userModule', 'AdminController@userModule_index');
     Route::get('adminEstab', 'AdminController@establishment_index');
     Route::get('ccts_reports', 'AdminController@report');
-    Route::post('generateReport', 'AdminController@generateReport');
+    Route::post('/admin/print-pdf',['as' => 'citizen.printpdf', 'uses' => 'AdminController@printPDF']);
     Route::post('/admin/client', 'AdminController@updateClient');
     Route::post('/user/getUser/', 'AdminController@getUser')->name('user.getUser');
     Route::get('/adminUsers/searchUser/', 'AdminController@searchUser')->name('adminUsers.searchUser');

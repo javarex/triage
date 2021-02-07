@@ -12,7 +12,7 @@
                 @if($data = Session::get('data'))
                     {{$data}}
                 @endif
-                   <form action="/generateReport" method="post" autocomplete="off">
+                   <form action="{{route('citizen.printpdf')}}" method="post" autocomplete="off">
 
                         @csrf
                         <div class="col-md-6 card card-body bg-choco">

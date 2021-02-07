@@ -25,5 +25,8 @@ class Terminal extends Model
     {
         return $this->belongsTo('App\Establishment');
     }
-    
+    public function logs()
+    {
+        return $this->hasMany('App\Logs');
+    }
 }

@@ -21,6 +21,7 @@ use App\Imports\EmployeesImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
@@ -207,7 +208,6 @@ class AdminController extends Controller
      {
         $fullname = strtoupper($request->search_input);
         $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
-        dd($hashed_fullname);
          $data = [
              'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the'
          ];
@@ -246,6 +246,8 @@ class AdminController extends Controller
                 'before'        => $datetimeBefore,
                 'after'         => $datetimeAfter,
             ]);
+
+            dd($data);
             
             // Establishment Visit
 
@@ -254,6 +256,36 @@ class AdminController extends Controller
         }
 
      }
+
+     // sample pdf print 
+
+     public function printPDF(Request $request)
+    {
+     
+        
+        $data = [
+            'title'     => 'First PDF for Medium',
+            'citizen'   => $request->search_input,
+            'content'   => 'sample',
+            'from'      => $request->from,
+            'to'      => $request->to,
+              ];
+
+
+        $logs = DB::table('logs')
+                    ->select(
+                            'terminals.description',
+                            'logs.time_in',
+                            'establishments.establishment_name'
+                            )
+                    ->join('terminals','logs.terminal_id','terminals.id')
+                    ->join('establishments','terminals.establishment_id','establishments.id')
+                    ->where('barcode',$request->barcode)
+                    ->get();
+
+        $pdf = PDF::loadView('admin.pdf_view', array('data' => $data, 'logs' => $logs) )->setPaper('a4', 'landscape');  
+        return $pdf->stream('medium.pdf');
+    }
 
      //decrypt value
 
@@ -308,7 +340,6 @@ class AdminController extends Controller
         // Fetch records
         if($searchValue)
         {
-
             $records = User::orderBy('id','asc')
                         ->where('users.hash', 'like', '%' . $hashed_fullname . '%')
                         ->orWhere('users.qrcode', 'like', '%' . $searchValue . '%')
@@ -399,12 +430,7 @@ class AdminController extends Controller
         }
       }
 
-      // search hashed user
-      protected function hash_input($stringInput)
-      {
-        
-      }
-
+      // update duplicates qr
       public function updateQRuser()
       {
           $newUser = User::where('qrcode','DDOXUP83')  
@@ -442,5 +468,28 @@ class AdminController extends Controller
         $code = 'DDO'.$leters.$digits;
         
         return $code;
+    }
+
+    function array_to_obj($array, &$obj)
+    {
+        foreach ($array as $key => $value)
+        {
+        if (is_array($value))
+        {
+        $obj->$key = new stdClass();
+        array_to_obj($value, $obj->$key);
+        }
+        else
+        {
+            $obj->$key = $value;
+        }
+        }
+    return $obj;
+    }
+
+    function arrayToObject($array)
+    {
+    $object= new stdClass();
+    return array_to_obj($array,$object);
     }
 }
