@@ -262,13 +262,14 @@ class AdminController extends Controller
      public function printPDF(Request $request)
     {
      
-        
+        $from = $request->from;
+        $to = $request->to;
         $data = [
-            'title'     => 'First PDF for Medium',
+            'title'     => 'CCTS Report',
             'citizen'   => $request->search_input,
             'content'   => 'sample',
-            'from'      => $request->from,
-            'to'      => $request->to,
+            'from'      => $from,
+            'to'      => $to,
               ];
 
 
@@ -281,6 +282,7 @@ class AdminController extends Controller
                     ->join('terminals','logs.terminal_id','terminals.id')
                     ->join('establishments','terminals.establishment_id','establishments.id')
                     ->where('barcode',$request->barcode)
+                    ->whereBetween(\DB::raw('DATE(time_in)'), [$from, $to])
                     ->get();
         
         $pdf = PDF::loadView('admin.pdf_view', array('data' => $data, 'logs' => $logs) )->setPaper('a4');  
