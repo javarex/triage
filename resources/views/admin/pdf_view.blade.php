@@ -28,37 +28,39 @@
     background-color: #242423;
     color: white;
     }
-    *{
-        padding:0;
-        margin:5px;
-    }
-    
+   
+    @page { margin: 80px 25px; }
+    header { position: fixed; top: -100px; left: 0px; right: 0px; height: 50px; }
+    footer { position: fixed; bottom: -60px; left: 0px; right: 0px; height: 50px; }
+    p { page-break-after: always; }
+    p:last-child { page-break-after: never; }
     
  </style>
 </head>
-<body class="py-5" >
-    <div>
-        <h1>Establishment visit of {{$data['citizen']}}</h1>
-        <h3>From: <u>{{ $data['from'] }}</u> | To: <u>{{ $data['to'] }}</u></h3>
-        <table id="citizen" class="table" style="width:100%; border: solid black 1px">
-            <thead>
+<body class="" >
+    <header class="header">
+        <h1 style="margin-bottom:-10px">Establishment visit of {{$data['citizen']}}</h1>
+        <h3>From: <u>{{ date('F d, Y', strtotime($data['from'])) }}</u> | To: <u>{{date('F d, Y', strtotime($data['to']))  }}</u></h3>
+    </header>
+    <table id="citizen" class="table" style="width:100%; border: solid black 1px">
+        <thead>
+            <tr>
+                <th>Terminal</th>
+                <th>Establishment</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($logs as $log)
                 <tr>
-                    <th>Terminal</th>
-                    <th>Establishment</th>
-                    <th>Time</th>
+                    <td style="">{{$log->description}}</td>
+                    <td style="">{{$log->establishment_name}}</td>
+                    <td style="">{{$log->time_in}}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach($logs as $log)
-                    <tr>
-                        <td style="">{{$log->description}}</td>
-                        <td style="">{{$log->establishment_name}}</td>
-                        <td style="">{{$log->time_in}}</td>
-                    </tr>
-                @endforeach
+            @endforeach
 
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+    
 </body>
 </html>

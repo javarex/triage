@@ -282,8 +282,8 @@ class AdminController extends Controller
                     ->join('establishments','terminals.establishment_id','establishments.id')
                     ->where('barcode',$request->barcode)
                     ->get();
-
-        $pdf = PDF::loadView('admin.pdf_view', array('data' => $data, 'logs' => $logs) )->setPaper('a4', 'landscape');  
+        
+        $pdf = PDF::loadView('admin.pdf_view', array('data' => $data, 'logs' => $logs) )->setPaper('a4');  
         return $pdf->stream('medium.pdf');
     }
 
