@@ -39,7 +39,7 @@
 </head>
 <body class="" >
     <header class="header">
-        <h1 style="margin-bottom:-10px">Establishment visit of {{$data['citizen']}}</h1>
+        <h1 style="margin-bottom:-10px">Terminal visit of {{$data['citizen']}}</h1>
         <h3>From: <u>{{ date('F d, Y', strtotime($data['from'])) }}</u> | To: <u>{{date('F d, Y', strtotime($data['to']))  }}</u></h3>
     </header>
     <table id="citizen" class="table" style="width:100%; border: solid black 1px">
