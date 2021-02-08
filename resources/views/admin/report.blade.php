@@ -44,20 +44,20 @@
                                 <div class="col-md-12 pt-3">
                                     <label for="" class="text-warning font-weight-bolder">Hours:</label>
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <input type="number" min="1" class="form-control" name="before_arrival" placeholder="number of hours">
                                     <label for="" class="text-warning">Before Arrival</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="number" min="1" class="form-control" name="after_arrival" placeholder="number of hours">
                                     <label for="" class="text-warning">After Arrival</label>
-                                </div>
-                                <div class="col-md-12 pt-2">
+                                </div> -->
+                                <!-- <div class="col-md-12 pt-2">
                                     <label for="" class="text-warning font-weight-bolder">Report type:</label>
                                 </div>
                                 <div class="col-md-12 text-warning">
                                     <input type="radio" name="report_type" value="estab_visit" id="establishment_visit"> <label for="establishment_visit">Establishment visit</label>
-                                </div>
+                                </div> -->
                                 <!-- <div class="col-md-12 text-warning">
                                     <input type="radio" name="report_type" value="terminal_visit" id="terminal_visit"> <label for="terminal_visit">Terminal visit</label>
                                 </div>
@@ -67,10 +67,10 @@
                                 <div class="col-md-6">
                                     <button type="" class="btn btn-block login_btn">Generate PDF</button>
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <button type="button" class="btn btn-block login_btn">Generate Excel</button>
 
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                    </form>

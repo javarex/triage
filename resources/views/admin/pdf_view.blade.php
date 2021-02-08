@@ -28,13 +28,16 @@
     background-color: #242423;
     color: white;
     }
-    .page-break {
-        page-break-after: always;
+    *{
+        padding:0;
+        margin:5px;
     }
+    
+    
  </style>
 </head>
-<body class="py-5">
-    <div class="container">
+<body class="py-5" >
+    <div>
         <h1>Establishment visit of {{$data['citizen']}}</h1>
         <h3>From: <u>{{ $data['from'] }}</u> | To: <u>{{ $data['to'] }}</u></h3>
         <table id="citizen" class="table" style="width:100%; border: solid black 1px">
@@ -53,6 +56,7 @@
                         <td style="">{{$log->time_in}}</td>
                     </tr>
                 @endforeach
+
             </tbody>
         </table>
     </div>
