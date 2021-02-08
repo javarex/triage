@@ -41,9 +41,9 @@
                                     <input type="date" class="form-control" name="to">
                                     <label for="" class="text-warning">To</label>
                                 </div>
-                                <div class="col-md-12 pt-3">
+                                <!-- <div class="col-md-12 pt-3">
                                     <label for="" class="text-warning font-weight-bolder">Hours:</label>
-                                </div>
+                                </div> -->
                                 <!-- <div class="col-md-6">
                                     <input type="number" min="1" class="form-control" name="before_arrival" placeholder="number of hours">
                                     <label for="" class="text-warning">Before Arrival</label>
