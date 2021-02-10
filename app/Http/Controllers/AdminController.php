@@ -21,6 +21,7 @@ use App\Imports\EmployeesImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
@@ -34,7 +35,6 @@ class AdminController extends Controller
     
     public function index()
     {
-       
         $decrypt = new EncryptionController;
         $user = auth()->user();
         $first_nameAdmin =  $decrypt->decrypt($user->first_name);
@@ -174,23 +174,22 @@ class AdminController extends Controller
         $decrypt = new EncryptionController;
 
         $search = $request->search;
-        $searchType = $request->searchType;
-
+        $full_name = crypt(strtoupper($search),'$1$hNoLa02$');
         if($search == ''){
-            $users = User::orderby('qrcode','asc')->select('id','qrcode')->limit(5)->get();
-         }else{
+            $users = User::orderby('id','asc')->select('id','qrcode')->limit(5)->get();
+        }else{
            
             $users = User::orderby('first_name','asc')
-                        ->select('id','first_name','last_name','qrcode')
+                        ->select('id','first_name','last_name','qrcode','suffix')
                         ->where('role',2)
-                        ->where('qrcode', 'like', '%' .$search . '%')
+                        ->where('hash', 'like', '%' .$full_name . '%')
                         ->limit(5)->get();
          }
    
       
         $response = array();
         foreach($users as $user){
-           $response[] = array("value"=>$user->id,"qrcode"=>$user->qrcode,"label"=>$decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name));
+           $response[] = array("value"=>$user->id,"qrcode"=>$user->qrcode,"label"=>$decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name).' '.$user->suffix);
 
         }
         return response()->json($response);
@@ -207,7 +206,8 @@ class AdminController extends Controller
 
      public function generateReport(Request $request)
      {
-        
+        $fullname = strtoupper($request->search_input);
+        $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
          $data = [
              'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the'
          ];
@@ -246,6 +246,8 @@ class AdminController extends Controller
                 'before'        => $datetimeBefore,
                 'after'         => $datetimeAfter,
             ]);
+
+            dd($data);
             
             // Establishment Visit
 
@@ -254,6 +256,38 @@ class AdminController extends Controller
         }
 
      }
+
+     // sample pdf print 
+
+     public function printPDF(Request $request)
+    {
+     
+        $from = $request->from;
+        $to = $request->to;
+        $data = [
+            'title'     => 'CCTS Report',
+            'citizen'   => $request->search_input,
+            'content'   => 'sample',
+            'from'      => $from,
+            'to'      => $to,
+              ];
+
+
+        $logs = DB::table('logs')
+                    ->select(
+                            'terminals.description',
+                            'logs.time_in',
+                            'establishments.establishment_name'
+                            )
+                    ->join('terminals','logs.terminal_id','terminals.id')
+                    ->join('establishments','terminals.establishment_id','establishments.id')
+                    ->where('barcode',$request->barcode)
+                    ->whereBetween(\DB::raw('DATE(time_in)'), [$from, $to])
+                    ->get();
+        
+        $pdf = PDF::loadView('admin.pdf_view', array('data' => $data, 'logs' => $logs) )->setPaper('a4');  
+        return $pdf->stream('medium.pdf');
+    }
 
      //decrypt value
 
@@ -295,20 +329,39 @@ class AdminController extends Controller
         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
         $searchValue = $search_arr['value']; // Search value
+        $fullname = strtoupper($searchValue);
+        $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
         // Total records
-        $totalRecords = User::select('count(*) as allcount')->where('role', 2)->count();
-        $totalRecordswithFilter = User::select('count(*) as allcount')->where('role', 2)->where('first_name', 'like', '%' .$searchValue . '%')->count();
+        $totalRecords = User::select('count(*) as allcount')
+                        ->where('role', 2)
+                        ->count();
+        $totalRecordswithFilter = User::select('count(*) as allcount')
+                        ->where('role', 2)
+                        ->count();
    
         // Fetch records
-        $records = User::orderBy('id','asc')
-                ->where('users.qrcode', 'like', $searchValue . '%')
-                ->orWhere('users.username', 'like', $searchValue . '%')
-                ->where('role', 2)
-                ->select('users.*')
-                ->skip($start)
-                ->take($rowperpage)
-                ->get();
-   
+        if($searchValue)
+        {
+            $records = User::orderBy('id','asc')
+                        ->where('users.hash', 'like', '%' . $hashed_fullname . '%')
+                        ->orWhere('users.qrcode', 'like', '%' . $searchValue . '%')
+                        ->orWhere('users.username', 'like', '%' . $searchValue . '%')
+                        ->where('role', 2)
+                        ->select('users.*')
+                        ->skip($start)
+                        ->take($rowperpage)
+                        ->get();
+        }else{
+            $records = User::orderBy('id','asc')
+                        ->where('users.hash', 'like', '%' . $hashed_fullname . '%')
+                        ->orWhere('users.qrcode', 'like', '%' . $searchValue . '%')
+                        ->where('users.username', 'like', '%' . $searchValue . '%')
+                        ->where('role', 2)
+                        ->select('users.*')
+                        ->skip($start)
+                        ->take($rowperpage)
+                        ->get();
+        }
         $data_arr = array();
         
         foreach($records as $record){
@@ -364,27 +417,25 @@ class AdminController extends Controller
         {
             
             $decrypt = new EncryptionController;
-            $fullname = strtoupper($decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name));
             
-            $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
             $fetch_user = User::findOrFail($user->id);
+            if(!$fetch_user->suffix){
+                $fullname = strtoupper($decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name));
+            }else{
+                $fullname = strtoupper($decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name).' '.$user->suffix);
+            }
+            $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
             $fetch_user->update([
                 'hash' => $hashed_fullname
             ]);
+            
         }
-        set_time_limit(300);
       }
 
-      protected function hash_input($stringInput)
-      {
-
-      }
-
+      // update duplicates qr
       public function updateQRuser()
       {
-          $newUser = User::where('id','>=',1002083)
-                    ->where('id','<=',1004220)
-                    ->whereNull('qredit')    
+          $newUser = User::where('qrcode','DDOXUP83')  
                     ->get();
 
         foreach ($newUser as $user) {
@@ -403,7 +454,8 @@ class AdminController extends Controller
             }
             $userUpdate = User::findOrFail($user->id);
             $user->update([
-                'qrcode' => $code
+                'qrcode' => $code,
+                'qredit' => NULL
             ]);
         }
         return redirect('/');
@@ -418,5 +470,28 @@ class AdminController extends Controller
         $code = 'DDO'.$leters.$digits;
         
         return $code;
+    }
+
+    function array_to_obj($array, &$obj)
+    {
+        foreach ($array as $key => $value)
+        {
+        if (is_array($value))
+        {
+        $obj->$key = new stdClass();
+        array_to_obj($value, $obj->$key);
+        }
+        else
+        {
+            $obj->$key = $value;
+        }
+        }
+    return $obj;
+    }
+
+    function arrayToObject($array)
+    {
+    $object= new stdClass();
+    return array_to_obj($array,$object);
     }
 }

@@ -280,6 +280,7 @@
             url:"/pagination/fetch_data?page="+page+"&sortby="+sort_by+"&sorttype="+sort_type+"&query="+query,
             success:function(data)
             {
+                console.log(data)
                 $('#clientTable').html('');
                 $('tbody').html(data);
             }
