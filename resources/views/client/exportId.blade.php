@@ -114,8 +114,8 @@
     @include('client.navbar')
     <div class="container">
         <div class="row">
-            <div class="col-md-12 p-3 d-flex justify-content-center" id="capture">
-                <div class="id-card" >
+            <div class="col-md-12 p-3 d-flex justify-content-center" >
+                <div class="id-card" id="capture">
                     
                     <div style="text-align:center; margin-top:295px; white-space: nowrap; font-size:19pt; font-weight:bolder; color:#442900">
                         {{ $Users_name }}
@@ -145,8 +145,8 @@
                 canvas.scrollTo(0,0);
                 var a = document.createElement('a');
                 // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
-                a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
-                a.download = 'DdO_CCTS_ID.jpg';
+                a.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                a.download = 'DdO_CCTS_ID.png';
                 a.click();
             });
             
