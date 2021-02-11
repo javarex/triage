@@ -18,7 +18,7 @@
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" name="username" class="form-control input_user @error('username') is-invalid @enderror" value="{{ old('username') }}" placeholder="username">
+                                <input type="text" name="username" class="form-control input_user @error('username') is-invalid @enderror" value="{{ old('username') }}" placeholder="username" autofocus> 
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-append">
