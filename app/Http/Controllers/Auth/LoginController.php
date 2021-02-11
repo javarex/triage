@@ -53,7 +53,7 @@ class LoginController extends Controller
       
         // $userId = Auth::user()->id;
 
-        if(!(is_null($users_query)))
+        if($users_query)
         {
             
             if($users_query->role == 0){
@@ -65,7 +65,7 @@ class LoginController extends Controller
                 return redirect('/establishment');
             }
         }else{
-            return redirect('/logout');
+            return redirect('/')->with('error', 'Invalid Username or Password');
            
         }
     }

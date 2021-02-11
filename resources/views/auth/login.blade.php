@@ -4,21 +4,30 @@
 <!-- end page loader -->
 <div class="container pt-5">
 		<div class="row ">
-			<div class="col-md-12 d-flex justify-content-center">
+			<div class="col-md-12 d-flex justify-content-center bg-prinmary">
                 <div class="user_card">
                     <div class="d-flex justify-content-center">
                         <div class="brand_logo_container">
                             <img src="{{ asset('image/triage1.png')}}" class="image-fluid" width="160" alt="Logo">
                         </div>
                     </div>
+                    
+                  
+                   
                     <div class="d-flex justify-content-center form_container">
                         <form action="{{route('login')}}" method="post" autocomplete="off">
                                  @csrf 
+                                    
+                            @if(count( $errors ) > 0)
+                                <div class="alert alert-danger mb-3" role="alert">
+                                    *Invalid <b>Username or Password</b>
+                                </div>
+                            @endif
                             <div class="input-group mb-3">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" name="username" class="form-control input_user @error('username') is-invalid @enderror" value="{{ old('username') }}" placeholder="username" autofocus> 
+                                <input type="text" name="username" class="form-control input_user" value="{{ old('username') }}" placeholder="username" autofocus> 
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-append">

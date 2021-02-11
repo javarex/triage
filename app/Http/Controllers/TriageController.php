@@ -59,7 +59,7 @@ class TriageController extends Controller
         }else{
             $Users_name = $first_name.' '.$last_name;
         }
-        $data = $this->data();
+ 
 
         return view('triage.index',compact('flag','userAdd','data','user','provinces','years','address','Users_name','first_name','municipals','barangays'));
     }
@@ -311,6 +311,7 @@ class TriageController extends Controller
            'municipal'   => $user->municipal->citimunDesc,
            'province'   => $user->province->provDesc,
            'birthday'   => $user->birthday,
+           'suffix'   => $user->suffix,
        ); 
 
        return $data_array = (Object)$data_array;
