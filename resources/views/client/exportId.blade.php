@@ -10,12 +10,12 @@
     <style>
         
         .id-card{
-            background-image:url("{{ asset('image/ccts_portrait.png') }}");
+            background-image:url("{{ asset('image/ccts_portrait1.png') }}");
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: cover; /* Resize the background image to cover the entire container */
-            width:415px;
-            height:500px;
+            width:286px;
+            height:384px;
             border:solid black 1px;
             
         }
@@ -117,14 +117,14 @@
             <div class="col-md-12 p-3 d-flex justify-content-center" >
                 <div class="id-card" id="capture">
                     
-                    <div style="text-align:center; margin-top:295px; white-space: nowrap; font-size:19pt; font-weight:bolder; color:#442900">
+                    <div style="text-align:center; margin-top:232px; white-space: nowrap; font-size:13pt; font-weight:bolder; color:#442900">
                         {{ $Users_name }}
                     </div>
-                    <div style="text-align:center; white-space: nowrap; font-size:12pt; color:#442900">
+                    <div style="text-align:center; white-space: nowrap; font-size:9pt; color:#442900">
                     {{$address}}
                     </div>
-                    <div style="margin-left:270px; margin-top:10px">
-                        <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',5,5,array(1,1,1), true) }}"
+                    <div style="margin-left:178px;">
+                        <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->qrcode, 'QRCODE',4,4,array(1,1,1), true) }}"
                             class="bg-light p-2" alt="barcode" />
                     </div>
                 </div>

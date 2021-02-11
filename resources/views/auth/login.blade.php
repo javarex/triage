@@ -19,8 +19,8 @@
                                  @csrf 
                                     
                             @if(count( $errors ) > 0)
-                                <div class="alert alert-danger mb-3" role="alert">
-                                    *Invalid <b>Username or Password</b>
+                                <div class="card bg-danger text-light py-2 px-2 mb-3 d-flex justify-content-center">
+                                    <span>*Invalid Username or Password</span>
                                 </div>
                             @endif
                             <div class="input-group mb-3">
