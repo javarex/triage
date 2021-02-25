@@ -21,8 +21,10 @@ class EmployeesImport implements ToCollection, WithHeadingRow
         
 
         $encrypt = new EncryptionController;
+        
         foreach ($collection as $key => $row) 
         {
+          
             for (;;) { 
                 $code = $this->random_stringGenerate();
                 $findTerminal = User::where('qrcode',$code)
