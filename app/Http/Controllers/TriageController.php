@@ -20,10 +20,11 @@ use Illuminate\Support\Facades\Crypt;
 class TriageController extends Controller
 {
 
-    public function __construct(User $model, Province $province)
+    public function __construct(User $model, Province $province, EncryptionController $encrypt_decrypt)
     {
         $this->model = $model;
         $this->province = $province;
+        $this->encrypt_decrypt = new $encrypt_decrypt;
     }
     public function index()
     {
@@ -32,7 +33,7 @@ class TriageController extends Controller
         $provinces = $this->province->where('id','<>',0)
                         ->orderBy('provDesc', 'asc')
                         ->get();
-        $decrypt = new EncryptionController;
+       
 
         $user = auth()->user();
 
@@ -53,8 +54,8 @@ class TriageController extends Controller
         $flag = $this->validAddress();
 
         // $directory = date('m-d-Y', strtotime($date));
-        $first_name = $decrypt->decrypt($user->first_name);
-        $last_name = $decrypt->decrypt($user->last_name);
+        $first_name = $this->encrypt_decrypt->decrypt($user->first_name);
+        $last_name = $this->encrypt_decrypt->decrypt($user->last_name);
         $middle_name =$user->middle_name;
         if($user->suffix){
             $Users_name = $first_name.' '.$last_name.' '.$user->suffix;
@@ -69,7 +70,7 @@ class TriageController extends Controller
 
     public function exportId()
     {
-        $decrypt = new EncryptionController;
+      
         $user = auth()->user();
 
         $dateOfBirth = $user->birthday;
@@ -82,8 +83,8 @@ class TriageController extends Controller
         $municipal = strtolower($userAdd->municipal->citymunDesc);
         $address = ucwords($brgy.', '.$municipal.', '.$province);
         $directory = date('m-d-Y', strtotime($date));
-        $first_name = $decrypt->decrypt($user->first_name);
-        $last_name = $decrypt->decrypt($user->last_name);
+        $first_name = $this->encrypt_decrypt->decrypt($user->first_name);
+        $last_name = $this->encrypt_decrypt->decrypt($user->last_name);
 
         $middle_name =$user->middle_name;
         if($user->suffix){
@@ -189,9 +190,8 @@ class TriageController extends Controller
         $user =  $this->model->with('barangay','municipal','province')
                     ->where('id',auth()->user()->id)
                     ->first();
-        $decrypt = new EncryptionController;
-        $first_name = $decrypt->decrypt($user->first_name);
-        $last_name = $decrypt->decrypt($user->last_name);
+        $first_name = $this->encrypt_decrypt->decrypt($user->first_name);
+        $last_name = $this->encrypt_decrypt->decrypt($user->last_name);
         $middle_name =$user->middle_name;
         
        $data_array = array(
