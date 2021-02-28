@@ -19,11 +19,17 @@ use Illuminate\Support\Facades\Crypt;
 
 class TriageController extends Controller
 {
+
+    public function __construct(User $model, Province $province)
+    {
+        $this->model = $model;
+        $this->province = $province;
+    }
     public function index()
     {
         // $tempname = "RAYMART ITANONG";
         // dd(crypt($tempname,'$1$hNoLa02$'));
-        $provinces =   $province = Province::where('id','<>',0)
+        $provinces = $this->province->where('id','<>',0)
                         ->orderBy('provDesc', 'asc')
                         ->get();
         $decrypt = new EncryptionController;
@@ -35,20 +41,16 @@ class TriageController extends Controller
         $date = $user->created_at;
         $data = $this->data();
 
-    
-        $userAdd =  User::with('barangay','municipal','province')
+        $userAdd =  $this->model->with('barangay','municipal','province')
                     ->where('id',auth()->user()->id)
                     ->first();
+
         $brgy = strtolower($userAdd->barangay->brgyDesc);
         $province = strtolower($userAdd->province->provDesc);
         $municipals = strtolower($userAdd->municipal->citymunDesc);
         $address = ucwords($brgy.', '.$municipals.', '.$province);
     
-        if (auth()->user()->province_id != 0 || auth()->user()->municipal_id != 0 || auth()->user()->barangay_id != 0) {
-            $flag = true;
-        }else{
-            $flag = false;
-        }
+        $flag = $this->validAddress();
 
         // $directory = date('m-d-Y', strtotime($date));
         $first_name = $decrypt->decrypt($user->first_name);
@@ -184,7 +186,7 @@ class TriageController extends Controller
 
     protected function data()
     {
-        $user =  User::with('barangay','municipal','province')
+        $user =  $this->model->with('barangay','municipal','province')
                     ->where('id',auth()->user()->id)
                     ->first();
         $decrypt = new EncryptionController;
@@ -196,9 +198,9 @@ class TriageController extends Controller
            'first_name' => $first_name,
            'middle_name'  => $middle_name,
            'last_name'  => $last_name,
-           'barangay'   => $user->barangay->brgyDesc,
-           'municipal'   => $user->municipal->citimunDesc,
-           'province'   => $user->province->provDesc,
+           'barangay'   => strtoupper($user->barangay->brgyDesc),
+           'municipal'   => strtoupper($user->municipal->citymunDesc),
+           'province'   => strtoupper($user->province->provDesc),
            'birthday'   => $user->birthday,
            'suffix'   => $user->suffix,
        ); 
@@ -212,5 +214,11 @@ class TriageController extends Controller
                 ->orderBy('provDesc', 'asc')
                 ->get();
     }
+
+    public function validAddress()
+    {
+        return auth()->user()->province_id && auth()->user()->municipal_id && auth()->user()->barangay_id;
+    }
+  
 
 }
