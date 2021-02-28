@@ -75,7 +75,7 @@ class TriageController extends Controller
         $dateOfBirth = $user->birthday;
         $years = Carbon::parse($dateOfBirth)->age;
         $date = $user->created_at;
-        $userAdd = User::with('barangay','municipal','province')->where('id', $user->id)->first();
+        $userAdd = $this->model->with('barangay','municipal','province')->where('id', $user->id)->first();
 
         $brgy = strtolower($userAdd->barangay->brgyDesc);
         $province = strtolower($userAdd->province->provDesc);
@@ -97,7 +97,7 @@ class TriageController extends Controller
 
     public function qrEdit(Request $request)
     {
-        $user = User::findOrFail(auth()->user()->id);
+        $user = $this->model->findOrFail(auth()->user()->id);
         $request['qrcode'] = $request->new_qrcode;
         $user->update($request->all());
        return redirect('/triage')->with('success','QR code successfully change!');
@@ -117,7 +117,7 @@ class TriageController extends Controller
         }
 
         if($validator){
-            $user = User::findOrFail(auth()->user()->id);
+            $user = $this->model->findOrFail(auth()->user()->id);
             $user->update([
                 'username'  => $request->username,
                 'password'  => bcrypt($request->password)
@@ -129,7 +129,7 @@ class TriageController extends Controller
 
     public function profile_edit(Request $request)
     {
-        $user = User::findOrFail(auth()->user()->id);
+        $user = $this->model->findOrFail(auth()->user()->id);
         $validator = $request->validate([
             'province_id'       => 'required',
             'municipal'         => 'required',
@@ -158,7 +158,7 @@ class TriageController extends Controller
         $data = $this->data();
         $user = auth()->user();
         $provinces = $this->getProvinces();
-        $userAdd =  User::with('barangay','municipal','province')
+        $userAdd =  $this->with('barangay','municipal','province')
                         ->where('id',auth()->user()->id)
                         ->first();
 
@@ -210,7 +210,7 @@ class TriageController extends Controller
 
     public function getProvinces()
     {
-        return Province::where('id','<>',0)
+        return $this->province->where('id','<>',0)
                 ->orderBy('provDesc', 'asc')
                 ->get();
     }
