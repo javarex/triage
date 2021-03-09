@@ -18,9 +18,15 @@ use Illuminate\Http\Request;
 
 class EstablishmentController extends Controller
 {
+    public function __construct(Establishment $establishment, Terminal $terminal, Establishment_type $estabType)
+    {
+        $this->establishment = $establishment;
+        $this->$terminal = $terminal;
+        $this->$estabType = $estabType;
+    }
     public function index()
     {
-        $establishment = Establishment::where('user_id', auth()->user()->id)->first();
+        $establishment = $this->establishment->where('user_id', auth()->user()->id)->first();
         $establishment_id = $establishment->id;
         $establishment_name = $establishment->establishment_name;
         $arrayTerminals = array();
@@ -41,7 +47,7 @@ class EstablishmentController extends Controller
     {
         for (;;) { 
             $code = $this->random_stringGenerate();
-            $findTerminal = Terminal::where('qrcode',$code)
+            $findTerminal = $this->$terminal->where('qrcode',$code)
                                     ->first();
             if($findTerminal)
             {
@@ -53,7 +59,7 @@ class EstablishmentController extends Controller
     
         }
         $user = auth()->user();
-        $establishment_type = Establishment_type::orderBy('type', 'asc')->get();
+        $establishment_type = $this->$estabType->orderBy('type', 'asc')->get();
         $provinces = Province::orderBy('provDesc', 'asc')->get();
         $municipals = Municipal::orderBy('citymunDesc', 'asc')->get();
         $barangays = Barangay::orderBy('brgyDesc', 'asc')->get();
