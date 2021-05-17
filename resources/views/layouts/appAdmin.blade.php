@@ -37,22 +37,22 @@
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item "> 
-                                <a href="admin" class="nav-link-mod ">
+                                <a href="/admin" class="nav-link-mod ">
                                     <i class="fas fa-home    "></i> Home
                                 </a>
                             </li>
                             <li class="nav-item "> 
-                                <a href="userModule" class="nav-link-mod">
+                                <a href="/userModule" class="nav-link-mod">
                                     <i class="fa fa-user" aria-hidden="true"></i> Citizens
                                 </a>
                             </li>
                             <li class="nav-item "> 
-                                <a href="adminEstab" class="nav-link-mod">
+                                <a href="/adminEstab" class="nav-link-mod">
                                     <i class="fa fa-city" aria-hidden="true"></i> Establishment
                                 </a>
                             </li>
                             <li class="nav-item "> 
-                                <a href="ccts_reports" class="nav-link-mod">
+                                <a href="/ccts_reports" class="nav-link-mod">
                                     <i class="fa fa-file-alt" aria-hidden="true"></i> Reports
                                 </a>
                             </li>
