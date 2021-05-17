@@ -91,9 +91,7 @@
                                     <a href="#" class="dropdown-item" data-toggle="modal" data-target="#securitySetup"><i
                                     class="fa fa-lock" aria-hidden="true"></i>Security Setup</a>
                                 </ul>
-                                <!-- <a href="/history?key=<?php echo base64_encode('travel_history') ?>" class=" dropdown-item" type="button" id="dropdown_trav_history">
-                                    <i class="fa fa-history" aria-hidden="true"></i> History Logs
-                                </a> -->
+                                
                                
 
 

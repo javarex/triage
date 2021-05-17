@@ -497,15 +497,13 @@ class AdminController extends Controller
     {
         foreach ($array as $key => $value)
         {
-        if (is_array($value))
-        {
-        $obj->$key = new stdClass();
-        array_to_obj($value, $obj->$key);
-        }
-        else
-        {
-            $obj->$key = $value;
-        }
+            if (is_array($value))
+            {
+                $obj->$key = new stdClass();
+                array_to_obj($value, $obj->$key);
+            }else{
+                $obj->$key = $value;
+            }
         }
     return $obj;
     }
