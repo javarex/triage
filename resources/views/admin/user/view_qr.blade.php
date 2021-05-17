@@ -50,25 +50,7 @@
             @endif
             
             <div class="col-12 col-md-6 bg-choco border pb-5 text-warning">
-                @error('file')
-                <div class="alert alert-danger" role="alert">
-                    {{ $message }}
-                </div>
-                @enderror
-                @if($message1 = Session::get('success_update'))
-                <div class="col-md-12 px-0">
-                    <div class="alert alert-success"  role="alert">
-                        {{ $message1 }}
-                    </div>
-                </div>
-                @endif
-                @if($message2 = Session::get('success_import'))
-                <div class="col-md-12 px-0">
-                    <div class="alert alert-success"  role="alert">
-                        {{ $message2 }}
-                    </div>
-                </div>
-                @endif
+            
                 
 
                     <!-- End modal for import -->
@@ -80,15 +62,17 @@
                 </div> -->
                 
                 <div class="d-flex justify-content-center"> 
-                    <div class="row bg-light px-0">
-                        <div class="col-12 text-center px-0">
-                            <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($users->qrcode, 'QRCODE',10,10,array(1,1,1), true) }}" class="bg-light p-2"
-                                id="qr" class="img-fluid" alt="barcode" />
-                        </div>
-                        <div class="col-md-12 px-0 text-center text-choco">
-                            <span style="font-size:16px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
-                                <span class="font-weight-bold" id="qrcode_value" style="cursor:pointer">{{$users->qrcode}}</span> 
-                            </span>
+                    <div class="row">
+                        <div class="bg-light p-2">
+                            <div class="col-12 text-center">
+                                <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($users->qrcode, 'QRCODE',10,10,array(1,1,1), true) }}" class="bg-light py-2 px-0"
+                                    id="qr" class="img-fluid" alt="barcode" />
+                            </div>
+                            <div class="col-md-12 px-0 text-center text-choco">
+                                <span style="font-size:16px" data-toggle="modal" data-target="#editQrsaaa" title="Edit QR Code">
+                                    <span class="font-weight-bold" id="qrcode_value" style="cursor:pointer">{{$users->qrcode}}</span> 
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
