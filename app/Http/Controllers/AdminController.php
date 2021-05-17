@@ -32,6 +32,10 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller 
 {
 
+    public function __construct(User $users)
+    {
+        $this->users = $users;
+    }
     
     public function index()
     {
@@ -155,6 +159,7 @@ class AdminController extends Controller
                         ->join('barangays','establishments.brgyCode','=','barangays.brgyCode')
                         ->join('municipals','establishments.citymunCode','=','municipals.citymunCode')
                         ->join('provinces','establishments.provCode','=','provinces.provCode')
+                        ->join('users', 'establishments.user_id','users.id')
                         ->get();
          return view('admin.admin_establishment.index',compact('first_nameAdmin','users'));
      }
@@ -384,7 +389,8 @@ class AdminController extends Controller
                             data-birthday='".$record->birthday."'
                             >
                                 <i class='fas fa-edit' ></i>
-                            </a>",
+                            </a>
+                            <a href='viewqr/".$record->id."'> <i class='fa fa-fw fa-qrcode'></i></a>",
            );
         }
      
@@ -461,7 +467,22 @@ class AdminController extends Controller
         return redirect('/');
       }
 
-      public function random_stringGenerate()
+      //viewing client qr code 
+
+    public function view_qrcode($user_id)
+    {
+        $decrypt = new EncryptionController;
+        $user = $this->users->findOrFail($user_id);
+        $name = $decrypt->decrypt($user->first_name).' '.$decrypt->decrypt($user->last_name);
+        $users = array(
+            'first_name' => strtoupper($name),
+            'qrcode' => $user->qrcode
+        );
+        $users = (object)$users;
+        return view('admin.user.view_qr', compact('users'));
+    }
+
+    public function random_stringGenerate()
     {
         $alphaList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         

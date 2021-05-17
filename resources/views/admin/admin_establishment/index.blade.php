@@ -23,8 +23,7 @@
                             <td>{{ $user->establishment_name }}</td>
                             <td>{{ $user->brgyDesc }}</td>
                             <td>{{ $user->citymunDesc }}</td>
-                            <td>{{ $user->provDesc }}</td>
-                            <td></td>
+                            <td>{{$user->username}}</td>
                         </tr>
                         @endforeach
                     </tbody>

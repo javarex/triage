@@ -69,6 +69,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/adminUsers/searchUser/', 'AdminController@searchUser')->name('adminUsers.searchUser');
     Route::get('/deleteUser', 'AdminController@deleteUser');
     Route::get('/updateQRUser', 'AdminController@updateQRuser');
+    Route::get('/viewqr/{user_id}', 'AdminController@view_qrcode');
 });
 
 

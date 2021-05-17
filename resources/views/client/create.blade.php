@@ -118,6 +118,7 @@
                
                 e.preventDefault();
                 var formData = new FormData(this);
+                console.log(formData)
                 $.ajax({
                     url:  '/validateInputs',
                     type: 'POST',              
