@@ -128,7 +128,7 @@
                                 <th>Municipal</th>
                                 <th>Province</th> -->
                                 <!-- <th><i class="fa fa-cog" aria-hidden="true"></i></th> -->
-                                <th class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th>
+                                <th style="width:auto" class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
                         <!-- <tbody>

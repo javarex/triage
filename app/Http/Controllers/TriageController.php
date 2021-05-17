@@ -45,7 +45,7 @@ class TriageController extends Controller
         $userAdd =  $this->model->with('barangay','municipal','province')
                     ->where('id',auth()->user()->id)
                     ->first();
-        dd($userAdd);
+        // dd($userAdd);
         $brgy = strtolower($userAdd->barangay->brgyDesc);
         $province = strtolower($userAdd->province->provDesc);
         $municipals = strtolower($userAdd->municipal->citymunDesc);
