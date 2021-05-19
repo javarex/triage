@@ -31,11 +31,7 @@
             <div class="col-1 col-md-1 px-1"><i class="fa fa-user" aria-hidden="true"></i></div>
             
             <div class="col-11 col-md-11 px-1">
-            @if($data->suffix)
-                {{$data->first_name.' '.$data->last_name.' '.$data->suffix}}
-            @else
-                {{$data->first_name.' '.$data->last_name}}
-            @endif 
+                {{ $Users_name }}
             </div>
         </div>  
         <!-- birthday       -->
