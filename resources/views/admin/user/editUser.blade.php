@@ -56,6 +56,19 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="qrcode" class="col-md-4 col-form-label text-md-right">Qrcode</label>
+                    
+                    <div class="col-md-6">
+                        <input id="qrcode" type="text" class="form-control @error('qrcode') is-invalid @enderror" name="qrcode" value="{{ old('qrcode') }}" autofocus>
+
+                        @error('username')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
                     
                     <div class="col-md-6">
