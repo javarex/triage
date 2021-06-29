@@ -91,11 +91,15 @@ class TriageController extends Controller
         $first_name = $this->encrypt_decrypt->decrypt($user->first_name);
         $last_name = $this->encrypt_decrypt->decrypt($user->last_name);
 
-        $middle_name =$user->middle_name;
+        $middle_name = $user->middle_name;
+        if($middle_name)
+        {
+            $middle_name = $middle_name[0].'.';
+        }
         if($user->suffix){
-            $Users_name = $first_name.' '.$last_name.' '.$user->suffix;
+            $Users_name = $first_name.' '.$middle_name.' '.$last_name.' '.$user->suffix;
         }else{
-            $Users_name = $first_name.' '.$last_name;
+            $Users_name = $first_name.' '.$middle_name.' '.$last_name;
         }
 
         return view('client.exportId', compact('user','first_name','years','directory','address','Users_name','first_name'));
