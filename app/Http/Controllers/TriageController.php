@@ -28,7 +28,7 @@ class TriageController extends Controller
     }
     public function index()
     {
-        dd(crypt(ucwords("Segundo Alibangbang Jr."),'$1$hNoLa02$'));
+        // dd(crypt(ucwords("Segundo Alibangbang Jr."),'$1$hNoLa02$'));
         // $tempname = "RAYMART ITANONG";
         // dd(crypt($tempname,'$1$hNoLa02$'));
         $provinces = $this->province->where('id','<>',0)
