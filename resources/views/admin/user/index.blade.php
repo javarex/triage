@@ -206,6 +206,7 @@
             var address = $(this).attr('data-address');
             var client_id = $(this).attr('data-client_id');
             var userName = $(this).attr('data-username');
+            var qrcode = $(this).attr('data-qrcode');
 
             $('#client_id').val(client_id);
             $('#firstName').val(firstName);
@@ -216,6 +217,7 @@
             $('#birthday').val(birthday);
             $('#sex').val(sex);
             $('#contact_number').val(contactNumber);
+            $('#qrcode').val(qrcode);
             // $('#firstNameModal').html(firstName+' '+middleName+' '+lastName+' '+contactNumber);
             
         })
