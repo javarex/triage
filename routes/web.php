@@ -70,6 +70,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/deleteUser', 'AdminController@deleteUser');
     Route::get('/updateQRUser', 'AdminController@updateQRuser');
     Route::get('/viewqr/{user_id}', 'AdminController@view_qrcode');
+
 });
 
 
@@ -113,3 +114,8 @@ Route::post('/qrEdit', 'TriageController@qrEdit');
 //terminal scanning
 Route::get('/terminal_scan', 'ApiController@terminal_scan')->name('terminal_scan');
 Route::post('/terminal_scan_login', 'ApiController@terminal_scan_login')->name('terminal_scan_login');
+
+
+// logs route
+Route::get('/logs', 'LogController@index')->middleware('admin');
+Route::get('/logs/get_user', 'LogController@get_user')->name('logs.get_user');

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+    use \Awobaz\Compoships\Compoships;
 
     /**
      * The attributes that are mass assignable.
@@ -73,5 +74,9 @@ class User extends Authenticatable implements MustVerifyEmail
     
     public function establishment() {
         return $this->hasOne('App\Establishment', 'user_id', 'id');
+    }
+    public function log()
+    {
+        return $this->belongsTo('App\Log',['qrcode','qredit'],['barcode','barcode']);
     }
 }
