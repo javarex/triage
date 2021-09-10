@@ -19,23 +19,29 @@ class LogController extends Controller
     
     public function index()
     {
-        $records = DB::table('logs')
-                        ->select(
-                        'users.*',
-                        'logs.*',
-                        'municipals.citymunDesc',
-                        'barangays.brgyDesc',
-                        'provinces.provDesc'
-                        )
-                        ->leftjoin('users',function($join) {
-                            $join->on('logs.barcode','=', 'users.qrcode');
-                            $join->on('logs.barcode','=', 'users.qredit');
-                        })
-                        ->leftjoin('municipals','users.municipal_id', 'municipals.id')
-                        ->leftjoin('barangays','users.barangay_id','barangays.id')
-                        ->leftjoin('provinces','users.province_id','provinces.id')
-                        ->leftJoin('terminals','logs.terminal_id','terminals.id')
-                        ->leftJoin('establishments','terminals.establishment_id','establishments.id')->limit(5)->get();
+        // $fullname = strtoupper('Leorene Vargas');
+        // $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
+        // $totalRecords = DB::select('select count(*) as allcount from logs where barcode is  not null');
+        // $totalRecords1 = $this->model->select('count(*) as allcount')->whereNotNull('barcode')->count();
+        
+
+        // $records = DB::table('logs')
+        //                 ->select(
+        //                 'users.*',
+        //                 'logs.*',
+        //                 'municipals.citymunDesc',
+        //                 'barangays.brgyDesc',
+        //                 'provinces.provDesc'
+        //                 )
+        //                 ->leftjoin('users',function($join) {
+        //                     $join->on('logs.barcode','=', 'users.qrcode');
+        //                     $join->on('logs.barcode','=', 'users.qredit');
+        //                 })
+        //                 ->leftjoin('municipals','users.municipal_id', 'municipals.id')
+        //                 ->leftjoin('barangays','users.barangay_id','barangays.id')
+        //                 ->leftjoin('provinces','users.province_id','provinces.id')
+        //                 ->leftJoin('terminals','logs.terminal_id','terminals.id')
+        //                 ->leftJoin('establishments','terminals.establishment_id','establishments.id')->limit(5)->get();
         // dd($records);
         return view('log.index');
     }
@@ -60,32 +66,37 @@ class LogController extends Controller
         $fullname = strtoupper($searchValue);
         $hashed_fullname = crypt($fullname,'$1$hNoLa02$');
 
-        $totalRecords = $this->model->select('count(*) as allcount')->whereNotNull('barcode')->count();
+        $totalRecords = DB::select('select count(*) as allcount from logs where barcode is  not null');
+        $totalRecords =  $totalRecords[0]->allcount;
         $totalRecordswithFilter = $totalRecords;
         $records = DB::table('logs')
                         ->select(
                         'users.*',
-                        'logs.*',
+                        'logs.barcode',
+                        'logs.terminal_id',
+                        'logs.time_in',
+                        'logs.time_out',
+                        'logs.type',
                         'municipals.citymunDesc',
                         'barangays.brgyDesc',
                         'provinces.provDesc',
                         'terminals.description',
                         'establishments.establishment_name'
                         )
-                        ->leftjoin('users',function($join) {
-                            $join->on('logs.barcode','=', 'users.qrcode');
-                            $join->on('logs.barcode','=', 'users.qredit');
-                        })
+                        ->leftjoin('users','logs.barcode', 'users.qrcode')
                         ->leftjoin('municipals','users.municipal_id', 'municipals.id')
                         ->leftjoin('barangays','users.barangay_id','barangays.id')
                         ->leftjoin('provinces','users.province_id','provinces.id')
                         ->leftJoin('terminals','logs.terminal_id','terminals.id')
-                        ->leftJoin('establishments','terminals.establishment_id','establishments.id');
+                        ->leftJoin('establishments','terminals.establishment_id','establishments.id')
+                        ->distinct();
+                        
         
         if ($searchValue) {
             $records = $records->where('users.hash', 'like', '%' . $hashed_fullname . '%');
         }
         $records = $records
+                    ->orderby('logs.id','desc')
                     ->skip($start)
                     ->take($rowperpage)
                     ->get();
@@ -93,12 +104,16 @@ class LogController extends Controller
         $data_arr = array();
 
         foreach($records as $record){
+            if (!$record->first_name) {
+                continue;
+            }
             $dt = Carbon::parse($record->time_in);
             $qrcode = $record->qrcode;
             $name = $decrypt->decrypt($record->first_name).' '.$decrypt->decrypt($record->last_name);
             $email = $record->email;
             $data_arr[] = array(
                 'name' => $name,
+                'barcode' => $record->barcode,
                 'address' => $record->citymunDesc,
                 'contact_no' => $record->contact_number,
                 'establishment' => $record->establishment_name,
