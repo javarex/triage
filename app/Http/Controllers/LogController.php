@@ -71,17 +71,18 @@ class LogController extends Controller
         $totalRecordswithFilter = $totalRecords;
         $records = DB::table('logs')
                         ->select(
-                        'users.*',
-                        'logs.barcode',
-                        'logs.terminal_id',
-                        'logs.time_in',
-                        'logs.time_out',
-                        'logs.type',
-                        'municipals.citymunDesc',
-                        'barangays.brgyDesc',
-                        'provinces.provDesc',
-                        'terminals.description',
-                        'establishments.establishment_name'
+                            'users.*',
+                            'logs.id',
+                            'logs.barcode',
+                            'logs.terminal_id',
+                            'logs.time_in',
+                            'logs.time_out',
+                            'logs.type',
+                            'municipals.citymunDesc',
+                            'barangays.brgyDesc',
+                            'provinces.provDesc',
+                            'terminals.description',
+                            'establishments.establishment_name'
                         )
                         ->leftjoin('users','logs.barcode', 'users.qrcode')
                         ->leftjoin('municipals','users.municipal_id', 'municipals.id')
