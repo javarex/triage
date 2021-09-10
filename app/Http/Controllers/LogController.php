@@ -100,7 +100,7 @@ class LogController extends Controller
             $records = $records->where('users.hash', 'like', '%' . $hashed_fullname . '%');
         }
         $records = $records
-                    ->orderby('logs.id','desc')
+                    ->orderby('logs.time_in','desc')
                     ->skip($start)
                     ->take($rowperpage)
                     ->get();
