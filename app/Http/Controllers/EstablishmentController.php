@@ -21,8 +21,8 @@ class EstablishmentController extends Controller
     public function __construct(Establishment $establishment, Terminal $terminal, Establishment_type $estabType)
     {
         $this->establishment = $establishment;
-        $this->$terminal = $terminal;
-        $this->$estabType = $estabType;
+        $this->terminal = $terminal;
+        $this->estabType = $estabType;
     }
     public function index()
     {
@@ -47,7 +47,7 @@ class EstablishmentController extends Controller
     {
         for (;;) { 
             $code = $this->random_stringGenerate();
-            $findTerminal = $this->$terminal->where('qrcode',$code)
+            $findTerminal = $this->terminal->where('qrcode',$code)
                                     ->first();
             if($findTerminal)
             {
@@ -59,7 +59,7 @@ class EstablishmentController extends Controller
     
         }
         $user = auth()->user();
-        $establishment_type = $this->$estabType->orderBy('type', 'asc')->get();
+        $establishment_type = $this->estabType->orderBy('type', 'asc')->get();
         $provinces = Province::orderBy('provDesc', 'asc')->get();
         $municipals = Municipal::orderBy('citymunDesc', 'asc')->get();
         $barangays = Barangay::orderBy('brgyDesc', 'asc')->get();

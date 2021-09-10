@@ -125,7 +125,7 @@
 
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
-                                            <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small> {{_('Barangay') }} </span>
+                                            <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small> {{ __('Barangay') }} </span>
                                         </div>
                                         <div class="col-md-12">
                                             <select name="barangay" id="barangay" class="form-control" required style="width:100%" >
@@ -137,7 +137,7 @@
 
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
-                                            <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ _('Agency Head')}}</span>
+                                            <span class="font-weight-normal"><small class="text-danger font-weight-bold">*</small>{{ __('Agency Head')}}</span>
                                         </div>
                                         <div class="col-md-12">
                                             <input type="text" class="form-control" name="agency_head" id="agency_head" value="{{ old('agency_head') }}" placeholder="e.g. John M. Doe Jr.">
