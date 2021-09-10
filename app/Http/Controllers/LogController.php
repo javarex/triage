@@ -117,11 +117,10 @@ class LogController extends Controller
             $email = $record->email;
             $data_arr[] = array(
                 'name' => $name,
-                'barcode' => $record->barcode,
-                'address' => $record->citymunDesc,
-                'contact_no' => $record->contact_number,
                 'establishment' => $record->establishment_name,
                 'terminal' => $record->description,
+                'address' => $record->citymunDesc,
+                'contact_no' => $record->contact_number,
                 'date' => date('j-n-Y',strtotime($record->time_in)),
                 'time' => date('g:i a',strtotime($record->time_in))
             );

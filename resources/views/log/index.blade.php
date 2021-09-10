@@ -29,11 +29,10 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>QR CODE</th>
-                                    <th>Address</th>
-                                    <th>Contact No</th>
                                     <th>Establishment</th>
                                     <th>Terminal</th>
+                                    <th>Address</th>
+                                    <th>Contact No</th>
                                     <th>Date</th>
                                     <th>Time</th>
                                 </tr>
@@ -57,11 +56,10 @@
         ajax:'{{route("logs.get_user")}}',
         columns:[
             {data:'name'},
-            {data:'barcode'},
-            {data:'address'},
-            {data:'contact_no'},
             {data:'establishment'},
             {data:'terminal'},
+            {data:'address'},
+            {data:'contact_no'},
             {data:'date'},
             {data:'time'},
         ]
