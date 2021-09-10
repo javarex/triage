@@ -41,7 +41,10 @@ class LogController extends Controller
         //                 ->leftjoin('barangays','users.barangay_id','barangays.id')
         //                 ->leftjoin('provinces','users.province_id','provinces.id')
         //                 ->leftJoin('terminals','logs.terminal_id','terminals.id')
-        //                 ->leftJoin('establishments','terminals.establishment_id','establishments.id')->limit(5)->get();
+        //                 ->leftJoin('establishments','terminals.establishment_id','establishments.id')
+        //                 ->distinct()
+        //                 ->orderby('logs.id','desc')
+        //                 ->get();
         // dd($records);
         return view('log.index');
     }
@@ -97,7 +100,6 @@ class LogController extends Controller
             $records = $records->where('users.hash', 'like', '%' . $hashed_fullname . '%');
         }
         $records = $records
-                    ->orderby('logs.id','desc')
                     ->skip($start)
                     ->take($rowperpage)
                     ->get();
