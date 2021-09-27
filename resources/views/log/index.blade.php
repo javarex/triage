@@ -53,7 +53,12 @@
             'processing': '<div class="spinner-border text-choco "></div>'
         },
         serverSide:true,
-        ajax:'{{route("logs.get_user")}}',
+        ajax:{
+            "url": '/logs/get_user',
+            "dataType": "json",
+            "type": "POST",
+            "data":{ _token: "{{csrf_token()}}"}
+        },
         columns:[
             {data:'name'},
             {data:'establishment'},

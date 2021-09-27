@@ -87,7 +87,7 @@ class LogController extends Controller
                             'terminals.description',
                             'establishments.establishment_name'
                         )
-                        ->leftjoin('users','logs.barcode', 'users.qrcode')
+                        ->rightJoin('users','logs.barcode', 'users.qrcode')
                         ->leftjoin('municipals','users.municipal_id', 'municipals.id')
                         ->leftjoin('barangays','users.barangay_id','barangays.id')
                         ->leftjoin('provinces','users.province_id','provinces.id')

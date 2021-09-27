@@ -118,4 +118,4 @@ Route::post('/terminal_scan_login', 'ApiController@terminal_scan_login')->name('
 
 // logs route
 Route::get('/logs', 'LogController@index')->middleware('admin');
-Route::get('/logs/get_user', 'LogController@get_user')->name('logs.get_user');
+Route::post('/logs/get_user', 'LogController@get_user');
