@@ -86,6 +86,9 @@ class AdminController extends Controller
         $encrypt = new EncryptionController;
         
         $user = User::findOrFail($request->client_id);
+        if (!$user->qredit) {
+            $request['qredit'] = $user->qrcode;
+        }
         $request['birthday'] = date('Y-m-d', strtotime($request->birthday));
         $request['first_name'] = $encrypt->encrypt(ucwords($request->first_name)); //255
         $request['middle_name'] = ucwords($request->middle_name);
