@@ -108,7 +108,7 @@
             if(menu == 'establishment'){
                 window.location.href = "/establishment/create";
             }else if(menu == 'citizen'){
-                window.location.href = "/client/create";
+                window.location.href = "/userDdo/create";
             }
         }
     </script>
